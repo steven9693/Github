@@ -1,0 +1,11 @@
+/* pages/myhuace/myhuace.wxss */
+page{background:#eee}
+.header{padding:10px 0;background:#fff;border-bottom:1px solid #ddd;margin-bottom:8px}
+.headimg{width:45px;height:45px;margin:0 auto;}
+.headimg image{width:45px;height:45px;box-shadow:5px 5px 3px 0px #46c01b;border-bottom:2px solid #fff;border-right:2px solid #fff;}
+.nickname{margin:20px 0 0 0;font-size:14px;text-align:center;height:24px;line-height:24px}
+.mblock{width:46%;margin:2%;box-shadow:0 0 3px #000;height:170px;border-radius:3px;padding:5px;box-sizing:border-box;display:inline-block;position:relative}
+.imgbox image{display:block;width:100%;height:130px}
+.imginfo{height:30px;line-height:30px;font-size:12px}
+.deletebtn{width:25px;height:30px;border-radius:3px;background:rgba(0,0,0,0.7);position:absolute;top:10px;right:10px;color:#fff;text-align:center}
+

@@ -1,0 +1,51 @@
+{
+  "pages":[
+
+    
+
+    "pages/tuya/tuya",
+
+    "pages/mine/mine",
+
+    "pages/myhuace/myhuace",
+
+    "pages/xiangqing/xiangqing",
+    
+    "pages/guangchang/guangchang",
+
+
+
+
+    
+
+    "pages/index/index",
+
+    
+    "pages/canvas/canvas"
+
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/tuya/tuya",
+        "text": "首页"
+      },
+
+      {
+        "pagePath": "pages/guangchang/guangchang",
+        "text": "画展中心"
+      },
+
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的"
+      }
+    ]
+  }
+}

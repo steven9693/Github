@@ -1,0 +1,21 @@
+<!--pages/mine/mine.wxml-->
+<view class="header">
+  <view class="headerimg">
+    <image src="../images/120.jpg"></image>
+  </view>
+  <view class="rightarea">
+    <view class="nickname">什么算了算了</view>
+    <view class="desc">啦啦啦啦</view>
+  </view>
+</view>
+
+<view class="list">
+  <view class="item borbm">
+    <view class="itemleft">我的画册</view>
+    <view class="itemright"></view>
+  </view>
+  <view class="item">
+    <view class="itemleft">我的画册</view>
+    <view class="itemright"></view>
+  </view>
+</view>

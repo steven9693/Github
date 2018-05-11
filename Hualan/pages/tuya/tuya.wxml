@@ -1,0 +1,50 @@
+<view class="content">
+
+    <view class="header">
+      <view><image src="../images/120.jpg" style="width:40px;height:40px;display:inline-block;border-radius:3px"></image></view>
+      <view class="timu"><view>题目：</view><view>哈哈哈</view><view>--</view></view>
+      <view class="chuti">自己出题</view>
+    </view>
+    <!--画布区域-->
+    <view class="canvas_area">
+        <!--注意：同一页面中的 canvas-id 不可重复，如果使用一个已经出现过的 canvas-id，该 canvas 标签对应的画布将被隐藏并不再正常工作-->
+        <canvas canvas-id="myCanvas" class="myCanvas" style="height:320px;width:320px" 
+            disable-scroll="false"
+            bindtouchstart="touchStart"
+            bindtouchmove="touchMove"
+            bindtouchend="touchEnd">
+        </canvas>
+    </view>
+    <!--画布工具区域-->
+    <view class="canvas_tools">
+      <view class="flexbox">
+        <view class="box box0">笔尖</view>
+
+        <block wx:for="{{penarr}}" wx:key="unique">
+          <view class="box {{item.current==1?'cur':''}}" bindtap="penSelect" data-param="{{item.size}}" id="{{index}}">
+            <view style="width:{{item.size}}px;height:{{item.size}}px;background:{{color}};border-radius:{{item.size/2}}px" class="inblock"></view>
+          </view>
+        </block>
+
+        <view class="box">撤销</view>
+        <view class="box" bindtap="clearCanvas">橡皮</view>
+        <view class="box"  >清除</view>
+      </view>
+
+      <view class="colorarea">
+        <view class="leftarea">颜色</view>
+        <view class="rightarea">
+          <scroll-view class="tempbox" scroll-x="true" style="width:{{width-(width/8)}}px">
+            <block wx:for="{{colorarr}}" wx:key="unique">
+            <view class="box inblock pt" bindtap="colorSelect" data-param="{{item}}">
+              <view class="mblock" style="background:{{item}}"></view>
+            </view>
+            </block>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+
+    <view class="btn" bindtap="toshareimg">导出作品</view>
+
+</view>

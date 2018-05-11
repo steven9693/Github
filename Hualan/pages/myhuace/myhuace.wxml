@@ -1,0 +1,42 @@
+<!--pages/myhuace/myhuace.wxml-->
+<view class="header">
+  <view class="headimg">
+    <image src="../images/120.jpg"></image>
+  </view>
+  <view class="nickname">遐想</view>
+</view>
+
+<view>
+  <view class="mblock">
+    <view class="imgbox"><image src="../images/120.jpg"></image></view>
+    <view class="imginfo">
+      <view>1223</view>
+      <view class="deletebtn">删</view>
+    </view>
+  </view>
+
+  <view class="mblock">
+    <view class="imgbox"><image src="../images/120.jpg"></image></view>
+    <view class="imginfo">
+      <view>1223</view>
+      <view class="deletebtn">删</view>
+    </view>
+  </view>
+
+  <view class="mblock">
+    <view class="imgbox"><image src="../images/120.jpg"></image></view>
+    <view class="imginfo">
+      <view>1223</view>
+      <view class="deletebtn">删</view>
+    </view>
+  </view>
+
+  <view class="mblock">
+    <view class="imgbox"><image src="../images/120.jpg"></image></view>
+    <view class="imginfo">
+      <view>1223</view>
+      <view class="deletebtn">删</view>
+    </view>
+  </view>
+
+</view>

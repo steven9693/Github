@@ -1,0 +1,92 @@
+<!--pages/xiangqing/xiangqing.wxml-->
+<view class="header">
+  <view class="head">
+    <image src="../images/120.jpg"></image>
+  </view>
+  <view class="headright">
+    <view class="nickname">啦啦啦</view>
+    <view class="info">ddfff</view>
+  </view>
+</view>
+
+<view class="imagearea">
+  <image src="../images/120.jpg"></image>
+</view>
+
+
+
+<view class="list">
+
+  <view class="item">
+    <view class="itemleft"><image src="../images/120.jpg" ></image></view>
+    <view class="itemright">
+      <view class="titlebar">
+        <view class="list-nickname">小星星</view>
+        <view class="ctime">2222</view>
+      </view>
+      <view class="descbar">图片</view>
+    </view>
+  </view>
+
+  <view class="item">
+    <view class="itemleft"><image src="../images/120.jpg" ></image></view>
+    <view class="itemright">
+      <view class="titlebar">
+        <view class="list-nickname">小星星</view>
+        <view class="ctime">2222</view>
+      </view>
+      <view class="descbar">图片</view>
+    </view>
+  </view>
+
+  <view class="item">
+    <view class="itemleft"><image src="../images/120.jpg" ></image></view>
+    <view class="itemright">
+      <view class="titlebar">
+        <view class="list-nickname">小星星</view>
+        <view class="ctime">2222</view>
+      </view>
+      <view class="descbar">图片</view>
+    </view>
+  </view>
+
+  <view class="item">
+    <view class="itemleft"><image src="../images/120.jpg" ></image></view>
+    <view class="itemright">
+      <view class="titlebar">
+        <view class="list-nickname">小星星</view>
+        <view class="ctime">2018-02-20</view>
+      </view>
+      <view class="descbar">图片</view>
+    </view>
+  </view>
+
+  <view class="item">
+    <view class="itemleft"><image src="../images/120.jpg" ></image></view>
+    <view class="itemright">
+      <view class="titlebar">
+        <view class="list-nickname">小星星</view>
+        <view class="ctime">2222</view>
+      </view>
+      <view class="descbar">图片</view>
+    </view>
+  </view>
+
+
+
+
+</view>
+
+
+
+
+
+
+<view class="tool">
+  <view class="toolleft">
+    <input />
+  </view>
+  <view class="toolright">
+    <view class="huida">说说</view>
+  </view>
+</view>

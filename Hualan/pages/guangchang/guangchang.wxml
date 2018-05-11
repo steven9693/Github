@@ -1,0 +1,20 @@
+<!--pages/guangchang/guangchang.wxml-->
+<view class="content">
+  <block wx:for="{{userdata}}" wx:key="unique">
+    <view class="mblock">
+      <view class="imgaera">
+        <image src="../images/120.jpg"></image>
+        <view class='smallbox'>555555</view>
+      </view>
+      <view class="userblock">
+        <view class="headimg">
+          <image src="../images/120.jpg"></image>
+        </view>
+        <view class="nickname">
+        拉拉开
+        </view>
+      </view>
+    </view>
+  </block>
+  
+</view>

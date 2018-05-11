@@ -1,0 +1,19 @@
+/* pages/tuya/tuya.wxss */
+page{background:#f1f1f1}
+.canvas_area{width:320px;margin:0 auto;border-top:1px solid #ddd;border-bottom:1px solid #ddd}
+.flexbox{height:40px;width:100%;display:flex}
+.box{width:12.5%;height:40px;line-height:40px;text-align:center;font-size:12px}
+.cur view{box-shadow:0 0 2px 2px #ffffff}
+.inblock{display:inline-block;vertical-align: middle}
+.tempbox{height:40px;white-space: nowrap;overflow:hidden}
+.myCanvas{background:#ffffff;}
+.colorarea{display:flex;height:40px;line-height:40px}
+.leftarea{width:12.5%;font-size:12px;text-align:center}
+.rightarea{width:87.5%;}
+.pt{padding-top:13px;height:27px}
+.mblock{width:14px;height:14px;margin:0 auto}
+
+.btn{width:120px;height:30px;line-height:30px;background:#46c01b;font-size:14px;text-align:center;margin:20px auto 0;color:#ffffff;}
+.header{height:40px;padding:5px;display:flex;}
+.timu{margin:0 0 0 10px;font-size:12px;line-height:40px;width:60%;color:#ff0000;display:flex}
+.chuti{font-size:12px;line-height:40px;color:#666;}

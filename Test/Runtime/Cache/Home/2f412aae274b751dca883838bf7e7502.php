@@ -83,6 +83,10 @@
                     "height": canvas.height / 2 + "px",
                 }).addClass('f-full');
                 */
+
+
+
+
                 /*
                 var image = new Image();
                 image.style.cssText="width:"+(canvas.width/2)+'px;height:'+(canvas.height/2)+'px'
