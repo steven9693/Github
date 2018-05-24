@@ -14,14 +14,18 @@ class CurlController extends Controller {
 
         $output = $curl->getHTML_id('vlink_1');
 
+        dump($output);
+
         $reg1="/<a .*?>.*?<\/a>/";
 
         preg_match_all($reg1,$output[3],$aarray);
 
+        //dump($aarray);
+
         $reg2="/href=\'([^\']+)/";
         $reg3="/title=\'([^\']+)/";
 
-        $allitem=array();
+        //$allitem=array();
 
         for($i=0;$i<count($aarray[0]);$i++){
             $item=array();
@@ -33,6 +37,8 @@ class CurlController extends Controller {
             $allitem[]=$item;
         }
 
+        dump($allitem);
+
         $this->getdata($allitem);
 
         echo '<textarea style="width:800px;height:500px">'.$output[3].'</textarea>';
@@ -42,7 +48,7 @@ class CurlController extends Controller {
     public function getdata($data){
         $result=array();
 
-        for($i=0;$i<20;$i++){
+        for($i=0;$i<3;$i++){
 
             $curl = new Curl('http://www.ting56.com'.$data[$i]['href']);
             $html=$curl->getHtml();
