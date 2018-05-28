@@ -4,71 +4,90 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="./Home/View/js/jquery-1.11.1.min.js"></script>
-    <script src="./Home/View/js/jplayer/js/jquery.jplayer.min.js"></script>
-    <link href="./Home/View/js/jplayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet">
+    <link href="./Home/View/css/global.css" rel="stylesheet">
+    <link href="./Home/View/layui/css/layui.css" rel="stylesheet">
+    <script src="./Home/View/layui/layui.all.js"></script>
 </head>
 <body>
-<div id="jquery_jplayer_1" class="jp-jplayer"></div>
-<div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
-    <div class="jp-type-single">
-        <div class="jp-gui jp-interface">
-            <div class="jp-controls">
-                <button class="jp-play" role="button" tabindex="0">play</button>
-                <button class="jp-stop" role="button" tabindex="0">stop</button>
-            </div>
-            <div class="jp-progress">
-                <div class="jp-seek-bar">
-                    <div class="jp-play-bar"></div>
-                </div>
-            </div>
-            <div class="jp-volume-controls">
-                <button class="jp-mute" role="button" tabindex="0">mute</button>
-                <button class="jp-volume-max" role="button" tabindex="0">max volume</button>
-                <div class="jp-volume-bar">
-                    <div class="jp-volume-bar-value"></div>
-                </div>
-            </div>
-            <div class="jp-time-holder">
-                <div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
-                <div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
-                <div class="jp-toggles">
-                    <button class="jp-repeat" role="button" tabindex="0">repeat</button>
-                </div>
-            </div>
-        </div>
-        <div class="jp-details">
-            <div class="jp-title" aria-label="title">&nbsp;</div>
-        </div>
-        <div class="jp-no-solution">
-            <span>Update Required</span>
-            To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+
+
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">layui 后台布局</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <!--
+        <ul class="layui-nav layui-layout-left">
+            <li class="layui-nav-item"><a href="">控制台</a></li>
+            <li class="layui-nav-item"><a href="">商品管理</a></li>
+            <li class="layui-nav-item"><a href="">用户</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">其它系统</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="">邮件管理</a></dd>
+                    <dd><a href="">消息管理</a></dd>
+                    <dd><a href="">授权管理</a></dd>
+                </dl>
+            </li>
+        </ul>-->
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+                    贤心
+                </a>
+                <!--
+                <dl class="layui-nav-child">
+                    <dd><a href="">基本资料</a></dd>
+                    <dd><a href="">安全设置</a></dd>
+                </dl>-->
+            </li>
+            <li class="layui-nav-item"><a href="">退了</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree"  lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">所有商品</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">列表一</a></dd>
+                        <dd><a href="javascript:;">列表二</a></dd>
+                        <dd><a href="javascript:;">列表三</a></dd>
+                        <dd><a href="">超链接</a></dd>
+                    </dl>
+                </li>
+                <!--
+                <li class="layui-nav-item">
+                    <a href="javascript:;">解决方案</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="javascript:;">列表一</a></dd>
+                        <dd><a href="javascript:;">列表二</a></dd>
+                        <dd><a href="">超链接</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a href="">云市场</a></li>
+                <li class="layui-nav-item"><a href="">发布商品</a></li>
+                -->
+            </ul>
         </div>
     </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;height:1000px">
+            <iframe height="100%" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" src="./Home/View/Index/main.html"></iframe>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+        <!-- 底部固定区域 -->
+        © layui.com - 底部固定区域
+    </div>
 </div>
-<script>
-    $(function(){
 
 
 
-        $("#jquery_jplayer_1").jPlayer({
-
-            supplied: "m4a, mp3",
-            swfPath: "/Home/View/js/jplayer/js/jquery.jplayer.swf",
-            supplied: "mp3,m4a",
-            volume: 1
-
-        });
-
-
-        url="http://audio.xmcdn.com/group40/M01/CF/1E/wKgJT1q7J9aQNYzSAGLWgLwBOpU504.m4a"
-
-        $("#jquery_jplayer_1").jPlayer("setMedia", {
-            mp3:url,
-            m4v:url // Defines the m4v url
-        }).jPlayer("play");
-
-
-    })
-</script>
 </body>
 </html>
