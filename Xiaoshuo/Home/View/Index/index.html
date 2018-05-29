@@ -50,11 +50,11 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">所有商品</a>
+                    <a class="" href="javascript:;">有声小说</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">列表一</a></dd>
-                        <dd><a href="javascript:;">列表二</a></dd>
-                        <dd><a href="javascript:;">列表三</a></dd>
+                        <dd><a href="javascript:;" class="change" data-url="./Home/View/Index/add.html">添加分类</a></dd>
+                        <dd><a href="javascript:;" class="change" data-url="">保存网址</a></dd>
+                        <dd><a href="javascript:;" class="change" data-url="">网址管理</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>
                 </li>
@@ -76,8 +76,8 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;height:1000px">
-            <iframe height="100%" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" src="./Home/View/Index/main.html"></iframe>
+        <div style="padding: 15px;height:600px">
+            <iframe height="100%" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" id="main" src="./Home/View/Index/add.html"></iframe>
         </div>
     </div>
 
@@ -87,6 +87,14 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $(function(){
+        $('.change').on('click',function(){
+            var src = $(this).attr('data-url');
+            $('#main').attr('src',src);
+        })
+    })
+</script>
 
 
 </body>

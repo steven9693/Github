@@ -15,17 +15,39 @@
 
 <body>
 
-<div class="layui-tab layui-tab-card">
+<div class="layui-tab layui-tab-card" lay-filter="demo">
     <ul class="layui-tab-title">
-        <li class="layui-this">保存网址</li>
+
+        <li class="layui-this">添加分类</li>
+
+        <li>保存网址</li>
         <li>网址管理</li>
         <li>未完结</li>
         <li>完结</li>
         <li>全部</li>
     </ul>
-    <div class="layui-tab-content" style="height:920px;" lay-filter="demo">
+    <div class="layui-tab-content" style="height:920px;">
+
 
         <div class="layui-tab-item layui-show">
+
+            <table class="layui-table">
+                <tbody>
+                <tr>
+                    <td>分类</td>
+                    <td><a href="javascript:void(0)">添加</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+
+
+        </div>
+
+
+        <div class="layui-tab-item">
 
             <div class="layui-form">
                 <div class="layui-form-item">
@@ -95,17 +117,17 @@
 </div>
 
 
-<scirpt type="text/javascript">
+<script type="text/javascript">
 
     $(function(){
-        var a=22;
-        var i=10100
+        layui.use('element', function(){
+            var element = layui.element;
 
+        });
 
     })
 
-
-</scirpt>
+</script>
 
 </body>
 </html>
