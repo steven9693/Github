@@ -52,7 +52,7 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">有声小说</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" class="change" data-url="./Home/View/Index/add.html">添加分类</a></dd>
+                        <dd><a href="javascript:;" class="change" data-url="./index.php?m=Home&c=Index&a=add">添加分类</a></dd>
                         <dd><a href="javascript:;" class="change" data-url="">保存网址</a></dd>
                         <dd><a href="javascript:;" class="change" data-url="">网址管理</a></dd>
                         <dd><a href="">超链接</a></dd>
@@ -77,7 +77,7 @@
     <div class="layui-body">
         <!-- 内容主体区域 -->
         <div style="padding: 15px;height:600px">
-            <iframe height="100%" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" id="main" src="./Home/View/Index/add.html"></iframe>
+            <iframe height="100%" width="100%"  frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" id="main" src="./index.php?m=Home&c=Index&a=add"></iframe>
         </div>
     </div>
 
