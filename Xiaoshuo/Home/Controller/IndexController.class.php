@@ -11,9 +11,13 @@ class IndexController extends Controller {
 
     public function index(){
 
-
         $this->display();
 
+    }
+
+
+    public function add(){
+        $this->display();
     }
 
 
@@ -36,19 +40,25 @@ class IndexController extends Controller {
 
 
     public function addbook(){
+
+        $category=M('category')->order('category_id desc')->select();
+
+        $this->assign('category',$category);
+
         $this->display();
     }
 
 
 
-    public function add(){
+    public function setbook(){
+
         $bookname=I('post.bookname');
         $url=I('post.url');
-        $catogary=I('post.catogary');
+        $category=I('post.category');
 
         $data['bookname']=$bookname;
         $data['originalurl']=$url;
-        $data['catogary_id']=$catogary;
+        $data['category_id']=$category;
         $data['ctime']=time();
 
         M('books')->add($data);

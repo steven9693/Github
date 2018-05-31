@@ -14,63 +14,67 @@
 
 <body>
 
+<style>
+    .box{padding:20px 30px 0}
+</style>
+
+<div class="box">
+    
+    <table class="layui-table">
+        <colgroup>
+            <col width="50">
+            <col width="200">
+        </colgroup>
+
+        <tbody>
+        <tr>
+            <td>简介</td>
+            <td><?php echo ($info); ?></td>
+        </tr>
+        <tr>
+            <td>作者、播音</td>
+            <td><?php echo ($msg); ?></td>
+        </tr>
+        </tbody>
+    </table>
 
 
-<table class="layui-table">
-    <colgroup>
-        <col width="50">
-        <col width="200">
-    </colgroup>
-
-    <tbody>
-    <tr>
-        <td>简介</td>
-        <td><?php echo ($info); ?></td>
-    </tr>
-    <tr>
-        <td>作者、播音</td>
-        <td><?php echo ($msg); ?></td>
-    </tr>
-    </tbody>
-</table>
-
-
-<div class="layui-form">
-    <div class="layui-form-item">
-        <label class="layui-form-label">作者</label>
-        <div class="layui-input-block">
-            <input type="text" name="author" required  lay-verify="required" placeholder="作者" autocomplete="off" class="layui-input">
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">作者</label>
+            <div class="layui-input-block">
+                <input type="text" name="author" required  lay-verify="required" placeholder="作者" autocomplete="off" class="layui-input">
+            </div>
         </div>
-    </div>
 
-    <div class="layui-form-item">
-        <label class="layui-form-label">播音</label>
-        <div class="layui-input-block">
-            <input type="text" name="voice" required  lay-verify="required" placeholder="播音" autocomplete="off" class="layui-input">
+        <div class="layui-form-item">
+            <label class="layui-form-label">播音</label>
+            <div class="layui-input-block">
+                <input type="text" name="voice" required  lay-verify="required" placeholder="播音" autocomplete="off" class="layui-input">
+            </div>
         </div>
-    </div>
 
 
-    <div class="layui-form-item layui-form-text">
-        <label class="layui-form-label">小说简介</label>
-        <div class="layui-input-block">
-            <textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">小说简介</label>
+            <div class="layui-input-block">
+                <textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
         </div>
-    </div>
 
 
-    <div class="layui-form-item layui-form-text">
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
+        <div class="layui-form-item layui-form-text">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
+            </div>
         </div>
-    </div>
 
+
+
+    </div>
 
 
 </div>
-
-
-
 
 
 

@@ -50,10 +50,10 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;">有声小说</a>
+                    <a class="" href="javascript:void(0);">有声小说</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" class="change" data-url="./index.php?m=Home&c=Index&a=add">添加分类</a></dd>
-                        <dd><a href="javascript:;" class="change" data-url="">保存网址</a></dd>
+                        <dd><a href="javascript:;" class="change" data-url="./index.php?m=Home&c=Index&a=booklist">书单</a></dd>
                         <dd><a href="javascript:;" class="change" data-url="">网址管理</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>

@@ -38,7 +38,7 @@
             <tr>
                 <td>{$book.bookname}</td>
                 <td>{$book.ctime}</td>
-                <td><a href="./index.php?m=Home&c=Index&a=getbook&id={$book.bookid}" target="_blank">获取详情</a></td>
+                <td><a href="javascript:void(0)" data-src="/index.php?m=Home&c=Index&a=getbook&id={$book.bookid}" class="getdetail">获取详情</a></td>
                 <td><img src="{$book.cover}"></td>
                 <td><a href="">上传封面</a></td>
                 <td>{$book.originalurl}</td>
@@ -47,6 +47,20 @@
     </tbody>
 </table>
 
+<script>
+    $(function(){
+        $('.getdetail').click(function(){
+
+            var src=$(this).attr("data-src");
+            layer.open({
+                type: 2,
+                content:DOMAIN+src,
+                area:["900px","500px"]
+
+            });
+        })
+    })
+</script>
 
 
 </body>

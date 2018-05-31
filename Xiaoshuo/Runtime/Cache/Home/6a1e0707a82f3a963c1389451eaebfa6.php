@@ -37,7 +37,7 @@
         <?php if(is_array($books)): $i = 0; $__LIST__ = $books;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$book): $mod = ($i % 2 );++$i;?><tr>
                 <td><?php echo ($book["bookname"]); ?></td>
                 <td><?php echo ($book["ctime"]); ?></td>
-                <td><a href="./index.php?m=Home&c=Index&a=getbook&id=<?php echo ($book["bookid"]); ?>" target="_blank">获取详情</a></td>
+                <td><a href="javascript:void(0)" data-src="/index.php?m=Home&c=Index&a=getbook&id=<?php echo ($book["bookid"]); ?>" class="getdetail">获取详情</a></td>
                 <td><img src="<?php echo ($book["cover"]); ?>"></td>
                 <td><a href="">上传封面</a></td>
                 <td><?php echo ($book["originalurl"]); ?></td>
@@ -45,6 +45,20 @@
     </tbody>
 </table>
 
+<script>
+    $(function(){
+        $('.getdetail').click(function(){
+
+            var src=$(this).attr("data-src");
+            layer.open({
+                type: 2,
+                content:DOMAIN+src,
+                area:["900px","500px"]
+
+            });
+        })
+    })
+</script>
 
 
 </body>

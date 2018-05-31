@@ -13,51 +13,47 @@
 
 
 
-
 <body>
+<style>
+    .wrap{padding:20px 50px 0}
+</style>
 
-<form class="layui-form">
-    <div class="layui-form-item">
-        <label class="layui-form-label">书名</label>
-        <div class="layui-input-block">
-            <input type="text" name="bookname" required  lay-verify="required" placeholder="书名" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">ULR</label>
-        <div class="layui-input-block">
-            <input type="text" name="url" required  lay-verify="required" placeholder="原始URL" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label">选择框</label>
-
-        <div class="layui-input-block">
-            <select id="edit_exam_school" name="catogary" lay-verify="required">
-                <option value="">选择分类</option>
-                <option value="1">华南理工大学大学城</option>
-                <option value="2">华南理工大学五山校区</option>
-                <option value="3">中山大学珠海校区</option>
-                <option value="4">中山大学大学城校区</option>
-            </select>
+<div class="wrap">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">书名</label>
+            <div class="layui-input-block">
+                <input type="text" name="bookname" required  lay-verify="required" placeholder="书名" autocomplete="off" class="layui-input">
+            </div>
         </div>
 
-    </div>
-
-    <div class="layui-form-item">
-        <label class="layui-form-label"></label>
-        <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">保存数据</button>
+        <div class="layui-form-item">
+            <label class="layui-form-label">网址</label>
+            <div class="layui-input-block">
+                <input type="text" name="url" required  lay-verify="required" placeholder="原始URL" autocomplete="off" class="layui-input">
+            </div>
         </div>
-    </div>
 
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择框</label>
 
+            <div class="layui-input-block">
+                <select id="edit_exam_school" name="catogary" lay-verify="required">
+                    <option value="">选择分类</option>
+                    <?php if(is_array($category)): $i = 0; $__LIST__ = $category;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?><option value="<?php echo ($item["category_id"]); ?>"><?php echo ($item["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
+                </select>
+            </div>
 
+        </div>
 
-</form>
-
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">保存数据</button>
+            </div>
+        </div>
+    </form>
+</div>
 
 <script>
     layui.use('form', function(){

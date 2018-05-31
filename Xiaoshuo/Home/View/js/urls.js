@@ -1,12 +1,12 @@
 
-var DOMAIN="http://localhost/Github/Xiaoshuo/index.php?";
+var DOMAIN="http://localhost/Github/Xiaoshuo/";
 
 //添加分类
 
-var ADDCATOGARY=DOMAIN+"m=Home&c=Index&a=addcatogary";
+var ADDCATOGARY=DOMAIN+"index.php?m=Home&c=Index&a=addcatogary";
 
 //添加书本
 
-var ADDBOOK=DOMAIN+"m=Home&c=Index&a=add";
-var UPDATEBOOK=DOMAIN+"m=Home&c=Index&a=updatebook";
+var ADDBOOK=DOMAIN+"index.php?m=Home&c=Index&a=add";
+var UPDATEBOOK=DOMAIN+"index.php?m=Home&c=Index&a=updatebook";
 
