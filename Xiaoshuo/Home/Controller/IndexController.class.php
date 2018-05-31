@@ -16,8 +16,6 @@ class IndexController extends Controller {
 
     }
 
-    
-
 
 
     public function addcatogary(){
@@ -31,8 +29,6 @@ class IndexController extends Controller {
 
         echo $id;
     }
-
-
 
 
 
