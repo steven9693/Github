@@ -11,11 +11,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="urls.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="urls.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/View/js/urls.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+            <state relative-caret-position="190">
+              <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -33,7 +33,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/Controller/IndexController.class.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-1072">
@@ -65,8 +65,8 @@
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Index/addcatogary.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Index/index.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Index/add.html" />
-        <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/js/urls.js" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Controller/IndexController.class.php" />
+        <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/js/urls.js" />
       </list>
     </option>
   </component>
@@ -122,7 +122,15 @@
               <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Home" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Home" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="js" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
@@ -172,12 +180,12 @@
       <workItem from="1527612235377" duration="5961000" />
       <workItem from="1527693967169" duration="2085000" />
       <workItem from="1527699270403" duration="4410000" />
-      <workItem from="1527775554285" duration="1733000" />
+      <workItem from="1527775554285" duration="1823000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15491000" />
+    <option name="totallyTimeSpent" value="15581000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -358,14 +366,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/View/js/urls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/Controller/CurlController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-228">
@@ -383,6 +383,14 @@
           <folding>
             <element signature="e#33#54#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/View/js/urls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
