@@ -62,12 +62,12 @@
 
         //监听提交
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
+            // layer.msg(JSON.stringify(data.field));
 
-            console.log(ADDBOOK)
-            $.post(ADDBOOK,data.field,function(){
-
-            })
+            console.log(SETBOOK)
+            $.post(SETBOOK,data.field,function(data){
+                console.log(data)
+            },'json')
 
             return false;
         });

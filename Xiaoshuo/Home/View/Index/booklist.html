@@ -14,6 +14,9 @@
 
 <body>
 
+<a href="javascript:void(0)" class="layui-btn layui-btn-radius" id="addbook">添加书本</a>
+<hr/>
+
 <table class="layui-table">
     <colgroup>
         <col width="150">
@@ -49,12 +52,12 @@
 
 <script>
     $(function(){
-        $('.getdetail').click(function(){
+        $('#addbook').click(function(){
 
-            var src=$(this).attr("data-src");
             layer.open({
                 type: 2,
-                content:DOMAIN+src,
+                title:'添加书本',
+                content:'./index.php?m=Home&c=Index&a=addbook',
                 area:["900px","500px"]
 
             });

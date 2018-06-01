@@ -19,7 +19,7 @@
 </style>
 
 <div class="box">
-    
+
     <table class="layui-table">
         <colgroup>
             <col width="50">

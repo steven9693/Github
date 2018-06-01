@@ -16,7 +16,7 @@
 
 <body>
 <div class="content">
-    <form class="layui-form layui-form-pane" action="">
+    <div class="layui-form layui-form-pane">
         <div class="layui-form-item">
             <label class="layui-form-label">分类名称</label>
             <div class="layui-input-block">
@@ -30,7 +30,7 @@
             </div>
         </div>
 
-    </form>
+    </div>
 </div>
 
 
@@ -41,12 +41,14 @@
         //监听提交
         form.on('submit(formDemo)', function(data){
             //layer.msg(JSON.stringify(data.field));
-            $.post(ADDCATOGARY,data.field,function(ret){
-                if(ret){
-                    window.location.href=window.location.href;
-                    layer.close(window.parent.openid)
-                }
-            })
+            var href=window.parent.window.location.href;
+
+             $.post(ADDCATOGARY,data.field,function(ret){
+                 console.log(ret)
+                 if(ret.status==1){
+                     window.parent.location.href=href;
+                 }
+             },'json');
 
             return false;
 

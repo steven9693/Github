@@ -17,6 +17,8 @@ class IndexController extends Controller {
 
 
     public function add(){
+        $category=M('category')->order('category_id desc')->select();
+        $this->assign('category',$category);
         $this->display();
     }
 
@@ -31,7 +33,9 @@ class IndexController extends Controller {
 
         $id=M('category')->add($data);
 
-        echo $id;
+        $result['status']=1;
+        $result['data']=array('id'=>$id);
+        echo json_encode($result);
     }
 
 
@@ -61,7 +65,12 @@ class IndexController extends Controller {
         $data['category_id']=$category;
         $data['ctime']=time();
 
-        M('books')->add($data);
+        $id=M('books')->add($data);
+
+        $result['status']=1;
+
+        echo json_encode($result);
+
     }
 
 

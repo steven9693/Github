@@ -53,7 +53,7 @@
                     <a class="" href="javascript:void(0);">有声小说</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" class="change" data-url="./index.php?m=Home&c=Index&a=add">添加分类</a></dd>
-                        <dd><a href="javascript:;" class="change" data-url="./index.php?m=Home&c=Index&a=booklist">书单</a></dd>
+                        <dd><a href="javascript:;" class="change" data-url="./index.php?m=Home&c=Index&a=booklist">添加书本</a></dd>
                         <dd><a href="javascript:;" class="change" data-url="">网址管理</a></dd>
                         <dd><a href="">超链接</a></dd>
                     </dl>

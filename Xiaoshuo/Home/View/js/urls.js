@@ -7,6 +7,6 @@ var ADDCATOGARY=DOMAIN+"index.php?m=Home&c=Index&a=addcatogary";
 
 //添加书本
 
-var ADDBOOK=DOMAIN+"index.php?m=Home&c=Index&a=add";
+var SETBOOK=DOMAIN+"index.php?m=Home&c=Index&a=setbook";
 var UPDATEBOOK=DOMAIN+"index.php?m=Home&c=Index&a=updatebook";
 

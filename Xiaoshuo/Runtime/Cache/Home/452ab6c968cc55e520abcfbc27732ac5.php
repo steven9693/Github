@@ -18,28 +18,24 @@
 
 <table class="layui-table">
     <colgroup>
-        <col width="150">
         <col width="200">
-        <col>
+        <col width="200">
+        <col width="200">
     </colgroup>
     <thead>
     <tr>
-        <th>昵称</th>
-        <th>加入时间</th>
-        <th>签名</th>
+        <th>分类</th>
+        <th>是否显示</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <td>贤心</td>
-        <td>2016-11-29</td>
-        <td>人生就像是一场修行</td>
-    </tr>
-    <tr>
-        <td>许闲心</td>
-        <td>2016-11-28</td>
-        <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
-    </tr>
+        <?php if(is_array($category)): $i = 0; $__LIST__ = $category;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?><tr>
+                <td><?php echo ($item["name"]); ?></td>
+                <td><?php echo ($item["isshow"]); ?></td>
+                <td></td>
+            </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+
     </tbody>
 </table>
 
@@ -56,7 +52,7 @@
 
             var layer = layui.layer;
 
-             layer.open({
+            layer.open({
                  title:'添加分类',
                  area:['800px','580px'],
                  type: 2,
