@@ -13,7 +13,7 @@
 
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">layui 后台布局</div>
+        <div class="layui-logo">有声小说后台管理</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <!--
         <ul class="layui-nav layui-layout-left">
@@ -50,7 +50,7 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:void(0);">有声小说</a>
+                    <a class="" href="javascript:void(0);">ting56 有声小说</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;" class="change" data-url="./index.php?m=Home&c=Index&a=add">添加分类</a></dd>
                         <dd><a href="javascript:;" class="change" data-url="./index.php?m=Home&c=Index&a=booklist">添加书本</a></dd>

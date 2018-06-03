@@ -38,7 +38,7 @@
             <label class="layui-form-label">选择框</label>
 
             <div class="layui-input-block">
-                <select id="edit_exam_school" name="catogary" lay-verify="required">
+                <select id="edit_exam_school" name="category" lay-verify="required">
                     <option value="">选择分类</option>
                     <?php if(is_array($category)): $i = 0; $__LIST__ = $category;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$item): $mod = ($i % 2 );++$i;?><option value="<?php echo ($item["category_id"]); ?>"><?php echo ($item["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
                 </select>
@@ -49,7 +49,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label"></label>
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="formDemo">保存数据</button>
+                <button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
             </div>
         </div>
     </form>
@@ -62,11 +62,13 @@
 
         //监听提交
         form.on('submit(formDemo)', function(data){
-            // layer.msg(JSON.stringify(data.field));
 
-            console.log(SETBOOK)
+            var href=window.parent.window.location.href;
+            console.log(data.field)
             $.post(SETBOOK,data.field,function(data){
-                console.log(data)
+                if(data.status==1){
+                    window.parent.location.href=href;
+                }
             },'json')
 
             return false;

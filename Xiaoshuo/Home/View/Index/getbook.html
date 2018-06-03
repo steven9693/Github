@@ -84,14 +84,18 @@
 
         //监听提交
         form.on('submit(formDemo)', function(data){
-            layer.msg(JSON.stringify(data.field));
-
+            //layer.msg(JSON.stringify(data.field));
             var id="{$id}";
             data.field.id=id
 
-            console.log(UPDATEBOOK)
+            var href=window.parent.window.location.href;
+            console.log(href)
+            $.post(UPDATEBOOK, data.field, function(data){
+                if(data.status){
+                    window.parent.location.href=href;
+                }
 
-            $.post(UPDATEBOOK, data.field, function(){});
+            },'json');
 
             //return false;
         });

@@ -8,13 +8,18 @@ class CurlController extends Controller {
 
     public function index(){
 
-        $url="http://www.ting56.com/mp3/4427.html";
+        $id=I('get.id');
+
+        $book=M('books')->where(array('bookid'=>$id))->find();
+
+
+        $url=$book['originalurl'];
 
         $curl = new Curl($url);
 
         $output = $curl->getHTML_id('vlink_1');
 
-        dump($output);
+        //dump($output);
 
         $reg1="/<a .*?>.*?<\/a>/";
 
@@ -37,11 +42,13 @@ class CurlController extends Controller {
             $allitem[]=$item;
         }
 
-        dump($allitem);
+        //dump($allitem);
 
         $this->getdata($allitem);
 
-        echo '<textarea style="width:800px;height:500px">'.$output[3].'</textarea>';
+
+
+        //echo '<textarea style="width:800px;height:500px">'.$output[3].'</textarea>';
 
     }
 
