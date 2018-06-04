@@ -1,0 +1,51 @@
+-- phpMyAdmin SQL Dump
+-- version 4.7.9
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: 2018-06-04 10:48:07
+-- 服务器版本： 5.7.21
+-- PHP Version: 5.6.35
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Database: `xiaoshuo`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `voicelist`
+--
+
+DROP TABLE IF EXISTS `voicelist`;
+CREATE TABLE IF NOT EXISTS `voicelist` (
+  `voiceid` int(11) NOT NULL AUTO_INCREMENT,
+  `defindex` int(11) NOT NULL,
+  `voice` varchar(300) NOT NULL,
+  `setid` int(11) NOT NULL,
+  `bookid` int(11) NOT NULL,
+  PRIMARY KEY (`voiceid`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `voicelist`
+--
+
+INSERT INTO `voicelist` (`voiceid`, `defindex`, `voice`, `setid`, `bookid`) VALUES
+(1, 0, 'http://fdfs.xmcdn.com/group44/M04/05/01/wKgKjFsM93GRHhb-AIRb1Qc3EN8086.mp3&58&mp3', 0, 0),
+(2, 1, 'http://fdfs.xmcdn.com/group44/M05/05/09/wKgKjFsM97mQEO8SAIpOSBVICv0107.mp3&58&mp3', 0, 0),
+(3, 2, 'http://fdfs.xmcdn.com/group44/M06/05/D9/wKgKkVsM9_Pxs-cLAMBBtrKeeoA122.mp3&58&mp3', 0, 0),
+(4, 0, 'http://audio.xmcdn.com/group7/M08/BD/87/wKgDWlZgNVnRr_IVALnaXweo7VI616.m4a&951&m4a', 4427, 0),
+(5, 1, 'http://audio.xmcdn.com/group11/M0A/B1/8D/wKgDa1Zhbkyxq32ZAJRLIgor6JY624.m4a&951&m4a', 4427, 0),
+(6, 2, 'http://audio.xmcdn.com/group15/M04/C0/02/wKgDaFZia4ajzeuyAJyUOyg9gSs586.m4a&951&m4a', 4427, 0),
+(7, 3, 'http://audio.xmcdn.com/group10/M05/BF/7D/wKgDaVZibH6BrQraAJIscAoIUQc470.m4a&951&m4a', 4427, 0),
+(8, 0, 'http://audio.xmcdn.com/group7/M08/BD/87/wKgDWlZgNVnRr_IVALnaXweo7VI616.m4a&951&m4a', 4427, 15),
+(9, 1, 'http://audio.xmcdn.com/group11/M0A/B1/8D/wKgDa1Zhbkyxq32ZAJRLIgor6JY624.m4a&951&m4a', 4427, 15),
+(10, 2, 'http://audio.xmcdn.com/group15/M04/C0/02/wKgDaFZia4ajzeuyAJyUOyg9gSs586.m4a&951&m4a', 4427, 15),
+(11, 3, 'http://audio.xmcdn.com/group10/M05/BF/7D/wKgDaVZibH6BrQraAJIscAoIUQc470.m4a&951&m4a', 4427, 15);
+COMMIT;

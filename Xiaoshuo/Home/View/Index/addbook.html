@@ -28,6 +28,13 @@
         </div>
 
         <div class="layui-form-item">
+            <label class="layui-form-label">设置原始ID</label>
+            <div class="layui-input-block">
+                <input type="text" name="setid" required  lay-verify="required" placeholder="原始ID" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
             <label class="layui-form-label">网址</label>
             <div class="layui-input-block">
                 <input type="text" name="url" required  lay-verify="required" placeholder="原始URL" autocomplete="off" class="layui-input">
@@ -70,6 +77,8 @@
             $.post(SETBOOK,data.field,function(data){
                 if(data.status==1){
                     window.parent.location.href=href;
+                }else{
+                    layer.alert('书本已经添加过了');
                 }
             },'json')
 

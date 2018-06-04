@@ -59,17 +59,30 @@ class IndexController extends Controller {
         $bookname=I('post.bookname');
         $url=I('post.url');
         $category=I('post.category');
+        $setid=I('post.setid');
+        $time=time();
 
         $data['bookname']=$bookname;
         $data['originalurl']=$url;
         $data['category_id']=$category;
-        $data['ctime']=time();
+        $data['ctime']=$time;
+        $data['setid']=$setid;
+        $data['lastupdate']=$time;
 
-        $id=M('books')->add($data);
+        //判端是否已经添加了该书本
+        $isbook=M('books')->where(array('setid'=>$setid))->find();
 
-        $result['status']=1;
 
-        echo json_encode($result);
+        if($isbook){ //已经添加了
+            $result['status']=2;
+            echo json_encode($result);
+        }else{
+            $id=M('books')->add($data);
+            $result['status']=1;
+            echo json_encode($result);
+        }
+
+
 
     }
 

@@ -9,8 +9,13 @@ class AjaxController extends Controller {
 
         $id=I('get.id');
         $book=M('books')->where(array('bookid'=>$id))->find();
-        $this->assign('id',$id);
+        $this->assign('bookid',$id);
         $this->assign('setid',$book['setid']);
+
+        $latest=M('voicelist')->where(array('bookid'=>$id))->limit(1)->select();
+
+        $this->assign('latest',$latest);
+
         $this->display();
     }
 
@@ -31,7 +36,6 @@ class AjaxController extends Controller {
     public function getdata(){
         header('content-type:text/html;charset=utf-8');
         $setid=I('post.setid');
-        $setid='16590';
         $start=I('post.start') ? I('post.start'):0;
         $end=I('post.end');
         $index=$start;
@@ -131,10 +135,24 @@ class AjaxController extends Controller {
 
 
     public function savevoice(){
-        $data = "'[".I('post.data')."]'";
-        echo $data;
-        //$data='[{"index":0,"voice":"http://fdfs.xmcdn.com/group44/M04/05/01/wKgKjFsM93GRHhb-AIRb1Qc3EN8086.mp3&58&mp3"}]';
-        dump(json_decode($data,true));
+        $setid=I('post.setid');
+        $bookid=I('post.bookid');
+        $data = htmlspecialchars_decode(I('post.data'));
+        $result = json_decode($data,true);
+        if($result){
+
+            for($i=0;$i<count($result);$i++){
+                $item['bookid']=$bookid;
+                $item['setid']=$setid;
+                $item['voice']=$result[$i]['voice'];
+                $item['defindex']=$result[$i]['index'];
+                M('voicelist')->add($item);
+            }
+        }
+
+        $res=array('status'=>1);
+
+        echo json_encode($res);
     }
 
 

@@ -21,7 +21,7 @@
         <div class="layui-input-inline">
             <input type="text" name="setid" required  lay-verify="required" placeholder="设置对应的书本ID" autocomplete="off" class="layui-input" value="<?php echo ($setid); ?>">
         </div>
-        <?php if($setid == ''): ?><div class="layui-input-inline">
+        <?php if($setid == ''||$setid == 0): ?><div class="layui-input-inline">
             <button class="layui-btn" lay-submit lay-filter="formDemo">保存</button>
         </div><?php endif; ?>
     </div>
@@ -67,7 +67,6 @@
 
             },'json')
 
-
             return false;
         });
 
@@ -77,8 +76,8 @@
         //获取页面数据
         form.on('submit(getData)', function (data) {
 
-            var id="<?php echo ($id); ?>";
-            data.field.id=id;
+            var setid="<?php echo ($setid); ?>";
+            data.field.setid=setid;
             console.log(data.field)
             $.post(GETDATA,data.field,function(ret){
                 console.log(ret);
@@ -139,11 +138,14 @@
         $(document).on('click','.js-save',function(){
             console.log(window.ret)
             var args={}
-            //args['id']=222;
-            //args['data']="'"+JSON.stringify(window.ret)+"'";
-            args={data:'{"a":"1"}'}
-            $.post(SAVEVOICE,args,function(){
-
+            args['setid']="<?php echo ($setid); ?>";
+            args['bookid']="<?php echo ($bookid); ?>"
+            args['data']=JSON.stringify(window.ret);
+            var href=window.parent.window.location.href;
+            $.post(SAVEVOICE,args,function(data){
+                if(data.status==1){
+                    window.parent.location.href=href;
+                }
             },"json")
         })
     })
