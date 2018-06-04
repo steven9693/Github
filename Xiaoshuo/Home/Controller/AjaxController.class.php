@@ -12,9 +12,9 @@ class AjaxController extends Controller {
         $this->assign('bookid',$id);
         $this->assign('setid',$book['setid']);
 
-        $latest=M('voicelist')->where(array('bookid'=>$id))->limit(1)->select();
-
-        $this->assign('latest',$latest);
+        $latest=M('voicelist')->where(array('bookid'=>$id))->order('voiceid desc')->limit(1)->select();
+        $this->assign('defindex',$latest[0]['defindex']);
+        $this->assign('voice',$latest[0]['voice']);
 
         $this->display();
     }

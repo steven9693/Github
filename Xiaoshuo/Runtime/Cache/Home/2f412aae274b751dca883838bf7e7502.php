@@ -52,10 +52,10 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:void(0);">ting56 有声小说</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;" class="change" data-url="./index.php?m=Home&c=Index&a=add">添加分类</a></dd>
-                        <dd><a href="javascript:;" class="change" data-url="./index.php?m=Home&c=Index&a=booklist">添加书本</a></dd>
-                        <dd><a href="javascript:;" class="change" data-url="">网址管理</a></dd>
-                        <dd><a href="">超链接</a></dd>
+                        <dd><a href="javascript:void(0);" class="change" data-url="./index.php?m=Home&c=Index&a=add">添加分类</a></dd>
+                        <dd><a href="javascript:void(0);" class="change" data-url="./index.php?m=Home&c=Index&a=booklist">添加书本</a></dd>
+                        <dd><a href="javascript:void(0);" class="change" data-url="">书本管理</a></dd>
+                        <dd><a href="javascript:void(0)">书本</a></dd>
                     </dl>
                 </li>
                 <!--

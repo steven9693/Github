@@ -12,7 +12,7 @@
 </head>
 <body>
 
-
+<!--
 <blockquote class="layui-elem-quote">设置书本ID</blockquote>
 <hr class="layui-bg-green">
 <div class="layui-form" style="padding:20px">
@@ -26,11 +26,33 @@
         </div><?php endif; ?>
     </div>
 </div>
+-->
 
-
-<blockquote class="layui-elem-quote">获取音频链接</blockquote>
-<hr class="layui-bg-green">
 <div class="layui-form" style="padding:20px">
+
+    <table class="layui-table">
+        <colgroup>
+            <col width="80">
+            <col width="200">
+        </colgroup>
+        <thead>
+            <tr>
+                <th>最后一集</th>
+                <th>最后一集音频链接</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td><?php echo ($defindex); ?></td>
+                <td><?php echo ($voice); ?></td>
+            </tr>
+        </tbody>
+
+
+    </table>
+
+
 
     <div class="layui-form-item">
         <label class="layui-form-label">起始集</label>
@@ -58,33 +80,35 @@
 
     layui.use('form', function() {
         var form = layui.form;
-
-        form.on('submit(formDemo)', function (data) {
-
-            var setid="<?php echo ($setid); ?>";
-            data.field.setid=setid;
-            $.post(SETBOOKID,data.field,function(){
-
-            },'json')
-
-            return false;
-        });
-
+        //
+        // form.on('submit(formDemo)', function (data) {
+        //
+        //     var setid="<?php echo ($setid); ?>";
+        //     data.field.setid=setid;
+        //     $.post(SETBOOKID,data.field,function(){
+        //
+        //     },'json')
+        //
+        //     return false;
+        // });
+        //
 
 
 
         //获取页面数据
         form.on('submit(getData)', function (data) {
-
+            var loading=layer.load();
             var setid="<?php echo ($setid); ?>";
             data.field.setid=setid;
             console.log(data.field)
             $.post(GETDATA,data.field,function(ret){
+
                 console.log(ret);
                 var voiceTemp = $('#voiceTemp').html();
                 var temp = doT.template(voiceTemp);
                 $('#urlarea').html(temp(ret));
                 window.ret=ret;
+                layer.close(loading);
             },'json')
 
 
@@ -141,10 +165,10 @@
             args['setid']="<?php echo ($setid); ?>";
             args['bookid']="<?php echo ($bookid); ?>"
             args['data']=JSON.stringify(window.ret);
-            var href=window.parent.window.location.href;
+            var href=window.location.href;
             $.post(SAVEVOICE,args,function(data){
                 if(data.status==1){
-                    window.parent.location.href=href;
+                    window.location.href=href;
                 }
             },"json")
         })
