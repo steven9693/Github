@@ -25,4 +25,30 @@ class LoginController extends Controller {
         M('admin')->add($data);
     }
 
+    public function gotologin(){
+
+        $phone=I('post.phone');
+        $pwd=I('post.pwd');
+        $data=M('admin')->where(array('loginphone'=>$phone))->find();
+
+        if($data){
+
+            if(MD5($pwd)==$data['password']){
+
+                echo json_encode(array('status'=>1));
+                session('userid',$data['id']);
+                session('username',$data['username']);
+                session('loginphone',$data['loginphone']);
+
+            }else{
+                //密码不正确
+                echo json_encode(array('status'=>2));
+            }
+
+        }else{
+            //用户不存在
+            echo json_encode(array('status'=>3));
+        }
+    }
+
 }

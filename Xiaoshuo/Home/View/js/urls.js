@@ -22,3 +22,7 @@ var GETDATA=DOMAIN+"index.php?m=Home&c=Ajax&a=getdata";
 
 //保存音频
 var SAVEVOICE=DOMAIN+"index.php?m=Home&c=Ajax&a=savevoice";
+
+//去登录
+
+var GOTOLOGIN=DOMAIN+"index.php?m=Home&c=Login&a=gotologin";

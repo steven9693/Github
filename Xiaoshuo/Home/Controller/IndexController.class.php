@@ -10,8 +10,20 @@ class IndexController extends Controller {
 
     //首页
     public function index(){
+        $islogin=session('userid');
+        $username=session('username');
 
-        $this->display();
+        if(!$islogin){
+            header("Location: ./index.php?m=Home&c=Login&a=login");
+        }else{
+
+
+
+            $this->assign('username',$username);
+
+            $this->display();
+        }
+
 
     }
 

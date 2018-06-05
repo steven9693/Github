@@ -7,7 +7,7 @@
     <link href="./Home/View/css/global.css" rel="stylesheet">
     <link href="./Home/View/layui/css/layui.css" rel="stylesheet">
     <script src="./Home/View/layui/layui.all.js"></script>
-    <script src="./Home/View/js/urls.js?v=2"></script>
+    <script src="./Home/View/js/urls.js?v=3"></script>
     <script src="./Home/View/js/doT.js"></script>
 </head>
 <body>
@@ -45,6 +45,19 @@
         //各种基于事件的操作，下面会有进一步介绍
         form.on('submit(formDemo)', function (data) {
             console.log(data)
+            $.post(GOTOLOGIN,data.field,function(ret){
+                if(ret.status==1){
+                    window.location.href="./index.php?m=Home&c=Index&a=index"
+                }
+
+                if(ret.status==2){
+                    layer.msg('密码不正确！', {icon: 5});
+                }
+
+                if(ret.status==3){
+                    layer.msg('用户不存在！', {icon: 5});
+                }
+            },'json')
         })
     });
 
