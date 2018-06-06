@@ -47,7 +47,7 @@
             console.log(data)
             $.post(GOTOLOGIN,data.field,function(ret){
                 if(ret.status==1){
-                    window.location.href="./index.php?m=Home&c=Login&a=login"
+                    window.location.href="./index.php?m=Home&c=Index&a=index"
                 }
 
                 if(ret.status==2){

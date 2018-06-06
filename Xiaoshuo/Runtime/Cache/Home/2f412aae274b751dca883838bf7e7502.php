@@ -7,6 +7,7 @@
     <link href="./Home/View/css/global.css" rel="stylesheet">
     <link href="./Home/View/layui/css/layui.css" rel="stylesheet">
     <script src="./Home/View/layui/layui.all.js"></script>
+    <script src="./Home/View/js/urls.js"></script>
 </head>
 <body>
 
@@ -41,7 +42,7 @@
                     <dd><a href="">安全设置</a></dd>
                 </dl>-->
             </li>
-            <li class="layui-nav-item"><a href="javascript:void(0)">退了</a></li>
+            <li class="layui-nav-item"><a href="javascript:void(0)" class="loginout">退了</a></li>
         </ul>
     </div>
 
@@ -93,6 +94,16 @@
             var src = $(this).attr('data-url');
             $('#main').attr('src',src);
         })
+
+
+        $('.loginout').on('click',function(){
+            var href=window.location.href
+            $.post(LOGINOUT,{},function(){
+                window.location.href=href;
+            })
+        })
+
+
     })
 </script>
 

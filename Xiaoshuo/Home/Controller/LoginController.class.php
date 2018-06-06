@@ -51,4 +51,10 @@ class LoginController extends Controller {
         }
     }
 
+
+    public function loginout(){
+        session(null);
+    }
+
+
 }
