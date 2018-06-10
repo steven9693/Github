@@ -7,6 +7,9 @@ use Think\Controller;
 class LoginController extends Controller {
 
     public function login(){
+
+        $this->assign('version',$this->clearcache());
+
         $this->display();
     }
 
@@ -54,6 +57,11 @@ class LoginController extends Controller {
 
     public function loginout(){
         session(null);
+    }
+
+
+    public function clearcache(){
+        return time();
     }
 
 

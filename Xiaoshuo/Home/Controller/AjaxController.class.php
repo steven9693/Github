@@ -16,6 +16,8 @@ class AjaxController extends Controller {
         $this->assign('defindex',$latest[0]['defindex']);
         $this->assign('voice',$latest[0]['voice']);
 
+        $this->assign('version',$this->clearcache());
+
         $this->display();
     }
 
@@ -153,6 +155,12 @@ class AjaxController extends Controller {
         $res=array('status'=>1);
 
         echo json_encode($res);
+    }
+
+
+
+    public function clearcache(){
+        return time();
     }
 
 

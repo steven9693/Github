@@ -21,6 +21,8 @@ class IndexController extends Controller {
 
             $this->assign('username',$username);
 
+            $this->assign('version',$this->clearcache());
+
             $this->display();
         }
 
@@ -31,15 +33,23 @@ class IndexController extends Controller {
     public function add(){
         $category=M('category')->order('category_id desc')->select();
         $this->assign('category',$category);
+        $this->assign('version',$this->clearcache());
         $this->display();
     }
 
 
     //添加书本分类
-    public function addcatogary(){
+
+    public function addcategory(){
+
+        $this->assign('version',$this->clearcache());
+        $this->display();
+    }
+
+    //保存分类
+    public function savecatogary(){
 
         $title=I('post.title');
-
         $data['name']=$title;
         $data['ctime']=time();
 
@@ -60,6 +70,8 @@ class IndexController extends Controller {
         $category=M('category')->order('category_id desc')->select();
 
         $this->assign('category',$category);
+
+        $this->assign('version',$this->clearcache());
 
         $this->display();
     }
@@ -105,6 +117,8 @@ class IndexController extends Controller {
 
         $this->assign('books',$data);
 
+        $this->assign('version',$this->clearcache());
+
         $this->display();
     }
 
@@ -115,14 +129,17 @@ class IndexController extends Controller {
 
         $book=M('books')->where(array('bookid'=>$id))->find();
 
+
         $url=$book['originalurl'];
 
         $rules=array(
             'content'=>array('div.jj','text'),
             'author'=>array('div.zz','text')
         );
+        echo $url;
 
         $data = QueryList::Query($url,$rules,'','UTF-8','GB2312')->getData();
+
 
         $info= $data[1]['content'];
 
@@ -131,7 +148,7 @@ class IndexController extends Controller {
         $this->assign('info',$info);
         $this->assign('msg',$msg);
         $this->assign('id',$id);
-
+        $this->assign('version',$this->clearcache());
         $this->display();
     }
 
@@ -148,7 +165,7 @@ class IndexController extends Controller {
         $data['author']=$author;
         $data['bojiang']=$voice;
 
-        //M('books')->where(array('bookid'=>$id))->save($data);
+        M('books')->where(array('bookid'=>$id))->save($data);
 
         $result['status']=1;
 
@@ -176,18 +193,24 @@ class IndexController extends Controller {
         //dump($data);
         $this->assign('src', $data[0]['src']);
 
+        $this->assign('version',$this->clearcache());
+
         $this->display();
     }
 
     public function getpicturebyurl(){
-
+        $this->assign('version',$this->clearcache());
         $this->display();
     }
 
 
     public function getpictureuplaod(){
-
+        $this->assign('version',$this->clearcache());
         $this->display();
+    }
+
+    public function clearcache(){
+        return time();
     }
 
 

@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="./Home/View/js/jquery-1.11.1.min.js"></script>
-    <link href="./Home/View/css/global.css" rel="stylesheet">
-    <link href="./Home/View/layui/css/layui.css" rel="stylesheet">
-    <script src="./Home/View/layui/layui.all.js"></script>
+    <script src="./Xiaoshuo/Home/View/js/jquery-1.11.1.min.js"></script>
+    <link href="./Xiaoshuo/Home/View/css/global.css?v={$version}" rel="stylesheet">
+    <link href="./Xiaoshuo/Home/View/layui/css/layui.css" rel="stylesheet">
+    <script src="./Xiaoshuo/Home/View/layui/layui.all.js"></script>
+    <script src="./Xiaoshuo/Home/View/js/urls.js?v={$version}"></script>
 
 </head>
 
 
 <body>
-<a href="javascript:void(0)" class="layui-btn layui-btn-radius" id="addCatogry">添加分类</a>
+<a href="javascript:void(0)" class="layui-btn layui-btn-radius" id="addCategory">添加分类</a>
 <hr/>
 
 
@@ -50,7 +51,7 @@
 
 <script>
     $(function(){
-        $('#addCatogry').click(function(){
+        $('#addCategory').click(function(){
 
             var layer = layui.layer;
 
@@ -58,7 +59,7 @@
                  title:'添加分类',
                  area:['800px','580px'],
                  type: 2,
-                 content: "./index.php?m=Home&c=Index&a=addcategory"
+                 content: ADDCATEGORY
              });
 
         })
