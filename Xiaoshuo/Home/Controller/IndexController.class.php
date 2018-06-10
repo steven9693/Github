@@ -10,21 +10,22 @@ class IndexController extends Controller {
 
     //首页
     public function index(){
-        $islogin=session('userid');
-        $username=session('username');
 
-        if(!$islogin){
-            header("Location: ./index.php?m=Home&c=Login&a=login");
-        }else{
-
-
-
-            $this->assign('username',$username);
+//        $islogin=session('userid');
+//        $username=session('username');
+//
+//        if(!$islogin){
+//            header("Location: ./index.php?m=Home&c=Login&a=login");
+//        }else{
+//
+//
+//
+//            $this->assign('username',$username);
 
             $this->assign('version',$this->clearcache());
 
             $this->display();
-        }
+//        }
 
 
     }
@@ -136,7 +137,7 @@ class IndexController extends Controller {
             'content'=>array('div.jj','text'),
             'author'=>array('div.zz','text')
         );
-        echo $url;
+        //echo $url;
 
         $data = QueryList::Query($url,$rules,'','UTF-8','GB2312')->getData();
 

@@ -14,11 +14,21 @@
       <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/Controller/IndexController.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="138" column="18" lean-forward="false" selection-start-line="138" selection-start-column="18" selection-end-line="138" selection-end-column="18" />
+            <state relative-caret-position="304">
+              <caret line="19" column="2" lean-forward="true" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="2" />
               <folding>
                 <element signature="e#33#54#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Xiaoshuo/Common/Conf/config.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -42,6 +52,7 @@
       <find>addCatogry</find>
       <find>updatebook</find>
       <find>formDemo</find>
+      <find>getbook</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -52,7 +63,6 @@
       <list>
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Index/main.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Index/addcatogary.html" />
-        <option value="$PROJECT_DIR$/Xiaoshuo/Common/Conf/config.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Conf/config.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Controller/CurlController.class.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Controller/Login.class.php" />
@@ -72,6 +82,7 @@
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Login/login.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Controller/LoginController.class.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Controller/AjaxController.class.php" />
+        <option value="$PROJECT_DIR$/Xiaoshuo/Common/Conf/config.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Controller/IndexController.class.php" />
       </list>
     </option>
@@ -122,7 +133,27 @@
               <item name="Github" type="b2602c69:ProjectViewProjectNode" />
               <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Common" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Common" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Conf" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Home" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Home" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Conf" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Github" type="b2602c69:ProjectViewProjectNode" />
@@ -216,12 +247,12 @@
       <workItem from="1528602712837" duration="29000" />
       <workItem from="1528602774953" duration="86000" />
       <workItem from="1528602885444" duration="9537000" />
-      <workItem from="1528645923693" duration="708000" />
+      <workItem from="1528645923693" duration="1537000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83062000" />
+    <option name="totallyTimeSpent" value="83891000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
@@ -466,22 +497,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Xiaoshuo/index.php" />
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/Conf/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/View/Ajax/index_.html" />
     <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/Controller/CurlController.class.php" />
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Common/Conf/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="505">
-          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/View/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -610,10 +627,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/Conf/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="18" lean-forward="false" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Common/Conf/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/Controller/IndexController.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="138" column="18" lean-forward="false" selection-start-line="138" selection-start-column="18" selection-end-line="138" selection-end-column="18" />
+        <state relative-caret-position="304">
+          <caret line="19" column="2" lean-forward="true" selection-start-line="19" selection-start-column="2" selection-end-line="19" selection-end-column="2" />
           <folding>
             <element signature="e#33#54#0#PHP" expanded="true" />
           </folding>
