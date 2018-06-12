@@ -179,6 +179,23 @@ body {
     color:#333;
 }
 
+.imagearea{
+    display:block;
+    width:104px;
+    height:150px;
+    overflow:hidden;
+    background:#fff;
+    padding:1px;
+    border:1px solid #e0e0e0
+}
+
+.imagearea img{
+    display:block;
+    width:104px;
+    height:150px;
+    overflow:hidden;
+}
+
 .footer{
     border-top:3px solid #12B7F5;
     margin:10px 0 0 0;
