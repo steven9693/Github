@@ -11,14 +11,6 @@
 </head>
 <body>
 
-<!--
-<div class="ui-row-flex ui-whitespace">
-    <div class="ui-col ui-col">平均分</div>
-    <div class="ui-col ui-col">平均分</div>
-    <div class="ui-col ui-col">平均分</div>
-    <div class="ui-col ui-col">平均分</div>
-</div>
--->
 
 <div class="ui-row-flex ui-whitespace header">
     <div class="ui-col">哈哈哈</div>
@@ -28,11 +20,9 @@
 
 
 <ul class="ui-row mt10 nav">
-    <li class="ui-col ui-col-33"><a href="">玄幻武侠</a></li>
-    <li class="ui-col ui-col-33"><a href="">玄幻武侠</a></li>
-    <li class="ui-col ui-col-33"><a href="">玄幻武侠</a></li>
-    <li class="ui-col ui-col-33"><a href="">玄幻武侠</a></li>
-    <li class="ui-col ui-col-33"><a href="">玄幻武侠</a></li>
+    <volist name="category" id="item">
+        <li class="ui-col ui-col-33"><a href="{$item.category_id}">{$item.name}</a></li>
+    </volist>
 </ul>
 
 
@@ -44,42 +34,20 @@
 
 
 <ul class="ui-list ui-border-tb mt10">
-
+    <volist name="todayrecommend" id="item">
     <li>
         <div class=" ui-list-img-vertical">
             <span style="background-image:url(http://placeholder.qiniudn.com/216x308)"></span>
         </div>
         <div class="ui-list-info ui-border-t">
-            <h4 class="ui-nowrap bookname"><a href="">标题</a></h4>
-            <p class="ui-nowrap classify">分类：</p>
-            <p class="ui-nowrap voice">播音：</p>
-            <p class="ui-nowrap description">简介：</p>
+            <h4 class="ui-nowrap bookname"><a href="">{$item.bookname}</a></h4>
+            <p class="ui-nowrap classify">分类：{$item.category_id}</p>
+            <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
+            <p class="ui-nowrap description">简介：{$item.description}</p>
         </div>
     </li>
+    </volist>
 
-    <li>
-        <div class=" ui-list-img-vertical">
-            <span style="background-image:url(http://placeholder.qiniudn.com/216x308)"></span>
-        </div>
-        <div class="ui-list-info ui-border-t">
-            <h4 class="ui-nowrap bookname"><a href="">标题</a></h4>
-            <p class="ui-nowrap classify">分类：</p>
-            <p class="ui-nowrap voice">播音：</p>
-            <p class="ui-nowrap description">简介：</p>
-        </div>
-    </li>
-
-    <li>
-        <div class=" ui-list-img-vertical">
-            <span style="background-image:url(http://placeholder.qiniudn.com/216x308)"></span>
-        </div>
-        <div class="ui-list-info ui-border-t">
-            <h4 class="ui-nowrap bookname"><a href="">标题</a></h4>
-            <p class="ui-nowrap classify">分类：</p>
-            <p class="ui-nowrap voice">播音：</p>
-            <p class="ui-nowrap description">简介：</p>
-        </div>
-    </li>
 
 </ul>
 
