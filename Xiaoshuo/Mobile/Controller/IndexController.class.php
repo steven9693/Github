@@ -9,7 +9,7 @@ class IndexController extends Controller {
         $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
 
         //今日推荐
-        $todayrecommend=M('books')->where(array('isshow'=>1,'todayrecommend'=>1))->order('issort desc,bookid desc')->limit(3)->select();
+        $todayrecommend=M('books')->where(array('isshow'=>1,'todayrecommend'=>1))->order('todayrecommendsort desc,bookid desc')->limit(3)->select();
 
         //玄幻武侠
         $xh=M('books')->where(array('isshow'=>1,'category_id'=>1))->order('issort desc,bookid desc')->limit(10)->select();
@@ -41,6 +41,23 @@ class IndexController extends Controller {
 
 
     public function categorytime(){
+
+//        $category_id=I('get.cid'); //获取分类ID
+        $category_id=1;
+
+        $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
+
+
+        $map['isshow']=1;
+        $map['category_id']=$category_id;
+
+        $da=M('books')->where($map)->order('lastupdate desc')->select();
+
+        $data=$this->getCategory($da,$category);
+
+        $this->assign('data',$data);
+
+        $this->assign('category',$category);
 
         $this->assign('random',$this->setrandom());
         $this->display();
