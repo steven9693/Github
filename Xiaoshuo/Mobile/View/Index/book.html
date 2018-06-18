@@ -1,0 +1,106 @@
+<include file="./Xiaoshuo/Mobile/View/Index/header.html" />
+
+
+<ul class="ui-list ui-border-tb mt10">
+    <li>
+        <div class=" ui-list-img-vertical">
+            <a class="imagearea" href="#"><img src="{$book.cover}"></a>
+        </div>
+        <div class="ui-list-info ui-border-t">
+            <h4 class="ui-nowrap bookname"><a href="">{$book.bookname}</a></h4>
+            <p class="ui-nowrap classify">分类：{$book.category_id}</p>
+            <p class="ui-nowrap voice">播音：{$book.bojiang}</p>
+            <p class="ui-nowrap description">最新章节：第{$count}集</p>
+        </div>
+    </li>
+
+</ul>
+
+<a href="" class="playbtn">立即收听</a>
+
+<div class="ui-row-flex ui-whitespace mt10">
+    <div class="ui-col desc"><strong>{$book.bookname}有声小说简介：</strong>{$book.description}</div>
+</div>
+
+
+<div class="ui-row-flex ui-whitespace secheader mt10">
+    <div class="ui-col"><h2>章节列表</h2></div>
+    <div class="ui-col ui-col-2"></div>
+</div>
+
+
+
+<ul class="ui-row voicebox" id="voicebox">
+
+</ul>
+
+
+
+
+
+
+<!--
+
+<volist name="xuanhuan" id="item" key="index">
+
+    <ul class="ui-list ui-border-tb mt10">
+        <li>
+            <div class=" ui-list-img-vertical">
+                <a class="imagearea" href="#"><img src="{$item.cover}"></a>
+            </div>
+            <div class="ui-list-info ui-border-t">
+                <h4 class="ui-nowrap bookname"><a href="">标题：{$item.bookname}</a></h4>
+                <p class="ui-nowrap classify">分类：{$item.category}</p>
+                <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
+                <p class="ui-nowrap description">简介：{$item.description}</p>
+            </div>
+        </li>
+
+    </ul>
+
+</volist>
+
+-->
+
+<include file="./Xiaoshuo/Mobile/View/Index/footer.html" />
+
+
+<script>
+$(function(){
+    var bookid="{$bookid}";
+    var count = "{$count}";
+    var resort=0;
+
+    function drawhtml(){
+        var html="";
+
+        if(resort){
+            for(count;count>0;count--){
+                html+='<li class="ui-col ui-col-33"><a href="#">第'+(count)+'集</a></li>';
+            }
+            resort=0;
+        }else{
+
+            for(var i=0;i<count;i++){
+                html+='<li class="ui-col ui-col-33"><a href="#">第'+(i+1)+'集</a></li>';
+            }
+            resort=1;
+        }
+
+
+
+
+
+        $("#voicebox").html(html)
+    }
+
+    drawhtml();
+})
+
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+.playbox{width:100%;background:#0892c5;margin:10px 0}
+
+.jp-audio{width:320px;margin:0 auto;background-color:transparent;border:none}
+
+.jp-audio .jp-controls{width:100%;padding:10px;box-sizing:border-box}
+
+.jp-controls button.jp-stop{display:none}
+
+.jp-interface{background-color:transparent !important}
+
+.jp-play,.jp-play:focus{
+    width:56px;
+    height:56px;
+    border:2px solid #fff !important;
+    border-radius:28px;
+    background:url('./play.png') no-repeat 14px center;
+    background-size:30px 30px
+}
+
+.jp-state-playing .jp-play:focus,.jp-state-playing  .jp-play{
+    background:url('./stop.png') no-repeat center center;
+    background-size:26px 26px;
+}
+
+.jp-seek-bar{background:#fff}
+.jp-play-bar{background:#f5a512}
+
+.jp-volume-controls{display:none}
+.jp-toggles{display:none}
+
+.jp-audio .jp-progress{height:5px;top:35px;}
+.jp-audio .jp-time-holder{color:#fff;top:15px}
+.jp-audio .jp-type-single .jp-progress{left:100px;width:200px}
+.jp-audio .jp-type-single .jp-time-holder{left:100px;width:200px}
+
+.mypalybar{position:absolute;left:100px;width:200px;color:#fff;font-size:12px;top:45px}
+
+.menutool{height:45px;}
+.menutool a{
+    height:43px;
+    line-height:43px;
+    display:block;
+    text-align:center;
+    font-size:14px;
+    border:1px solid #ddd;
+    background:#fafafa;
+    margin:0 10px;
+    border-radius:5px;
+    color:#666;
+
+}
+
+.toback a,.toindex a{font-size:14px;display:block;text-align:center;color:#fff}
+.pagetitle{font-size:18px;text-align:center}

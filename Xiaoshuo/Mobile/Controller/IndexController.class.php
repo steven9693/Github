@@ -65,6 +65,45 @@ class IndexController extends Controller {
 
 
 
+    public function book(){
+
+        $bookid=3;
+
+        $book=M('books')->where(array('bookid'=>$bookid))->find();
+
+        $this->assign('book',$book);
+
+//        dump($book);
+
+        $count=M('voicelist')->where(array('bookid'=>$bookid))->count();
+
+        $this->assign('count',$count);
+
+        $this->assign('bookid',$bookid);
+
+        $this->assign('random',$this->setrandom());
+
+
+
+
+        $this->display();
+    }
+
+
+
+    public function play(){
+
+
+        $data=M('voicelist')->where(array('voiceid'=>5))->find();
+        $this->assign('data',$data);
+
+        $this->assign('random',$this->setrandom());
+
+        $this->display();
+    }
+
+
+
 
 
     public function setrandom(){
