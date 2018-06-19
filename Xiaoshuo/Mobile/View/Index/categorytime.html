@@ -12,23 +12,22 @@
     <volist name="data" id="item">
     <li>
         <div class=" ui-list-img-vertical">
-            <a class="imagearea" href="#"><img src="{$item.cover}"></a>
+            <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><img src="{$item.cover}"></a>
         </div>
         <div class="ui-list-info ui-border-t">
-            <h4 class="ui-nowrap bookname"><a href="#">{$item.bookname}</a></h4>
+            <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
             <p class="ui-nowrap classify">分类：{$item.category}</p>
             <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
             <p class="ui-nowrap description">简介：{$item.description}</p>
         </div>
     </li>
     </volist>
-
 </ul>
 
 <div class="ui-row-flex ui-whitespace pagenav">
-    <div class="ui-col ui-col"><a href="#" class="pagefront">上一页</a></div>
-    <div class="ui-col ui-col pageinfo">1/10</div>
-    <div class="ui-col ui-col"><a href="#" class="pagenext">下一页</a></div>
+    <div class="ui-col ui-col"><a href="{:U('categorytime/'.$category_id.'-'.($page?$page-1:0))}" class="pagefront">上一页</a></div>
+    <div class="ui-col ui-col pageinfo">{$page+1}/{$all}</div>
+    <div class="ui-col ui-col"><a href="{:U('categorytime/'.$category_id.'-'.($page+1))}" class="pagenext">下一页</a></div>
 </div>
 
 

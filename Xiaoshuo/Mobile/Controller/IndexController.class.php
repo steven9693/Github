@@ -42,16 +42,29 @@ class IndexController extends Controller {
 
     public function categorytime(){
 
-//        $category_id=I('get.cid'); //获取分类ID
-        $category_id=1;
+        $arg=I('get.cid'); //分类ID-分页页码
+        $page=0;
+
+        if(strpos($arg,'-')>0){
+            $arrs=explode('-',$arg);
+            $category_id=$arrs[0];
+            $page=$arrs[1];
+        }else{
+            $category_id=$arg;
+        }
+
+        $pagesize=3;
+
 
         $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
 
-
         $map['isshow']=1;
+
         $map['category_id']=$category_id;
 
-        $da=M('books')->where($map)->order('lastupdate desc')->select();
+        $da=M('books')->where($map)->order('lastupdate desc')->limit($pagesize*$page,$pagesize)->select();
+
+        $count=M('books')->where($map)->count();
 
         $data=$this->getCategory($da,$category);
 
@@ -60,12 +73,20 @@ class IndexController extends Controller {
         $this->assign('category',$category);
 
         $this->assign('random',$this->setrandom());
+
+        $this->assign('category_id',$category_id);
+
+        $this->assign('page',$page);
+
+        $this->assign('all',($count/$pagesize));
+
         $this->display();
     }
 
 
 
     public function book(){
+//        echo I('get.id');
 
         $bookid=3;
 

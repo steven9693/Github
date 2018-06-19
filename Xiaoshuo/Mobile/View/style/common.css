@@ -105,10 +105,15 @@ body {
     color: #fff
 }
 
-.back a,.toindex a {
+.toback a,.toindex a {
     display: block;
     font-size: 14px;
-    color: #fff
+    color: #fff;
+    text-align:center
+}
+.pagetitle{
+    font-size:18px;
+    text-align:center;
 }
 
 .tiparea {

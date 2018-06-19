@@ -114,8 +114,11 @@ class IndexController extends Controller {
 
     public function booklist(){
 
+        $page=I('get.page')?(I('get.page')-1):0;
 
-        $data=M('books')->order('bookid desc')->limit(5)->select();
+        $pagesize=5;
+
+        $data=M('books')->order('bookid desc')->limit($pagesize*$page,$pagesize)->select();
 
         $count=M('books')->order('bookid desc')->count();
 
@@ -123,9 +126,9 @@ class IndexController extends Controller {
 
         $url="./index.php?m=Home&c=Index&a=booklist";
 
-        $count=100;
+//        $count=100;
 
-        $pagehtml=$pagenav->pagenav($count,10,$url);
+        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
 
         $this->assign('pagenav',$pagehtml);
 
