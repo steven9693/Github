@@ -37,6 +37,7 @@
     </tr>
     </thead>
     <tbody>
+
         <volist name="books" id="book">
             <tr>
                 <td>{$book.bookname}</td>
@@ -53,8 +54,13 @@
                 <td>{$book.originalurl}</td>
             </tr>
         </volist>
+
     </tbody>
 </table>
+
+<div class="pagenav">
+    {$pagenav}
+</div>
 
 <script>
     $(function(){
@@ -139,6 +145,11 @@
 
             });
         })
+
+
+
+
+
 
     })
 </script>

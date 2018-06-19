@@ -1,8 +1,8 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-
 use QL\QueryList;
+use Pagenav\Pagenav;
 
 header("Content-Type:text/html;charset=UTF-8");
 
@@ -114,7 +114,20 @@ class IndexController extends Controller {
 
     public function booklist(){
 
-        $data=M('books')->order('bookid desc')->select();
+
+        $data=M('books')->order('bookid desc')->limit(5)->select();
+
+        $count=M('books')->order('bookid desc')->count();
+
+        $pagenav=new Pagenav();
+
+        $url="./index.php?m=Home&c=Index&a=booklist";
+
+        $count=100;
+
+        $pagehtml=$pagenav->pagenav($count,10,$url);
+
+        $this->assign('pagenav',$pagehtml);
 
         $this->assign('books',$data);
 
