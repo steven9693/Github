@@ -25,6 +25,8 @@ return array(
 
     //配置静态路由
     'URL_ROUTE_RULES'=>array(
+	
+		'index'=>'Mobile/Index/index',
 
         'book/:id' => 'Mobile/Index/book',
 

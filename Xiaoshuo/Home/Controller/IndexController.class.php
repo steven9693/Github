@@ -8,6 +8,8 @@ header("Content-Type:text/html;charset=UTF-8");
 
 class IndexController extends Controller {
 
+
+
     //首页
     public function index(){
 

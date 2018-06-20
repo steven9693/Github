@@ -21,13 +21,13 @@
     <colgroup>
         <col width="200">
         <col width="200">
-        <col width="200">
+        <col>
     </colgroup>
     <thead>
     <tr>
         <th>分类</th>
         <th>是否显示</th>
-        <th></th>
+        <th colspan="2">设置排序</th>
     </tr>
     </thead>
     <tbody>
@@ -35,7 +35,8 @@
             <tr>
                 <td>{$item.name}</td>
                 <td>{$item.isshow}</td>
-                <td></td>
+                <td><input /></td>
+                <td><a href="#">确定</a></td>
             </tr>
         </volist>
 

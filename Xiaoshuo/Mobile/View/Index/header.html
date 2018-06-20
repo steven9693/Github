@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0, user-scalable=no">
     <title>小微夜听</title>
     <!-- 引入 FrozenUI -->
-    <link rel="stylesheet" href="/Github/Xiaoshuo/Mobile/View/style/frozenui/css/frozenui.css"/>
-    <link rel="stylesheet" href="/Github/Xiaoshuo/Mobile/View/style/common.css?v={$random}"/>
-    <script type="text/javascript" src="/Github/Xiaoshuo/Mobile/View/js/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="{$realpath}/style/frozenui/css/frozenui.css"/>
+    <link rel="stylesheet" href="{$realpath}/style/common.css?v={$random}"/>
+    <script type="text/javascript" src="{$realpath}/js/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 
 
 <div class="ui-row-flex ui-whitespace header">
     <div class="ui-col toback"><if condition="$isindex neq 1"><a href="javascript:history.back()">返回</a></if></div>
-    <div class="ui-col ui-col-3 pagetitle">小微夜听</div>
+    <div class="ui-col ui-col-3 pagetitle"><if condition="$settitle eq 1">{$title}<else/>小微夜听</if></div>
     <div class="ui-col toindex"><if condition="$isindex neq 1"><a href="{:U(index)}">首页</a></if></div>
 </div>
 

@@ -58,29 +58,6 @@
 </ul>
 
 
-<!--
-
-<volist name="xuanhuan" id="item" key="index">
-
-    <ul class="ui-list ui-border-tb mt10">
-        <li>
-            <div class=" ui-list-img-vertical">
-                <a class="imagearea" href="#"><img src="{$item.cover}"></a>
-            </div>
-            <div class="ui-list-info ui-border-t">
-                <h4 class="ui-nowrap bookname"><a href="">标题：{$item.bookname}</a></h4>
-                <p class="ui-nowrap classify">分类：{$item.category}</p>
-                <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
-                <p class="ui-nowrap description">简介：{$item.description}</p>
-            </div>
-        </li>
-
-    </ul>
-
-</volist>
-
--->
-
 <include file="./Xiaoshuo/Mobile/View/Index/footer.html" />
 
 
@@ -89,7 +66,7 @@
     var bookid="{$bookid}";
     var count = "{$count}";
     var resort=0;
-    var palyurl='/Github/index.php/play/'
+    var palyurl="{$playpath}"
 
     function drawhtml(){
         var html="";

@@ -1,15 +1,19 @@
 <include file="./Xiaoshuo/Mobile/View/Index/header.html" />
 
-<link href="/Github/Xiaoshuo/Mobile/View/jPlayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+<link href="{$realpath}/jPlayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
 
 
-<link href="/Github/Xiaoshuo/Mobile/View/jPlayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+<link href="{$realpath}/jPlayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
 
-<link href="/Github/Xiaoshuo/Mobile/View/jPlayer/skin/blue.monday/myplay.css?v={$random}" rel="stylesheet" type="text/css" />
+<link href="{$realpath}/jPlayer/skin/blue.monday/myplay.css?v={$random}" rel="stylesheet" type="text/css" />
 
-<script type="text/javascript" src="/Github/Xiaoshuo/Mobile/View/jPlayer/dist/jplayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="{$realpath}/jPlayer/dist/jplayer/jquery.jplayer.min.js"></script>
 
 <include file="./Xiaoshuo/Mobile/View/Index/QQqun.html" />
+
+<div class="historymsg">
+    您正在收听：<span>{$book.bookname} 第{$defindex+1}集</span>
+</div>
 
 <div class="playbox">
     <div id="jquery_jplayer_1" class="jp-jplayer"></div>
@@ -45,33 +49,6 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    //<![CDATA[
-    $(document).ready(function(){
-        var encodevoice="{$encodevoice}";
-        $("#jquery_jplayer_1").jPlayer({
-            ready: function (event) {
-                $(this).jPlayer("setMedia", {
-                    title: "Bubble",
-                    m4a: "http://audio.xmcdn.com/group14/M05/FE/3C/wKgDZFa10AHScycYAJufWjluq_o899.m4a",
-                    oga: "http://audio.xmcdn.com/group14/M05/FE/3C/wKgDZFa10AHScycYAJufWjluq_o899.m4a"
-                });
-            },
-            swfPath: "../../dist/jplayer",
-            supplied: "m4a, oga",
-            wmode: "window",
-            useStateClassSkin: true,
-            autoBlur: false,
-            smoothPlayBar: true,
-            keyEnabled: true,
-            remainingDuration: true,
-            toggleDuration: true
-        });
-    });
-    //]]>
-</script>
-
-
 
 <div class="ui-row-flex ui-whitespace menutool">
     <div class="ui-col ui-col"><a href="{:U('play/'.$bookid.'-0-'.($defindex==0?0:$defindex-1))}">上一集</a></div>
@@ -105,9 +82,33 @@
 <include file="./Xiaoshuo/Mobile/View/Index/footer.html" />
 
 
+<script src="{$realpath}/js/main.js"></script>
+
+<script type="text/javascript">
+    var encodevoice=FonHen_JieMa("{$encodevoice}")
+
+    $("#jquery_jplayer_1").jPlayer({
+        ready: function (event) {
+            $(this).jPlayer("setMedia", {
+                title: "Bubble",
+                m4a:encodevoice,
+                oga:encodevoice
+            });
+        },
+        swfPath: "../../dist/jplayer",
+        supplied: "m4a, oga",
+        wmode: "window",
+        useStateClassSkin: true,
+        autoBlur: false,
+        smoothPlayBar: true,
+        keyEnabled: true,
+        remainingDuration: true,
+        toggleDuration: true
+    });
 
 
-
+    //]]>
+</script>
 
 
 </body>

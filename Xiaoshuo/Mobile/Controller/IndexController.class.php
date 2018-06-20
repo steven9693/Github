@@ -3,6 +3,16 @@ namespace Mobile\Controller;
 use Think\Controller;
 class IndexController extends Controller {
 
+    //public $realpath="/Github/Xiaoshuo/Mobile/View"; //本地测试
+    public $realpath="/Xiaoshuo/Mobile/View"; //网上路径
+
+    //public $playpath="/Github/index.php/play/"; //本地测试
+    public $playpath="/index.php/play/"; //网上路径
+
+    public function setpath(){
+        $this->assign('playpath',$this->playpath);
+        $this->assign('realpath',$this->realpath);
+    }
 
     public function index(){
 
@@ -26,6 +36,9 @@ class IndexController extends Controller {
         $this->assign('isindex',1); //隐藏首页的返回
 
         $this->assign('random',$this->setrandom());
+
+        $this->setpath();
+
         $this->display();
     }
 
@@ -81,6 +94,12 @@ class IndexController extends Controller {
 
         $this->assign('all',ceil($count/$pagesize));
 
+        $ca=$data[0]['category'];
+        $this->assign('settitle',1);
+        $this->assign('title',$ca);
+
+        $this->setpath();
+
         $this->display();
     }
 
@@ -117,6 +136,11 @@ class IndexController extends Controller {
         $this->assign('random',$this->setrandom());
 
         $this->assign('category',$category);
+
+        $this->setpath();
+
+        $this->assign('settitle',1);
+        $this->assign('title',$book['bookname']);
 
 
         $this->display();
@@ -166,6 +190,8 @@ class IndexController extends Controller {
 
         $rand=$this->randombook($book['category_id'],5);
 
+        $this->assign('book',$book);
+
         $this->assign('rand',$rand);
 
         $this->assign('data',$data);
@@ -177,6 +203,11 @@ class IndexController extends Controller {
         $this->assign('random',$this->setrandom());
 
         $this->assign('category',$category);
+
+        $this->assign('settitle',1);
+        $this->assign('title',$book['bookname']);
+
+        $this->setpath();
 
         $this->display();
 

@@ -260,3 +260,16 @@ body {
     text-align:right;
     margin:0px 10px;
 }
+
+.historymsg{
+    background:#e4e4e4;
+    padding:10px;
+    font-size:14px;
+    color:#333;
+}
+
+.historymsg span{
+    color:#d20e0e;
+    font-weight:bold;
+    font-size:16px
+}
