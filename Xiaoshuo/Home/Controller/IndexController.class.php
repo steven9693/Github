@@ -231,5 +231,21 @@ class IndexController extends Controller {
     }
 
 
+    public function control(){
+
+        $category_id=I('get.cid');
+
+        $category=M('category')->where(array('isshow'=>1))->select();
+
+        $this->assign('category',$category);
+
+        $books = M('books')->order('bookid desc')->select();
+
+        $this->assign('books',$books);
+
+        $this->display();
+    }
+
+
 
 }
