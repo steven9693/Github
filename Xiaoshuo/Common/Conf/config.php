@@ -25,7 +25,12 @@ return array(
 
     //配置静态路由
     'URL_ROUTE_RULES'=>array(
-        '/^book-(\d+)$/' => 'Index/test?id=:1'
+
+        'book/:id' => 'Mobile/Index/book',
+
+        'categorytime/:cid'=>'Mobile/Index/categorytime',
+
+        'play/:id'=>'Mobile/Index/play'
     ),
 
     //伪静态

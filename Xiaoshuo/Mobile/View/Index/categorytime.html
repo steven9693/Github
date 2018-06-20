@@ -1,6 +1,6 @@
 <include file="./Xiaoshuo/Mobile/View/Index/header.html" />
 
-<div class="tiparea">夜听小说群：</div>
+<include file="./Xiaoshuo/Mobile/View/Index/QQqun.html" />
 
 
 <div class="menu">
@@ -27,9 +27,8 @@
 <div class="ui-row-flex ui-whitespace pagenav">
     <div class="ui-col ui-col"><a href="{:U('categorytime/'.$category_id.'-'.($page?$page-1:0))}" class="pagefront">上一页</a></div>
     <div class="ui-col ui-col pageinfo">{$page+1}/{$all}</div>
-    <div class="ui-col ui-col"><a href="{:U('categorytime/'.$category_id.'-'.($page+1))}" class="pagenext">下一页</a></div>
+    <div class="ui-col ui-col"><a href="{:U('categorytime/'.$category_id.'-'.($page+1==$all ? $page:$page+1))}" class="pagenext">下一页</a></div>
 </div>
-
 
 
 

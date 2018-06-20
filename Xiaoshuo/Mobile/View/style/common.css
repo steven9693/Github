@@ -36,6 +36,10 @@ body {
     margin-top: 10px;
 }
 
+.mt20 {
+    margin-top: 20px;
+}
+
 .nav {
     background: #fff;
 }
@@ -247,4 +251,12 @@ body {
     text-align:center;
     border-bottom:1px solid #ddd;
     border-right:1px solid #ddd;
+}
+
+.resort{
+    font-size:16px;
+    color:#fff;
+    display:block;
+    text-align:right;
+    margin:0px 10px;
 }

@@ -22,7 +22,7 @@
         </div>
         <div class="ui-list-info ui-border-t">
             <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
-            <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$item['category_id'])}">{$item.category_id}</a></p>
+            <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$item['category_id'])}">{$item.category}</a></p>
             <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
             <p class="ui-nowrap description">简介：{$item.description}</p>
         </div>
@@ -47,17 +47,16 @@
                 </div>
                 <div class="ui-list-info ui-border-t">
                     <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
-                    <p class="ui-nowrap classify">分类：{$item.category}</p>
+                    <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$item['category_id'])}">{$item.category}</a></p>
                     <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
                     <p class="ui-nowrap description">简介：{$item.description}</p>
                 </div>
             </li>
-
         </ul>
     <else/>
         <div class="ui-row-flex ui-whitespace list">
-            <div class="ui-col fn-tac"><a href="">{$item.category}</a></div>
-            <div class="ui-col ui-col-2"><a href="" class="listright">{$item.bookname}</a></div>
+            <div class="ui-col fn-tac"><a href="{:U('categorytime/'.$item['category_id'])}">{$item.category}</a></div>
+            <div class="ui-col ui-col-2"><a href="{:U('book/'.$item['bookid'])}" class="listright">{$item.bookname}</a></div>
         </div>
     </if>
 

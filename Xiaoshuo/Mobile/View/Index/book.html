@@ -1,5 +1,5 @@
 <include file="./Xiaoshuo/Mobile/View/Index/header.html" />
-
+<include file="./Xiaoshuo/Mobile/View/Index/QQqun.html" />
 
 <ul class="ui-list ui-border-tb mt10">
     <li>
@@ -7,16 +7,15 @@
             <a class="imagearea" href="#"><img src="{$book.cover}"></a>
         </div>
         <div class="ui-list-info ui-border-t">
-            <h4 class="ui-nowrap bookname"><a href="">{$book.bookname}</a></h4>
-            <p class="ui-nowrap classify">分类：{$book.category_id}</p>
+            <h4 class="ui-nowrap bookname"><a href="javascript:void(0)">{$book.bookname}</a></h4>
+            <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$book['category_id'])}">{$book.category}</a></p>
             <p class="ui-nowrap voice">播音：{$book.bojiang}</p>
             <p class="ui-nowrap description">最新章节：第{$count}集</p>
         </div>
     </li>
-
 </ul>
 
-<a href="" class="playbtn">立即收听</a>
+<a href="javascript:void(0)" class="playbtn">立即收听</a>
 
 <div class="ui-row-flex ui-whitespace mt10">
     <div class="ui-col desc"><strong>{$book.bookname}有声小说简介：</strong>{$book.description}</div>
@@ -25,7 +24,8 @@
 
 <div class="ui-row-flex ui-whitespace secheader mt10">
     <div class="ui-col"><h2>章节列表</h2></div>
-    <div class="ui-col ui-col-2"></div>
+    <div class="ui-col ui-col"></div>
+    <div class="ui-col"><a href="javascript:void(0)" onclick="drawhtml()" class="resort">排序</a></div>
 </div>
 
 
@@ -36,7 +36,26 @@
 
 
 
+<div class="ui-row-flex ui-whitespace secheader mt20">
+    <div class="ui-col"><h2>猜您喜欢</h2></div>
+    <div class="ui-col ui-col-2"></div>
+</div>
 
+<ul class="ui-list ui-border-tb mt10">
+    <volist name="rand" id="item">
+        <li>
+            <div class=" ui-list-img-vertical">
+                <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><img src="{$item.cover}"></a>
+            </div>
+            <div class="ui-list-info ui-border-t">
+                <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
+                <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$book['category_id'])}">{$item.category}</a></p>
+                <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
+                <p class="ui-nowrap description">简介：{$item.description}</p>
+            </div>
+        </li>
+    </volist>
+</ul>
 
 
 <!--
@@ -66,36 +85,40 @@
 
 
 <script>
-$(function(){
+
     var bookid="{$bookid}";
     var count = "{$count}";
     var resort=0;
+    var palyurl='/Github/index.php/play/'
 
     function drawhtml(){
         var html="";
 
         if(resort){
-            for(count;count>0;count--){
-                html+='<li class="ui-col ui-col-33"><a href="#">第'+(count)+'集</a></li>';
+            var rcount=parseInt(count)-1;
+            for(rcount;rcount>=0;rcount--){
+                html+='<li class="ui-col ui-col-33"><a href="'+palyurl+bookid+'-0-'+rcount+'.html">第'+(rcount+1)+'集</a></li>';
             }
             resort=0;
         }else{
-
             for(var i=0;i<count;i++){
-                html+='<li class="ui-col ui-col-33"><a href="#">第'+(i+1)+'集</a></li>';
+                html+='<li class="ui-col ui-col-33"><a href="'+palyurl+bookid+'-0-'+i+'.html"'+'>第'+(i+1)+'集</a></li>';
             }
             resort=1;
         }
-
-
-
-
 
         $("#voicebox").html(html)
     }
 
     drawhtml();
-})
+
+
+    $(function(){
+        $('.playbtn').click(function(){
+            window.location.href=palyurl+bookid+'-0-0.html';
+        })
+    })
+
 
 </script>
 

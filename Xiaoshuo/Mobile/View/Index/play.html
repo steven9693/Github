@@ -1,15 +1,15 @@
 <include file="./Xiaoshuo/Mobile/View/Index/header.html" />
 
-<link href="./Xiaoshuo/Mobile/View/jPlayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+<link href="/Github/Xiaoshuo/Mobile/View/jPlayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
 
 
-<link href="./Xiaoshuo/Mobile/View/jPlayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
+<link href="/Github/Xiaoshuo/Mobile/View/jPlayer/skin/blue.monday/jplayer.blue.monday.css" rel="stylesheet" type="text/css" />
 
-<link href="./Xiaoshuo/Mobile/View/jPlayer/skin/blue.monday/myplay.css?v={$random}" rel="stylesheet" type="text/css" />
+<link href="/Github/Xiaoshuo/Mobile/View/jPlayer/skin/blue.monday/myplay.css?v={$random}" rel="stylesheet" type="text/css" />
 
-<script type="text/javascript" src="./Xiaoshuo/Mobile/View/jPlayer/dist/jplayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="/Github/Xiaoshuo/Mobile/View/jPlayer/dist/jplayer/jquery.jplayer.min.js"></script>
 
-
+<include file="./Xiaoshuo/Mobile/View/Index/QQqun.html" />
 
 <div class="playbox">
     <div id="jquery_jplayer_1" class="jp-jplayer"></div>
@@ -39,7 +39,6 @@
                         <button class="jp-repeat" role="button" tabindex="0">repeat</button>
                     </div>
                 </div>
-
                 <div class="mypalybar">正在为您播放.....</div>
             </div>
         </div>
@@ -49,7 +48,7 @@
 <script type="text/javascript">
     //<![CDATA[
     $(document).ready(function(){
-
+        var encodevoice="{$encodevoice}";
         $("#jquery_jplayer_1").jPlayer({
             ready: function (event) {
                 $(this).jPlayer("setMedia", {
@@ -75,15 +74,32 @@
 
 
 <div class="ui-row-flex ui-whitespace menutool">
-    <div class="ui-col ui-col"><a href="#">上一集</a></div>
-    <div class="ui-col ui-col"><a href="#">目录</a></div>
-    <div class="ui-col ui-col"><a href="#">下一集</a></div>
+    <div class="ui-col ui-col"><a href="{:U('play/'.$bookid.'-0-'.($defindex==0?0:$defindex-1))}">上一集</a></div>
+    <div class="ui-col ui-col"><a href="{:U('book/'.$bookid)}">目录</a></div>
+    <div class="ui-col ui-col"><a href="{:U('play/'.$bookid.'-0-'.($defindex+1))}">下一集</a></div>
 </div>
 
 
+<div class="ui-row-flex ui-whitespace secheader mt20">
+    <div class="ui-col"><h2>猜您喜欢</h2></div>
+    <div class="ui-col ui-col-2"></div>
+</div>
 
-
-
+<ul class="ui-list ui-border-tb mt10">
+    <volist name="rand" id="item">
+        <li>
+            <div class=" ui-list-img-vertical">
+                <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><img src="{$item.cover}"></a>
+            </div>
+            <div class="ui-list-info ui-border-t">
+                <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
+                <p class="ui-nowrap classify">分类：{$item.category}</p>
+                <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
+                <p class="ui-nowrap description">简介：{$item.description}</p>
+            </div>
+        </li>
+    </volist>
+</ul>
 
 
 <include file="./Xiaoshuo/Mobile/View/Index/footer.html" />

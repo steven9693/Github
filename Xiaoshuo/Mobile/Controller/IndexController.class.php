@@ -9,7 +9,8 @@ class IndexController extends Controller {
         $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
 
         //今日推荐
-        $todayrecommend=M('books')->where(array('isshow'=>1,'todayrecommend'=>1))->order('todayrecommendsort desc,bookid desc')->limit(3)->select();
+        $recommend=M('books')->where(array('isshow'=>1,'todayrecommend'=>1))->order('todayrecommendsort desc,bookid desc')->limit(3)->select();
+        $todayrecommend=$this->getCategory($recommend,$category);
 
         //玄幻武侠
         $xh=M('books')->where(array('isshow'=>1,'category_id'=>1))->order('issort desc,bookid desc')->limit(10)->select();
@@ -22,7 +23,7 @@ class IndexController extends Controller {
 
         $this->assign('category',$category);
 
-
+        $this->assign('isindex',1); //隐藏首页的返回
 
         $this->assign('random',$this->setrandom());
         $this->display();
@@ -53,7 +54,7 @@ class IndexController extends Controller {
             $category_id=$arg;
         }
 
-        $pagesize=3;
+        $pagesize=8;
 
 
         $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
@@ -78,7 +79,7 @@ class IndexController extends Controller {
 
         $this->assign('page',$page);
 
-        $this->assign('all',($count/$pagesize));
+        $this->assign('all',ceil($count/$pagesize));
 
         $this->display();
     }
@@ -86,17 +87,28 @@ class IndexController extends Controller {
 
 
     public function book(){
-//        echo I('get.id');
 
-        $bookid=3;
+        $bookid=I('get.id');
+
+//        echo $bookid;
 
         $book=M('books')->where(array('bookid'=>$bookid))->find();
 
+        $ca = M('category')->where(array('category_id'=>$book['category_id']))->find();
+
+        $book['category']=$ca['name'];
+
+        $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
+
         $this->assign('book',$book);
 
-//        dump($book);
-
         $count=M('voicelist')->where(array('bookid'=>$bookid))->count();
+
+        $ra=$this->randombook($book['category_id'],3);
+
+        $rand=$this->getCategory($ra,$category);
+
+        $this->assign('rand',$rand);
 
         $this->assign('count',$count);
 
@@ -104,7 +116,7 @@ class IndexController extends Controller {
 
         $this->assign('random',$this->setrandom());
 
-
+        $this->assign('category',$category);
 
 
         $this->display();
@@ -114,20 +126,79 @@ class IndexController extends Controller {
 
     public function play(){
 
+        //书本ID -0- 集数
 
-        $data=M('voicelist')->where(array('voiceid'=>5))->find();
+        $arg=I('get.id');
+
+        $args=explode('-',$arg);
+
+
+        $map['bookid']=$args[0];
+
+        $map['defindex']=$args[2];
+
+        $data=M('voicelist')->where($map)->find();
+
+//        dump($data);
+        $voice=$data['voice'];
+//        echo $voice;
+//        echo '<br/>';
+        if(strpos($voice,'.m4a')){
+            $voice=substr($voice,0,strpos($voice,'.m4a')).'.m4a';
+        }
+
+//        echo $voice;
+//        echo '<br>';
+        $encodevoice='';
+        if($voice){
+            for($i=0;$i<strlen($voice);$i++){
+                $encodevoice.=ord($voice[$i]).'*';
+            }
+            $encodevoice=substr($encodevoice,0,(strlen($encodevoice)-1));
+        }
+
+//        echo $encodevoice;
+        $this->assign('encodevoice',$encodevoice);
+
+        $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
+
+        $book=M('books')->where(array('bookid'=>$args[0]))->find();
+
+        $rand=$this->randombook($book['category_id'],5);
+
+        $this->assign('rand',$rand);
+
         $this->assign('data',$data);
+
+        $this->assign('bookid',$args[0]);
+
+        $this->assign('defindex',$args[2]);
 
         $this->assign('random',$this->setrandom());
 
+        $this->assign('category',$category);
+
         $this->display();
+
     }
 
 
+    //随机选取同一分类下的书本
 
+    public function randombook($categoryid,$number){
+
+        $data=M('books')->order('bookid desc')->where(array('category_id'=>$categoryid,'isshow'=>1))->select();
+        $rand=array_rand($data,$number) ;
+
+        for($i=0;$i<count($rand);$i++){
+            $result[]=$data[$rand[$i]];
+        }
+        return $result;
+    }
 
 
     public function setrandom(){
         return time();
     }
+
 }
