@@ -361,8 +361,9 @@ class IndexController extends Controller {
 
         $map['category_id']=$cid;
         $map['settoindex']=1;
+        $map['isshow']=1;
 
-        $books = M('books')->where($map)->order('settoindexsort desc')->select();
+        $books = M('books')->where($map)->order('settoindexsort desc,bookid desc')->select();
 
         $this->assign('cid',$cid);
 
