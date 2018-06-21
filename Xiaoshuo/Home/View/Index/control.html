@@ -11,31 +11,16 @@
 
 </head>
 
-<style>
-    .menu a{
-        display:block;
-        height:30px;
-        line-height:30px;
-        text-align:center;
-        font-size:14px;
-        color:#fff;
-    }
-    .menu a:hover,.menu a.current{
-        color:#333;
-        background:#fff;
-    }
-
-</style>
 
 <body>
 
 <div class="layui-row menu layui-bg-green">
     <div class="layui-col-md1">
-        <a href="./index.php?m=Home&c=Index&a=control" class="current">全部</a>
+        <a href="./index.php?m=Home&c=Index&a=control" <if condition="$category_id eq ''">class="current"</if>>全部</a>
     </div>
     <volist id="item" name="category">
         <div class="layui-col-md1">
-            <a href="./index.php?m=Home&c=Index&a=control&cid={$item.category_id}">{$item.name}</a>
+            <a href="./index.php?m=Home&c=Index&a=control&cid={$item.category_id}"  <if condition="$item.category_id eq $category_id">class="current"</if>>{$item.name}</a>
         </div>
     </volist>
 </div>
@@ -51,8 +36,8 @@
     <tr>
         <th>书名</th>
         <th>上架/下架</th>
-        <th>首页显示</th>
-        <th>首页显示</th>
+        <th>首页今日推荐</th>
+        <th>首页分类推荐</th>
     </tr>
     </thead>
     <tbody>
@@ -60,9 +45,19 @@
     <volist name="books" id="item">
         <tr>
             <td>{$item.bookname}</td>
-            <td><if condition="$item.isshow eq 1"><a href="">上架</a><else/><a href="">下架</a></if></td>
-            <td>人生就像是一场修行</td>
-            <td>人生就像是一场修行</td>
+            <td>
+                <a href="javascript:void(0)" class="layui-btn <if condition='$item.isshow eq 0'>layui-btn-danger</if> js-setshow layui-btn-sm" data-bookid="{$item.bookid}" data-isshow="{$item.isshow}">
+                    <if condition="$item.isshow eq 1">上架<else/>下架</if>
+                </a>
+            </td>
+            <td>
+                <a href="javascript:void(0)" data-id="{$item.bookid}" data-todayrecommend="{$item.todayrecommend}" class="js-setrecommend layui-btn layui-btn-sm <if condition='$item.todayrecommend neq 1'>layui-btn-danger</if>"><if condition="$item.todayrecommend eq 1">推荐<else/>不推荐</if></a>
+            </td>
+
+            <td>
+                <a href="javascript:void(0)" data-id="{$item.bookid}" data-settoindex="{$item.settoindex}" class="js-settoindex layui-btn layui-btn-sm <if condition='$item.settoindex neq 1'>layui-btn-danger</if>"><if condition="$item.settoindex eq 1">推荐<else/>不推荐</if></a>
+            </td>
+
         </tr>
     </volist>
 
@@ -70,6 +65,73 @@
 </table>
 
 
+<div class="pagenav">
+    {$pagenav}
+</div>
+
+
+<script>
+    $(function(){
+        $('.js-setshow').on('click',function(){
+            var bookid = $(this).attr('data-bookid');
+            var isshow = $(this).attr('data-isshow');
+            var show;
+            if(isshow==1){
+                show=0
+            }else{
+                show=1
+            }
+            var href=window.location.href
+            $.post(SETBOOKSHOW,{bookid:bookid,isshow:show},function(data){
+                if(data.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+        })
+
+
+
+        $('.js-setrecommend').on('click',function(){
+            var id=$(this).attr('data-id');
+            var todayrecommend=$(this).attr('data-todayrecommend');
+            var recommend;
+            if(todayrecommend==1){
+                recommend=0;
+            }else{
+                recommend=1;
+            }
+            var href=window.location.href;
+            $.post(SETTODAYRECOMMEND,{bookid:id,todayrecommend:recommend},function(data){
+                if(data.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+        })
+
+
+        //首页分类推荐
+        $('.js-settoindex').click(function(){
+            var id=$(this).attr('data-id');
+            var settoindex=$(this).attr('data-settoindex');
+
+            var settoindexval;
+
+            if(settoindex==1){
+                settoindexval=0
+            }else{
+                settoindexval=1
+            }
+
+            var href=window.location.href;
+
+            $.post(SETCATEGORYTOINDEX,{bookid:id,settoindex:settoindexval},function(data){
+                if(data.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+        })
+    })
+</script>
 
 </body>
 </html>

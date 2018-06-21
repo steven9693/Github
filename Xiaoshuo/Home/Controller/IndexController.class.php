@@ -34,7 +34,7 @@ class IndexController extends Controller {
 
     //添加分类
     public function add(){
-        $category=M('category')->order('category_id desc')->select();
+        $category=M('category')->order('issort desc , category_id desc')->select();
         $this->assign('category',$category);
         $this->assign('version',$this->clearcache());
         $this->display();
@@ -61,6 +61,25 @@ class IndexController extends Controller {
         $result['status']=1;
         $result['data']=array('id'=>$id);
         echo json_encode($result);
+    }
+
+
+    //显示或隐藏分类
+
+    public function setshow(){
+        $category_id=I('post.category_id');
+        $isshow=I('post.isshow');
+        M('category')->where(array('category_id'=>$category_id))->save(array('isshow'=>$isshow));
+        echo json_encode(array(status=>1));
+    }
+
+    //设置分类排序
+
+    public function setsort(){
+        $id=I('post.id');
+        $issort=I('post.issort');
+        M('category')->where(array('category_id'=>$id))->save(array('issort'=>$issort));
+        echo json_encode(array('status'=>1));
     }
 
 
@@ -164,6 +183,10 @@ class IndexController extends Controller {
 
         $msg=$data[0]['author'];
 
+//        dump($book);
+
+        $this->assign('book',$book);
+
         $this->assign('info',$info);
         $this->assign('msg',$msg);
         $this->assign('id',$id);
@@ -237,15 +260,127 @@ class IndexController extends Controller {
 
         $category_id=I('get.cid');
 
-        $category=M('category')->where(array('isshow'=>1))->select();
+        $pagesize=10;
+
+        $page=I('get.page')?I('get.page')-1:0;
+
+        $url="./index.php?m=Home&c=Index&a=control";
+
+
+        if($category_id){
+            $url.='&cid='.$category_id;
+        }
+
+
+        if($category_id){
+            $map['category_id']=$category_id;
+        }
+
+        $category=M('category')->order('issort desc,category_id desc')->where(array('isshow'=>1))->select();
 
         $this->assign('category',$category);
 
-        $books = M('books')->order('bookid desc')->select();
+        $books = M('books')->where($map)->order('todayrecommend desc,lastupdate desc,bookid desc')->limit($page*$pagesize,$pagesize)->select();
+
+
+        $pagenav=new Pagenav();
+
+        $count=M('books')->where($map)->order('bookid desc')->count();
+
+        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
+
+        $this->assign('pagenav',$pagehtml);
+
+        $this->assign('category_id',$category_id);
 
         $this->assign('books',$books);
 
+        $this->assign('version',$this->clearcache());
+
         $this->display();
+    }
+
+
+    //设置书本上架
+    public function setbookshow(){
+        $bookid=I('post.bookid');
+        $isshow=I('post.isshow');
+        $map['bookid']=$bookid;
+        M('books')->where($map)->save(array('isshow'=>$isshow));
+        echo json_encode(array('status'=>1));
+    }
+
+    //设置是否放到今日推荐
+
+    public function settodayrecommend(){
+        $bookid=I('post.bookid');
+        $todayrecommend=I('post.todayrecommend');
+        M('books')->where(array('bookid'=>$bookid))->save(array('todayrecommend'=>$todayrecommend));
+        echo json_encode(array('status'=>1));
+    }
+
+
+    //设置今日推荐排序
+    public function recommendsort(){
+        $map['todayrecommend']=1;
+        $map['isshow']=1;
+        $books=M('books')->where($map)->order('todayrecommendsort desc')->select();
+        $this->assign('books',$books);
+        $this->assign('version',$this->clearcache());
+        $this->display();
+    }
+
+    //设置今日推荐指数
+    public function todayrecommendsort(){
+        $bookid = I('post.bookid');
+        $todayrecommendsort = I('post.todayrecommendsort');
+        M('books')->where(array('bookid'=>$bookid))->save(array('todayrecommendsort'=>$todayrecommendsort));
+        echo json_encode(array('status'=>1));
+    }
+
+
+
+    //设置分类首页推荐
+    public function setcategorytoindex(){
+        $bookid=I('post.bookid');
+        $settoindex=I('post.settoindex');
+        M('books')->where(array('bookid'=>$bookid))->save(array('settoindex'=>$settoindex));
+        echo json_encode(array('status'=>1));
+    }
+
+    //设置分类首页推荐排序显示
+    public function categorysort(){
+
+        $cid=I('get.cid');
+
+        $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
+
+        if(!$cid){
+            $cid=$category[0]['category_id'];
+        }
+
+        $map['category_id']=$cid;
+        $map['settoindex']=1;
+
+        $books = M('books')->where($map)->order('settoindexsort desc')->select();
+
+        $this->assign('cid',$cid);
+
+        $this->assign('books',$books);
+
+        $this->assign('category',$category);
+
+        $this->assign('version',$this->clearcache());
+
+        $this->display();
+    }
+
+    //设置分类首页排序指数
+    public function setcategorytoindexsort(){
+        $bookid=I('post.bookid');
+        $settoindexsort=I('post.settoindexsort');
+        M('books')->where(array('bookid'=>$bookid))->save(array('settoindexsort'=>$settoindexsort));
+        echo json_encode(array('status'=>1));
     }
 
 

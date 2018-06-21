@@ -43,14 +43,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">作者</label>
             <div class="layui-input-block">
-                <input type="text" name="author" required  lay-verify="required" placeholder="作者" autocomplete="off" class="layui-input">
+                <input type="text" name="author" required  lay-verify="required" placeholder="作者" autocomplete="off" class="layui-input" value="{$book.author}"/>
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">播音</label>
             <div class="layui-input-block">
-                <input type="text" name="voice" required  lay-verify="required" placeholder="播音" autocomplete="off" class="layui-input">
+                <input type="text" name="voice" required  lay-verify="required" placeholder="播音" autocomplete="off" class="layui-input" value="{$book.bojiang}"/>
             </div>
         </div>
 
@@ -58,7 +58,7 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">小说简介</label>
             <div class="layui-input-block">
-                <textarea name="description" placeholder="请输入内容" class="layui-textarea"></textarea>
+                <textarea name="description" placeholder="请输入内容" class="layui-textarea">{$book.description}</textarea>
             </div>
         </div>
 

@@ -1,4 +1,32 @@
 *{padding:0;margin:0}
 
+.page{
+    height:35px;
+    line-height:35px;
+    text-align:center;
+    font-size:14px
+}
+.page a{
+    height:35px;
+    display:inline-block;
+    padding:0 15px;
+    border-radius:5px
+}
+.page a.current{
+    background:#009688;
+    color:#fff;
+}
 
+.menu a{
+    display:block;
+    height:30px;
+    line-height:30px;
+    text-align:center;
+    font-size:14px;
+    color:#fff;
+}
+.menu a:hover,.menu a.current{
+    color:#333;
+    background:#fff;
+}
 

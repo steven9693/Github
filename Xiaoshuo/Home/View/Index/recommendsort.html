@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./Xiaoshuo/Home/View/js/jquery-1.11.1.min.js"></script>
+    <link href="./Xiaoshuo/Home/View/css/global.css?v={$version}" rel="stylesheet">
+    <link href="./Xiaoshuo/Home/View/layui/css/layui.css" rel="stylesheet">
+    <script src="./Xiaoshuo/Home/View/layui/layui.all.js"></script>
+    <script src="./Xiaoshuo/Home/View/js/urls.js?v={$version}"></script>
+
+</head>
+
+
+
+<body>
+设置今日推荐排序
+<hr class="layui-bg-cyan">
+<table class="layui-table">
+    <colgroup>
+        <col width="200">
+        <col width="200">
+        <col width="200">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>书名</th>
+        <th>推荐指数(越大越排前)</th>
+        <th>设置推荐指数</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <volist name="books" id="item">
+        <tr>
+            <td>{$item.bookname}</td>
+            <td>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" value="{$item.todayrecommendsort}" id="recommend_{$item.bookid}">
+                </div>
+            </td>
+            <td>
+                <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-recommend" data-id="{$item.bookid}">设置</a>
+            </td>
+        </tr>
+    </volist>
+
+    </tbody>
+</table>
+
+<script>
+    $(function(){
+        $('.js-recommend').on('click',function(){
+            var id = $(this).attr('data-id');
+            var todayrecommendsort=$('#recommend_'+id).val();
+            var href=window.location.href;
+            if(!todayrecommendsort){
+                todayrecommendsort=0;
+            }
+            $.post(TODAYRECOMMENDSORT,{bookid:id,todayrecommendsort:todayrecommendsort},function(data){
+                if(data.status==1){
+                     window.location.href=href;
+                }
+            },'json')
+        })
+    })
+</script>
+</body>
+</html>

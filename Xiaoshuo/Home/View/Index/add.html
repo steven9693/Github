@@ -34,9 +34,13 @@
         <volist name="category" id="item">
             <tr>
                 <td>{$item.name}</td>
-                <td>{$item.isshow}</td>
-                <td><input /></td>
-                <td><a href="#">确定</a></td>
+                <td>
+                    <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-setsshow" data-isshow="{$item.isshow}" id="{$item.category_id}" >
+                        <if condition="$item.isshow eq 1" >显示<else/>隐藏</if>
+                    </a>
+                </td>
+                <td><input placeholder="设置排序" class="layui-input" value="{$item.issort}" id="setorder_{$item.category_id}"/></td>
+                <td><a href="#" class="layui-btn layui-btn-sm js-setsort" data-id="{$item.category_id}">确定</a></td>
             </tr>
         </volist>
 
@@ -64,6 +68,45 @@
              });
 
         })
+
+
+        //设置分类是否显示
+
+        $('.js-setsshow').on('click',function(){
+            var isshow = $(this).attr('data-isshow');
+            var category_id=$(this).attr('id');
+            var show;
+
+            if(isshow==1){
+                show=0;
+            }else{
+                show=1;
+            }
+
+            $.post(SETCATEGORYSHOW,{isshow:show,category_id:category_id},function(data){
+                var href=window.location.href;
+                if(data.status==1){
+                     window.location.href=href;
+                }
+            },'json')
+
+        })
+
+
+        //设置分类排序
+
+        $('.js-setsort').click(function(){
+            var id = $(this).attr('data-id');
+            var issort=$('#setorder_'+id).val();
+            var href=window.location.href;
+            $.post(SETSORT,{id:id,issort:issort},function(data){
+                if(data.status==1){
+                    window.location.href=href
+                }
+            },'json')
+        })
+
+
     })
 </script>
 

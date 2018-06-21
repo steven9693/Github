@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./Xiaoshuo/Home/View/js/jquery-1.11.1.min.js"></script>
+    <link href="./Xiaoshuo/Home/View/css/global.css?v={$version}" rel="stylesheet">
+    <link href="./Xiaoshuo/Home/View/layui/css/layui.css" rel="stylesheet">
+    <script src="./Xiaoshuo/Home/View/layui/layui.all.js"></script>
+    <script src="./Xiaoshuo/Home/View/js/urls.js?v={$version}"></script>
+
+</head>
+
+
+
+<body>
+设置分类推荐排序
+<hr class="layui-bg-cyan">
+
+<div class="layui-row menu layui-bg-green">
+    <volist id="item" name="category">
+        <div class="layui-col-md1">
+            <a href="./index.php?m=Home&c=Index&a=categorysort&cid={$item.category_id}"  <if condition="$item.category_id eq $cid">class="current"</if>>{$item.name}</a>
+        </div>
+    </volist>
+</div>
+
+
+<table class="layui-table">
+    <colgroup>
+        <col width="200">
+        <col width="200">
+        <col width="200">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>书名</th>
+        <th>推荐指数(越大越排前)</th>
+        <th>设置推荐指数</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <volist name="books" id="item">
+        <tr>
+            <td>{$item.bookname}</td>
+            <td>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" value="{$item.settoindexsort}" id="settoindexsort_{$item.bookid}">
+                </div>
+            </td>
+            <td>
+                <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-settoindex" data-id="{$item.bookid}">设置</a>
+            </td>
+        </tr>
+    </volist>
+
+    </tbody>
+</table>
+
+<script>
+    $(function(){
+        $('.js-settoindex').on('click',function(){
+            var id = $(this).attr('data-id');
+            var settoindexval=$('#settoindexsort_'+id).val();
+            var href=window.location.href;
+            if(!settoindexval){
+                settoindexval=0;
+            }
+            $.post(SETCATEGORYTOINDEXSORT,{bookid:id,settoindexsort:settoindexval},function(data){
+                if(data.status==1){
+                     window.location.href=href;
+                }
+            },'json')
+        })
+    })
+</script>
+</body>
+</html>
