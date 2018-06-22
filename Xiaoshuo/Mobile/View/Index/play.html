@@ -84,7 +84,30 @@
 
 <script src="{$realpath}/js/main.js"></script>
 
+
 <script type="text/javascript">
+
+    //记录播放历史
+    $(function(){
+        var bookname="{$book.bookname}";
+        var bookid="{$book.bookid}";
+        var defindex="{$defindex}";
+        var storage;
+
+        var lastest={
+            bookname:bookname,
+            bookid:bookid,
+            defindex:defindex
+        }
+        if(window.localStorage){
+            storage=window.localStorage;
+            storage.setItem('lastest',JSON.stringify(lastest));
+        }
+
+    })
+
+
+
     var encodevoice=FonHen_JieMa("{$encodevoice}")
 
     $("#jquery_jplayer_1").jPlayer({

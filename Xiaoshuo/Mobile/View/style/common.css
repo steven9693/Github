@@ -273,3 +273,40 @@ body {
     font-weight:bold;
     font-size:16px
 }
+
+.searcharea{
+    padding:10px;
+    border-top:1px solid #fafafa;
+    border-bottom:1px solid #fafafa;
+}
+
+.search{
+    height:35px;
+    border:1px solid #ccc;
+    line-height:35px;
+    font-size:14px;
+    display:block;
+    width:100%;
+    box-sizing: border-box;
+    padding:0 0 0 10px;
+    border-radius:17px 0 0 17px
+}
+.searchbtn{
+    height:35px;
+    line-height:35px;
+    background:#12B7F5;
+    display:block;
+    font-size:16px;
+    color:#fff;
+    padding:0 10px 0 0;
+    border-radius:0 17px 17px 0;
+    text-align:center;
+}
+
+.nodata{
+    font-size:14px;
+    padding:20px 0;
+    text-algin:center;
+    color:#ff0000;
+    text-align:center
+}

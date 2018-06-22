@@ -18,3 +18,18 @@
     <div class="ui-col toindex"><if condition="$isindex neq 1"><a href="{:U(index)}">首页</a></if></div>
 </div>
 
+<script>
+
+    function alertmsg(txt){
+        var mask='<div id="mask" style="background:rgba(0,0,0,0.1);position:absolute;top:0;left:0;right:0;bottom:0;z-index:1"></div>'
+        var html='<div id="msgbox" style="width:280px;padding:10px;height:30px;line-height:30px;position:fixed;top:50%;left:50%;margin:-25px 0 0 -140px;font-size:16px;color:#666;background:rgba(0,0,0,0.8);z-index:2;border-radius:10px;text-align:center;color:#fff">'+txt+'</div>'
+        $('body').append(mask);
+        $('body').append(html);
+
+        setTimeout(function(){
+            $('#mask').remove();
+            $('#msgbox').remove();
+        },2000)
+    }
+
+</script>

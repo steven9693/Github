@@ -32,7 +32,9 @@ return array(
 
         'categorytime/:cid'=>'Mobile/Index/categorytime',
 
-        'play/:id'=>'Mobile/Index/play'
+        'play/:id'=>'Mobile/Index/play',
+
+        'search'=>'Mobile/Index/search'
     ),
 
     //伪静态

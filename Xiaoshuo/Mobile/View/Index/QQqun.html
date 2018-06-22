@@ -1,1 +1,26 @@
-<div class="tiparea">小微夜听有声小说群：805553577<br />加入我们一起交流吧</div>
+<div class="tiparea">
+    小微夜听有声小说群：805553577<br />
+    加入我们一起交流吧
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        if(window.localStorage){
+            var storage=window.localStorage;
+            var lastest=storage.getItem('lastest');
+            lastest=JSON.parse(lastest);
+            console.log(lastest);
+            var bookname=lastest.bookname;
+            var bookid=lastest.bookid;
+            var defindex=parseInt(lastest.defindex);
+
+            var html="<div style='height:30px;line-height:30px;margin:3px 0 0 0'>您上次听到: "
+            +"<a href='javascript:void(0)' style='color:#d20e0e;font-size:14px;' id='history'>"+bookname+" 第"+(defindex+1)+"集"+"</a></div>";
+            $('.tiparea').append(html);
+
+            $(document).on('click','#history',function(){
+                window.location.href='{$playpath}'+bookid+'-0-'+defindex+'.html';
+            })
+        }
+    })
+</script>

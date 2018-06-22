@@ -9,6 +9,7 @@ class IndexController extends Controller {
     public $playpath="/Github/index.php/play/"; //本地测试
     //public $playpath="/index.php/play/"; //网上路径
 
+
     public function setpath(){
         $this->assign('playpath',$this->playpath);
         $this->assign('realpath',$this->realpath);
@@ -19,12 +20,17 @@ class IndexController extends Controller {
         $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
 
         //今日推荐
-        $recommend=M('books')->where(array('isshow'=>1,'todayrecommend'=>1))->order('todayrecommendsort desc,bookid desc')->limit(3)->select();
+        $recommend=M('books')->where(array('isshow'=>1,'todayrecommend'=>1))->order('todayrecommendsort desc,bookid desc')->limit(5)->select();
         $todayrecommend=$this->getCategory($recommend,$category);
 
         //玄幻武侠
-        $xh=M('books')->where(array('isshow'=>1,'category_id'=>1))->order('issort desc,bookid desc')->limit(10)->select();
+        $xh=M('books')->where(array('isshow'=>1,'category_id'=>1,'settoindex'=>1))->order('settoindexsort desc,bookid desc')->limit(10)->select();
         $xuanhuan=$this->getCategory($xh,$category);
+
+        //都市言情
+        $ds=M('books')->where(array('isshow'=>1,'category_id'=>2,'settoindex'=>1))->order('settoindexsort desc,bookid desc')->limit(10)->select();
+        $dushi=$this->getCategory($ds,$category);
+        $this->assign('dushi',$dushi);
 
 
         $this->assign('todayrecommend',$todayrecommend);
@@ -226,6 +232,47 @@ class IndexController extends Controller {
         }
         return $result;
     }
+
+    //查询书本
+    public function search(){
+
+        $book=I('get.book');
+
+        $map['bookname']=$book;
+        $map['isshow']=1;
+
+        $res=M('books')->where($map)->find();
+
+        if($res){
+            //找到书本
+
+            $this->assign('isexist',1);
+
+            $this->assign('book',$res);
+            $count=M('voicelist')->where(array('bookid'=>$res['bookid']))->count();
+            $this->assign('count',$count);
+            $this->assign('bookid',$res['bookid']);
+
+        }else{
+            //不存在书本
+            $this->assign('isexist',0);
+
+        }
+
+        $this->assign('random',$this->setrandom());
+
+        $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
+        $this->assign('category',$category);
+
+
+        $this->setpath();
+
+        $this->display();
+    }
+
+
+
+
 
 
     public function setrandom(){
