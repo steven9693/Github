@@ -12,7 +12,7 @@
 <include file="./Xiaoshuo/Mobile/View/Index/QQqun.html" />
 
 <div class="historymsg">
-    您正在收听：<span>{$book.bookname} 第{$defindex+1}集</span>
+    您正在收听：<span>{$book.bookname} 第{$showindex+1}集</span>
 </div>
 
 <div class="playbox">
@@ -91,14 +91,17 @@
     $(function(){
         var bookname="{$book.bookname}";
         var bookid="{$book.bookid}";
-        var defindex="{$defindex}";
+        var showindex="{$data.showindex}";
+        var defindex="{$data.defindex}";
         var storage;
 
         var lastest={
             bookname:bookname,
             bookid:bookid,
+            showindex:showindex,
             defindex:defindex
         }
+        console.log(lastest);
         if(window.localStorage){
             storage=window.localStorage;
             storage.setItem('lastest',JSON.stringify(lastest));

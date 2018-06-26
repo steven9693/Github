@@ -5,22 +5,24 @@
 
 <script type="text/javascript">
     $(function(){
-        if(window.localStorage){
-            var storage=window.localStorage;
-            var lastest=storage.getItem('lastest');
-            lastest=JSON.parse(lastest);
-            console.log(lastest);
-            var bookname=lastest.bookname;
-            var bookid=lastest.bookid;
-            var defindex=parseInt(lastest.defindex);
+        if(window.localStorage) {
+            var storage = window.localStorage;
+            var lastest = storage.getItem('lastest');
+            if (lastest){
+                lastest = JSON.parse(lastest);
+                var bookname = lastest.bookname;
+                var bookid = lastest.bookid;
+                var defindex=lastest.defindex;
+                var showindex = parseInt(lastest.showindex);
 
-            var html="<div style='height:30px;line-height:30px;margin:3px 0 0 0'>您上次听到: "
-            +"<a href='javascript:void(0)' style='color:#d20e0e;font-size:14px;' id='history'>"+bookname+" 第"+(defindex+1)+"集"+"</a></div>";
-            $('.tiparea').append(html);
+                var html = "<div style='height:30px;line-height:30px;margin:3px 0 0 0'>您上次听到: "
+                    + "<a href='javascript:void(0)' style='color:#d20e0e;font-size:14px;' id='history'>" + bookname + " 第" + (showindex + 1) + "集" + "</a></div>";
+                $('.tiparea').append(html);
 
-            $(document).on('click','#history',function(){
-                window.location.href='{$playpath}'+bookid+'-0-'+defindex+'.html';
-            })
+                $(document).on('click', '#history', function () {
+                    window.location.href = '{$playpath}' + bookid + '-0-' + defindex + '.html';
+                })
+            }
         }
     })
 </script>

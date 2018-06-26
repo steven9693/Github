@@ -59,7 +59,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">起始集</label>
         <div class="layui-input-block">
-            <input type="text" name="start" required  lay-verify="required" placeholder="设置对应的书本ID" autocomplete="off" class="layui-input" value="0">
+            <input type="text" name="start" required  lay-verify="required" placeholder="设置对应的书本ID" autocomplete="off" class="layui-input" value="{$defindex?($defindex+1):0}">
         </div>
     </div>
 
@@ -67,6 +67,13 @@
         <label class="layui-form-label">结束集</label>
         <div class="layui-input-block">
             <input type="text" name="end" required  lay-verify="required" placeholder="设置对应的书本ID" autocomplete="off" class="layui-input" value="0">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">数据条数</label>
+        <div class="layui-input-block">
+            <div id="counts" style="line-height:36px">0</div>
         </div>
     </div>
 
@@ -105,7 +112,7 @@
             console.log(data.field)
             $.post(GETDATA,data.field,function(ret){
 
-                console.log(ret);
+                $("#counts").html(ret.length)
                 var voiceTemp = $('#voiceTemp').html();
                 var temp = doT.template(voiceTemp);
                 $('#urlarea').html(temp(ret));
@@ -162,6 +169,7 @@
 <script>
     $(function(){
         $(document).on('click','.js-save',function(){
+            layer.load()
             console.log(window.ret)
             var args={}
             args['setid']="{$setid}";

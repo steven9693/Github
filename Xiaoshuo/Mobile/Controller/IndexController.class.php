@@ -4,10 +4,10 @@ use Think\Controller;
 class IndexController extends Controller {
 
     public $realpath="/Github/Xiaoshuo/Mobile/View"; //本地测试
-    //public $realpath="/Xiaoshuo/Mobile/View"; //网上路径
+//    public $realpath="/Xiaoshuo/Mobile/View"; //网上路径
 
     public $playpath="/Github/index.php/play/"; //本地测试
-    //public $playpath="/index.php/play/"; //网上路径
+//    public $playpath="/index.php/play/"; //网上路径
 
 
     public function setpath(){
@@ -177,6 +177,12 @@ class IndexController extends Controller {
             $voice=substr($voice,0,strpos($voice,'.m4a')).'.m4a';
         }
 
+        if(strpos($voice,'.mp3')){
+            $voice=substr($voice,0,strpos($voice,'.mp3')).'.mp3';
+        }
+
+//        echo $voice;
+
 //        echo $voice;
 //        echo '<br>';
         $encodevoice='';
@@ -202,15 +208,20 @@ class IndexController extends Controller {
 
         $this->assign('data',$data);
 
+//        dump($data);
+
         $this->assign('bookid',$args[0]);
 
-        $this->assign('defindex',$args[2]);
+        $this->assign('showindex',$data['showindex']);
+
+        $this->assign('defindex',$data['defindex']);
 
         $this->assign('random',$this->setrandom());
 
         $this->assign('category',$category);
 
         $this->assign('settitle',1);
+
         $this->assign('title',$book['bookname']);
 
         $this->setpath();

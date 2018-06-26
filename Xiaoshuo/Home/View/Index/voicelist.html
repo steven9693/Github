@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./Xiaoshuo/Home/View/js/jquery-1.11.1.min.js"></script>
+    <link href="./Xiaoshuo/Home/View/css/global.css?v={$version}" rel="stylesheet">
+    <link href="./Xiaoshuo/Home/View/layui/css/layui.css" rel="stylesheet">
+    <script src="./Xiaoshuo/Home/View/layui/layui.all.js"></script>
+    <script src="./Xiaoshuo/Home/View/js/urls.js?v={$version}"></script>
+
+</head>
+
+
+<body>
+
+音频列表-->{$book.bookname}
+<hr/>
+
+<table class="layui-table">
+    <colgroup>
+        <col width="50">
+        <col width="150">
+        <col width="150">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>系统排序</th>
+        <th>设置集数</th>
+        <th>从这里开始后面全部加1</th>
+    </tr>
+    </thead>
+    <tbody>
+
+        <volist name="data" id="voice">
+            <tr>
+                <td>{$voice.defindex}</td>
+                <td>
+
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" value="{$voice.showindex}" id="showindex_{$voice.showindex}"/>
+                    </div>
+                    <a href="javascript:void(0)" class="layui-btn js-setindex" data-voiceid="{$voice.voiceid}" data-showindex="{$voice.showindex}">设置</a>
+                </td>
+                <td><a href="javascript:void(0)" class="layui-btn js-addone" data-voiceid="{$voice.voiceid}" data-bookid="{$voice.bookid}">后续全部自动加1</a></td>
+            </tr>
+        </volist>
+
+    </tbody>
+</table>
+
+<div class="pagenav">
+    {$pagenav}
+</div>
+
+<script>
+    $(function(){
+        $('.js-setindex').on('click',function(){
+            var voiceid=$(this).attr('data-voiceid');
+            var showindex=$(this).attr('data-showindex');
+            var setshowindex=$('#showindex_'+showindex).val();
+            var href=window.location.href;
+            $.post(SETSHOWINDEX,{voiceid:voiceid,showindex:setshowindex},function(data){
+                if(data.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+        })
+
+        $('.js-addone').on('click',function(){
+            layer.load()
+            var bookid=$(this).attr("data-bookid");
+            var voiceid = $(this).attr('data-voiceid');
+            var href=window.location.href;
+            $.post(AUTOADDONE,{bookid:bookid,voiceid:voiceid},function(data){
+                if(data.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+        })
+
+    })
+</script>
+
+
+</body>
+</html>

@@ -13,21 +13,16 @@ class IndexController extends Controller {
     //首页
     public function index(){
 
-//        $islogin=session('userid');
-//        $username=session('username');
-//
-//        if(!$islogin){
-//            header("Location: ./index.php?m=Home&c=Login&a=login");
-//        }else{
-//
-//
-//
-//            $this->assign('username',$username);
+        $islogin=session('userid');
+        $username=session('username');
 
+        if(!$islogin){
+            header("Location: ./index.php?m=Home&c=Login&a=login");
+        }else{
+            $this->assign('username',$username);
             $this->assign('version',$this->clearcache());
-
             $this->display();
-//        }
+        }
 
 
     }
@@ -383,6 +378,103 @@ class IndexController extends Controller {
         M('books')->where(array('bookid'=>$bookid))->save(array('settoindexsort'=>$settoindexsort));
         echo json_encode(array('status'=>1));
     }
+
+
+
+    //修复音频列表
+
+    public function voicelist(){
+
+        $bookid=I('get.id');
+
+        $pagesize=50;
+
+        $page=I('get.page')?(I('get.page')-1):0;
+
+
+        $book=M('books')->where(array('bookid'=>$bookid))->find();
+
+        $pagenav=new Pagenav();
+
+        $url="./index.php?m=Home&c=Index&a=voicelist&id=".$bookid;
+
+        $count=M('voicelist')->where(array('bookid'=>$bookid))->count();
+
+        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
+
+        $this->assign('pagenav',$pagehtml);
+
+        $data=M('voicelist')->where(array('bookid'=>$bookid))->limit($page*$pagesize,$pagesize)->select();
+
+        if($data){
+            for($i=0;$i<count($data);$i++){
+                $data[$i]['showindex']+=1;
+            }
+        }
+
+        $this->assign('data',$data);
+        $this->assign('book',$book);
+        $this->assign('version',$this->clearcache());
+        $this->display();
+    }
+
+    //调整集数，只调整当前1集
+
+    public function setshowindex(){
+        $voiceid=I('post.voiceid');
+        $showindex=I('post.showindex')-1;
+        M('voicelist')->where(array('voiceid'=>$voiceid))->save(array('showindex'=>$showindex));
+        echo json_encode(array('status'=>1));
+    }
+
+    //后续全都自动加1
+
+    public function autoaddone(){
+        $bookid=I('post.bookid');
+        $voiceid=I('post.voiceid');
+        $map['bookid']=$bookid;
+        $map['voiceid']=array('EGT',$voiceid);
+        $data=M('voicelist')->where($map)->select();
+        if($data){
+            for($i=0;$i<count($data);$i++){
+                M('voicelist')->where(array('voiceid'=>$data[$i]['voiceid']))->setInc('showindex');
+            }
+        }
+        echo json_encode(array('status'=>1));
+    }
+
+
+
+    public function search(){
+
+        $bookid = I('get.id');
+        if ($bookid) {
+
+            $book = M('books')->where(array('bookid' => $bookid))->find();
+
+            $this->assign('book', $book);
+            $this->assign('issearch',1);
+        }
+        $this->assign('version',$this->clearcache());
+
+        $this->display();
+    }
+
+    public function searchbook(){
+        $bookname=I('post.bookname');
+        $book=M('books')->where(array('bookname'=>$bookname))->find();
+
+        if($book){
+            $res['status']=1;
+            $res['data']=$book;
+        }else{
+            $res['status']=2;
+        }
+        echo json_encode($res);
+    }
+
+
+
 
 
 

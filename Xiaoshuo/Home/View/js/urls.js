@@ -1,6 +1,6 @@
 
-var DOMAIN="http://localhost/Github/";
-
+ var DOMAIN="http://localhost/Github/";
+// var DOMAIN="http://xiaoshuo.migiweb.cn/"
 //添加分类
 
 var ADDCATEGORY=DOMAIN+"index.php?m=Home&c=Index&a=addcategory";
@@ -51,5 +51,13 @@ var TODAYRECOMMENDSORT=DOMAIN+"index.php?m=Home&c=Index&a=todayrecommendsort";
 var SETCATEGORYTOINDEX=DOMAIN+"index.php?m=Home&c=Index&a=setcategorytoindex";
 
 //设置分类首页推荐排序显示
-
 var SETCATEGORYTOINDEXSORT=DOMAIN+"index.php?m=Home&c=Index&a=setcategorytoindexsort";
+
+//调整显示的集数
+var SETSHOWINDEX=DOMAIN+"index.php?m=Home&c=Index&a=setshowindex";
+
+//后续自动加1
+var AUTOADDONE=DOMAIN+"index.php?m=Home&c=Index&a=autoaddone";
+
+//搜索书本
+var SEARCHBOOK=DOMAIN+"index.php?m=Home&c=Index&a=searchbook";

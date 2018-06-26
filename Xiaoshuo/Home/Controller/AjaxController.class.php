@@ -148,6 +148,7 @@ class AjaxController extends Controller {
                 $item['setid']=$setid;
                 $item['voice']=$result[$i]['voice'];
                 $item['defindex']=$result[$i]['index'];
+                $item['showindex']=$result[$i]['index'];
                 M('voicelist')->add($item);
             }
         }
