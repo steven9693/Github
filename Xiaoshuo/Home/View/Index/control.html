@@ -34,6 +34,7 @@
         <col width="200">
         <col width="200">
         <col width="200">
+        <col width="100">
     </colgroup>
     <thead>
     <tr>
@@ -41,6 +42,7 @@
         <th>上架/下架</th>
         <th>首页今日推荐</th>
         <th>首页分类推荐</th>
+        <th>集数</th>
     </tr>
     </thead>
     <tbody>
@@ -53,12 +55,17 @@
                     <if condition="$item.isshow eq 1">上架<else/>下架</if>
                 </a>
             </td>
+
             <td>
                 <a href="javascript:void(0)" data-id="{$item.bookid}" data-todayrecommend="{$item.todayrecommend}" class="js-setrecommend layui-btn layui-btn-sm <if condition='$item.todayrecommend neq 1'>layui-btn-danger</if>"><if condition="$item.todayrecommend eq 1">推荐<else/>不推荐</if></a>
             </td>
 
             <td>
                 <a href="javascript:void(0)" data-id="{$item.bookid}" data-settoindex="{$item.settoindex}" class="js-settoindex layui-btn layui-btn-sm <if condition='$item.settoindex neq 1'>layui-btn-danger</if>"><if condition="$item.settoindex eq 1">推荐<else/>不推荐</if></a>
+            </td>
+
+            <td>
+                {$item.num}
             </td>
 
         </tr>

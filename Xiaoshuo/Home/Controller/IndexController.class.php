@@ -278,6 +278,11 @@ class IndexController extends Controller {
         $books = M('books')->where($map)->order('todayrecommend desc,lastupdate desc,bookid desc')->limit($page*$pagesize,$pagesize)->select();
 
 
+        if($books){
+            for($i=0;$i<count($books);$i++){
+                $books[$i]['num']=M('voicelist')->where(array('bookid'=>$books[$i]['bookid']))->count();
+            }
+        }
         $pagenav=new Pagenav();
 
         $count=M('books')->where($map)->order('bookid desc')->count();
@@ -471,6 +476,20 @@ class IndexController extends Controller {
             $res['status']=2;
         }
         echo json_encode($res);
+    }
+
+
+
+    //保存图片
+    public function savecover(){
+        $id=I('id');
+        $cover = I('cover');
+        $cover='http://www.baidu.com/'.$cover;
+        M('books')->where(array('bookid'=>$id))->save(array('cover'=>$cover));
+        $result['status']=1;
+        $result['data']=array('cover'=>$cover);
+        echo json_encode($result);
+
     }
 
 

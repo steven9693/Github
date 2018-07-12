@@ -61,3 +61,6 @@ var AUTOADDONE=DOMAIN+"index.php?m=Home&c=Index&a=autoaddone";
 
 //搜索书本
 var SEARCHBOOK=DOMAIN+"index.php?m=Home&c=Index&a=searchbook";
+
+//保存图片名称
+var SAVECOVER=DOMAIN+"index.php?m=Home&c=Index&a=savecover";
