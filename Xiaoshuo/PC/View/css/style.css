@@ -276,13 +276,101 @@
 
 .bookcover{
     display:block;
-    width:120px;
-    height:200px;
-    float:left
+    width:86px;
+    height:116px;
+    float:left;
+    padding:1px;
+    border:1px solid #ddd;
+}
+
+.bookcover img{
+    width:86px;
+    height:116px;
 }
 
 .bookcontent{
     width:525px;
     padding-left:15px;
     float:left
+}
+
+.booknamebar{
+    height:30px;
+    line-height:30px;
+    font-size:16px;
+    font-weight:bold;
+}
+.bookmsgarea{
+    height:24px;
+    line-height:24px;
+}
+
+.bookmsgarea li{
+    float:left;
+    width:33.33%;
+    height:24px;
+}
+.bookdesc{
+    height:42px;
+    line-height:21px;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    color:#666;
+    font-size: 12px;
+
+}
+
+.leftareatitle{
+    height:35px;
+    background:#fafafa;
+    font-size:16px;
+    font-weight:bold;
+    line-height:35px;
+    border-left:3px solid #009688;
+    padding-left:10px;
+    color:#333
+}
+
+.leftarealist ul li{
+    line-height:30px;
+    height:30px;
+    font-size:14px;
+    border-bottom:1px solid #fafafa
+}
+
+.setnum{
+    width:30px;
+    margin:4px 5px 4px 0;
+    height:22px;
+    background:#ccc;
+    display:inline-block;
+    text-align:center;
+    line-height:22px;
+    color:#333;
+    border-radius:5px;
+
+}
+.leftarealink{
+    color:#666;
+    display:inline-block;
+    width:170px;
+    height:30px;
+    line-height:30px;
+}
+.star{
+    width:70px;
+    margin-left:10px;
+    width:70px;
+    display:inline-block;
+}
+
+.mb10{
+    margin-bottom:10px
+}
+
+.mb15{
+    margin-bottom:15px
 }
