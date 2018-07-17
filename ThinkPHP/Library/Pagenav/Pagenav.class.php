@@ -80,8 +80,9 @@ class Pagenav{
             
         }
         $key.='<span class="allpage">共'.$page_count.'页';
-//        $key.='，到第<input id="setpage" class="setpage" value="" />页<a href="javascript:void(0)" class="topage" onclick="gotopage()">确定</a></span>';
-//        $key.='</div><script>function gotopage(){var topage=document.getElementById("setpage").value;maxpage='.$pages.';if(topage>maxpage){topage=maxpage};var href="'.$url.'&page=";window.location.href=href+topage}</script>';
+        $key.='，到第<input id="setpage" class="setpage" value="" />页<a href="javascript:void(0)" class="topage" onclick="gotopage()">确定</a></span>';
+        $key.='</div><script>function gotopage(){var topage=document.getElementById("setpage").value;maxpage='.$pages.';if(topage>maxpage){topage=maxpage};var href="'.$url.'&page=";window.location.href=href+topage}</script>';
+//        $key.='</div>';
         return $key;
     }
 }

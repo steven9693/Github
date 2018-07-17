@@ -261,14 +261,14 @@
 
 /**分类**/
 
-.category_left{
+.category_right{
     width:285px;
     float:left;
-    margin:0 15px 0 0;
+    margin:0 0 0 15px;
     padding:15px 0 0 0;
 }
 
-.category_right{
+.category_left{
     width:660px;
     float:left;
     padding:15px 0 0 0;
@@ -334,6 +334,18 @@
     color:#333
 }
 
+.rightareatitle{
+    height:34px;
+    background:#fafafa;
+    font-size:16px;
+    font-weight:bold;
+    line-height:34px;
+    border-bottom:1px solid #009688;
+    padding-left:10px;
+    color:#009688;
+    text-align: center;
+}
+
 .leftarealist ul li{
     line-height:30px;
     height:30px;
@@ -343,12 +355,12 @@
 
 .setnum{
     width:30px;
-    margin:4px 5px 4px 0;
-    height:22px;
+    margin:5px 5px 5px 0;
+    height:20px;
     background:#ccc;
     display:inline-block;
     text-align:center;
-    line-height:22px;
+    line-height:20px;
     color:#333;
     border-radius:5px;
 
@@ -373,4 +385,92 @@
 
 .mb15{
     margin-bottom:15px
+}
+
+.mt15{
+    margin-top:15px
+}
+
+
+.page{
+    height:24px;
+    line-height:24px;
+    text-align:center;
+    font-size:14px;
+    margin-top:15px
+}
+.page a{
+    height:24px;
+    min-width:20px;
+    display:inline-block;
+    padding:0 2px;
+    border-radius:5px
+}
+.page a.current{
+    background:#009688;
+    color:#fff;
+}
+
+.setpage{
+    border:1px solid #999;
+    width:30px;
+    margin:0 5px;
+    padding:0 5px;
+    border-radius:3px;
+    color:#333
+}
+
+.mininav{
+    height:40px;
+    line-height:40px;
+    font-size:14px;
+    width:960px;
+    margin:15px auto 0;
+    background:#FEF1E1;
+    border:1px solid #FABE7F;
+    padding:0 10px;
+    box-sizing: border-box;
+}
+
+.mininav li{
+    float:left;
+}
+
+.mininav li.first{
+    width:400px;
+}
+
+.mininav li.second{
+    width:400px;
+}
+
+.bookname{
+    font-size:20px;
+    font-weight:bold;
+    color:#333;
+}
+
+.description{
+    color:#666;
+}
+
+
+.booklist{
+    border:1px solid #f1f1f1;
+
+}
+
+.booklisttitle{
+    height:35px;
+    line-height:35px;
+}
+
+.booklisttitle li{
+    float:left;
+    margin:0 15px 0 0;
+}
+
+.list_1{
+    font-size:12px;
+    color:#666;
 }
