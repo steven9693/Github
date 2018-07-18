@@ -1,0 +1,95 @@
+<include file="./Xiaoshuo/PC/View/Pc/header.html" />
+
+<div class="main">
+
+    <div class="maintitle">
+        <ul>
+            <li style="background:none">最近更新</li>
+            <li style="width:864px"></li>
+        </ul>
+    </div>
+
+    <div class="maincontent clearfix">
+
+        <ul>
+
+            <volist name="lastupdate" id="item">
+                <li class="clearfix">
+                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea"><img src="{$item.cover}"/></a>
+                    <div class="bookmsg">
+                        <p class="bookname"><a href="{:U('mp3/'.$item['bookid'])}">{$item.bookname}</a></p>
+                        <p>类型：<a href="{:U('cate/'.$item['category_id'])}">{$item.category}</a></p>
+                        <p>作者：{$item.author}</p>
+                        <p>播音：{$item.bojiang}</p>
+                        <p>状态：第{$item.count}集</p>
+                        <p><a href="{:U('video/'.$item['bookid'].'-0-0')}" class="btn">收听</a></p>
+                    </div>
+                </li>
+            </volist>
+
+        </ul>
+
+    </div>
+
+
+    <div class="maintitle">
+        <ul>
+            <li style="background:none">玄幻武侠</li>
+            <li style="width:864px"></li>
+        </ul>
+    </div>
+
+    <div class="maincontent clearfix">
+
+        <ul>
+
+            <volist name="wuxia" id="item">
+            <li class="clearfix">
+                <a href="{:U('mp3/'.$item['bookid'])}" class="picarea"><img src="{$item.cover}"/></a>
+                <div class="bookmsg">
+                    <p class="bookname"><a href="{:U('mp3/'.$item['bookid'])}">{$item.bookname}</a></p>
+                    <p>类型：{$item.category}</p>
+                    <p>作者：{$item.author}</p>
+                    <p>播音：{$item.bojiang}</p>
+                    <p>状态：{$item.count}</p>
+                    <p><a href="{:U('video/'.$item['bookid'].'-0-0')}" class="btn">收听</a></p>
+                </div>
+            </li>
+            </volist>
+
+        </ul>
+
+    </div>
+
+    <div class="maintitle">
+        <ul>
+            <li style="background:none">都市言情</li>
+            <li style="width:864px"></li>
+        </ul>
+    </div>
+
+    <div class="maincontent clearfix">
+
+        <ul>
+            <volist name="dushi" id="item">
+                <li class="clearfix">
+                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea"><img src="{$item.cover}"/></a>
+                    <div class="bookmsg">
+                        <p class="bookname"><a href="{:U('mp3/'.$item['bookid'])}">{$item.bookname}</a></p>
+                        <p>类型：{$item.category}</p>
+                        <p>作者：{$item.author}</p>
+                        <p>播音：{$item.bojiang}</p>
+                        <p>状态：{$item.count}</p>
+                        <p><a href="{:U('video/'.$item['bookid'].'-0-0')}" class="btn">收听</a></p>
+                    </div>
+                </li>
+            </volist>
+        </ul>
+
+    </div>
+
+</div>
+
+<include file="./Xiaoshuo/PC/View/Pc/friend.html" />
+
+<include file="./Xiaoshuo/PC/View/Pc/footer.html" />

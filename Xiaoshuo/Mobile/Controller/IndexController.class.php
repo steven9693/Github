@@ -9,6 +9,8 @@ class IndexController extends Controller {
     public $playpath="/Github/index.php/play/"; //本地测试
 //    public $playpath="/index.php/play/"; //网上路径
 
+    public $domain="http://localhost/Github/index.php";
+
 
     public function setpath(){
         $this->assign('playpath',$this->playpath);
@@ -32,6 +34,7 @@ class IndexController extends Controller {
         $dushi=$this->getCategory($ds,$category);
         $this->assign('dushi',$dushi);
 
+        $this->assign('domain',$this->domain);
 
         $this->assign('todayrecommend',$todayrecommend);
 
@@ -100,6 +103,8 @@ class IndexController extends Controller {
 
         $this->assign('all',ceil($count/$pagesize));
 
+        $this->assign('domain',$this->domain);
+
         $ca=$data[0]['category'];
         $this->assign('settitle',1);
         $this->assign('title',$ca);
@@ -147,6 +152,8 @@ class IndexController extends Controller {
 
         $this->assign('settitle',1);
         $this->assign('title',$book['bookname']);
+
+        $this->assign('domain',$this->domain);
 
 
         $this->display();
@@ -223,6 +230,8 @@ class IndexController extends Controller {
         $this->assign('settitle',1);
 
         $this->assign('title',$book['bookname']);
+
+        $this->assign('domain',$this->domain);
 
         $this->setpath();
 

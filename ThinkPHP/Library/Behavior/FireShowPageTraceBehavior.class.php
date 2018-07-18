@@ -1335,7 +1335,7 @@ class FirePHP {
             }
         }
     
-        $this->setHeader('X-Wf-1-Index',$this->messageIndex-1);
+        $this->setHeader('X-Wf-1-Pc',$this->messageIndex-1);
     
         return true;
     }

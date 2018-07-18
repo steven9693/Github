@@ -2,8 +2,8 @@
 return array(
 	//'配置项'=>'配置值'
 
-
     //数据库配置信息
+
     'DB_TYPE'   => 'mysql', // 数据库类型
     'DB_HOST'   => 'localhost', // 服务器地址
     'DB_NAME'   => 'xiaoshuo', // 数据库名
@@ -19,22 +19,25 @@ return array(
     'URL_ROUTER_ON'   => true,
 
     'MODULE_ALLOW_LIST' => array('Home','PC','Mobile'),
-    'DEFAULT_MODULE'       =>    'Mobile',  // 默认模块
-    //'DEFAULT_CONTROLLER'    =>  'Index', // 默认控制器名称
+    'DEFAULT_MODULE'       =>'PC',  // 默认模块
+    //'DEFAULT_CONTROLLER'    =>  'Pc', // 默认控制器名称
     //'DEFAULT_ACTION'        =>  'index', // 默认操作名称
 
     //配置静态路由
     'URL_ROUTE_RULES'=>array(
-	
-		'index'=>'Mobile/Index/index',
 
-        'book/:id' => 'Mobile/Index/book',
-
+        //移动端路由
+        'mindex'=>'Mobile/Index/index',
+        'book/:id'=>'Mobile/Index/book',
         'categorytime/:cid'=>'Mobile/Index/categorytime',
+		'play/:id'=>'Mobile/Index/play',
+        'search'=>'Mobile/Index/search',
 
-        'play/:id'=>'Mobile/Index/play',
-
-        'search'=>'Mobile/Index/search'
+        //PC上的路由
+        'index'=>'PC/Pc/index',
+        'cate/:cid'=>'PC/Pc/category',
+        'mp3/:bid'=>'PC/Pc/book',
+        'video/:id'=>'PC/Pc/player'
     ),
 
     //伪静态

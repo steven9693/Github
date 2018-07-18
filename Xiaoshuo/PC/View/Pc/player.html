@@ -1,0 +1,78 @@
+<include file="./Xiaoshuo/PC/View/Pc/header.html" />
+
+
+<div class="clearfix mininav">
+    <ul>
+        <li class="first">首页->{$category.name}->{$book.bookname}</li>
+        <li class="second">关注微信公众号：</li>
+    </ul>
+</div>
+
+
+<div class="main clearfix">
+
+
+    <div class="category_left">
+
+        <div class="playerbook">{$book.bookname}有声小说第 {$voiceid} 集在线收听</div>
+
+        <div class="bookinfo clearfix mt15">
+
+            <div class="bookpic"><img src="{$book.cover}"></div>
+
+            <div class="bookdetail">
+                <ul>
+                    <li>基本资料</li>
+                    <li>书名：{$book.bookname}</li>
+                    <li>作者：{$book.author}</li>
+                    <li>播讲：{$book.bojiang}</li>
+                    <li>类别：玄幻武侠</li>
+                    <li>状态：连载至第{$book.count}集</li>
+                    <li>更新时间：2018/7/17</li>
+                    <li class="oneline">简介：{$book.description}</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div>播放器</div>
+
+    </div>
+
+
+    <div class="category_right">
+        <div class="leftareatitle">
+            大家都在听...
+        </div>
+        <div class="leftarealist mt15">
+            <volist name="listen" id="item">
+            <div class="p-item clearfix">
+
+                <div class="p-itemleft">
+                    <a href="#">
+                        <img src="{$item.cover}">
+                    </a>
+                </div>
+
+                <div class="p-itemright">
+
+                    <div style="font-size:14px;font-weight:bold">{$item.bookname}</div>
+                    <div>类别：{$category.name}</div>
+                    <div>状态：{$item.count}</div>
+                    <div class="towline">{$item.description}</div>
+
+                </div>
+            </div>
+            </volist>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+<div class="blank15"></div>
+
+<include file="./Xiaoshuo/PC/View/Pc/footer.html" />

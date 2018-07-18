@@ -1,0 +1,79 @@
+<include file="./Xiaoshuo/PC/View/Pc/header.html" />
+
+
+<div class="clearfix mininav">
+    <ul>
+        <li class="first">首页->{$category.name}</li>
+        <li class="second">关注微信公众号：</li>
+    </ul>
+</div>
+
+<div class="main clearfix">
+
+    <div class="category_left">
+
+        <div class="rightareatitle">
+            {$category.name}有声小说
+        </div>
+
+        <volist name="categorybooks" id="item">
+        <div class="clearfix mb15 mt15">
+            <a class="bookcover" href="{:U('mp3/'.$item['bookid'])}"><img src="{$item.cover}"></a>
+            <div class="bookcontent">
+
+                <div class="booknamebar"><a href="{:U('mp3/'.$item['bookid'])}">{$item.bookname}</a></div>
+                <div class="bookmsgarea clearfix">
+                    <ul>
+                        <li>作者：{$item.author}</li>
+                        <li>播音：{$item.bojiang}</li>
+                        <li>状态：第 {$item.count} 集</li>
+                    </ul>
+                </div>
+                <div class="bookmsgarea clearfix">
+                    <ul>
+                        <li>最近更新：{$item.lastupdate}</li>
+                    </ul>
+                </div>
+
+                <div class="bookdesc">
+                    {$item.description}
+                </div>
+
+            </div>
+        </div>
+        </volist>
+
+        {$pagenav}
+    </div>
+
+    <div class="category_right">
+        <div class="leftarea">
+            <div class="leftareatitle">
+                最新推荐
+            </div>
+            <div class="leftarealist mt15">
+                <ul>
+                    <li><span class="setnum">1
+                    </span><a href="#" class="leftarealink">哈哈方法
+                    </a><span class="star">star</span></li>
+                    <li><span class="setnum">1
+                    </span><a href="#" class="leftarealink">哈哈方法
+                    </a><span class="star">star</span></li>
+                    <li><span class="setnum">1
+                    </span><a href="#" class="leftarealink">哈哈方法
+                    </a><span class="star">star</span></li>
+                    <li><span class="setnum">1
+                    </span><a href="#" class="leftarealink">哈哈方法
+                    </a><span class="star">star</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="blank15"></div>
+
+
+
+<include file="./Xiaoshuo/PC/View/Pc/footer.html" />

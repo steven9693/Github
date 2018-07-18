@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="{$path}/PC/View/script/jquery-1.11.1.min.js"></script>
+    <script src="{$path}/PC/View/layui/layui.all.js"></script>
+    <link href="{$path}/PC/View/layui/css/layui.css" rel="stylesheet">
+    <link href="{$path}/PC/View/css/style.css?v={$version}" rel="stylesheet">
+    <title>Title</title>
+</head>
+
+<body>
+
+<div class="topnav">
+    <div class="topwrap clearfix">
+        <div class="topnav-l"></div>
+        <div class="topnav-r">
+            <a href="#">最新上架</a><span></span><a href="#">最新上架</a><span></span>
+        </div>
+    </div>
+</div>
+
+<div class="header clearfix">
+    <div class="header-l">logo</div>
+    <div class="header-r">
+
+        <div class="hotsearch">
+            热门搜索:<a href="#">鬼吹灯有声小说</a>
+        </div>
+
+        <div class="search">
+            <input type="text" class="searchbar" /><a href="javascript:void(0)" class="searchbtn">搜索</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="nav">
+    <div class="navwrap">
+        <a href="http://localhost/Github/index.php">首页</a>
+        <volist name="nav" id="item">
+            <a href="{:U('cate/'.$item['category_id'])}">{$item.name}</a>
+        </volist>
+    </div>
+</div>
