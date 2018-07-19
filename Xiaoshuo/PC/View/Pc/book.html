@@ -2,7 +2,7 @@
 
 <div class="clearfix mininav">
     <ul>
-        <li class="first">首页->{$category.name}->书名</li>
+        <li class="first">首页 -> {$category.name} -> 书名</li>
         <li class="second">关注微信公众号：</li>
     </ul>
 </div>
@@ -14,7 +14,7 @@
     <div class="category_left">
 
         <div class="rightareatitle bookname">
-            {$book.bookname}-有声小说
+            {$book.bookname} - 有声小说
         </div>
 
         <div class="bookmsgarea clearfix mt15">
@@ -34,21 +34,13 @@
                 <ul>
                     <li class="list_1" style="color:#0f7bff;margin-right:40px">支持安卓手机、苹果手机、电脑，无需安装任何插件</li>
                     <li style="font-size:12px;color:#0f7bff">有声小说QQ群：437038310</li>
-                    <li style="float:right">倒序 ↓</li>
-                    <li style="float:right">顺序 ↑</li>
+
+                    <li style="float:right" id="issort" class="current">顺序 ↑</li>
+                    <li style="float:right" id="isresort">倒序 ↓</li>
                 </ul>
             </div>
 
-            <div class="clearfix booklistcontent">
-                <a href="#">1</a>
-                <a href="#">1</a>
-                <a href="#">1</a>
-                <a href="#">1</a>
-                <a href="#">1</a>
-                <a href="#">1</a>
-                <a href="#">1</a>
-                <a href="#">1</a>
-            </div>
+            <div class="clearfix booklistcontent" id="booklistcontent"></div>
 
             <div class="banquan">声明：<span>{$book.bookname}</span>有声小说是由<span>{$book.bojiang}</span>所播讲，<span>{$book.author}</span>创作的一部<span>{$category.name}</span>类有声读物，
                 所有章节都由网友提供发布，本站不参加任何原创录制工作。<span>{$book.bookname}</span>所描述的内容只是作者个人观点，
@@ -65,18 +57,11 @@
         </div>
         <div class="leftarealist mt15">
             <ul>
+                <volist name="latest" id="item">
                 <li><span class="setnum">1
-                    </span><a href="#" class="leftarealink">哈哈方法
+                    </span><a href="{:U('mp3/'.$item['bookid'])}" class="leftarealink">{$item.bookname}
                 </a><span class="star">star</span></li>
-                <li><span class="setnum">1
-                    </span><a href="#" class="leftarealink">哈哈方法
-                </a><span class="star">star</span></li>
-                <li><span class="setnum">1
-                    </span><a href="#" class="leftarealink">哈哈方法
-                </a><span class="star">star</span></li>
-                <li><span class="setnum">1
-                    </span><a href="#" class="leftarealink">哈哈方法
-                </a><span class="star">star</span></li>
+                </volist>
             </ul>
         </div>
     </div>
@@ -84,5 +69,49 @@
 
 </div>
 
+<script>
+    $(function(){
+        var bookid="{$bookid}";
+        var url='{$url}';
+        var videocount=0
+        $.post('{$getvideo}',{bookid:bookid},function(data){
+            if(data.status==1){
+                videocount=data.num
+                seturl(videocount,1)
+
+            }
+        },'json')
+
+        function seturl(num,flag){
+            var html=''
+            if(flag){
+                //顺序
+                for(var i=0;i<num;i++){
+                    html+='<a href="'+url+bookid+'-0-'+i+'"  target="_blank">'+(i+1)+'</a>'
+                }
+
+            }else{
+                num=parseInt(num)
+                for(;num>0;--num){
+                    html+='<a href="'+url+bookid+'-0-'+(num-1)+'" target="_blank">'+(num)+'</a>'
+                }
+            }
+
+            $('#booklistcontent').html(html);
+        }
+
+        $('#issort').click(function(){
+            $(this).addClass('current')
+            $('#isresort').removeClass('current')
+            seturl(videocount,1)
+        })
+
+        $('#isresort').click(function(){
+            $(this).addClass('current')
+            $('#issort').removeClass('current')
+            seturl(videocount,0)
+        })
+    })
+</script>
 
 <include file="./Xiaoshuo/PC/View/Pc/footer.html" />

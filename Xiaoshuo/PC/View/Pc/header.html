@@ -37,7 +37,7 @@
 
 <div class="nav">
     <div class="navwrap">
-        <a href="http://localhost/Github/index.php">首页</a>
+        <a href="{$indexurl}">首页</a>
         <volist name="nav" id="item">
             <a href="{:U('cate/'.$item['category_id'])}">{$item.name}</a>
         </volist>

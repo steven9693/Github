@@ -31,7 +31,7 @@
                 </div>
                 <div class="bookmsgarea clearfix">
                     <ul>
-                        <li>最近更新：{$item.lastupdate}</li>
+                        <li style="width:50%;color:#666">最近更新：{$item.lastupdate}</li>
                     </ul>
                 </div>
 
@@ -53,18 +53,11 @@
             </div>
             <div class="leftarealist mt15">
                 <ul>
-                    <li><span class="setnum">1
-                    </span><a href="#" class="leftarealink">哈哈方法
-                    </a><span class="star">star</span></li>
-                    <li><span class="setnum">1
-                    </span><a href="#" class="leftarealink">哈哈方法
-                    </a><span class="star">star</span></li>
-                    <li><span class="setnum">1
-                    </span><a href="#" class="leftarealink">哈哈方法
-                    </a><span class="star">star</span></li>
-                    <li><span class="setnum">1
-                    </span><a href="#" class="leftarealink">哈哈方法
-                    </a><span class="star">star</span></li>
+                    <volist name="latest" id="item" key="k">
+                        <li><span class="setnum">{$k}
+                    </span><a href="{:U('mp3/'.$item['bookid'])}" class="leftarealink">{$item.bookname}
+                        </a><span class="star">star</span></li>
+                    </volist>
                 </ul>
             </div>
         </div>

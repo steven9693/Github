@@ -56,6 +56,8 @@ class PcController extends Controller {
 
         $this->assign('lastupdate',$lastupdate);
 
+        $this->assign('indexurl',toindex());
+
         $this->setpath();
         $this->assign('version',randtime());
         $this->display();
@@ -75,6 +77,7 @@ class PcController extends Controller {
         if($books){
             for($i=0;$i<count($books);$i++){
                 $books[$i]['category']=$cate['name'];
+                $books[$i]['lastupdate']=date('Y-m-d H:i:s',$books[$i]['lastupdate']);
             }
 
             for($k=0;$k<count($books);$k++){
@@ -112,6 +115,12 @@ class PcController extends Controller {
         $category = M('category')->where(array('category_id'=>$category_id))->find();
         $this->assign('category',$category);
 
+
+        //获取最新推荐数据
+        $latest=M('books')->where(array('category_id'=>$category_id))->order('lastupdate desc')->limit(10)->select();
+        $this->assign('latest',$latest);
+
+
         //生成导航
         $nav=$this->getnav();
         $this->assign('nav',$nav);
@@ -120,6 +129,7 @@ class PcController extends Controller {
         $categorybooks = $this->getcategorybook($category_id,$pagesize,$page);
         $this->assign('categorybooks',$categorybooks);
 
+        $this->assign('indexurl',toindex());
 
         $this->setpath();
         $this->assign('version',randtime());
@@ -147,6 +157,20 @@ class PcController extends Controller {
         $this->assign('category',$category);
 
         $this->setpath();
+        $this->assign('bookid',$bookid);
+
+        //获取最新推荐数据
+        $latest=M('books')->where(array('category_id'=>$category_id))->order('lastupdate desc')->limit(10)->select();
+        $this->assign('latest',$latest);
+
+        //获取音频列表链接
+        $this->assign('getvideo',getvideolist());
+
+        //跳转到播放页的链接
+        $this->assign('url',playerurl());
+
+        //首页链接
+        $this->assign('indexurl',toindex());
 
         $this->assign('version',randtime());
         $this->display();
@@ -208,6 +232,27 @@ class PcController extends Controller {
         $where=array('isshow'=>1);
         $data = M('category')->where($where)->order('issort desc,category_id desc')->select();
         return $data;
+    }
+
+
+
+    //获取音频列表
+    public function getvideo(){
+        $bookid = I('post.bookid');
+        $num = M('voicelist')->where(array('bookid'=>$bookid))->count();
+        if($num){
+            $res['status']=1;
+            $res['num']=$num;
+            echo json_encode($res);
+        }else{
+            $res['status']=0;
+            echo json_encode($res);
+        }
+    }
+
+
+    function test(){
+        $this->display();
     }
 
 

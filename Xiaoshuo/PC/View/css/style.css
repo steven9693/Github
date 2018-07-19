@@ -362,7 +362,7 @@
     display:inline-block;
     text-align:center;
     line-height:20px;
-    color:#333;
+    color:#666;
     border-radius:5px;
 
 }
@@ -600,4 +600,8 @@
 .blank15{
     height:15px;
     width:100%
+}
+
+.current{
+    color:#e03702
 }
