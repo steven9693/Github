@@ -149,6 +149,7 @@ class PcController extends Controller {
         $this->assign('nav',$nav);
 
         $book = M('books')->where(array('bookid'=>$bookid))->find();
+        $book['lastupdate']=date('Y-m-d H:i:s',$book['lastupdate']);
         $this->assign('book',$book);
 
         $category_id=$book['category_id'];
@@ -186,9 +187,32 @@ class PcController extends Controller {
         $voiceid=$args[2];
 
 
-        M('books')->where(array('bookid'=>$bookid))->find();
         $book = M('books')->where(array('bookid'=>$bookid))->find();
         $this->assign('book',$book);
+
+        //获取当前音频链接
+        $map['bookid']=$bookid;
+        $map['defindex']=$voiceid;
+        $data=M('voicelist')->where($map)->find();
+        $voice=$data['voice'];
+        if(strpos($voice,'.m4a')){
+            $voice=substr($voice,0,strpos($voice,'.m4a')).'.m4a';
+        }
+
+        if(strpos($voice,'.mp3')){
+            $voice=substr($voice,0,strpos($voice,'.mp3')).'.mp3';
+        }
+        $encodevoice='';
+        if($voice){
+            for($i=0;$i<strlen($voice);$i++){
+                $encodevoice.=ord($voice[$i]).'*';
+            }
+            $encodevoice=substr($encodevoice,0,(strlen($encodevoice)-1));
+        }
+
+        $this->assign('encodevoice',$encodevoice);
+
+
 
         //生成导航
         $nav=$this->getnav();
