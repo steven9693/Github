@@ -355,6 +355,15 @@ class PcController extends Controller {
         $len = count($data)? count($data) : 0;
         $this->assign('len',$len);
 
+        if($data){
+            for($i=0;$i<count($data);$i++){
+                $count=M('voicelist')->where(array('bookid'=>$data[$i]['bookid']))->count();
+                $data[$i]['lastupdate']=date('Y-m-d H:i:s',$data[$i]['lastupdate']);
+                $data[$i]['count']=$count;
+            }
+
+        }
+
         $this->assign('bookdata',$data);
 
         //生成导航

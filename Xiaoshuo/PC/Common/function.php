@@ -6,10 +6,12 @@
  * Time: 0:19
  */
 
-define("DOMAIN",'http://localhost/Github/');
+//define("DOMAIN",'http://localhost/Github/');
 //define("DOMAIN",'http://xiaoshuo.migiweb.cn/');
 
-define("Github",'/Github'); //本地路径
+define("DOMAIN",'http://www.migiweb.com/');//正式服务器
+
+define("Github",''); //本地路径
 
 //define("Github",''); //服务器路径
 
