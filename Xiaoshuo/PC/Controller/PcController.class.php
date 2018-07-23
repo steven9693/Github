@@ -5,7 +5,11 @@ use Pagenav\Pagenav;
 
 class PcController extends Controller {
 
-    public $path='/Github/Xiaoshuo';
+    //public $path='/Github/Xiaoshuo'; //本地测试
+    //public $seturl="/Github/index.php/cate/";
+
+    public $path='/Xiaoshuo'; //本地测试 测试服务器
+    public $seturl="/index.php/cate/";
 
     public function setpath(){
         $this->assign('path',$this->path);
@@ -44,10 +48,22 @@ class PcController extends Controller {
 
 
         //获取玄幻武侠分类
-        $this->assign('wuxia',$this->getcategorybook(1));
+        $this->assign('wuxia',$this->getcategorybook(1,12));
 
         //获取都市言情分类
-        $this->assign('dushi',$this->getcategorybook(2));
+        $this->assign('dushi',$this->getcategorybook(2,12));
+
+        //获取刑侦推理分类
+        $this->assign('xingzhen',$this->getcategorybook(7,12));
+
+        //获取职场商战分类
+        $this->assign('zhichang',$this->getcategorybook(8,8));
+
+        //获取百家讲坛分类
+        $this->assign('baijia',$this->getcategorybook(9,8));
+
+        //获取军事历史分类
+        $this->assign('junshi',$this->getcategorybook(6,8));
 
 
         $friend = M('friend')->where(array('isshow'=>1))->select();
@@ -60,6 +76,13 @@ class PcController extends Controller {
 
         $this->setpath();
         $this->assign('version',randtime());
+
+
+        $this->assign('title','有声小说_有声小说在线收听网_听书网_听小说_在线听书_语音小说_56听书网_夜听_夜听小说 - 小微夜听');
+
+        $this->assign('keywords','听书网,小微夜听,有声小说,有声小说在线收听网,有声小说下载,在线听书网,在线听小说,听书网');
+
+        $this->assign('descripts','小微夜听,听书网,有声小说网站提供有声小说,可以听的小说,在线听书,听书,听小说,听书网有声小说在线听,56听书网,语音小说,有声读物在线收听,免费有声小说,在线听小说,做最好的听小说网,听书网站,有声小说排行榜');
         $this->display();
 
 
@@ -101,14 +124,21 @@ class PcController extends Controller {
     //分类
     public function category(){
 
-        $category_id=I('get.cid');
-        $page=I('get.page')?I('get.page')-1 : 0;
+        $cid=I('get.cid');
 
-        $pagenav=new Pagenav();
-        $url="./index.php?m=Home&c=Pc&a=booklist";
-        $count=M('books')->where(array('category_id'=>$category_id))->count();
+        $cidArr=explode('_',$cid);
+        $category_id=$cidArr[0];
+
+        $page=$cidArr[1]?$cidArr[1]-1 : 0;
+
+        //设置分页
+//        $pagenav=new Pagenav();
+        $url=$this->seturl.$category_id;
+        $count=M('books')->where(array('category_id'=>$category_id,'isshow'=>1))->count();
         $pagesize=10;
-        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
+//        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
+
+        $pagehtml=pagenav($count,$pagesize,$url,$page);
         $this->assign('pagenav',$pagehtml);
 
         //生成当前分类信息
@@ -133,6 +163,12 @@ class PcController extends Controller {
 
         $this->setpath();
         $this->assign('version',randtime());
+
+        $this->assign('title',$category['name'].'有声小说 - 小微夜听');
+        $this->assign('keywords',$category['name'].'有声小说');
+
+        $this->assign('description','');
+
         $this->display();
 
 
@@ -240,7 +276,7 @@ class PcController extends Controller {
 
     public function alllisten($category_id,$pagesize){
         //$category_id=1;
-        $data = M('books')->where(array('category_id'=>$category_id))->order('lastupdate desc')->limit($pagesize)->select();
+        $data = M('books')->where(array('category_id'=>$category_id,'isshow'=>1))->order('lastupdate desc')->limit($pagesize)->select();
         if($data){
             for($i=0;$i<count($data);$i++){
                 $count = M('voicelist')->where(array('bookid'=>$data[$i]['bookid']))->count();

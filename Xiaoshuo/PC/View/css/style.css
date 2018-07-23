@@ -114,10 +114,10 @@
 }
 
 .navwrap a{
-    font-size:16px;
+    font-size:14px;
     color:#fff;
     display:inline-block;
-    padding:0 10px;
+    padding:0 8px;
 }
 .navwrap a:hover{
     background:#007368;
@@ -190,7 +190,10 @@
 .bookmsg p{
     height:22px;
     line-height:22px;
-    font-size:14px
+    font-size:14px;
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow:hidden;
 }
 
 .btn{

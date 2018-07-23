@@ -140,7 +140,7 @@ class IndexController extends Controller {
 
         $pagenav=new Pagenav();
 
-        $url="./index.php?m=Home&c=Index&a=booklist";
+        $url="./index.php?m=Home&c=Pc&a=booklist";
 
 //        $count=100;
 
@@ -259,7 +259,7 @@ class IndexController extends Controller {
 
         $page=I('get.page')?I('get.page')-1:0;
 
-        $url="./index.php?m=Home&c=Index&a=control";
+        $url="./index.php?m=Home&c=Pc&a=control";
 
 
         if($category_id){
@@ -401,7 +401,7 @@ class IndexController extends Controller {
 
         $pagenav=new Pagenav();
 
-        $url="./index.php?m=Home&c=Index&a=voicelist&id=".$bookid;
+        $url="./index.php?m=Home&c=Pc&a=voicelist&id=".$bookid;
 
         $count=M('voicelist')->where(array('bookid'=>$bookid))->count();
 
@@ -484,7 +484,7 @@ class IndexController extends Controller {
     public function savecover(){
         $id=I('id');
         $cover = I('cover');
-        $cover='http://image.weishop.wang/xiaoshuo/'.$cover;
+        $cover='http://www.baidu.com/'.$cover;
         M('books')->where(array('bookid'=>$id))->save(array('cover'=>$cover));
         $result['status']=1;
         $result['data']=array('cover'=>$cover);

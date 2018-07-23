@@ -3,13 +3,15 @@ namespace Mobile\Controller;
 use Think\Controller;
 class IndexController extends Controller {
 
-    public $realpath="/Github/Xiaoshuo/Mobile/View"; //本地测试
-//    public $realpath="/Xiaoshuo/Mobile/View"; //网上路径
+//    public $realpath="/Github/Xiaoshuo/Mobile/View"; //本地测试
+    public $realpath="/Xiaoshuo/Mobile/View"; //网上路径
 
-    public $playpath="/Github/index.php/play/"; //本地测试
-//    public $playpath="/index.php/play/"; //网上路径
+//    public $playpath="/Github/index.php/play/"; //本地测试
+    public $playpath="/index.php/play/"; //网上路径
 
-    public $domain="http://localhost/Github/index.php";
+//    public $domain="http://localhost/Github/index.php";
+
+    public $domain="/index.php";
 
 
     public function setpath(){
