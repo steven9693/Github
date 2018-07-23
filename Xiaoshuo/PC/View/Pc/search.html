@@ -1,22 +1,22 @@
 <include file="./Xiaoshuo/PC/View/Pc/header.html" />
 
-
+<!--
 <div class="clearfix mininav">
     <ul>
         <li class="first">首页->{$category.name}</li>
         <li class="second">关注微信公众号：</li>
     </ul>
 </div>
-
+-->
 <div class="main clearfix">
 
     <div class="category_left">
 
         <div class="rightareatitle">
-            {$category.name}有声小说
+            为您查到{$len}本类似的书籍
         </div>
 
-        <volist name="categorybooks" id="item">
+        <volist name="bookdata" id="item">
         <div class="clearfix mb15 mt15">
             <a class="bookcover" href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}"></a>
             <div class="bookcontent">
@@ -43,7 +43,6 @@
         </div>
         </volist>
 
-        {$pagenav}
     </div>
 
     <div class="category_right">

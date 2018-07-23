@@ -31,9 +31,9 @@
                     <li>书名：{$book.bookname}</li>
                     <li>作者：{$book.author}</li>
                     <li>播讲：{$book.bojiang}</li>
-                    <li>类别：玄幻武侠</li>
-                    <li>状态：连载至第{$book.count}集</li>
-                    <li>更新时间：2018/7/17</li>
+                    <li>类别：<a href="{:U('cate/'.$category['category_id'])}" title="{$category.name}">{$category.name}</a></li>
+                    <li>状态：连载至第 {$book.count} 集</li>
+                    <li>更新时间：{$book.lastupdate}</li>
                     <li class="oneline">简介：{$book.description}</li>
                 </ul>
             </div>
@@ -98,15 +98,15 @@
             <div class="p-item clearfix">
 
                 <div class="p-itemleft">
-                    <a href="#">
-                        <img src="{$item.cover}">
+                    <a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}">
+                        <img src="{$item.cover}" alt="{$item.bookname}">
                     </a>
                 </div>
 
                 <div class="p-itemright">
 
-                    <div style="font-size:14px;font-weight:bold">{$item.bookname}</div>
-                    <div>类别：{$category.name}</div>
+                    <div style="font-size:14px;font-weight:bold"><a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}">{$item.bookname}</a></div>
+                    <div>类别：<a href="{:U('cate/'.$item['category_id'])}" title="{$category.name}">{$category.name}</a></div>
                     <div>状态：{$item.count}</div>
                     <div class="towline">{$item.description}</div>
 

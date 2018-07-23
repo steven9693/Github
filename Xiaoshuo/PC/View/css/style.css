@@ -123,6 +123,10 @@
     background:#007368;
 }
 
+.navwrap a.on{
+    background:#007368;
+}
+
 .main{
     width:960px;
     margin:0 auto;
@@ -442,6 +446,7 @@
 
 .mininav li.first{
     width:400px;
+    color:#666;
 }
 
 .mininav li.second{

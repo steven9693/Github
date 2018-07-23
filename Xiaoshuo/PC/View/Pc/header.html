@@ -36,7 +36,7 @@
         </div>
 
         <div class="search">
-            <input type="text" class="searchbar" /><a href="javascript:void(0)" class="searchbtn">搜索</a>
+            <input type="text" class="searchbar" placeholder="请输入查找的书名"/><a href="javascript:void(0)" class="searchbtn">搜索</a>
         </div>
 
     </div>
@@ -44,9 +44,16 @@
 
 <div class="nav">
     <div class="navwrap">
-        <a href="{$indexurl}">首页</a>
-        <volist name="nav" id="item">
-            <a href="{:U('cate/'.$item['category_id'])}">{$item.name}</a>
-        </volist>
+        <a href="{$indexurl}" title="首页" <if condition="$ishere eq 0">class="on"</if> >首页</a><volist name="nav" id="item"><a href="{:U('cate/'.$item['category_id'])}" title="{$item.name}" target="_blank" <if condition="$ishere eq $item['category_id']">class="on"</if>>{$item.name}</a></volist>
     </div>
 </div>
+
+
+<script>
+    $(function(){
+        $('.searchbtn').click(function(){
+            var searchval=$('.searchbar').val();
+            window.location.href='{$searchurl}'+searchval;
+        })
+    })
+</script>

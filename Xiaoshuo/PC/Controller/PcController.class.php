@@ -1,18 +1,12 @@
 <?php
 namespace PC\Controller;
 use Think\Controller;
-use Pagenav\Pagenav;
 
 class PcController extends Controller {
 
-    //public $path='/Github/Xiaoshuo'; //本地测试
-    //public $seturl="/Github/index.php/cate/";
-
-    public $path='/Xiaoshuo'; //本地测试 测试服务器
-    public $seturl="/index.php/cate/";
-
     public function setpath(){
-        $this->assign('path',$this->path);
+        $this->assign('path',filepath());
+        $this->assign('searchurl',searchurl());
     }
 
     //首页
@@ -83,6 +77,9 @@ class PcController extends Controller {
         $this->assign('keywords','听书网,小微夜听,有声小说,有声小说在线收听网,有声小说下载,在线听书网,在线听小说,听书网');
 
         $this->assign('descripts','小微夜听,听书网,有声小说网站提供有声小说,可以听的小说,在线听书,听书,听小说,听书网有声小说在线听,56听书网,语音小说,有声读物在线收听,免费有声小说,在线听小说,做最好的听小说网,听书网站,有声小说排行榜');
+
+        $this->assign('ishere',0);
+
         $this->display();
 
 
@@ -129,21 +126,23 @@ class PcController extends Controller {
         $cidArr=explode('_',$cid);
         $category_id=$cidArr[0];
 
-        $page=$cidArr[1]?$cidArr[1]-1 : 0;
+        $page=$cidArr[1]?$cidArr[1]-1: 0;
 
         //设置分页
-//        $pagenav=new Pagenav();
-        $url=$this->seturl.$category_id;
+        $url=setpagenavurl().$category_id;
         $count=M('books')->where(array('category_id'=>$category_id,'isshow'=>1))->count();
         $pagesize=10;
-//        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
 
         $pagehtml=pagenav($count,$pagesize,$url,$page);
+
         $this->assign('pagenav',$pagehtml);
 
         //生成当前分类信息
         $category = M('category')->where(array('category_id'=>$category_id))->find();
         $this->assign('category',$category);
+
+        //标识当前的分类
+        $this->assign('ishere',$category_id);
 
 
         //获取最新推荐数据
@@ -159,7 +158,7 @@ class PcController extends Controller {
         $categorybooks = $this->getcategorybook($category_id,$pagesize,$page);
         $this->assign('categorybooks',$categorybooks);
 
-        $this->assign('indexurl',toindex());
+        $this->assign('indexurl',toindex()); //首页链接
 
         $this->setpath();
         $this->assign('version',randtime());
@@ -188,6 +187,8 @@ class PcController extends Controller {
         $book['lastupdate']=date('Y-m-d H:i:s',$book['lastupdate']);
         $this->assign('book',$book);
 
+        $this->assign('ishere',$book['category_id']);
+
         $category_id=$book['category_id'];
         $category=M('category')->where(array('category_id'=>$category_id))->find();
 
@@ -203,6 +204,9 @@ class PcController extends Controller {
         //获取音频列表链接
         $this->assign('getvideo',getvideolist());
 
+//        $volicelist=M('voicelist')->where(array('bookid'=>$bookid))->count();
+
+
         //跳转到播放页的链接
         $this->assign('url',playerurl());
 
@@ -210,6 +214,12 @@ class PcController extends Controller {
         $this->assign('indexurl',toindex());
 
         $this->assign('version',randtime());
+
+
+        $this->assign('title',$book['bookname'].'_'.$book['bookname'].'有声小说_'.$category['name'].'小说在线收听 - 小微夜听');
+        $this->assign('keywords',$book['bookname'].'_'.$book['bookname'].'有声小说_'.$category['name'].'小说在线收听');
+
+
         $this->display();
     }
 
@@ -224,6 +234,11 @@ class PcController extends Controller {
 
 
         $book = M('books')->where(array('bookid'=>$bookid))->find();
+        $book['lastupdate']=date('Y-m-d H:i:s',$book['lastupdate']);
+
+        $count=M('voicelist')->where(array('bookid'=>$bookid))->count();
+        $book['count']=$count;
+
         $this->assign('book',$book);
 
         //获取当前音频链接
@@ -261,13 +276,26 @@ class PcController extends Controller {
 
         $this->assign('voiceid',$voiceid);
 
+        $this->assign('ishere',$category_id);//标识当前的分类
+
         //大家都在听
         $listen = $this->alllisten($category_id,10);
+
         $this->assign('listen',$listen);
+
+        $this->assign('indexurl',toindex()); //首页链接
 
 
         $this->setpath();
+
         $this->assign('version',randtime());
+
+
+        $this->assign('title',$book['bookname'].'_'.$category['name'].'小说在线收听 - 小微夜听');
+        $this->assign('keywords',$book['bookname'].'_'.$category['name'].'小说在线收听');
+
+
+
         $this->display();
     }
 
@@ -315,6 +343,32 @@ class PcController extends Controller {
         $this->display();
     }
 
+
+
+    function search(){
+
+        $bookname= I('search');
+        $map['bookname']=array('like',"%$bookname%");
+        $map['isshow']=1;
+        $data=M('books')->where($map)->limit(10)->select();
+
+        $len = count($data)? count($data) : 0;
+        $this->assign('len',$len);
+
+        $this->assign('bookdata',$data);
+
+        //生成导航
+        $nav=$this->getnav();
+        $this->assign('nav',$nav);
+
+
+        $this->assign('indexurl',toindex());
+        $this->setpath();
+        $this->assign('version',randtime());
+
+
+        $this->display();
+    }
 
 
 

@@ -6,12 +6,32 @@
  * Time: 0:19
  */
 
-//define("DOMAIN",'http://localhost/Github/');
-define("DOMAIN",'http://xiaoshuo.migiweb.cn/');
+define("DOMAIN",'http://localhost/Github/');
+//define("DOMAIN",'http://xiaoshuo.migiweb.cn/');
+
+define("Github",'/Github'); //本地路径
+
+//define("Github",''); //服务器路径
+
+function filepath(){
+    $path=Github.'/Xiaoshuo';
+    return $path;
+}
+
+function setpagenavurl(){
+    $seturl=Github."/index.php/cate/";
+    return $seturl;
+}
+
+function searchurl(){
+    $surl=Github."/index.php/search?search=";
+    return $surl;
+}
 
 function randtime(){
     return time();
 }
+
 
 function toindex(){
     return DOMAIN.'index.php';
@@ -45,21 +65,20 @@ function pagenav($count,$pagesize,$url,$page){
     $max_p=$page_count;
     $pages=$page_count;
 
-    //判断当前页码
-//    if(empty($_GET['page'])||$_GET['page']<0){
-//        $page=1;
-//    }else {
-//        $page=$_GET['page'];
-//    }
 
     $page_len = ($page_len%2)?$page_len:$page_len+1;//页码个数
     $pageoffset = ($page_len-1)/2;//页码个数左右偏移量
 
 
+//    echo $page;
+//    echo '<br/>';
+//    echo $pages;
+
+
     $key='<div class="page">';
     //$key.="<span>$page/$pages</span> "; //第几页,共几页
-    if($page!=1){
-        $key.='<a href="'.$url.'_'.($page-1).'html">上一页</a>'; //上一页
+    if($page!=1&&$page){
+        $key.='<a href="'.$url.'_'.($page).'.html">上一页</a>'; //上一页
         if($page>4&&$page_count>7){
             $key.='<a href="'.$url.'_1.html">1</a>'; //第一页
             $key.='<span>...</span>';
@@ -93,13 +112,27 @@ function pagenav($count,$pagesize,$url,$page){
             $key.='<a href="'.$url."_".$i.'.html">'.$i.'</a>';
         }
     }
-    //echo $max_p;
+
+
+
     if($page!=$pages){
+
+//        echo $page;
+//        echo '<br/>';
+//        echo $pages;
+
         if($max_p<$pages){
             $key.='<span>...</span>';
         }
-        $key.='<a href="'.$url.'_'.$pages.'.html">'.$pages.'</a>'; //最后一页
-        $key.='<a href="'.$url.'_'.($page+1).'.html">下一页</a>';//下一页
+
+        if($pages==($page+1)){
+            $key.='<a href="'.$url.'_'.$pages.'.html" class="current">'.$pages.'</a>'; //最后一页
+        }else{
+            $key.='<a href="'.$url.'_'.$pages.'.html">'.$pages.'</a>'; //最后一页
+        }
+
+        $key.='<a href="'.$url.'_'.($page+2>$pages ? $pages: $page+2).'.html">下一页</a>';//下一页
+
     }else {
 
         $key.='<a href="'.$url.'_'.$pages.'.html" class="current">'.$pages.'</a>'; //最后一页
