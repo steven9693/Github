@@ -1,0 +1,39 @@
+/* pages/profit/profit.wxss */
+@import '../../style/style.wxss';
+
+.listarea .listrow{
+  height:45px;
+  position:relative;
+  padding:2px 15px;
+  border-bottom:1px solid #f1f1f1
+}
+
+.listtop{
+  font-size:15px;
+  line-height:25px;
+  height:25px;
+
+}
+
+.listtime{
+  font-size:10px;
+  color:#999;
+  height:20px;
+  line-height:20px;
+}
+
+.listleft{
+  margin:0 100px 0 0;
+}
+
+.listright{
+  position:absolute;
+  top:0;
+  right:15px;
+  height:50px;
+  line-height:50px;
+  font-size:18px;
+  color:#e71c3a;
+  width:90px;
+  text-align:right;
+}

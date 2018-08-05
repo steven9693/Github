@@ -1,0 +1,86 @@
+<view class="main" style="height:220px">
+  <view class="profit">{{money}}<text style="font-size:12px;margin-left:5px">元</text></view>
+  <view class="myprofit">我的收益</view>
+  <view class="profitbtn" bindtap="toprofit">收支明细</view>
+</view>
+<view class="content" style="margin-top:-50px;padding-top:25px;height:70px">
+  <view class="row">
+    <view class="micon">￥</view>
+    <view class="inputnum"><input placeholder="请输入要提现的金额" value="{{setall}}" bindinput="setgetmoney" style="font-size:16px"/></view>
+    <view class="txall" bindtap="getall">全部提现</view>
+  </view>
+
+  <view class="rowarea">
+    <view class="rowleft">可提现金额</view>
+    <view class="txall" style="color:#999;top:10px">{{money}}元</view>
+  </view>
+</view>
+
+
+<view class="tixian" wx:if="{{setbtn==0}}" style="background:#999">提现</view>
+<view class="tixian" wx:else bindtap="togetout">提现</view>
+
+<view class="txnote">1-5个工作日内到帐</view>
+
+
+
+<block wx:if="{{notice==1}}">
+  <view class="alertbox">
+    <view class="alerttitle">温馨提示</view>
+    <view class="alertcontent">提现申请成功，关注【链豹财经】公众号获取提现进度。</view>
+    <view class="alertbtn" bindtap="nextnotice">好的</view>
+  </view>
+  <view class="mask maskbg"></view>
+</block>
+
+
+<block wx:if="{{kefu==1}}">
+  <view class="alertbox" style="height:170px;margin-top:-85px">
+    <view class="message"><view style="padding:0 0 0 10px;">进入客服消息，<text style="font-weight:bold;color:#ff5050">发送 “ 0 ” </text>关注</view><view>【链豹财经】公众号查询提现进度。</view></view>
+    <button open-type="contact" class="messagebtn" plain="true" style="border:0;color:#eb003d;width:100%;">知道了</button>
+  </view>
+  <view class="mask maskbg"></view>
+</block>
+
+
+
+<block wx:if="{{lessten==1}}">
+  <view class="alertbox" style="display:block;height:141px;margin-top:-70px">
+    <view class="message" style="text-align:center">累计金额要超过2元才可以提现</view>
+    <view>
+      <view class="messagebtn" bindtap="hidelessten" style="color:#999;border-right:1px solid #f1f1f1;box-sizing:border-box">知道了</view>
+      <view class="messagebtn" bindtap="tofocus" >联系客服</view>
+    </view>
+  </view>
+  <view class="mask maskbg"></view>
+</block>
+
+
+
+<block wx:if="{{iserror==1}}">
+  <view class="alertbox" style="display:block;height:170px;margin-top:-85px">
+    <view class="message">输入的提现金额不能大于当前可以提现的金额</view>
+    <view class="messagebtn" bindtap="hideerror" style="width:100%">知道了</view>
+  </view>
+  <view class="mask maskbg"></view>
+</block>
+
+
+
+<block wx:if="{{tofocus==1}}">
+
+  <image animation="{{animationData}}" class='follow_arrow' src='../../images/follow_arrow.png'></image>
+  <view class="alertbox" style="display:block;width:310px;height:307px;margin:-155px 0 0 -153px">
+    <image src="../../images/focus.png" style="width:310px;height:307px;border-radius:10px" bindtap="showFollow"></image>
+  </view>
+  <view class="mask maskbg"></view>
+</block>
+
+
+<block wx:if="{{focuslbcaijing==1}}">
+  <view class="alertbox" style="display:block;height:170px;margin-top:-85px">
+    <view class="message" style="text-align:center">提现请先关注链豹财经公众号</view>
+    <view class="messagebtn" bindtap="hidefocusbox" style="width:100%">知道了</view>
+  </view>
+  <view class="mask maskbg"></view>
+</block>

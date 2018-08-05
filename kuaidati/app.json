@@ -1,0 +1,25 @@
+{
+  "pages":[
+
+    "pages/userceter/userceter",
+
+    "pages/questions/questions",
+
+    "pages/profit/profit",
+
+    "pages/tixian/tixian",
+
+    "pages/index/index",
+
+    "pages/logs/logs"
+
+  ],
+  
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#e61039",
+    "navigationBarTitleText": "块答",
+    "navigationBarTextStyle":"#fff",
+    "disableScroll": true
+  }
+}

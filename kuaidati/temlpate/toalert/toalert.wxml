@@ -1,0 +1,14 @@
+<template name="tp_alert">
+<view class='alert_body'>
+     <view class='alert_warp'>
+      <view class='alert_title'>需要授权获取您的昵称和头像</view>
+      <view class='alert_opt'>
+        <view class='alert_close' bindtap='closeAlert'>取消</view>
+        <view class='alert_confrim'>
+          <button  plain='true' open-type='getUserInfo' bindgetuserinfo="bindGetUserInfo">确认</button>
+        </view>
+      </view>
+    </view>
+</view>
+
+</template>

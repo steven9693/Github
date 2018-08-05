@@ -1,0 +1,50 @@
+<!--pages/userceter/userceter.wxml-->
+<view class="main">
+  <view class="title">微信答题新玩法</view>
+  <view class="notes">答对即送红包<view class="dian"></view>可提现微信钱包</view>
+</view>
+
+<view class="content">
+  <view class="top">
+    <view class="heading"><image src="{{userInfo.headimgurl}}" style="width:50px;height:50px"></image></view>
+    <view class="topm">
+      <view class="toprow">{{userInfo.nickname}}</view>
+      <view class="bottomrow">累计收益 {{userInfo.money}} 元</view>
+    </view>
+    <view class="topr" bindtap="towallet">
+      <!--
+      <view class="toprow" style="font-weight:bold">{{userInfo.money}}</view>
+      <view class="bottomrow">我的收益(元)</view>-->
+      <view style="width:50px;height:24px;font-size:12px;color:#999;background:#eee;text-align:center;line-height:24px;margin-top:13px;border-radius:12px">提现</view>
+    </view>
+  </view>
+
+  <view class="wrap">
+    <view class="block">
+      <view class="blocktop">
+        {{todaycount}}
+      </view>
+      <view class="blockbottom">
+        今日收益
+      </view>
+    </view>
+    <view class="block">
+      <view class="blocktop">
+        {{userInfo.rightcount}}
+      </view>
+      <view class="blockbottom">
+        答对
+      </view>
+    </view>
+    <view class="block">
+      <view class="blocktop">
+        {{userInfo.errorcount}}
+      </view>
+      <view class="blockbottom">
+        答错
+      </view>
+    </view>
+  </view>
+</view>
+
+<button class="startbtn" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" lang="zh_CN">开始挑战</button>

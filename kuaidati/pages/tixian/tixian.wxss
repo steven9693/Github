@@ -1,0 +1,181 @@
+/* pages/tixian/tixian.wxss */
+@import '../../style/style.wxss';
+
+
+.row{
+  position:relative;
+}
+.micon{
+  width:20px;
+  display:inline-block;
+  font-weight:bold;
+  text-align:center;
+  height:30px;
+  line-height:30px;
+  vertical-align:middle;
+  font-size:16px;
+}
+
+.inputnum{
+  display:inline-block;
+  height:30px;
+  line-height:30px;
+  vertical-align:middle;
+  font-size:12px;
+  padding:0px 5px;
+  box-sizing: border-box;
+  position:absolute;
+  top:0;
+  left:20px;
+  right:70px
+}
+
+.inputnum input{
+  height:30px;
+  line-height:30px;
+}
+
+.txall{
+  text-align: right;
+  width:70px;
+  height:30px;
+  line-height:30px;
+  font-size:12px;
+  position:absolute;
+  top:0;
+  right:0;
+  color:#4f4dae
+}
+
+.rowarea{
+  border-top:1px solid #f1f1f1;
+  margin:5px 0 0 0;
+  padding:10px 0 0 0;
+  position:relative;
+  height:30px;
+  color:#999;
+}
+
+.rowleft{
+  height:30px;
+  font-size:12px;
+  display:inline-block;
+  position:absolute;
+  left:0;
+  right:70px;
+  line-height:30px;
+}
+
+.tixian{
+  width:300px;
+  height:49px;
+  line-height:49px;
+  margin:40px auto 0;
+  background:#e61039;
+  color:#fff;
+  text-align:center;
+  border-radius:5px;
+  
+}
+
+.txnote{
+  font-size:10px;
+  text-align:center;
+  margin:20px 0 0 0;
+  color:#999;
+}
+
+.mask{
+  background:rgba(0,0,0,0.3);
+  position:absolute;
+  left:0;
+  top:0;
+  right:0;
+  bottom:0;
+  display:none;
+}
+
+.alertbox{
+  width:270px;
+  height:200px;
+  background:#fff;
+  position:fixed;
+  left:50%;
+  top:50%;
+  margin:-100px 0 0 -135px;
+  z-index:10;
+  border-radius:10px;
+}
+
+.profitbtn{
+  width:88px;
+  height:29px;
+  color:#fff;
+  font-size:12px;
+  background:14px;
+  text-align:center;
+  margin:25px auto 0;
+  background:#c30c30;
+  line-height:29px;
+  border-radius:14px;
+}
+
+
+.maskbg{
+  background:rgba(0,0,0,0.4);
+  display:block;
+}
+
+.alerttitle{
+  padding:19px 0 25px 0;
+  color:#333;
+  font-size:18px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.alertcontent{
+  font-size:15px;
+  color:#999;
+  line-height:26px;
+  padding:0 20px
+}
+
+.alertbtn{
+  height:49px;
+  margin-top:30px;
+  text-align:center;
+  line-height:49px;
+  color:#eb003d;
+  border-top:1px solid #f1f1f1;
+}
+
+
+.message{
+  color:#666;
+  font-size:15px;
+  line-height:26px;
+  padding:40px 15px 25px 15px;
+  border-bottom:#f1f1f1 solid 1px;
+}
+
+.messagebtn{
+  color:#eb003d;
+  font-size:18px;
+  height:49px;
+  line-height:49px;
+  text-align:center;
+  width:50%;
+  display:inline-block;
+}
+
+
+
+.follow_arrow{
+  width: 78rpx;
+  height: 86rpx;
+  position: absolute;
+  top: 25px;
+  right: 140rpx;
+  z-index:10;
+}
