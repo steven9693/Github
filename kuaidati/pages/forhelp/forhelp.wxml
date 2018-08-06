@@ -1,0 +1,19 @@
+<!--pages/forhelp/forhelp.wxml-->
+<view class="main">
+  <view style="padding-top:5px">
+    <image src="../../images/kuaida.png" style="display:block;width:100px;height:28px;margin:0 auto"></image>
+  </view>
+  <view style="text-align:center;font-size:12px;color:#fff;padding:10px 0 0 0">答对即送红包<view class="dian"></view>可提现微信钱包</view>
+</view>
+
+  <view class="content" style="margin-top:-90px">
+    <view class="mainquestions"><view class="timu">单选题</view>{{currentQ.subject}}</view>
+    <view class="answerblock" >
+      <block wx:for="{{currentQ.answers}}" wx:key="unique">
+      <view class="row {{item.userselect==1 ? 'userselect':''}} {{item.rightAnswer==2?'userselect':item.rightAnswer==1?'right ':''}} {{item.userselect==1&&item.rightAnswer==0&&item.step==1?'answererror' : ''}}" bindtap="chooseanswer" data-id="{{item.id}}">
+        <view class="leftrow"><view class="circle"><view class="opt">{{item.option}}</view><view class="distcircle"></view><view class="righttip"></view><view class="errortip"></view></view></view>
+        <view class="rightrow">{{item.answer_key}}</view>
+      </view>
+      </block>
+    </view>
+  </view>

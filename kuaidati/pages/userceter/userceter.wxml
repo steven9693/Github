@@ -15,7 +15,7 @@
       <!--
       <view class="toprow" style="font-weight:bold">{{userInfo.money}}</view>
       <view class="bottomrow">我的收益(元)</view>-->
-      <view style="width:50px;height:24px;font-size:12px;color:#999;background:#eee;text-align:center;line-height:24px;margin-top:13px;border-radius:12px">提现</view>
+      <view style="width:50px;height:24px;font-size:12px;color:#fff;background:#e92b3b;text-align:center;line-height:24px;margin-top:13px;border-radius:12px">提现</view>
     </view>
   </view>
 

@@ -37,7 +37,8 @@ return array(
         'index'=>'PC/Pc/index',
         'cate/:cid'=>'PC/Pc/category',
         'mp3/:bid'=>'PC/Pc/book',
-        'video/:id'=>'PC/Pc/player'
+        'video/:id'=>'PC/Pc/player',
+        'search'=>'PC/Pc/search'
     ),
 
     //伪静态

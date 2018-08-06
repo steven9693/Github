@@ -1,6 +1,8 @@
 {
   "pages":[
 
+    "pages/forhelp/forhelp",
+
     "pages/userceter/userceter",
 
     "pages/questions/questions",
