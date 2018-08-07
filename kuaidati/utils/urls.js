@@ -1,5 +1,5 @@
-const HOST = "https://www.quh5.cn";
-//const HOST = "http://test.wjumei.cn";//测试域名
+//const HOST = "https://www.quh5.cn";
+const HOST = "http://test.wjumei.cn";//测试域名
 
 export const URL_USER_LOGIN = HOST+'/index.php?g=Xcxdati&m=Xcx&a=login';//登录验证
 
@@ -18,3 +18,7 @@ export const URL_REDUCECOUNT = HOST + '/index.php?g=Xcxdati&m=Index&a=reducecoun
 export const URL_UPDATETODAY = HOST + '/index.php?g=Xcxdati&m=Index&a=updatetoday';
 
 export const URL_PROFITTIME = HOST + '/index.php?g=Xcxdati&m=Index&a=profittimes';
+
+export const URL_GETIMAGE = HOST + '/index.php?g=Xcxdati&m=Xcx&a=getimage';
+
+export const URL_GETQUESTION = HOST + '/index.php?g=Xcxdati&m=Index&a=getquestion';

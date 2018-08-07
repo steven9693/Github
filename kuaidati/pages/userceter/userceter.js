@@ -25,7 +25,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    console.log(options)
+    // var id=options.id;
+    var id=149;
+    // console.log('onload')
+    if(id){
+      wx.setStorageSync('frompic',id);
+    }
   },
 
   /**

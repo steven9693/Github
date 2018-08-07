@@ -1,8 +1,9 @@
-/* pages/forhelp/forhelp.wxss */
 
-/* pages/questions/questions.wxss */
 @import '../../style/style.wxss';
 
+page{
+  background:#e61039
+}
 
 button::after {
   border: 0;

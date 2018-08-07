@@ -1,6 +1,6 @@
 // pages/questions/questions.js
 
-import { URL_GET_QUESTIONS, URL_ANSWER, URL_CREATECASE, URL_PROFITTIME } from '../../utils/urls';
+import { URL_GET_QUESTIONS, URL_ANSWER, URL_CREATECASE, URL_PROFITTIME, URL_GETIMAGE, URL_GETQUESTION } from '../../utils/urls';
 import { apiV1 } from '../../utils/util';
 const app = getApp()
 
@@ -37,6 +37,9 @@ Page({
 
     animationData: {},
     isFollow: false,
+    isloading:0, //显示加载
+
+    hadanswer:0 //扫码过来，
 
   },
 
@@ -49,31 +52,48 @@ Page({
     var userInfo = wx.getStorageSync('userInfo');
     var currentQ = wx.getStorageSync('currentQ');
 
-    if (currentQ && (!currentQ.right) ){
-      var questions=wx.getStorageSync("questions");
-      var tmindex=0
-      for(var i=0;i<questions.length;i++){
-        if(currentQ.id==questions[i].id){
-          tmindex=i;
-          console.log(tmindex)
-          that.setData({index:(tmindex+1)});
-          break;
-        }
-      }
+    var frompic=wx.getStorageSync('frompic');
 
-      that.setData({ currentQ: currentQ, toshare: 1, 'questions': questions});
+    if (wx.getStorageSync('frompic')){ //判断是否扫码进来的
+      apiV1(URL_GETQUESTION, { id: frompic, uid: userInfo.id},function(res){ //检测是否答过这道题
+        //wx.removeStorageSync('frompic') //移除参数 
+        console.log(res);
+        if(res.status==1){ //已经回答过的问题
+          that.setData({ hadanswer: 1, currentQ: res.data});
+        }else{
+          that.setData({ currentQ: res.data });
+        }
+
+      },true)
     }else{
 
-      apiV1(URL_GET_QUESTIONS, { user_id: userInfo.id }, function (ret) {
-        console.log(ret)
-        if (ret.status == 1) {
-          that.setData({'questions': ret.data });
-          // that.setcurrentQ(that.data.index);
-          that.setcurrentQ(0);
-          wx.setStorageSync('questions', ret.data)
-          // console.log(that.data.currentQ)
+      if (currentQ && (!currentQ.right) ){
+        var questions=wx.getStorageSync("questions");
+        var tmindex=0
+        for(var i=0;i<questions.length;i++){
+          if(currentQ.id==questions[i].id){
+            tmindex=i;
+            console.log(tmindex)
+            that.setData({index:(tmindex+1)});
+            break;
+          }
         }
-      }, true);
+
+        that.setData({ currentQ: currentQ, toshare: 1, 'questions': questions});
+      }else{
+
+        apiV1(URL_GET_QUESTIONS, { user_id: userInfo.id }, function (ret) {
+          console.log(ret)
+          if (ret.status == 1) {
+            that.setData({'questions': ret.data });
+            // that.setcurrentQ(that.data.index);
+            that.setcurrentQ(0);
+            wx.setStorageSync('questions', ret.data)
+            // console.log(that.data.currentQ)
+          }
+        }, true);
+
+      }
 
     }
 
@@ -447,6 +467,44 @@ Page({
     wx.navigateBack({
       delta: 1
     })
+  },
+
+
+  sharetopyq:function(){
+
+    var that=this
+    var questions = wx.getStorageSync('questions');
+
+    var id = that.data.currentQ.id
+    console.log(id)
+
+    that.setData({
+      isloading:1
+    })
+    apiV1(URL_GETIMAGE,{id:id},function(res){
+
+      that.setData({
+        isloading: 0
+      })
+
+      if (!(typeof res == 'object')){
+        var res = that.toTrim(res);
+        res = JSON.parse(res);
+      }
+      console.log(res)
+      
+      if(res.status==1){
+        wx.setStorageSync('shareimage', res.data);
+        wx.navigateTo({
+          url: '/pages/forhelp/forhelp'
+        })
+      }
+      
+    },true)
+  },
+
+  toTrim: function (str) {
+    return str.replace(/(^\s*)|(\s*$)/g, "");
   }
 
 

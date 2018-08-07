@@ -24,7 +24,7 @@
   <view class="submitbtn" bindtap="submitanswer" wx:if="{{goon==0}}">提交答案</view>
   <view class="submitbtn" bindtap="goonanswer" wx:if="{{goon==1}}">继续答题</view>
 
-<view class="submitbtn" bindtap="needhelp">求助朋友圈好友</view>
+<view class="submitbtn" bindtap="sharetopyq">求助朋友圈好友</view>
 
 <!--
 <button class="submitbtn" open-type="share" wx:if="{{toshare==1}}" style="background:#f06d3d">分享给好友,获得答题机会</button>
@@ -102,3 +102,23 @@
 </view>
 <view class="mask maskbg"></view>
 </block>
+
+
+
+<block wx:if="{{isloading==1}}">
+<view style="background:rgba(0,0,0,0.8);width:100px;height:100px;position:fixed;left:50%;top:50%;border-radius:8px;box-sizing:border-box;padding:20px;margin:-50px 0 0 -50px"><image src="../../images/loadingV1.gif" style="display:block;width:60px;height:60px"></image></view>
+<view class="mask"></view>
+</block>
+
+
+
+<block wx:if="{{hadanswer==1}}">
+<view class="sharesuccess">
+  <view class="sharetitle">温馨提示</view>
+  <view class="sharenote">这道题您已回答过</view>
+  <view class="openbtn" bindtap="hideoverbox">知道了</view>
+</view>
+<view class="mask maskbg"></view>
+</block>
+
+

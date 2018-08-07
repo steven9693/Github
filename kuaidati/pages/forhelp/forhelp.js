@@ -12,7 +12,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    
   },
 
   /**
@@ -26,7 +26,26 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    var that=this;
+    wx.getSystemInfo({
+      success:function(res){
+
+        var width = parseInt(res.windowHeight*(750/1334));
+
+
+        that.setData({
+          width: res.windowWidth,
+          height: res.windowHeight,
+          imgwidth: width,
+          imgheight: res.windowHeight
+        })
+      }
+    })
+    var shareimage = wx.getStorageSync('shareimage');
+    this.setData({
+      src: shareimage.src
+    })
+
   },
 
   /**
@@ -59,8 +78,20 @@ Page({
 
   /**
    * 用户点击右上角分享
-   */
+   
+
   onShareAppMessage: function () {
   
   }
+  */
+
+  preview:function(){
+    var that=this;
+    wx.previewImage({
+      current: that.data.src, // 当前显示图片的http链接
+      urls: [that.data.src] // 需要预览的图片http链接列表
+    })
+  }
+
+
 })
