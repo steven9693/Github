@@ -39,7 +39,9 @@ Page({
     isFollow: false,
     isloading:0, //显示加载
 
-    hadanswer:0 //扫码过来，
+    hadanswer:0, //扫码过来，
+    isshare:0
+
 
   },
 
@@ -47,16 +49,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log('--onload--')
+
     var that = this;
     var userInfo = wx.getStorageSync('userInfo');
     var currentQ = wx.getStorageSync('currentQ');
 
     var frompic=wx.getStorageSync('frompic');
 
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          width: (res.windowWidth-30),
+          height: res.windowHeight,
+        })
+      }
+    })
+
     if (wx.getStorageSync('frompic')){ //判断是否扫码进来的
       apiV1(URL_GETQUESTION, { id: frompic, uid: userInfo.id},function(res){ //检测是否答过这道题
-        //wx.removeStorageSync('frompic') //移除参数 
+        wx.removeStorageSync('frompic') //移除参数 
+        wx.removeStorageSync('questions') //删除缓存里的题目
         console.log(res);
         if(res.status==1){ //已经回答过的问题
           that.setData({ hadanswer: 1, currentQ: res.data});
@@ -67,33 +79,7 @@ Page({
       },true)
     }else{
 
-      if (currentQ && (!currentQ.right) ){
-        var questions=wx.getStorageSync("questions");
-        var tmindex=0
-        for(var i=0;i<questions.length;i++){
-          if(currentQ.id==questions[i].id){
-            tmindex=i;
-            console.log(tmindex)
-            that.setData({index:(tmindex+1)});
-            break;
-          }
-        }
 
-        that.setData({ currentQ: currentQ, toshare: 1, 'questions': questions});
-      }else{
-
-        apiV1(URL_GET_QUESTIONS, { user_id: userInfo.id }, function (ret) {
-          console.log(ret)
-          if (ret.status == 1) {
-            that.setData({'questions': ret.data });
-            // that.setcurrentQ(that.data.index);
-            that.setcurrentQ(0);
-            wx.setStorageSync('questions', ret.data)
-            // console.log(that.data.currentQ)
-          }
-        }, true);
-
-      }
 
     }
 
@@ -106,6 +92,7 @@ Page({
     //设置当前的题目
     console.log('-------setcurrentQ------')
     console.log(index);
+    var that=this;
     //保存当前的题目索引
     // wx.setStorageSync('tmindex', index);
 
@@ -126,7 +113,9 @@ Page({
 
     }else{
       //更换题目
-      console.log('回答完了')
+      console.log('回答完了');
+      //重新加载题目
+
     }
   },
 
@@ -141,14 +130,62 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    console.log('show---')
     var userinfo=wx.getStorageSync('userInfo');
     var that=this;
+
+    var userInfo = wx.getStorageSync('userInfo');
+    var currentQ = wx.getStorageSync('currentQ');
+
+     wx.showShareMenu({
+       withShareTicket: true
+     })
+
     if (this.data.openhongbao==1){
       console.log('openhongbao')
       this.setData({ openhongbao: 0, hongbaolock:0})
       this.nextquestion();
     }
+
+    if (!wx.getStorageSync('frompic')){
+
+      if (currentQ && (!currentQ.right)) {
+        var questions = wx.getStorageSync("questions");
+        var tmindex = 0
+        for (var i = 0; i < questions.length; i++) {
+          if (currentQ.id == questions[i].id) {
+            tmindex = i;
+            console.log(tmindex)
+            that.setData({ index: (tmindex + 1) });
+            break;
+          }
+        }
+        if(that.data.isshare==1){ //通过分享刷的页面
+          that.setData({ currentQ: currentQ, 'questions': questions });
+        }else{
+          that.setData({ currentQ: currentQ, toshare: 1, 'questions': questions });
+        }
+        
+      } else {
+
+        apiV1(URL_GET_QUESTIONS, { user_id: userInfo.id }, function (ret) {
+          console.log(ret)
+          if (ret.status == 1) {
+            that.setData({ 'questions': ret.data });
+            // that.setcurrentQ(that.data.index);
+            that.setcurrentQ(0);
+            wx.setStorageSync('questions', ret.data)
+            // console.log(that.data.currentQ)
+          }
+        }, true);
+
+      }
+
+
+    }
+
+
+
 
     //今天的答题次数用完了
 
@@ -156,7 +193,7 @@ Page({
       // console.log(ret)
       if (ret.status == 1 && ret.todayprofittimes>=2){
         wx.removeStorageSync('currentQ'); //移除缓存里的题目
-        that.setData({ overbox: 1, toshare:0});
+        that.setData({ overbox: 1, toshare: 0, hadanswer:0});
         
       }
     },true)
@@ -198,19 +235,21 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (e) {
+     console.log(e)
     var that=this;
+/*
     return {
-      title: '块答',
+      title: '快帮帮我，这道题有点难！',
       path: 'pages/userceter/userceter',
       success:function(e){
-        var userinfo=wx.getStorageSync('userInfo')
-        if (userinfo.profittimes<2){
+        //var userinfo=wx.getStorageSync('userInfo')
+        //if (userinfo.profittimes<2){
           //今天还能继续答题
-          that.setData({ toshare: 0, sharesuccess: 1 })
-        }
-        
-
+          // wx.removeStorageSync('currentQ')
+        that.setData({ toshare: 0, sharesuccess: 1, isshare:1 })
+        //}
+      
 
       //   console.log('onShareAppMessage success')
       //   //分享成功回调；
@@ -223,7 +262,76 @@ Page({
       //   console.log('onShareAppMessage fail')
       }
     }
+*/
+
+    return {
+      title: '快帮帮我，这道题有点难！',
+      path: 'pages/userceter/userceter',
+      success: function (res) {
+
+        //getSystemInfo是为了获取当前设备信息，判断是android还是ios，如果是android
+        //还需要调用wx.getShareInfo()，只有当成功回调才是转发群，ios就只需判断shareTickets
+        //获取用户设备信息
+        // console.log(e)
+        wx.getSystemInfo({
+          success: function (d) {
+            // console.log(d);
+            //判断用户手机是IOS还是Android
+            if (d.platform == 'android') {
+              wx.getShareInfo({//获取群详细信息
+                shareTicket: res.shareTickets,
+                success: function (res) {
+                  console.log('android 群')
+                  //这里写你分享到群之后要做的事情，比如增加次数什么的
+                  console.log(e)
+                  if (e.target.dataset.id == 'isshare') {
+                    that.setData({ toshare: 0, sharesuccess: 1, isshare: 1 })
+                  }
+                },
+                fail: function (res) {//这个方法就是分享到的是好友，给一个提示
+                  console.log('android 个人')
+                  if (e.target.dataset.id == 'isshare') {
+                    that.setData({ toshare: 0, sharesuccess: 1, isshare: 1 })
+                  }
+                }
+              })
+            }
+            if (d.platform == 'ios') {//如果用户的设备是IOS
+              if (res.shareTickets != undefined) {
+                console.log("ios 分享的是群");
+                wx.getShareInfo({
+                  shareTicket: res.shareTickets,
+                  success: function (res) {
+                    //分享到群之后你要做的事情
+                    if (e.target.dataset.id == 'isshare') {
+                      that.setData({ toshare: 0, sharesuccess: 1, isshare: 1 })
+                    }
+
+                  }
+                })
+
+              } else {//分享到个人要做的事情，我给的是一个提示
+                console.log("ios分享的是个人");
+                if(e.target.dataset.id=='isshare'){
+                  that.setData({ toshare: 0, sharesuccess: 1, isshare: 1 })
+                }
+                
+
+              }
+            }
+
+          },
+          fail: function (res) {
+
+          }
+        })
+      }
+
+    }
+
+
   },
+
 
   chooseanswer:function(e){
     //选择答案
@@ -375,9 +483,30 @@ Page({
 
 //分享完成获得一次答题机会
   tonextquestion:function(){
-    this.setData({ sharesuccess: 0});
-    wx.removeStorageSync('currentQ');
-    this.nextquestion();
+
+    var that=this;
+
+    if(wx.getStorageSync('questions')){
+
+      this.setData({ sharesuccess: 0 });
+      wx.removeStorageSync('currentQ');
+      this.nextquestion();
+
+    }else{
+      var user = wx.getStorageSync('userInfo');
+      apiV1(URL_GET_QUESTIONS, { user_id: user.id }, function (res) {
+        console.log(res);
+        if (res.status == 1) {
+          that.setData({ questions: res.data, sharesuccess: 0 });
+          that.setcurrentQ(0);
+          wx.setStorageSync('questions', res.data);
+        }
+
+      }, true)
+    }
+    
+
+
   },
 
   //回答错误的时候执行

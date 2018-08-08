@@ -1,5 +1,5 @@
-//const HOST = "https://www.quh5.cn";
-const HOST = "http://test.wjumei.cn";//测试域名
+const HOST = "https://www.quh5.cn";
+//const HOST = "http://test.wjumei.cn";//测试域名
 
 export const URL_USER_LOGIN = HOST+'/index.php?g=Xcxdati&m=Xcx&a=login';//登录验证
 

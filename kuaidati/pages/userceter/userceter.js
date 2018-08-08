@@ -26,8 +26,8 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    // var id=options.id;
-    var id=149;
+      var id=options.id;
+      // var id=129;
     // console.log('onload')
     if(id){
       wx.setStorageSync('frompic',id);
@@ -96,9 +96,9 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
   
-  },
+  // },
 
   bindGetUserInfo: function (e) {
     var that=this;

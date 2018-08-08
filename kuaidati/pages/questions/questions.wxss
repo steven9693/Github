@@ -92,6 +92,7 @@ button::after {
   display:inline-block;
   height:16px;
   line-height:16px;
+  padding-top:2px;
   width:38px;
   border:1px solid #15a3ff;
   color:#15a3ff;

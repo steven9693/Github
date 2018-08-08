@@ -13,7 +13,7 @@ App({
     })
   },
   onLaunch: function () {
-    this.getUserInfo();
+    // this.getUserInfo();
     wx.removeStorageSync('counponInfo');
 
     //调用API从本地缓存中获取数据
