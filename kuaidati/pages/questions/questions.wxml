@@ -23,7 +23,7 @@
 
   <view class="submitbtn" bindtap="submitanswer" wx:if="{{goon==0}}">提交答案</view>
   <view class="submitbtn" bindtap="goonanswer" wx:if="{{goon==1}}">继续答题</view>
-  <view class="submitbtn" bindtap="sharetopyq">求助朋友圈好友</view>
+  <view class="submitbtn" bindtap="sharetopyq" style="background:#fff;border:1px solid #e61039;box-sizing:border-box;color:#e61039">求助朋友圈好友</view>
 </scroll-view>
 <!--
 <button class="submitbtn" open-type="share" wx:if="{{toshare==1}}" style="background:#f06d3d">分享给好友,获得答题机会</button>
@@ -71,7 +71,7 @@
 
 <block wx:if="{{overbox==1}}">
 <view class="overbox" style="height:162px;margin-top:-81px">
-  <view class="overtitle">每日最多能领取两次红包，请明日再来答题</view>
+  <view class="overtitle">每日最多能领取两次红包，请明日再来答题。</view>
   <view class="overbar" style="border-top:1px solid #f1f1f1;">
     <view class="btn" bindtap="hideoverbox" style="box-sizing:border-box;border-right:1px solid #f1f1f1;color:#999">知道了</view><button class="sharebutton" open-type="share" >分享给好友</button>
   </view>

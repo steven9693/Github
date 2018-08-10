@@ -453,14 +453,14 @@ Page({
             //执行领取奖励
             //领完两次奖励直接答对直接进入下一题
             console.log(userinfo)
-            if (userinfo.profittimes>=2){
+            // if (userinfo.profittimes>=2){
               //答对的题目自增1
-              userinfo.rightcount = parseInt(userinfo.rightcount)+1
-              wx.setStorageSync('userInfo', userinfo);
-              that.nextquestion();
-            }else{
+              // userinfo.rightcount = parseInt(userinfo.rightcount)+1
+              // wx.setStorageSync('userInfo', userinfo);
+              // that.nextquestion();
+            // }else{
               that.setData({ answerright: 1 });
-            }
+            // }
             
           }
 

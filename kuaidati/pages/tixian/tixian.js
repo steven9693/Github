@@ -15,7 +15,7 @@ Page({
     num:0, //设置要取出来的金额
     iserror:0, // 1 提现金额大于可提现金额
     notice:0,
-    kefu:1,
+    kefu:0,
     lessten:0,
     submitLock:0,
     tofocus:0,
