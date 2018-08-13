@@ -1,4 +1,4 @@
-.playbox{width:100%;background:#0892c5;margin:10px 0}
+.playbox{width:100%;background:#0892c5;margin:10px 0;position:relative}
 
 .jp-audio{width:320px;margin:0 auto;background-color:transparent;border:none}
 
@@ -52,3 +52,6 @@
 
 .toback a,.toindex a{font-size:14px;display:block;text-align:center;color:#fff}
 .pagetitle{font-size:18px;text-align:center}
+
+.playerbtn{height:50px;position:absolute;width:120px;line-height:50px;display:block;text-align: center;font-size:18px;color:#fff;border-radius:5px}
+.playerbtn:hover{color:#fff;background:#0576a0;}

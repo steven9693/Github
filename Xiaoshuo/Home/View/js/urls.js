@@ -1,6 +1,6 @@
 
-// var DOMAIN="http://localhost/Github/";
- var DOMAIN="http://xiaoshuo.migiweb.cn/"
+ var DOMAIN="http://localhost/Github/";
+// var DOMAIN="http://xiaoshuo.migiweb.cn/"
 //添加分类
 
 var ADDCATEGORY=DOMAIN+"index.php?m=Home&c=Index&a=addcategory";

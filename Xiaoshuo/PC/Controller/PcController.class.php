@@ -275,6 +275,25 @@ class PcController extends Controller {
         $this->assign('category',$category);
 
         $this->assign('voiceid',$voiceid);
+        
+        $this->assign('bookid',$bookid);
+        
+        //上一集
+        if($voiceid==0){
+            $prev=$voiceid;
+        }else{
+            $prev=$voiceid-1;
+        }
+        $this->assign('prev',$prev);
+        //下一集
+        if($voiceid>=$count){
+            $next=$count;
+        }else{
+            $next=$voiceid+1;
+        }
+        $this->assign('next',$next);
+        
+        
 
         $this->assign('ishere',$category_id);//标识当前的分类
 

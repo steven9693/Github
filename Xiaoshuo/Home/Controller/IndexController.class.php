@@ -277,7 +277,6 @@ class IndexController extends Controller {
 
         $books = M('books')->where($map)->order('todayrecommend desc,lastupdate desc,bookid desc')->limit($page*$pagesize,$pagesize)->select();
 
-
         if($books){
             for($i=0;$i<count($books);$i++){
                 $books[$i]['num']=M('voicelist')->where(array('bookid'=>$books[$i]['bookid']))->count();
