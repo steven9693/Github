@@ -24,6 +24,11 @@
 
 </head>
 
+<style>
+    h1{display:none}
+    h2,h3{font-size:14px;font-weight:normal;display:inline-block}
+</style>
+
 <body>
 
 <div class="topnav">
@@ -39,7 +44,7 @@
 </div>
 
 <div class="header clearfix">
-    <div class="header-l"><a href="/index.php"><img src="/xsimage/xwyt.png" width="240" height="96"></a></div>
+    <div class="header-l"><h1>小微夜听</h1><a href="/index.php"><img src="/xsimage/xwyt.png" width="240" height="96" alt='小微夜听_Logo'></a></div>
     <div class="header-r">
 
         <div class="hotsearch">
@@ -55,7 +60,7 @@
 
 <div class="nav">
     <div class="navwrap">
-        <a href="{$indexurl}" title="首页" <if condition="$ishere eq 0">class="on"</if> >首页</a><volist name="nav" id="item"><a href="{:U('cate/'.$item['category_id'])}" title="{$item.name}" target="_blank" <if condition="$ishere eq $item['category_id']">class="on"</if>>{$item.name}</a></volist>
+        <h2><a href="{$indexurl}" title="首页" <if condition="$ishere eq 0">class="on"</if> >首页</a></h2><volist name="nav" id="item"><h2><a href="{:U('cate/'.$item['category_id'])}" title="{$item.name}" target="_blank" <if condition="$ishere eq $item['category_id']">class="on"</if>>{$item.name}</a></h2></volist>
     </div>
 </div>
 

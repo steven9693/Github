@@ -64,3 +64,7 @@ var SEARCHBOOK=DOMAIN+"index.php?m=Home&c=Index&a=searchbook";
 
 //保存图片名称
 var SAVECOVER=DOMAIN+"index.php?m=Home&c=Index&a=savecover";
+
+
+//添加友情连接
+var ADDFRIEND=DOMAIN+"index.php?m=Home&c=Index&a=addfriend";

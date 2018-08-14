@@ -490,6 +490,31 @@ class IndexController extends Controller {
         echo json_encode($result);
 
     }
+    
+    
+    
+    //添加连接
+    
+    public function friend(){
+        $this->display();
+    }
+    
+    public function addfriend(){
+        $name=I('post.title');
+        $website=I('post.website');
+        $isshow=I('post.isshow');
+        
+        $data['webname']=$name;
+        $data['url']=$website;
+        $data['isshow']=$isshow;
+        
+        M('friend')->add($data);
+        echo json_encode(array('status'=>1));
+    }
+    
+    public function friendlist(){
+        $this->display();
+    }
 
 
 

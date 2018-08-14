@@ -19,9 +19,17 @@ class SitemapController extends Controller {
         }
         $sitemap .= '</urlset>';
         $file = fopen("sitemap.xml","w");
-        fwrite($file,$sitemap);
+        $flag = fwrite($file,$sitemap);
         fclose($file);
+        
+        if($flag){
+            header("Location: ".'./index.php?m=Sitemap&c=Sitemap&a=success');
+        }
 //        $this->success('地图生成成功');
+    }
+    
+    public function success(){
+        $this->display();
     }
 
 }

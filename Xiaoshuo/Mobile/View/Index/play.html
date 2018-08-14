@@ -119,7 +119,7 @@
                 title: "Bubble",
                 m4a:encodevoice,
                 oga:encodevoice
-            });
+            }).jPlayer("play");
         },
         swfPath: "../../dist/jplayer",
         supplied: "m4a, oga",
@@ -129,7 +129,14 @@
         smoothPlayBar: true,
         keyEnabled: true,
         remainingDuration: true,
-        toggleDuration: true
+        toggleDuration: true,
+        
+        ended:function(){
+            //播放完成进入下一集
+//            var href="{:U('video/'.$bookid.'-0-'.$next)}"
+//            window.location.href=href;
+            
+        }
     });
 
 
