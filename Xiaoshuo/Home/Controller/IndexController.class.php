@@ -517,7 +517,7 @@ class IndexController extends Controller {
         
         $page=I('get.page')?(I('get.page')-1):0;
 
-        $pagesize=5;
+        $pagesize=8;
 
         $data=M('friend')->order('friend_id desc')->limit($pagesize*$page,$pagesize)->select();
 
