@@ -12,14 +12,14 @@
 <body>
 <div class="layui-form" style="width:700px;margin:120px auto 0">
   <div class="layui-form-item">
-    <label class="layui-form-label">名称</label>
+    <label class="layui-form-label">名称：</label>
     <div class="layui-input-block">
       <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" />
     </div>
   </div>
   
   <div class="layui-form-item">
-    <label class="layui-form-label">website</label>
+    <label class="layui-form-label">网址：</label>
     <div class="layui-input-block">
       <input type="text" name="website" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" />
     </div>
@@ -27,7 +27,7 @@
   
   <div class="layui-form-item">
     <label class="layui-form-label">显示</label>
-    <div class="layui-input-block">
+    <div class="layui-input-inline">
       <input type="text" name="isshow" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input" value="1" />
     </div>
   </div>
@@ -47,12 +47,12 @@
 $(function(){
     layui.use('form', function(){
         var form = layui.form;
-        
+        var href=window.parent.window.location.href;
         form.on('submit(formDemo)', function(data){
             console.log(JSON.stringify(data.field));
             $.post(ADDFRIEND,data.field,function(ret){
                 if(ret.status==1){
-                    layer.alert('添加成功', {icon: 1});
+                   window.parent.location.href=href;
                 }
             },'json')
         });

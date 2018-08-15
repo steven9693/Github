@@ -513,7 +513,39 @@ class IndexController extends Controller {
     }
     
     public function friendlist(){
+        
+        
+        $page=I('get.page')?(I('get.page')-1):0;
+
+        $pagesize=5;
+
+        $data=M('friend')->order('friend_id desc')->limit($pagesize*$page,$pagesize)->select();
+
+        $count=M('friend')->order('friend_id desc')->count();
+
+        $pagenav=new Pagenav();
+
+        $url="./index.php?m=Home&c=Index&a=friendlist";
+
+//        $count=100;
+
+        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
+
+        $this->assign('pagenav',$pagehtml);
+
+        $this->assign('friends',$data);
+
+        $this->assign('version',$this->clearcache());
+
         $this->display();
+    }
+    
+    
+    public function setfrishow(){
+        $friend_id=I('post.friend_id');
+        $isshow=I('post.isshow');
+        M('friend')->where(array('friend_id'=>$friend_id))->save(array("isshow"=>$isshow));
+        echo json_encode(array('status'=>1));
     }
 
 

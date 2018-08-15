@@ -68,3 +68,7 @@ var SAVECOVER=DOMAIN+"index.php?m=Home&c=Index&a=savecover";
 
 //添加友情连接
 var ADDFRIEND=DOMAIN+"index.php?m=Home&c=Index&a=addfriend";
+
+
+//设置有情链接是否显示
+var SETFRISHOW=DOMAIN+"index.php?m=Home&c=Index&a=setfrishow";

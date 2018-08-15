@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./Xiaoshuo/Home/View/js/jquery-1.11.1.min.js"></script>
+    <link href="./Xiaoshuo/Home/View/css/global.css?v={$version}" rel="stylesheet">
+    <link href="./Xiaoshuo/Home/View/layui/css/layui.css" rel="stylesheet">
+    <script src="./Xiaoshuo/Home/View/layui/layui.all.js"></script>
+    <script src="./Xiaoshuo/Home/View/js/urls.js?v={$version}"></script>
+
+</head>
+
+
+<body>
+
+<a href="javascript:void(0)" class="layui-btn layui-btn-radius" id="addbook">添加链接</a>
+<hr/>
+
+<table class="layui-table">
+    <colgroup>
+        <col width="150">
+        <col width="100">
+        <col width="100">
+        <col width="100">
+        <col width="250">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>链接</th>
+        <th>名称</th>
+        <th>操作</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+        <volist name="friends" id="item">
+            <tr>
+                <td><a href="javascript:void(0)" class="getvoicelist">{$item.url}</a></td>
+                <td>{$item.webname}</td>
+                <td>
+                    <if condition="$item.isshow eq 1">
+                        <a href="javascript:void(0)" class="setshow layui-btn layui-btn-sm " id="btn_{$item.friend_id}" data-id="{$item.friend_id}" data-isshow="1">显示</a>
+                    <else/>
+                        <a href="javascript:void(0)" class="setshow layui-btn layui-btn-sm layui-btn-danger" id="btn_{$item.friend_id}" data-id="{$item.friend_id}" data-isshow="0">隐藏</a>
+                    </if>
+                </td>
+            </tr>
+        </volist>
+
+    </tbody>
+</table>
+
+<div class="pagenav">
+    {$pagenav}
+</div>
+
+<script>
+    var layerindex='';
+    $(function(){
+        $('#addbook').click(function(){
+
+            layerindex = layer.open({
+                type: 2,
+                title:'添加连接',
+                content:'./index.php?m=Home&c=Index&a=friend',
+                area:["900px","500px"],
+                offset: ['20px']
+
+            });
+        })
+
+
+        $('.setshow').click(function(){
+              var that=$(this)
+              var friend_id = $(this).attr('data-id');
+              var isshow=$(this).attr('data-isshow');
+              
+              if(isshow==1){
+                  isshow=0
+              }else{
+                  isshow=1
+              }
+              var href=window.location.href;
+              $.post(SETFRISHOW,{
+                  friend_id:friend_id,isshow:isshow
+              },function(res){
+                  if(res.status==1){
+                      window.location.href=href;
+                  }
+                  
+              },'json')
+        })
+
+
+
+
+
+
+
+    })
+</script>
+
+
+</body>
+</html>
