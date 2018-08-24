@@ -46,7 +46,7 @@
 
 <block wx:if="{{lessten==1}}">
   <view class="alertbox" style="display:block;height:141px;margin-top:-70px">
-    <view class="message" style="text-align:center">累计金额要超过2元才可以提现</view>
+    <view class="message" style="text-align:center">累计金额要超过1元才可以提现</view>
     <view>
       <view class="messagebtn" bindtap="hidelessten" style="color:#999;border-right:1px solid #f1f1f1;box-sizing:border-box">知道了</view>
       <view class="messagebtn" bindtap="tofocus" >联系客服</view>

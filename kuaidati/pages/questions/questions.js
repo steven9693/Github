@@ -188,7 +188,7 @@ Page({
 
 
     //今天的答题次数用完了
-
+/*
     apiV1(URL_PROFITTIME, { openid: userinfo.openid},function(ret){
       // console.log(ret)
       if (ret.status == 1 && ret.todayprofittimes>=2){
@@ -197,7 +197,7 @@ Page({
         
       }
     },true)
-
+*/
     // if (userinfo.profittimes>=2){
     //   this.setData({ overbox:1})
     // }

@@ -62,13 +62,13 @@
     <image src="../../images/hongbao.png" class="gongxibg"></image>
     <view class="gongxi">{{cash}}</view>
     <view class="gongxitip">已收入钱包</view>
-    <view class="mainnote">钱包金额累计2元以上可提现</view>
+    <view class="mainnote">钱包金额累计1元以上可提现</view>
     <view class="openbtn" bindtap="towallet">前往我的钱包</view>
   </view>
   <view class="mask maskbg"></view>
 </block>
 
-
+<!--
 <block wx:if="{{overbox==1}}">
 <view class="overbox" style="height:162px;margin-top:-81px">
   <view class="overtitle">每日最多能领取两次红包，请明日再来答题。</view>
@@ -78,7 +78,7 @@
 </view>
 <view class="mask maskbg"></view>
 </block>
-
+-->
 
 <block wx:if="{{toshare==1}}">
 <view class="overbox" style="height:160px;margin-top:-80px">

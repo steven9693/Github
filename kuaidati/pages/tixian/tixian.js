@@ -115,9 +115,9 @@ Page({
     if(num>parseFloat(money)){
       this.setData({ iserror:1});
     }else{
-      //发起提现小于2
+      //发起提现小于1
       
-      if (num>=2){
+      if (num>=1){
 
         apiV1(URL_TRANSFERS,{openid:openid,num:num},data=>{
           console.log(data)

@@ -5,6 +5,7 @@
 
 <view class="listarea">
   <block wx:if="{{nodata ==1 }}">
+  <scroll-view scroll-y style="position:absolute;background:#fff;overflow:hidden;width:100%;bottom:0;top:160px">
   <view class="listrow" wx:for="{{lists}}">
     <view class="listleft">
       <view class="listtop">红包收益</view>
@@ -12,6 +13,7 @@
     </view>
     <view class="listright">{{item.profit_type==1?'+':'-'}}{{item.count}}</view>
   </view>
+  </scroll-view>
   </block>
   <block wx:else>
   <view style="text-align:center;padding-top:80px;text-align:center;font-size:12px;color:#999">暂无收益记录</view>
