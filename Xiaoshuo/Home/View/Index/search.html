@@ -25,40 +25,91 @@
 
 <if condition="$issearch eq 1">
 <table class="layui-table">
-    <colgroup>
-        <col width="150">
-        <col width="150">
-        <col width="150">
-        <col width="150">
-        <col width="250">
-        <col width="200">
-    </colgroup>
-    <thead>
-    <tr>
-        <th>书名</th>
-        <th>封面图片</th>
-        <th>编辑基本信息</th>
-        <th>获取音频</th>
-        <th>设置封面</th>
-        <th>采集链接</th>
-    </tr>
-    </thead>
     <tbody>
 
-            <tr>
-                <td><a href="javascript:void(0)" data-src="./index.php?m=Home&c=Index&a=voicelist&id={$book.bookid}" class="getvoicelist">{$book.bookname}</a></td>
-                <td><img src="{$book.cover}"></td>
-                <td><a href="javascript:void(0)" data-src="./index.php?m=Home&c=Index&a=getbook&id={$book.bookid}" class="getdetail layui-btn layui-btn-sm">获取详情</a></td>
-                <td><a href="javascript:void(0)" data-src="./index.php?m=Home&c=Ajax&a=index&id={$book.bookid}" class="getvoice layui-btn layui-btn-sm">获取音频</a></td>
+    <tr>
+        <th>书名</th>
+        <td><a href="javascript:void(0)" data-src="./index.php?m=Home&c=Index&a=voicelist&id={$book.bookid}" class="getvoicelist">{$book.bookname}</a></td>
+    </tr>
 
-                <td>
-                    <a href="javascript:void(0)" data-src="./index.php?m=Home&c=Index&a=getpicture&id={$book.bookid}" class="getpicture layui-btn layui-btn-sm">保存封面</a>
-                    <a href="javascript:void(0)" data-src="./index.php?m=Home&c=Index&a=getpicturebyurl&id={$book.bookid}" class="getpicturebyurl layui-btn layui-btn-sm">通过URL</a>
-                    <a href="javascript:void(0)" data-src="./index.php?m=Home&c=Index&a=getpictureupload&id={$book.bookid}" class="getpictureupload layui-btn layui-btn-sm">上传</a>
-                </td>
+    <tr>
+        <th>封面</th>
+        <td><img src="{$book.cover}" style="width:60px;height:80px;display:block"></td>
+    </tr>
 
-                <td>{$book.originalurl}</td>
-            </tr>
+    <tr>
+        <th>集数</th>
+        <td>{$book.count}</td>
+    </tr>
+    <tr>
+        <th>编辑基本信息</th>
+        <td><a href="javascript:void(0)" data-src="./index.php?m=Home&c=Index&a=getbook&id={$book.bookid}" class="getdetail layui-btn layui-btn-sm">获取详情</a></td>
+    </tr>
+
+    <tr>
+        <th>获取音频</th>
+        <td><a href="javascript:void(0)" data-src="./index.php?m=Home&c=Ajax&a=index&id={$book.bookid}" class="getvoice layui-btn layui-btn-sm">获取音频</a></td>
+
+    </tr>
+
+    <tr>
+        <th>显示/隐藏</th>
+        <td>
+            <a href="javascript:void(0)" class="layui-btn <if condition='$book.isshow eq 0'>layui-btn-danger</if> js-setshow layui-btn-sm" data-bookid="{$book.bookid}" data-isshow="{$book.isshow}">
+                <if condition="$book.isshow eq 1">显示<else/>隐藏</if>
+            </a>
+
+        </td>
+    </tr>
+
+
+    <tr>
+        <th>更新状态</th>
+        <td>
+            <if condition="$book.status eq 1">
+                已完结
+                <else/>
+                <a href="javascript:void(0)" id="{$book.bookid}" class="js-setover layui-btn layui-btn-sm">设置完结</a>
+            </if>
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+        <th>设置人气</th>
+
+        <td>
+            <div class="layui-input-inline" style="width:100px">
+                <input type="number" class="layui-input" value="{$book.score}" id="score_{$book.bookid}">
+            </div>
+            <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-setscore" data-id="{$book.bookid}">设置</a>
+        </td>
+
+    </tr>
+
+
+    <tr>
+        <th>设置热搜</th>
+
+        <td>
+            <div class="layui-input-inline" style="width:100px">
+                <input type="number" class="layui-input" value="{$book.ishot}" id="ishot_{$book.bookid}">
+            </div>
+            <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-sethot" data-id="{$book.bookid}">设置</a>
+        </td>
+
+    </tr>
+
+
+    <tr>
+        <th>采集链接</th>
+        <td>{$book.originalurl}</td>
+    </tr>
+
+
+
 
 
     </tbody>
@@ -83,21 +134,6 @@
                     layer.alert('暂未添加当前书本')
                 }
             },'json')
-        })
-
-
-
-
-
-        $('#addbook').click(function(){
-
-            layer.open({
-                type: 2,
-                title:'添加书本',
-                content:'./index.php?m=Home&c=Index&a=addbook',
-                area:["900px","500px"]
-
-            });
         })
 
 
@@ -127,51 +163,6 @@
             });
         })
 
-
-        //保存图片
-        $('.getpicture').click(function(){
-            var url=$(this).attr('data-src');
-
-            layer.open({
-                type: 2,
-                title:'获取书本封面图',
-                content:url,
-                area:["1000px","500px"]
-
-            });
-        })
-
-
-        //通过URL保存
-
-        $('.getpicturebyurl').click(function(){
-            var url=$(this).attr('data-src');
-
-            layer.open({
-                type: 2,
-                title:'获取书本封面图通过URL',
-                content:url,
-                area:["1000px","500px"]
-
-            });
-        })
-
-
-        //直接上传图片
-
-        $('.getpictureupload').click(function(){
-            var url=$(this).attr('data-src');
-
-            layer.open({
-                type: 2,
-                title:'上传封面图',
-                content:url,
-                area:["1000px","500px"]
-
-            });
-        })
-
-
         //获取音频
         $('.getvoice').click(function(){
             var url=$(this).attr('data-src');
@@ -183,6 +174,78 @@
                 area:["1000px","500px"]
 
             });
+        })
+
+
+
+        //将书本设置为完结
+
+        $(document).on('click','.js-setover',function(){
+            var bookid=$(this).attr('id');
+            var href=window.location.href;
+            $.post(ISOVER,{bookid:bookid},function(ret){
+
+                if(ret.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+
+
+        })
+
+
+
+        //设置人气值
+        $(document).on('click','.js-setscore',function(){
+            var bookid=$(this).attr('data-id');
+            var score = $('#score_'+bookid).val();
+            $.post(SCORE,{bookid:bookid,score:score},function(ret){
+                var href=window.location.href;
+                if(ret.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+
+        })
+
+
+
+
+        $(document).on('click','.js-setshow',function(){
+            var bookid = $(this).attr('data-bookid');
+            var isshow = $(this).attr('data-isshow');
+            var show;
+            if(isshow==1){
+                show=0
+            }else{
+                show=1
+            }
+            var href=window.location.href
+            $.post(SETBOOKSHOW,{bookid:bookid,isshow:show},function(data){
+                if(data.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+        })
+
+
+
+
+
+        //设置热搜
+
+        $('.js-sethot').click(function(){
+            var id = $(this).attr('data-id');
+            var val = $('#ishot_'+id).val();
+
+            var href = window.location.href;
+
+            $.post(SETHOTSEARCH,{id:id,val:val},function(ret){
+                if(ret.status==1){
+                    window.location.href=href
+                }
+            },'json')
+
         })
 
 

@@ -153,6 +153,9 @@ class AjaxController extends Controller {
             }
         }
 
+        //更新书本最后更新时间
+        M('books')->where(array('bookid'=>$bookid))->save(array('lastupdate'=>time()));
+
         $res=array('status'=>1);
 
         echo json_encode($res);

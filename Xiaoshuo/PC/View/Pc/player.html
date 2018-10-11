@@ -5,11 +5,21 @@
 <link href="{$path}/PC/View/jPlayer/skin/blue.monday/myplay.css?v={$version}" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="{$path}/PC/View/jPlayer/dist/jplayer/jquery.jplayer.min.js"></script>
 
+<script>
+    //记录最近播放
+    if (window.localStorage) {
+        var play={}
+        play.count="{$voiceid+1}"
+        play.url="/video/{$bookid}-0-{$voiceid}.html";
+        play.bookname="{$book.bookname}";
+        localStorage.setItem("lastplay", JSON.stringify(play));
+    }
+</script>
 
 <div class="clearfix mininav">
     <ul>
         <li class="first">首页->{$category.name}->{$book.bookname}</li>
-        <li class="second">关注微信公众号：</li>
+        <li class="second">关注微信公众号：小微夜听</li>
     </ul>
 </div>
 
@@ -21,7 +31,7 @@
 
         <div class="playerbook">{$book.bookname}有声小说第 {$voiceid+1} 集在线收听</div>
 
-        <div class="bookinfo clearfix mt15">
+        <div class="bookinfo clearfix mt10">
 
             <div class="bookpic"><img src="{$book.cover}"></div>
 
@@ -32,7 +42,7 @@
                     <li>作者：{$book.author}</li>
                     <li>播讲：{$book.bojiang}</li>
                     <li>类别：<a href="{:U('cate/'.$category['category_id'])}" title="{$category.name}">{$category.name}</a></li>
-                    <li>状态：连载至第 {$book.count} 集</li>
+                    <li>状态：<if condition="$book.status eq 1">完结<else/>更新至{$book.count}集</if></li>
                     <li>更新时间：{$book.lastupdate}</li>
                     <li class="oneline">简介：{$book.description}</li>
                 </ul>
@@ -88,27 +98,46 @@
 
         </div>
 
+
+
+        <div class="playerbook" style="text-align:left;padding: 0 0 0 10px">喜欢听<span style="color:#f30;font-weight:bold">《{$book.bookname}》</span>的人也喜欢听：</div>
+
+        <div class="recommend clearfix">
+            <volist name="recommend" id="item">
+                <if condition="$key lt 10">
+                <div class="recommend-item">
+                    <a href="{:U('mp3/'.$item['bookid'])}" class="recommend-pic" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}"/></a>
+                    <a href="{:U('mp3/'.$item['bookid'])}" class="recommend-bookname" title="{$item.bookname}" target="_blank">{$item.bookname}</a>
+                    <div class="recommend-desc">{$item.description}</div>
+                </div>
+                <else/>
+                    <a href="{:U('mp3/'.$item['bookid'])}" class="recommend-link" title="{$item.bookname}" target="_blank">{$key+1}、{$item.bookname}</a>
+                </if>
+            </volist>
+        </div>
+
+
     </div>
 
 
     <div class="category_right">
         <div class="leftareatitle">
-            大家都在听...
+            最新推荐
         </div>
         <div class="leftarealist mt15">
             <volist name="listen" id="item">
             <div class="p-item clearfix">
 
                 <div class="p-itemleft">
-                    <a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}">
+                    <a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank">
                         <img src="{$item.cover}" alt="{$item.bookname}">
                     </a>
                 </div>
 
                 <div class="p-itemright">
 
-                    <div style="font-size:14px;font-weight:bold"><a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}">{$item.bookname}</a></div>
-                    <div>类别：<a href="{:U('cate/'.$item['category_id'])}" title="{$category.name}">{$category.name}</a></div>
+                    <div style="font-size:14px;font-weight:bold"><a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank">{$item.bookname}</a></div>
+                    <div>类别：<a href="{:U('cate/'.$item['category_id'])}" title="{$category.name}" target="_blank">{$category.name}</a></div>
                     <div>状态：{$item.count}</div>
                     <div class="towline">{$item.description}</div>
 

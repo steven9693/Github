@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{$path}/js/jquery-1.11.1.min.js"></script>
+    <script src="{$path}/layui/layui.all.js"></script>
+    <link href="{$path}/layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layui-form" style="padding:20px 20px 0 0">
+    <div class="layui-form-item">
+        <label class="layui-form-label">原始链接</label>
+        <div class="layui-input-block">
+            <input type="text" name="url" required  lay-verify="required" placeholder="原始链接URL" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">原始ID</label>
+        <div class="layui-input-block">
+            <input type="text" name="def_bookid" required  lay-verify="required" placeholder="原始书本ID" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">书本名称</label>
+        <div class="layui-input-block">
+            <input type="text" name="bookname" required  lay-verify="required" placeholder="书本名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择框</label>
+        <div class="layui-input-block">
+            <select name="category" lay-verify="required">
+                <option value="">选择分类</option>
+                <volist name="category" id="item">
+                <option value="{$item.cid}">{$item.category}</option>
+                </volist>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">添加书本</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+        form.render('select');
+
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            // layer.msg(JSON.stringify(data.field));
+             // return false;
+            console.log(data);
+            var href = window.parent.window.location.href
+            console.log(href)
+            $.post('./index.php?m=Adminwz&c=Index&a=editbookinfo',data.field,function(res){
+                if(res.status==1){
+                    window.parent.window.location.href=href
+                }
+            },'json')
+        });
+    });
+</script>
+
+</body>
+</html>

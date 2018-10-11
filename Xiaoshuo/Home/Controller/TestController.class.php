@@ -70,6 +70,64 @@ class TestController extends Controller {
 
 
 
+        //抓取文字小说
+
+    //    function doCurl($url, $data=array(), $header=array(), $referer='', $timeout=30){
+//
+//        $ch = curl_init();
+//        curl_setopt($ch, CURLOPT_URL, $url);
+//        curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
+//        curl_setopt($ch, CURLOPT_POST, true);
+//        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($ch, CURLOPT_TIMEOUT, $timeout);
+//
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+//
+//
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); // 对认证证书来源的检查
+//        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); // 从证书中检查SSL加密算法是否存在
+//
+//        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36');
+//
+//
+//        // 模拟来源
+//        curl_setopt($ch, CURLOPT_REFERER, $referer);
+//
+//        $response = curl_exec($ch);
+//
+//        if($error=curl_error($ch)){
+//            die($error);
+//        }
+//
+//        curl_close($ch);
+//
+//        return $response;
+//
+//    }
+//
+//    function demo(){
+//        // 调用
+//        $url = 'https://www.booktxt.net/2_2096/4412409.html';
+//        $data = array();
+//
+//// 设置IP
+//        $header = array(
+//            'CLIENT-IP: 192.168.1.100',
+//            'X-FORWARDED-FOR: 192.168.1.100'
+//        );
+//
+//// 设置来源
+//        $referer = 'https://www.booktxt.net';
+//
+//        $response = $this->doCurl($url, $data, $header, $referer, 5);
+//
+//        echo '<textarea style="width:980px;height:800px">'.$response.'</textarea>';
+//
+//    }
+//
+
+
 
 
 

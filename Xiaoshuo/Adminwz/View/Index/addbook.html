@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{$path}/js/jquery-1.11.1.min.js"></script>
+    <script src="{$path}/layui/layui.all.js"></script>
+    <link href="{$path}/layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+
+
+<div class="layui-input-inline" style="width:350px">
+    <input type="text" name="bookname" required  lay-verify="required" placeholder="书本名称" autocomplete="off" class="layui-input">
+</div>
+<div class="layui-input-inline">
+    <a href="javascript:void(0)" class="layui-btn" id="searchbook">搜索书本</a>
+</div>
+<div class="layui-input-inline" style="margin-left:100px">
+    <a href="javascript:void(0)" class="layui-btn layui-btn-normal" id="addbook">添加书本</a>
+</div>
+
+<hr>
+<style>
+    .layui-table tr th{text-align:right}
+</style>
+
+<table class="layui-table">
+
+    <tbody>
+        <tr>
+            <th style="width:150px">书本名称</th>
+            <td>天津气象</td>
+        </tr>
+
+        <tr>
+            <th>封面图片</th>
+            <td><img src=""></td>
+        </tr>
+
+        <tr>
+            <th>分类</th>
+            <td>{$item.name}</td>
+        </tr>
+
+        <tr>
+            <th>原始链接</th>
+            <td>{$item.name}</td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+<script>
+    $(function(){
+        $("#addbook").click(function(){
+            layer.open({
+                type: 2,
+                title:'添加书本',
+                content: './index.php?m=Adminwz&c=Index&a=addbookinfo',
+                area: ['1000px', '500px'],
+                offset: '20px'
+            });
+        })
+    })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{$path}/js/jquery-1.11.1.min.js"></script>
+    <script src="{$path}/layui/layui.all.js"></script>
+    <link href="{$path}/layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+
+
+<table class="layui-table">
+
+    <thead>
+    <tr>
+        <th>原始章节序号</th>
+        <th>书本章节名称</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="lists" id="item">
+        <tr>
+            <td>{$item.def_chapterid}</td>
+            <td>{$item.title}</td>
+        </tr>
+    </volist>
+
+    <tr>
+        <td colspan="2"><a href="javascript:void(0)" class="layui-btn layui-btn-norma js-save">保存</a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<script>
+
+    var lists = '{$liststr}';
+
+    var bookid='{$bookid}';
+
+    $(function(){
+
+        $('.js-save').click(function(){
+            var index = layer.load()
+            $.post('./index.php?m=Adminwz&c=Index&a=savelist',{lists:lists,bookid:bookid},function(res){
+                if(res.status==1){
+                    layer.close(index);
+                    layer.open({
+                        title:'温馨提示',
+                        content: '保存成功',
+                        // yes: function(index){
+                        //     console.log(index)
+                        //     //do something
+                        //     layer.close(index); //如果设定了yes回调，需进行手工关闭
+                        //     window.location.href=href;
+                        // }
+                    });
+                }
+            },'json')
+        })
+
+    })
+</script>
+
+</body>
+</html>

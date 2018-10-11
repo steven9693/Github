@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./Xiaoshuo/Home/View/js/jquery-1.11.1.min.js"></script>
+    <link href="./Xiaoshuo/Home/View/css/global.css?v={$version}" rel="stylesheet">
+    <link href="./Xiaoshuo/Home/View/layui/css/layui.css" rel="stylesheet">
+    <script src="./Xiaoshuo/Home/View/layui/layui.all.js"></script>
+    <script src="./Xiaoshuo/Home/View/js/urls.js?v={$version}"></script>
+
+</head>
+
+
+<body>
+
+设置人气榜
+<hr class="layui-bg-cyan">
+
+<div class="layui-row menu layui-bg-green">
+    <div class="layui-col-md1">
+        <a href="./index.php?m=Home&c=Index&a=setscore" <if condition="$category_id eq ''">class="current"</if>>全部</a>
+    </div>
+    <volist id="item" name="category">
+        <div class="layui-col-md1">
+            <a href="./index.php?m=Home&c=Index&a=setscore&cid={$item.category_id}"  <if condition="$item.category_id eq $category_id">class="current"</if>>{$item.name}</a>
+        </div>
+    </volist>
+</div>
+
+<table class="layui-table">
+    <colgroup>
+        <col width="100">
+        <col width="200">
+        <col width="200">
+        <col width="100">
+        <col width="100">
+        <col width="200">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>封面图标</th>
+        <th>书名</th>
+        <th>添加人气值</th>
+        <th>完结</th>
+        <th>集数</th>
+        <th>最近更新时间</th>
+        <th>添加时间</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <volist name="books" id="item">
+        <tr>
+            <td><img src="{$item.cover}" style="width:30px;height:40px;display:block"></td>
+
+            <td>{$item.bookname}</td>
+
+            <td>
+                <div class="layui-input-inline" style="width:100px">
+                    <input type="number" class="layui-input" value="{$item.score}" id="score_{$item.bookid}"/>
+                </div>
+                <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-setscore" data-id="{$item.bookid}">设置</a>
+            </td>
+
+            <td>
+                <if condition="$item.status eq 1">完结<else/>未完结</if>
+            </td>
+
+            <td>
+                {$item.num}
+            </td>
+
+            <td>
+                {$item.lastupdate}
+            </td>
+
+            <td>
+                {$item.ctime}
+            </td>
+
+
+
+        </tr>
+    </volist>
+
+    </tbody>
+</table>
+
+
+<div class="pagenav">
+    {$pagenav}
+</div>
+
+
+<script>
+    $(function(){
+
+        $('.js-setscore').click(function(){
+            var bookid=$(this).attr('data-id');
+            var score = $('#score_'+bookid).val();
+            $.post(SCORE,{bookid:bookid,score:score},function(ret){
+                var href=window.location.href;
+                if(ret.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+
+        })
+    })
+</script>
+
+</body>
+</html>

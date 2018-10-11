@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{$path}/js/jquery-1.11.1.min.js"></script>
+    <script src="{$path}/layui/layui.all.js"></script>
+    <link href="{$path}/layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="layui-form" style="padding:20px 20px 0 0">
+    <div class="layui-form-item">
+        <label class="layui-form-label">输入框</label>
+        <div class="layui-input-block">
+            <input type="text" name="category" required  lay-verify="required" placeholder="请输入分类名称" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    //Demo
+    layui.use('form', function(){
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function(data){
+            layer.msg(JSON.stringify(data.field));
+            // return false;
+            // console.log(data);
+            var href = window.parent.window.location.href
+            console.log(href)
+            $.post('./index.php?m=Adminwz&c=Index&a=additem',data.field,function(res){
+                if(res.status==1){
+                    window.parent.window.location.href=href
+                }
+            },'json')
+        });
+    });
+</script>
+
+</body>
+</html>

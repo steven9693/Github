@@ -6,14 +6,17 @@
  * Time: 0:19
  */
 
-define("DOMAIN",'http://localhost/Github/');
-//define("DOMAIN",'http://xiaoshuo.migiweb.cn/');
+//define("DOMAIN",'http://localhost/Github/');
+//define("Github",'/Github'); //本地路径
+
+
+
+define("DOMAIN",'http://xiaoshuo.migiweb.cn/');
 
 //define("DOMAIN",'http://www.migiweb.com/');//正式服务器
 
-define("Github",'/Github'); //本地路径
 
-//define("Github",''); //服务器路径
+define("Github",''); //服务器路径
 
 function filepath(){
     $path=Github.'/Xiaoshuo';
@@ -21,12 +24,12 @@ function filepath(){
 }
 
 function setpagenavurl(){
-    $seturl=Github."/index.php/cate/";
+    $seturl=Github."/cate/";
     return $seturl;
 }
 
 function searchurl(){
-    $surl=Github."/index.php/search?search=";
+    $surl=Github."/search?search=";
     return $surl;
 }
 
@@ -36,7 +39,7 @@ function randtime(){
 
 
 function toindex(){
-    return DOMAIN.'index.php';
+    return DOMAIN;
 }
 
 //异步获取音频列表
@@ -47,7 +50,14 @@ function getvideolist(){
 //生成跳转到播放页的URL
 
 function playerurl(){
-    return DOMAIN.'index.php/video/';
+    return DOMAIN.'video/';
+}
+
+
+//跳转移动端网页
+
+function tomobile(){
+    return DOMAIN.'mindex.html';
 }
 
 

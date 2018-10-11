@@ -2,8 +2,8 @@
 
 <div class="clearfix mininav">
     <ul>
-        <li class="first">首页 -> {$category.name} -> 书名</li>
-        <li class="second">关注微信公众号：</li>
+        <li class="first">首页 -> {$category.name} -> {$book.bookname}</li>
+        <li class="second">关注微信公众号：小微夜听</li>
     </ul>
 </div>
 
@@ -16,7 +16,7 @@
         <div class="rightareatitle bookname">
             {$book.bookname} - 有声小说
         </div>
-
+        <!--
         <div class="bookmsgarea clearfix mt15">
             <ul>
                 <li>分类：{$category.name}</li>
@@ -24,28 +24,64 @@
                 <li>更新时间：{$book.lastupdate}</li>
             </ul>
         </div>
+        -->
 
-        <div class="mt15 description">
-            简介：{$book.description}
+        <div class="bookinfo">
+            <a class="bookinfo-left" href="javascript:void(0)">
+                <img src="{$book.cover}"/>
+            </a>
+
+            <div class="bookinfo-right">
+                <p>作者：{$book.author}</p>
+                <p>播讲：{$book.bojiang}</p>
+                <p>类型：{$category.name}</p>
+                <p>时间：{$book.lastupdate}</p>
+                <p>状态：<if condition="$book.status eq 1">完结<else/>更新至{$book.count}集</if></p>
+
+                <p>支持平台：苹果手机 - 安卓手机 - 个人电脑</p>
+
+                    <div class="bshare-custom icon-medium" style="margin-top:10px">
+                        <div class="bsPromo bsPromo2"></div>
+                        <a title="分享到" href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a><a title="分享到QQ空间" class="bshare-qzone"></a><a title="分享到新浪微博" class="bshare-sinaminiblog" href="javascript:void(0);"></a><a title="分享到QQ好友" class="bshare-qqim" href="javascript:void(0);"></a><a title="分享到豆瓣" class="bshare-douban" href="javascript:void(0);"></a><a title="分享到微信" class="bshare-weixin" href="javascript:void(0);"></a><a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count" style="float: none;">61.4K</span>
+                    </div>
+                    <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+                    <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+
+
+
+
+            </div>
         </div>
 
-        <div class="booklist mt15">
+
+        <div class="booklist">
             <div class="clearfix booklisttitle">
                 <ul>
                     <li class="list_1" style="color:#0f7bff;margin-right:40px">支持安卓手机、苹果手机、电脑，无需安装任何插件</li>
                     <li style="font-size:12px;color:#0f7bff">有声小说QQ群：805553577</li>
-
+                    <!--
                     <li style="float:right" id="issort" class="current">顺序 ↑</li>
-                    <li style="float:right" id="isresort">倒序 ↓</li>
+                    <li style="float:right" id="isresort">倒序 ↓</li>-->
                 </ul>
             </div>
 
-            <div class="clearfix booklistcontent" id="booklistcontent"></div>
-
-            <div class="banquan">声明：<span>{$book.bookname}</span>有声小说是由<span>{$book.bojiang}</span>所播讲，<span>{$book.author}</span>创作的一部<span>{$category.name}</span>类有声读物，
-                所有章节都由网友提供发布，本站不参加任何原创录制工作。<span>{$book.bookname}</span>所描述的内容只是作者个人观点，
-                与本站的立场无关，小微听书只是一个免费有声小说在线收听网。
+            <div class="clearfix booklistcontent" id="booklistcontent">
+                <volist name="voicelist" id="item">
+                    <a href="{:U('video/'.$item['bookid'].'-0-'.$item['index'])}" title="第{$key+1}章" target="_blank">第{$key+1}章</a>
+                </volist>
             </div>
+
+
+
+        </div>
+
+        <div class="rightareatitle bookname mt15" style="text-align: left;">
+            {$book.bookname}有声小说简介
+        </div>
+        <div class="description">{$book.description}</div>
+        <div class="banquan">声明：<span>{$book.bookname}</span>有声小说是由<span>{$book.bojiang}</span>所播讲，<span>{$book.author}</span>创作的一部<span>{$category.name}</span>类有声读物，
+            所有章节都由网友提供发布，本站不参加任何原创录制工作。<span>{$book.bookname}</span>所描述的内容只是作者个人观点，
+            与本站的立场无关，小微听书只是一个免费有声小说在线收听网。
         </div>
 
     </div>
@@ -56,6 +92,7 @@
             最新推荐
         </div>
         <div class="leftarealist mt15">
+            <!--
             <ul>
                 <volist name="latest" id="item">
                 <li><span class="setnum">1
@@ -63,58 +100,27 @@
                 </a><span class="star">star</span></li>
                 </volist>
             </ul>
+            -->
+            <volist name="latest" id="item">
+            <div class="p-item clearfix">
+                <div class="p-itemleft">
+                    <a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank">
+                        <img src="{$item.cover}" alt="{$item.bookname}">
+                    </a>
+                </div>
+                <div class="p-itemright">
+                    <div style="font-size:14px;font-weight:bold"><a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank">{$item.bookname}</a></div>
+                    <div>类别：<a href="{:U('cate/'.$item['category_id'])}" title="{$category.name}" target="_blank">{$category.name}</a></div>
+                    <div>状态：{$item.count}</div>
+                    <div class="towline">{$item.description}</div>
+                </div>
+            </div>
+            </volist>
+
         </div>
     </div>
 
-
 </div>
 
-<script>
-
-    $(function(){
-        var bookid="{$bookid}";
-        var url='{$url}';
-        var videocount=0
-        $.post('{$getvideo}',{bookid:bookid},function(data){
-            if(data.status==1){
-                videocount=data.num
-                seturl(videocount,1)
-
-            }
-        },'json')
-
-        function seturl(num,flag){
-            var html=''
-            if(flag){
-                //顺序
-                for(var i=0;i<num;i++){
-                    html+='<a href="'+url+bookid+'-0-'+i+'.html"  target="_blank">'+(i+1)+'</a>'
-                }
-
-            }else{
-                num=parseInt(num)
-                for(;num>0;--num){
-                    html+='<a href="'+url+bookid+'-0-'+(num-1)+'.html" target="_blank">'+(num)+'</a>'
-                }
-            }
-
-            $('#booklistcontent').html(html);
-        }
-
-        $('#issort').click(function(){
-            $(this).addClass('current')
-            $('#isresort').removeClass('current')
-            seturl(videocount,1)
-        })
-
-        $('#isresort').click(function(){
-            $(this).addClass('current')
-            $('#issort').removeClass('current')
-            seturl(videocount,0)
-        })
-    })
-
-
-</script>
 
 <include file="./Xiaoshuo/PC/View/Pc/footer.html" />

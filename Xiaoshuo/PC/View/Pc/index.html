@@ -45,13 +45,12 @@
 
             <volist name="wuxia" id="item">
             <li class="clearfix">
-                <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}"/></a>
+                <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}"/>
+                    <span class="updateto"><if condition="$item.status eq 1">完结<else/>更新至{$item.count}集</if></span>
+                </a>
                 <div class="bookmsg">
                     <p class="bookname"><a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank">{$item.bookname}</a></p>
-                    <p>类型：<a href="{:U('cate/'.$item['category_id'])}" title="{$item.category}" target="_blank">{$item.category}</a></p>
-                    <p title="{$item.author}">作者：{$item.author}</p>
-                    <p>播音：{$item.bojiang}</p>
-                    <p>状态：第{$item.count}集</p>
+                    <p class="descriptions"><span>简介：</span>{$item.description}</p>
                     <p><a href="{:U('video/'.$item['bookid'].'-0-0')}" class="btn">收听</a></p>
                 </div>
             </li>
@@ -73,13 +72,13 @@
         <ul>
             <volist name="dushi" id="item">
                 <li class="clearfix">
-                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}"/></a>
+                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank">
+                        <img src="{$item.cover}" alt="{$item.bookname}"/>
+                        <span class="updateto"><if condition="$item.status eq 1">完结<else/>更新至{$item.count}集</if></span>
+                    </a>
                     <div class="bookmsg">
                         <p class="bookname"><a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank">{$item.bookname}</a></p>
-                        <p>类型：<a href="{:U('cate/'.$item['category_id'])}" title="{$item.category}" target="_blank">{$item.category}</a></p>
-                        <p title="{$item.author}">作者：{$item.author}</p>
-                        <p>播音：{$item.bojiang}</p>
-                        <p>状态：第{$item.count}集</p>
+                        <p class="descriptions"><span>简介：</span>{$item.description}</p>
                         <p><a href="{:U('video/'.$item['bookid'].'-0-0')}" class="btn">收听</a></p>
                     </div>
                 </li>
@@ -103,13 +102,13 @@
         <ul>
             <volist name="xingzhen" id="item">
                 <li class="clearfix">
-                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}"/></a>
+                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank">
+                        <img src="{$item.cover}" alt="{$item.bookname}"/>
+                        <span class="updateto"><if condition="$item.status eq 1">完结<else/>更新至{$item.count}集</if></span>
+                    </a>
                     <div class="bookmsg">
                         <p class="bookname"><a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank">{$item.bookname}</a></p>
-                        <p>类型：<a href="{:U('cate/'.$item['category_id'])}" title="{$item.category}" target="_blank">{$item.category}</a></p>
-                        <p title="{$item.author}">作者：{$item.author}</p>
-                        <p>播音：{$item.bojiang}</p>
-                        <p>状态：第{$item.count}集</p>
+                        <p class="descriptions"><span>简介：</span>{$item.description}</p>
                         <p><a href="{:U('video/'.$item['bookid'].'-0-0')}" class="btn">收听</a></p>
                     </div>
                 </li>
@@ -134,13 +133,13 @@
         <ul>
             <volist name="zhichang" id="item">
                 <li class="clearfix">
-                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}"/></a>
+                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank">
+                        <img src="{$item.cover}" alt="{$item.bookname}"/>
+                        <span class="updateto"><if condition="$item.status eq 1">完结<else/>更新至{$item.count}集</if></span>
+                    </a>
                     <div class="bookmsg">
                         <p class="bookname"><a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank">{$item.bookname}</a></p>
-                        <p>类型：<a href="{:U('cate/'.$item['category_id'])}" title="{$item.category}" target="_blank">{$item.category}</a></p>
-                        <p title="{$item.author}">作者：{$item.author}</p>
-                        <p>播音：{$item.bojiang}</p>
-                        <p>状态：第{$item.count}集</p>
+                        <p class="descriptions"><span>简介：</span>{$item.description}</p>
                         <p><a href="{:U('video/'.$item['bookid'].'-0-0')}" class="btn">收听</a></p>
                     </div>
                 </li>
@@ -162,13 +161,13 @@
         <ul>
             <volist name="baijia" id="item">
                 <li class="clearfix">
-                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}"/></a>
+                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank">
+                        <img src="{$item.cover}" alt="{$item.bookname}"/>
+                        <span class="updateto"><if condition="$item.status eq 1">完结<else/>更新至{$item.count}集</if></span>
+                    </a>
                     <div class="bookmsg">
                         <p class="bookname"><a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank">{$item.bookname}</a></p>
-                        <p>类型：<a href="{:U('cate/'.$item['category_id'])}" title="{$item.category}" target="_blank">{$item.category}</a></p>
-                        <p title="{$item.author}">作者：{$item.author}</p>
-                        <p>播音：{$item.bojiang}</p>
-                        <p>状态：第{$item.count}集</p>
+                        <p class="descriptions"><span>简介：</span>{$item.description}</p>
                         <p><a href="{:U('video/'.$item['bookid'].'-0-0')}" class="btn">收听</a></p>
                     </div>
                 </li>
@@ -190,13 +189,13 @@
         <ul>
             <volist name="junshi" id="item">
                 <li class="clearfix">
-                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}"/></a>
+                    <a href="{:U('mp3/'.$item['bookid'])}" class="picarea" title="{$item.bookname}" target="_blank">
+                        <img src="{$item.cover}" alt="{$item.bookname}"/>
+                        <span class="updateto"><if condition="$item.status eq 1">完结<else/>更新至{$item.count}集</if></span>
+                    </a>
                     <div class="bookmsg">
                         <p class="bookname"><a href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank">{$item.bookname}</a></p>
-                        <p>类型：<a href="{:U('cate/'.$item['category_id'])}" title="{$item.category}" target="_blank">{$item.category}</a></p>
-                        <p title="{$item.author}">作者：{$item.author}</p>
-                        <p>播音：{$item.bojiang}</p>
-                        <p>状态：第{$item.count}集</p>
+                        <p class="descriptions"><span>简介：</span>{$item.description}</p>
                         <p><a href="{:U('video/'.$item['bookid'].'-0-0')}" class="btn">收听</a></p>
                     </div>
                 </li>

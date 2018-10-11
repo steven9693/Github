@@ -5,7 +5,7 @@
     <title>{$title}</title>
     <link rel="shortcut icon" href="/xsimage/ting.ico" type="image/x-icon">
     <meta name="keywords" content="{$keywords}" />
-    <meta name="description" content="{$descripts}" />
+    <meta name="description" content="{$description}" />
     <script src="{$path}/PC/View/script/jquery-1.11.1.min.js"></script>
     <script src="{$path}/PC/View/layui/layui.all.js"></script>
     <link href="{$path}/PC/View/layui/css/layui.css" rel="stylesheet">
@@ -38,6 +38,7 @@
             <!--
             <a href="#">最新上架</a><span></span>
             -->
+            <a href="javascript:void(0)" id="playhistory">暂无您的收听记录</a><span></span>
             <a href="javascript:void(0)">QQ群：805553577</a>
         </div>
     </div>
@@ -48,7 +49,10 @@
     <div class="header-r">
 
         <div class="hotsearch">
-            热门搜索:<a href="#">鬼吹灯有声小说</a>
+            热门搜索:
+            <volist name="hotbooks" id="item">
+                <a href="{:U('mp3/'.$item['bookid'])}">{$item.bookname}</a>
+            </volist>
         </div>
 
         <div class="search">
@@ -60,7 +64,7 @@
 
 <div class="nav">
     <div class="navwrap">
-        <h2><a href="{$indexurl}" title="首页" <if condition="$ishere eq 0">class="on"</if> >首页</a></h2><volist name="nav" id="item"><h2><a href="{:U('cate/'.$item['category_id'])}" title="{$item.name}" target="_blank" <if condition="$ishere eq $item['category_id']">class="on"</if>>{$item.name}</a></h2></volist>
+        <h2><a href="{$indexurl}" title="首页" target="_blank" <if condition="$ishere eq 0">class="on"</if> >首页</a></h2><volist name="nav" id="item"><h2><a href="{:U('cate/'.$item['category_id'])}" title="{$item.name}" target="_blank" <if condition="$ishere eq $item['category_id']">class="on"</if>>{$item.name}</a></h2></volist>
     </div>
 </div>
 
@@ -71,5 +75,13 @@
             var searchval=$('.searchbar').val();
             window.location.href='{$searchurl}'+searchval;
         })
+
+        if (window.localStorage && localStorage.getItem("lastplay")) {
+            var str = localStorage.getItem("lastplay")
+            var lastplay = JSON.parse(str);
+            console.log(lastplay);
+            $('#playhistory').attr('href',lastplay.url);
+            $('#playhistory').html('您上次收听：<i style="font-style:normal;color:#f30">'+lastplay.bookname+' 第 '+lastplay.count+' 集</i>');
+        }
     })
 </script>

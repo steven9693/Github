@@ -11,6 +11,10 @@
 
 </head>
 
+<style>
+
+    .layui-table td, .layui-table th{padding:9px 0px}
+</style>
 
 <body>
 
@@ -20,11 +24,12 @@
 <table class="layui-table">
     <colgroup>
         <col width="150">
-        <col width="100">
-        <col width="100">
-        <col width="100">
-        <col width="250">
+        <col width="80">
+        <col width="80">
+        <col width="80">
         <col width="200">
+        <col width="150">
+        <col width="50">
     </colgroup>
     <thead>
     <tr>
@@ -34,6 +39,7 @@
         <th>获取音频</th>
         <th>封面名称</th>
         <th>采集链接</th>
+        <th>是否完结</th>
     </tr>
     </thead>
     <tbody>
@@ -64,6 +70,7 @@
                 </td>
 
                 <td>{$book.originalurl}</td>
+                <td><if condition="$book.status eq 0"><a href="javascript:void(0)" class="layui-btn layui-btn-normal layui-btn-sm js-over" data-bookid="{$book.bookid}" >未完结</a><else />完结</if></td>
             </tr>
         </volist>
 
@@ -200,6 +207,18 @@
                 }
 
             }
+        })
+
+
+
+        $('.js-over').click(function(){
+            var bookid = $(this).attr('data-bookid')
+            $.post(ISOVER,{bookid:bookid},function(ret){
+                var href=window.location.href;
+                if(ret.status==1){
+                    window.location.href=href;
+                }
+            },'json')
         })
 
 

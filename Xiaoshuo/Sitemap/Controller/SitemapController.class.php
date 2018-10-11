@@ -13,7 +13,7 @@ class SitemapController extends Controller {
         "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\r\n";
         foreach($list as $k=>$v){
             $sitemap .= "<url>\r\n".
-                "<loc>http://www.migiweb.com/index.php/mp3/".$v['bookid'].".html</loc>\r\n".
+                "<loc>http://www.migiweb.com/mp3/".$v['bookid'].".html</loc>\r\n".
                 "<priority>0.8</priority>\r\n<lastmod>".date('Y-m-d',$v['ctime']).
                 "</lastmod>\r\n<changefreq>weekly</changefreq>\r\n</url>\r\n";
         }
@@ -23,7 +23,7 @@ class SitemapController extends Controller {
         fclose($file);
         
         if($flag){
-            header("Location: ".'./index.php?m=Sitemap&c=Sitemap&a=success');
+            header("Location: ".'./index.php?m=Index&c=Index&a=success');
         }
 //        $this->success('地图生成成功');
     }

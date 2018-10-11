@@ -9,8 +9,24 @@ class PcController extends Controller {
         $this->assign('searchurl',searchurl());
     }
 
+    public function ismobile(){
+
+        $useragent = strtolower($_SERVER['HTTP_USER_AGENT']);
+
+        if(preg_match('/mobile/',$useragent)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     //首页
     public function index(){
+
+        if($this->ismobile()){
+            header('Location: '.tomobile());
+            exit;
+        }
 
 
         //生成导航
@@ -76,9 +92,12 @@ class PcController extends Controller {
 
         $this->assign('keywords','听书网,小微夜听,有声小说,有声小说在线收听网,有声小说下载,在线听书网,在线听小说,听书网');
 
-        $this->assign('descripts','小微夜听,听书网,有声小说网站提供有声小说,可以听的小说,在线听书,听书,听小说,听书网有声小说在线听,56听书网,语音小说,有声读物在线收听,免费有声小说,在线听小说,做最好的听小说网,听书网站,有声小说排行榜');
+        $this->assign('description','小微夜听,听书,听书网,在线听书,有声读物在线收听,免费有声小说,有声小说排行榜,本听书网提供最新最全热门有声小说,有声小说每日更新,最好的听书网');
 
         $this->assign('ishere',0);
+
+
+        $this->assign('hotbooks',$this->sethotsearch());
 
         $this->display();
 
@@ -92,7 +111,7 @@ class PcController extends Controller {
         $cate = M('category')->where(array('category_id'=>$category_id))->find();
         $where['category_id']=$category_id;
         $where['isshow']=1;
-        $books=M('books')->where($where)->order('todayrecommendsort desc , todayrecommend desc,lastupdate desc')->limit($pagesize*$page,$pagesize)->select();
+        $books=M('books')->where($where)->order('bookid desc')->limit($pagesize*$page,$pagesize)->select();
 
         if($books){
             for($i=0;$i<count($books);$i++){
@@ -145,10 +164,18 @@ class PcController extends Controller {
         $this->assign('ishere',$category_id);
 
 
+        $map['category_id']=$category_id;
+        $map['isshow']=1;
+
         //获取最新推荐数据
-        $latest=M('books')->where(array('category_id'=>$category_id))->order('lastupdate desc')->limit(10)->select();
+        $latest=M('books')->where($map)->order('lastupdate desc')->limit(15)->select();
         $this->assign('latest',$latest);
 
+
+        //本类热门有声小说人气TOP15
+
+        $hotbook=M('books')->where($map)->order('score desc')->limit(15)->select();
+        $this->assign('hotbook',$hotbook);
 
         //生成导航
         $nav=$this->getnav();
@@ -163,10 +190,14 @@ class PcController extends Controller {
         $this->setpath();
         $this->assign('version',randtime());
 
-        $this->assign('title',$category['name'].'有声小说 - 小微夜听');
-        $this->assign('keywords',$category['name'].'有声小说');
+        $title = $category['name'].'有声小说在线收听'.($page>0?'(第'.($page+1).'页)':'').'-小微夜听';
+
+        $this->assign('title',$title);
+        $this->assign('keywords',$category['name'].','.$category['name'].'有声小说');
 
         $this->assign('description','');
+
+        $this->assign('hotbooks',$this->sethotsearch());
 
         $this->display();
 
@@ -185,6 +216,22 @@ class PcController extends Controller {
 
         $book = M('books')->where(array('bookid'=>$bookid))->find();
         $book['lastupdate']=date('Y-m-d H:i:s',$book['lastupdate']);
+
+        //获取所有的集数
+
+        $count = M('voicelist')->where(array('bookid'=>$bookid))->count();
+
+        $book['count']=$count;
+
+        $voicelist=array();
+        if($count){
+            for($i=0;$i<$count;$i++){
+                $voicelist[]=array('bookid'=>$bookid,'index'=>$i);
+            }
+        }
+
+        $this->assign('voicelist',$voicelist);
+
         $this->assign('book',$book);
 
         $this->assign('ishere',$book['category_id']);
@@ -197,12 +244,41 @@ class PcController extends Controller {
         $this->setpath();
         $this->assign('bookid',$bookid);
 
+
+
         //获取最新推荐数据
-        $latest=M('books')->where(array('category_id'=>$category_id))->order('lastupdate desc')->limit(10)->select();
-        $this->assign('latest',$latest);
+
+        $map['category_id']=$category_id;
+        $map['isshow']=1;
+
+        $latest=M('books')->where($map)->order('lastupdate desc')->limit(8)->select();
+
+        //过滤掉当前的书本
+        $filterlatest=array();
+
+        if($latest){
+            for($i=0;$i<count($latest);$i++){
+                if($latest[$i]['status']==1){
+                    $latest[$i]['count']='完结';
+                }else{
+                    $voicecount=M('voicelist')->where(array('bookid'=>$latest[$i]['bookid']))->count();
+                    $latest[$i]['count']="更新至".$voicecount."集";
+                }
+
+                if($latest[$i]['bookid']!=$bookid){
+                    $filterlatest[]=$latest[$i];
+                }
+            }
+        }
+
+        $this->assign('latest',$filterlatest);
 
         //获取音频列表链接
-        $this->assign('getvideo',getvideolist());
+//        $this->assign('getvideo',getvideolist());
+
+
+
+
 
 //        $volicelist=M('voicelist')->where(array('bookid'=>$bookid))->count();
 
@@ -216,9 +292,16 @@ class PcController extends Controller {
         $this->assign('version',randtime());
 
 
-        $this->assign('title',$book['bookname'].'_'.$book['bookname'].'有声小说_'.$category['name'].'小说在线收听 - 小微夜听');
-        $this->assign('keywords',$book['bookname'].'_'.$book['bookname'].'有声小说_'.$category['name'].'小说在线收听');
+        $title = $book['bookname'].'有声小说_'.$book['bookname'].'有声小说在线收听_'.'有声小说'.$book['bookname'].'_'.$book['bookname'].'打包下载 - 小微夜听';
+        $this->assign('title',$title);
 
+        $keywords=$book['bookname'].','.$book['bookname'].'有声小说在线收听,'.$book['bookname'].'有声小说';
+        $this->assign('keywords',$keywords);
+
+        $description=$book['bookname'].'有声小说全集,'.$book['bookname'].'小说在线收听,'.$book['bookname'].'有声小说打包下载,有声小说'.$book['bookname'].',《'.$book['bookname'].'有声小说》';
+        $this->assign('description',$description);
+
+        $this->assign('hotbooks',$this->sethotsearch());
 
         $this->display();
     }
@@ -234,12 +317,11 @@ class PcController extends Controller {
 
 
         $book = M('books')->where(array('bookid'=>$bookid))->find();
-        $book['lastupdate']=date('Y-m-d H:i:s',$book['lastupdate']);
 
         $count=M('voicelist')->where(array('bookid'=>$bookid))->count();
         $book['count']=$count;
 
-        $this->assign('book',$book);
+
 
         //获取当前音频链接
         $map['bookid']=$bookid;
@@ -298,11 +380,54 @@ class PcController extends Controller {
         $this->assign('ishere',$category_id);//标识当前的分类
 
         //大家都在听
-        $listen = $this->alllisten($category_id,10);
+//        $listen = $this->alllisten($category_id,10);
 
-        $this->assign('listen',$listen);
+        //最近更新
+        $where['category_id']=$category_id;
+
+        $where['isshow']=1;
+
+        $listen = M('books')->where($where)->limit(10)->order('lastupdate desc')->select();
+
+        $filterlisten = array();
+
+        $filterID=array();
+
+        if($listen){
+            for($k=0;$k<count($listen);$k++){
+                if($listen[$k]['status']==1){
+                    $listen[$k]['count']="完结";
+                }else{
+                    $voicecount = M('voicelist')->where(array('bookid'=>$listen[$k]['bookid']))->count();
+                    $listen[$k]['count']="更新至".$voicecount."集";
+                }
+                $filterID[]=$listen[$k]['bookid'];
+                if($listen[$k]['bookid']!=$bookid){
+                    $filterlisten[]=$listen[$k];
+                }
+            }
+        }
+
+        $this->assign('listen',$filterlisten);
 
         $this->assign('indexurl',toindex()); //首页链接
+
+
+
+        //喜欢听的人也喜欢听
+        $lastupdate = $book['lastupdate'];
+
+
+        $whafter['lastupdate']=array('lt',$lastupdate);
+        $whafter['isshow']=1;
+        $whafter['category_id']=$category_id;
+        $whafter['bookid']=array('not in',$filterID);
+
+        //根据最后的更新时间去获取书本
+        $recommend= M('books')->where($whafter)->limit(22)->order('lastupdate desc')->select();
+
+
+        $this->assign('recommend',$recommend);
 
 
         $this->setpath();
@@ -310,10 +435,23 @@ class PcController extends Controller {
         $this->assign('version',randtime());
 
 
-        $this->assign('title',$book['bookname'].'_'.$category['name'].'小说在线收听 - 小微夜听');
-        $this->assign('keywords',$book['bookname'].'_'.$category['name'].'小说在线收听');
+
+        $book['lastupdate']=date('Y-m-d H:i:s',$book['lastupdate']);
+
+        $this->assign('book',$book);
 
 
+        $title=$book['bookname']."有声小说第".($voiceid+1)."集在线收听-小微夜听";
+        $this->assign('title',$title);
+
+        $keywords=$book['bookname'].','.$book['bookname']."有声小说第".($voiceid+1)."集在线收听";
+        $this->assign('keywords',$keywords);
+
+        $description='您正在收听的是由小微夜听提供的'.$book['bookname'].'有声小说第8集,'.'正在播放的是'.$book['bookname'].'有声小说第2章';
+
+        $this->assign('description',$description);
+
+        $this->assign('hotbooks',$this->sethotsearch());
 
         $this->display();
     }
@@ -394,8 +532,21 @@ class PcController extends Controller {
         $this->setpath();
         $this->assign('version',randtime());
 
+        $this->assign('hotbooks',$this->sethotsearch());
+
 
         $this->display();
+    }
+
+
+    function sethotsearch(){
+
+        $map['isshow']=1;
+        $map['ishot']=array('neq',0);
+
+        $hotbook = M('books')->where($map)->order('ishot desc , bookid desc')->limit(8)->select();
+//        dump($hotbook);
+        return $hotbook;
     }
 
 

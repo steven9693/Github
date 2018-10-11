@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{$path}/js/jquery-1.11.1.min.js"></script>
+    <script src="{$path}/layui/layui.all.js"></script>
+    <link href="{$path}/layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+
+<a href="javascript:void(0)" class="layui-btn" id="addcategory">添加分类</a>
+<hr>
+
+
+<table class="layui-table">
+    <colgroup>
+        <col width="200">
+        <col width="200">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>分类名称</th>
+        <th>设置排序</th>
+        <th>显示/隐藏</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="data" id="item">
+    <tr>
+        <td>{$item.category}</td>
+        <td>{$item.issort}</td>
+        <td>{$item.isshow}</td>
+    </tr>
+    </volist>
+    </tbody>
+</table>
+
+
+<script>
+    $(function(){
+        $("#addcategory").click(function(){
+            layer.open({
+                type: 2,
+                title:'添加分类',
+                content: './index.php?m=Adminwz&c=Index&a=addcategory', //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                area: ['1000px', '500px'],
+                offset: '20px'
+            });
+        })
+    })
+</script>
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 
- var DOMAIN="http://localhost/Github/";
-// var DOMAIN="http://xiaoshuo.migiweb.cn/"
+// var DOMAIN="http://localhost/Github/";
+ var DOMAIN="http://xiaoshuo.migiweb.cn/"
 //添加分类
 
 var ADDCATEGORY=DOMAIN+"index.php?m=Home&c=Index&a=addcategory";
@@ -72,3 +72,15 @@ var ADDFRIEND=DOMAIN+"index.php?m=Home&c=Index&a=addfriend";
 
 //设置有情链接是否显示
 var SETFRISHOW=DOMAIN+"index.php?m=Home&c=Index&a=setfrishow";
+
+
+ //设置是否设置已经完结
+ var ISOVER=DOMAIN+"index.php?m=Home&c=Index&a=isover";
+
+ //设置人气
+
+var SCORE = DOMAIN+"index.php?m=Home&c=Index&a=score";
+
+//设置热搜
+
+var SETHOTSEARCH = DOMAIN+"index.php?m=Home&c=Index&a=sethotsearch";

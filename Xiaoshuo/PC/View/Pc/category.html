@@ -4,7 +4,7 @@
 <div class="clearfix mininav">
     <ul>
         <li class="first">首页->{$category.name}</li>
-        <li class="second">关注微信公众号：</li>
+        <li class="second">关注微信公众号：小微夜听</li>
     </ul>
 </div>
 
@@ -17,7 +17,7 @@
         </div>
 
         <volist name="categorybooks" id="item">
-        <div class="clearfix mb15 mt15">
+        <div class="clearfix mb15 mt15 listitem">
             <a class="bookcover" href="{:U('mp3/'.$item['bookid'])}" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}"></a>
             <div class="bookcontent">
 
@@ -47,16 +47,34 @@
     </div>
 
     <div class="category_right">
+
+
         <div class="leftarea">
+            <div class="leftareatitle">
+                本类热门有声小说人气TOP15
+            </div>
+            <div class="leftarealist mt15">
+                <ul>
+                    <volist name="hotbook" id="item" key="k">
+                        <li><span <if condition="$k lt 4">class="setnum num_{$k}"<else/>class="setnum"</if>>{$k}
+                    </span><a href="{:U('mp3/'.$item['bookid'])}" class="leftarealink" title="{$item.bookname}" target="_blank">{$item.bookname}
+                        </a><span class="star"></span></li>
+                    </volist>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="leftarea mt15">
             <div class="leftareatitle">
                 最新推荐
             </div>
             <div class="leftarealist mt15">
                 <ul>
                     <volist name="latest" id="item" key="k">
-                        <li><span class="setnum">{$k}
+                        <li><span <if condition="$k lt 4">class="setnum num_{$k}"<else/>class="setnum"</if>>{$k}
                     </span><a href="{:U('mp3/'.$item['bookid'])}" class="leftarealink" title="{$item.bookname}" target="_blank">{$item.bookname}
-                        </a><span class="star">star</span></li>
+                        </a><span class="star"></span></li>
                     </volist>
                 </ul>
             </div>

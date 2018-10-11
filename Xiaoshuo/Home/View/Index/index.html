@@ -57,10 +57,11 @@
                         <dd><a href="javascript:void(0);" class="change" data-url="./index.php?m=Home&c=Index&a=search">搜索</a></dd>
                         <dd><a href="javascript:void(0);" class="change" data-url="./index.php?m=Home&c=Index&a=booklist">添加书本</a></dd>
                         <dd><a href="javascript:void(0);" class="change" data-url="./index.php?m=Home&c=Index&a=control">书本管理</a></dd>
+                        <dd><a href="javascript:void(0);" class="change" data-url="./index.php?m=Home&c=Index&a=setscore">设置人气榜</a></dd>
                         <dd><a href="javascript:void(0);" class="change" data-url="./index.php?m=Home&c=Index&a=recommendsort">设置今日推荐排序</a></dd>
                         <dd><a href="javascript:void(0);" class="change" data-url="./index.php?m=Home&c=Index&a=categorysort">设置分类推荐排序</a></dd>
                         <dd><a href="javascript:void(0);" class="change" data-url="./index.php?m=Home&c=Index&a=friendlist">友情链接</a></dd>
-                        <dd><a href="javascript:void(0);" class="change" data-url="./index.php?m=Sitemap&c=Sitemap&a=sitemap">生成网站地图</a></dd>
+                        <dd><a href="javascript:void(0);" class="change" data-url="/index.php?m=Sitemap&c=Sitemap&a=sitemap" rel="1">生成主站网站地图</a></dd>
                         
                     </dl>
                 </li>
@@ -98,6 +99,11 @@
     $(function(){
         $('.change').on('click',function(){
             var src = $(this).attr('data-url');
+            var rel=$(this).attr('rel');
+            if(rel){
+                src="http://www.migiweb.com"+src;
+            }
+
             $('#main').attr('src',src);
         })
 

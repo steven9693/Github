@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{$path}/js/jquery-1.11.1.min.js"></script>
+    <script src="{$path}/layui/layui.all.js"></script>
+    <link href="{$path}/layui/css/layui.css" rel="stylesheet">
+</head>
+<body>
+
+
+<table class="layui-table">
+
+    <thead>
+    <tr>
+        <th>书本名称</th>
+        <th>封面图片</th>
+        <th>显示/隐藏</th>
+        <th>采集章节</th>
+        <th>作者</th>
+        <th>简介</th>
+        <th>是否完结</th>
+        <th>添加时间</th>
+        <th>最近更新</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="booklist" id="item">
+    <tr>
+        <td><a href="javascript:void(0)" class="js-getcontent" id="{$item.def_bookid}">{$item.bookname}</a></td>
+        <td>2016-11-29</td>
+        <td>{$item.isshow}</td>
+        <td><a href="javascript:void(0)" id="{$item.bookid}" class="js-caiji">采集</a></td>
+        <td>{$item.author}</td>
+        <td>{$item.description}</td>
+        <td>{$item.isover}</td>
+        <td>{$item.ctime}</td>
+        <td>{$item.updatetime}</td>
+    </tr>
+    </volist>
+    </tbody>
+</table>
+
+
+<script>
+    $(function(){
+
+        $('.js-caiji').click(function(){
+            var id = $(this).attr('id');
+            layer.open({
+                type: 2,
+                title:'采集章节',
+                content: './index.php?m=Adminwz&c=Index&a=lists&id='+id,
+                area: ['1000px', '500px'],
+                offset: '20px'
+            });
+        })
+
+
+
+        $("#addbook").click(function(){
+            layer.open({
+                type: 2,
+                title:'添加书本',
+                content: './index.php?m=Adminwz&c=Index&a=addbookinfo',
+                area: ['1000px', '500px'],
+                offset: '20px'
+            });
+        })
+
+        $('.js-getcontent').click(function(){
+            var def_bookid=$(this).attr('id');
+            // console.log(def_bookid)
+            layer.open({
+                type: 2,
+                title:'采集书本章节',
+                content: './index.php?m=Adminwz&c=Index&a=getcontent&def_bookid='+def_bookid,
+                area: ['1000px', '500px'],
+                offset: '20px'
+            });
+        })
+
+
+
+
+
+
+
+    })
+</script>
+
+</body>
+</html>

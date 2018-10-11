@@ -275,7 +275,17 @@ class IndexController extends Controller {
 
         $this->assign('category',$category);
 
-        $books = M('books')->where($map)->order('todayrecommend desc,lastupdate desc,bookid desc')->limit($page*$pagesize,$pagesize)->select();
+        $books = M('books')->where($map)->order('bookid desc')->limit($page*$pagesize,$pagesize)->select();
+
+        for($k=0;$k<count($books);$k++){
+            for($j=0;$j<count($category);$j++){
+                if($books[$k]['category_id']==$category[$j]['category_id']){
+                    $books[$k]['category']=$category[$j]['name'];
+                }
+
+            }
+        }
+
 
         if($books){
             for($i=0;$i<count($books);$i++){
@@ -305,7 +315,7 @@ class IndexController extends Controller {
         $bookid=I('post.bookid');
         $isshow=I('post.isshow');
         $map['bookid']=$bookid;
-        M('books')->where($map)->save(array('isshow'=>$isshow));
+        M('books')->where($map)->save(array('isshow'=>$isshow,'lastupdate'=>time()));
         echo json_encode(array('status'=>1));
     }
 
@@ -455,7 +465,8 @@ class IndexController extends Controller {
         if ($bookid) {
 
             $book = M('books')->where(array('bookid' => $bookid))->find();
-
+            $count = M('voicelist')->where(array('bookid' => $bookid))->count();
+            $book['count']=$count;
             $this->assign('book', $book);
             $this->assign('issearch',1);
         }
@@ -549,6 +560,94 @@ class IndexController extends Controller {
     }
 
 
+
+    //设置完结
+    public function isover(){
+
+        $bookid = I('post.bookid');
+        M('books')->where(array('bookid'=>$bookid))->save(array('status'=>1));
+
+        echo json_encode(array('status'=>1));
+    }
+
+    //设置人气榜
+    public function setscore(){
+
+        $category_id=I('get.cid');
+
+        $pagesize=10;
+
+        $page=I('get.page')?I('get.page')-1:0;
+
+        $url="./index.php?m=Home&c=Index&a=setscore";
+
+
+        if($category_id){
+            $url.='&cid='.$category_id;
+        }
+
+
+        if($category_id){
+            $map['category_id']=$category_id;
+        }
+
+        $map['isshow']=1;
+
+        $category=M('category')->order('issort desc,category_id desc')->where(array('isshow'=>1))->select();
+
+        $this->assign('category',$category);
+
+        //书本先按照人气排行，再按照ID排行
+        $books = M('books')->where($map)->order('score desc,bookid desc')->limit($page*$pagesize,$pagesize)->select();
+
+        if($books){
+            for($i=0;$i<count($books);$i++){
+                $books[$i]['num']=M('voicelist')->where(array('bookid'=>$books[$i]['bookid']))->count();
+                $books[$i]['lastupdate']=date('Y-m-d H:i:s',$books[$i]['lastupdate']);
+                $books[$i]['ctime']=date('Y-m-d H:i:s',$books[$i]['ctime']);
+
+            }
+        }
+
+
+        $pagenav=new Pagenav();
+
+        $count=M('books')->where($map)->order('bookid desc')->count();
+
+        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
+
+        $this->assign('pagenav',$pagehtml);
+
+        $this->assign('category_id',$category_id);
+
+        $this->assign('books',$books);
+
+        $this->assign('version',$this->clearcache());
+
+        $this->display();
+
+    }
+
+    //设置人气
+
+    public function score(){
+        $bookid=I('post.bookid');
+        $score=I('post.score');
+        M('books')->where(array('bookid'=>$bookid))->save(array('score'=>$score));
+        echo json_encode(array('status'=>1));
+    }
+
+
+    //设置热搜
+
+    public function sethotsearch(){
+        $id=I('post.id');
+        $val=I('post.val');
+
+        M('books')->where(array('bookid'=>$id))->save(array('ishot'=>$val));
+
+        echo json_encode(array('status'=>1));
+    }
 
 
 
