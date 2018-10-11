@@ -30,8 +30,19 @@
     <volist name="data" id="item">
     <tr>
         <td>{$item.category}</td>
-        <td>{$item.issort}</td>
-        <td>{$item.isshow}</td>
+        <td>
+            <div class="layui-input-inline">
+              <input type="text" required lay-verify="required" placeholder="0" class="layui-input" id="cid_{$item.cid}" value="{$item.issort}"/>
+            </div>
+            <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-save" data-cid="{$item.cid}">保存</a>
+        </td>
+        <td>
+            <if condition="$item.isshow eq 1">
+                <a href="javascript:void(0)" class="layui-btn layui-btn-sm layui-btn-danger js-setshow" data-cid="{$item.cid}" rel="0">显示</a>
+            <else/>
+                <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-setshow" data-cid="{$item.cid}" rel="1">隐藏</a>
+            </if>
+        </td>
     </tr>
     </volist>
     </tbody>
@@ -48,6 +59,43 @@
                 area: ['1000px', '500px'],
                 offset: '20px'
             });
+        })
+
+
+        $(".js-setshow").click(function(){
+            var isshow=$(this).attr('rel');
+            var cid=$(this).attr('data-cid');
+            var href=window.location.href;
+            $.post('./index.php?m=Adminwz&c=Index&a=setcategoryshow',{isshow:isshow,cid:cid},function(res){
+                console.log(res)
+                if(res.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+        })
+
+
+
+        //保存排序
+        $('.js-save').click(function(){
+            var cid = $(this).attr('data-cid');
+            var sort=$('#cid_'+cid).val();
+            // console.log(sort);
+            var href=window.location.href;
+            $.post('./index.php?m=Adminwz&c=Index&a=setsort',{cid:cid,sort:sort},function(res){
+                console.log(res)
+                if(res.status==1){
+
+                    layer.alert('保存成功', function(index){
+                      //do something
+                      console.log(index)
+                      layer.close(index);
+                      window.location.href=href;
+                    });
+
+                }
+            },'json')
+
         })
     })
 </script>

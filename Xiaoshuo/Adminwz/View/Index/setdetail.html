@@ -11,15 +11,23 @@
 
 <div class="layui-form" style="padding:20px 20px 0 0">
     <div class="layui-form-item">
-        <label class="layui-form-label">输入框</label>
+        <label class="layui-form-label">作者</label>
         <div class="layui-input-block">
-            <input type="text" name="category" required  lay-verify="required" placeholder="请输入分类名称" autocomplete="off" class="layui-input">
+            <input type="text" name="author" required  lay-verify="required" placeholder="作者" autocomplete="off" class="layui-input" value="{$book.author}">
         </div>
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label">简介</label>
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+          <textarea name="description" placeholder="请输入内容" class="layui-textarea">{$book.description}</textarea>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo" data-id="{$book.bookid}">添加简介</button>
         </div>
     </div>
 </div>
@@ -28,15 +36,19 @@
     //Demo
     layui.use('form', function(){
         var form = layui.form;
+        form.render('select');
+
 
         //监听提交
         form.on('submit(formDemo)', function(data){
+            var bookid = $(this).attr('data-id')
             // layer.msg(JSON.stringify(data.field));
-            // return false;
-            // console.log(data);
+            data.field.bookid=bookid;
+             // return false;
+            console.log(data.field);
             var href = window.parent.window.location.href
-            console.log(href)
-            $.post('./index.php?m=Adminwz&c=Index&a=additem',data.field,function(res){
+
+            $.post('./index.php?m=Adminwz&c=Index&a=setdetailinfo',data.field,function(res){
                 if(res.status==1){
                     window.parent.window.location.href=href
                 }

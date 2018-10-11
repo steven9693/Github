@@ -10,9 +10,31 @@
 <body>
 
 
+
 <table class="layui-table">
 
     <thead>
+    <tr>
+        <th colspan="2">已保存的最后一条数据</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="lasts" id="item">
+        <tr>
+            <td>{$item.def_chapterid}</td>
+            <td>{$item.title}</td>
+        </tr>
+    </volist>
+    </tbody>
+
+
+
+    <thead>
+
+    <tr>
+        <th colspan="2" style="font-size: 16px;color:#FF5722">以下是获取的最新数据</th>
+    </tr>
+
     <tr>
         <th>原始章节序号</th>
         <th>书本章节名称</th>
@@ -42,6 +64,10 @@
     $(function(){
 
         $('.js-save').click(function(){
+            if(lists.length>0){
+                layer.msg('暂无数据保存');
+                return;
+            }
             var index = layer.load()
             $.post('./index.php?m=Adminwz&c=Index&a=savelist',{lists:lists,bookid:bookid},function(res){
                 if(res.status==1){

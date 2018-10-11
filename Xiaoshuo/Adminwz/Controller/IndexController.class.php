@@ -14,7 +14,7 @@ class IndexController extends Controller {
 
     public function category(){
 
-        $data = M('wz_category')->select();
+        $data = M('wz_category')->order('issort desc')->select();
 
         $this->assign('data',$data);
 
@@ -31,6 +31,7 @@ class IndexController extends Controller {
     public function additem(){
         $category = I('post.category');
         $data['category']=$category;
+        $data['issort']=0;
         $data['ctime']=time();
         M('wz_category')->add($data);
         $res['status']=1;
@@ -39,9 +40,64 @@ class IndexController extends Controller {
 
 
     public function addbook(){
+
+        $id=I('get.bookid');
+        if($id){
+            $book = M('wz_books')->where(array('bookid'=>$id))->find();
+
+            $category = M('wz_category')->where(array('cid'=>$book['cid']))->find();
+
+            $book['category']=$category['category'];
+
+            $book['updatetime']=date('Y-m-d H:i:s',$book['updatetime']);
+
+            $book['total']=M('wz_chapter')->where(array('bookid'=>$id))->count();
+
+            $this->assign('book',$book);
+        }
+
         $this->assign('path',setpath());
         $this->display();
     }
+
+    public function search(){
+        $bookname=I('post.bookname');
+
+        $book = M('wz_books')->where(array('bookname'=>$bookname))->find();
+
+        $res['status']=1;
+        $res['data']=$book;
+        echo json_encode($res);
+    }
+
+    //设置显示、隐藏
+    public function setshow(){
+        $isshow=I('post.isshow');
+        $bookid=I('post.bookid');
+        M('wz_books')->where(array('bookid'=>$bookid))->save(array('isshow'=>$isshow));
+        echo json_encode(array('status'=>1));
+    }
+
+    //设置完结
+    public function setover(){
+        $isover=I('post.isover');
+        $bookid=I('post.bookid');
+        M('wz_books')->where(array('bookid'=>$bookid))->save(array('isover'=>$isover));
+        echo json_encode(array('status'=>1));
+    }
+
+
+    //设置图片名称
+
+    public function setpicture(){
+        $picname=I('post.picname');
+        $bookid=I('post.bookid');
+
+        $data['cover']=$picname;
+        M('wz_books')->where(array('bookid'=>$bookid))->save($data);
+        echo json_encode(array('status'=>1));
+    }
+
 
     public function addbookinfo(){
 
@@ -60,14 +116,22 @@ class IndexController extends Controller {
         $category=I('post.category');
         $ctime=time();
 
-        $data['defurl']=$url;
-        $data['def_bookid']=$def_bookid;
-        $data['bookname']=$bookname;
-        $data['ctime']=$ctime;
-        $data['	updatetime']=$ctime;
-        $data['cid']=$category;
+        $exsit=M('wz_books')->where(array("def_bookid"=>$def_bookid))->find();
 
-        M('wz_books')->add($data);
+        if($exsit){
+            echo json_encode(array('status'=>2));
+        }else{
+            $data['defurl']=$url;
+            $data['def_bookid']=$def_bookid;
+            $data['bookname']=$bookname;
+            $data['ctime']=$ctime;
+            $data['updatetime']=$ctime;
+            $data['cid']=$category;
+            M('wz_books')->add($data);
+            echo json_encode(array('status'=>1));
+        }
+
+
 
     }
 
@@ -75,11 +139,69 @@ class IndexController extends Controller {
 
         $booklist = M("wz_books")->select();
 
+        for($i=0;$i<count($booklist);$i++){
+            $booklist[$i]['ctime']=date('Y-m-d',$booklist[$i]['ctime']);
+            $booklist[$i]['updatetime']=date('Y-m-d',$booklist[$i]['updatetime']);
+            $booklist[$i]['total'] = M('wz_chapter')->where(array('def_bookid'=>$booklist[$i]['def_bookid']))->count();
+        }
+
         $this->assign('booklist',$booklist);
 
         $this->assign('path',setpath());
         $this->display();
     }
+
+
+
+    public function setdetail(){
+
+        $bookid=I('get.bookid');
+
+        $book = M('wz_books')->where(array('bookid'=>$bookid))->find();
+
+        $this->assign('book',$book);
+
+        $this->assign('path',setpath());
+
+        $this->display();
+    }
+
+
+    public function setdetailinfo(){
+
+        $author=I('post.author');
+        $description=I('post.description');
+        $bookid=I('post.bookid');
+
+        $data['author']=$author;
+        $data['description']=$description;
+        $data['updatetime']=time();
+
+        M('wz_books')->where(array('bookid'=>$bookid))->save($data);
+        echo json_encode(array('status'=>1));
+    }
+
+
+
+    public function setcategoryshow(){
+        $isshow = I('post.isshow');
+        $cid=I('post.cid');
+
+        M('wz_category')->where(array('cid'=>$cid))->save(array('isshow'=>$isshow));
+
+        echo json_encode(array('status'=>1));
+    }
+
+
+
+    public function setsort(){
+        $cid=I('post.cid');
+        $sort=I('post.sort');
+        M('wz_category')->where(array('cid'=>$cid))->save(array("issort"=>$sort));
+        echo json_encode(array('status'=>1));
+    }
+
+
 
 
 
@@ -95,11 +217,7 @@ class IndexController extends Controller {
 
         $data = curl($url,false,true,true);
 
-
         preg_match_all('/<div id=\"content\">(.*)<\/div>/',$data,$arr);
-
-//        dump($arr);
-//        echo '<textarea style="width:980px;height:500px">'.$arr[1][0].'</textarea>';
 
         $map['def_bookid']=$def_bookid;
         $map['def_chapterid']=$def_chapterid;
@@ -107,12 +225,12 @@ class IndexController extends Controller {
         $str = str_replace("&nbsp;" , " " , $arr[1][0]) ;
 
         $content['content']=$str;
-
         M('wz_chapter')->where($map)->save($content);
+
+        $res['updatetime']=time();
+        M('wz_books')->where(array('def_bookid'=>$def_bookid))->save($res);
+
     }
-
-
-
 
 
 
@@ -153,35 +271,52 @@ class IndexController extends Controller {
             }
         }
 
-//        echo json_encode($res);
-//        dump($res);
+        // dump($res);
 
-        $this->assign('liststr',json_encode($res));
+        $map['def_bookid']=$book['def_bookid'];
+
+        $exsit=M('wz_chapter')->field('def_chapterid')->where($map)->select();
+
+        $lasts = M('wz_chapter')->where($map)->limit(1)->order('chapterid desc')->select();
+
+        $this->assign('lasts',$lasts);
+
+        // dump($exsit);
+
+        if($exsit){
+            $exsitarr = array();
+            for($k=0;$k<count($exsit);$k++){
+                $exsitarr[]=$exsit[$k]['def_chapterid'];
+            }
+
+            // dump($exsitarr);
+
+            $newdata = array();
+
+            for($j=0;$j<count($res);$j++){
+                //不存在数据库
+                if(!in_array($res[$j]['def_chapterid'],$exsitarr)){ 
+                    $newdata[]=$res[$j];
+                }
+
+                
+            }
+
+        }else{
+            $newdata=$res;
+        }
+
+
+        $this->assign('liststr',json_encode($newdata));
 
         $this->assign('bookid',$id);
 
-        $this->assign('lists',$res);
+        $this->assign('lists',$newdata);
 
         $this->assign('path',setpath());
+
         $this->display();
 
-
-//        $onestr  =$strarr[0][0];
-//        echo $onestr;
-
-//        preg_match_all('/<a href="(.*)">(.*)<\/a>/is',$onestr,$result);
-//
-//        dump($result);
-//
-//        $res = $result[1][0];
-//
-////        echo $res;
-//
-//        $resarr  =explode(" ", $res);
-//
-//        echo str_replace('"','',$resarr[0]);
-//
-//        echo '<textarea style="width:980px;height:500px">'.$strarr[0][0].'</textarea>';
 
     }
 
@@ -203,6 +338,7 @@ class IndexController extends Controller {
                 $item['def_chapterid']=$listsarr[$i]['def_chapterid'];
                 $item['ctime']=time();
                 $item['title']=$listsarr[$i]['title'];
+                $item['content']='';
                 M('wz_chapter')->add($item);
             }
 
@@ -225,6 +361,7 @@ class IndexController extends Controller {
 
         $this->assign('datastr',json_encode($data));
         $this->assign('data',$data);
+        $this->assign('count',count($data));
         $this->assign('path',setpath());
         $this->display();
     }

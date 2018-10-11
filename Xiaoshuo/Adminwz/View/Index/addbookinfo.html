@@ -68,6 +68,8 @@
             $.post('./index.php?m=Adminwz&c=Index&a=editbookinfo',data.field,function(res){
                 if(res.status==1){
                     window.parent.window.location.href=href
+                }else{
+                    layer.msg('该书本已经添加过了')
                 }
             },'json')
         });
