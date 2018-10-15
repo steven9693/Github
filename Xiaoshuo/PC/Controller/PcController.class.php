@@ -23,10 +23,10 @@ class PcController extends Controller {
     //首页
     public function index(){
 
-        if($this->ismobile()){
-            header('Location: '.tomobile());
-            exit;
-        }
+//        if($this->ismobile()){
+//            header('Location: '.tomobile());
+//            exit;
+//        }
 
 
         //生成导航

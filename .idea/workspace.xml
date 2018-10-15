@@ -11,43 +11,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IndexController.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Xiaoshuo/Adminwz/Controller/IndexController.class.php">
+      <file leaf-file-name="footer.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/footer.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="429">
-              <caret line="230" column="0" lean-forward="false" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
+            <state relative-caret-position="396">
+              <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
               <folding>
-                <marker date="1539189701398" expanded="true" signature="2169:2193" ph="..." />
+                <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#1;n#div#2;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="booklist.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/booklist.html">
+      <file leaf-file-name="common.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/View/style/common.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="76" column="29" lean-forward="false" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="getcontent.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/getcontent.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="73" column="183" lean-forward="false" selection-start-line="73" selection-start-column="183" selection-end-line="73" selection-end-column="183" />
+            <state relative-caret-position="244">
+              <caret line="433" column="17" lean-forward="true" selection-start-line="433" selection-start-column="17" selection-end-line="433" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -66,12 +47,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>listitem</find>
-      <find>$recommend</find>
-      <find>recommend-pic</find>
-      <find>.recommend-item</find>
-      <find>$voicecount</find>
-      <find>player</find>
       <find>change</find>
       <find>footerlinks</find>
       <find>js-setscore</find>
@@ -96,6 +71,12 @@
       <find>function category</find>
       <find>js-caiji</find>
       <find>getcontent</find>
+      <find>TMPL_EXCEPTION_FILE</find>
+      <find>domain</find>
+      <find>mask</find>
+      <find>imagearea</find>
+      <find>more</find>
+      <find>getCategory</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -104,23 +85,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Login/login.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Controller/LoginController.class.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/jPlayer/skin/blue.monday/myplay.css" />
-        <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/index.html" />
-        <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/footer.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/categorytime.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Index/add.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/book.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/js/main.js" />
-        <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/style/common.css" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Ajax/index.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/QQqun.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/play.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Index/voicelist.html" />
-        <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/header.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Sitemap/View/Sitemap/create.html" />
-        <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/Controller/IndexController.class.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/PC/Common/function.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Index/setscore.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Controller/AjaxController.class.php" />
@@ -135,12 +110,10 @@
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Index/control.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/View/Index/search.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/PC/View/Pc/category.html" />
-        <option value="$PROJECT_DIR$/Xiaoshuo/PC/View/Pc/header.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/PC/View/Pc/index.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/PC/View/css/style.css" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Controller/TestController.class.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Home/Controller/TextbookController.class.php" />
-        <option value="$PROJECT_DIR$/Xiaoshuo/Common/Conf/config.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/Controller/WzindexController.class.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/Common/function.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/add.html" />
@@ -149,12 +122,20 @@
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/addcategory.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/addbookinfo.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/addbook.html" />
-        <option value="$PROJECT_DIR$/Xiaoshuo/PC/Controller/PcController.class.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/lists.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/booklist.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/Controller/IndexController.class.php" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/index.html" />
         <option value="$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/getcontent.html" />
+        <option value="$PROJECT_DIR$/404/404.html" />
+        <option value="$PROJECT_DIR$/Xiaoshuo/PC/Controller/PcController.class.php" />
+        <option value="$PROJECT_DIR$/Xiaoshuo/PC/View/Pc/header.html" />
+        <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/header.html" />
+        <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/Controller/IndexController.class.php" />
+        <option value="$PROJECT_DIR$/Xiaoshuo/Common/Conf/config.php" />
+        <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/index.html" />
+        <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/style/common.css" />
+        <option value="$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/footer.html" />
       </list>
     </option>
   </component>
@@ -186,6 +167,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -202,35 +184,51 @@
               <item name="Github" type="b2602c69:ProjectViewProjectNode" />
               <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Adminwz" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Mobile" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Github" type="b2602c69:ProjectViewProjectNode" />
               <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Adminwz" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Mobile" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Controller" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Github" type="b2602c69:ProjectViewProjectNode" />
               <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Adminwz" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Mobile" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="Github" type="b2602c69:ProjectViewProjectNode" />
               <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Adminwz" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Mobile" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="Index" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Mobile" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="style" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="Github" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Github" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Xiaoshuo" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Mobile" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="View" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="style" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="frozenui" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -342,11 +340,14 @@
       <workItem from="1539101802081" duration="3192000" />
       <workItem from="1539180281262" duration="5553000" />
       <workItem from="1539187325942" duration="3618000" />
+      <workItem from="1539360050566" duration="3235000" />
+      <workItem from="1539411902937" duration="18853000" />
+      <workItem from="1539613744137" duration="3343000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="306640000" />
+    <option name="totallyTimeSpent" value="332071000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -407,57 +408,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/View/Index/addcategory.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="42" column="23" lean-forward="false" selection-start-line="42" selection-start-column="14" selection-end-line="42" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/View/Login/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="9" column="61" lean-forward="false" selection-start-line="9" selection-start-column="61" selection-end-line="9" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/Controller/-IndexController.class.php" />
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Home/View/js/-urls.js" />
-    <entry file="file://$PROJECT_DIR$/ThinkPHP/Library/Pagenav/Pagenav.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="0" lean-forward="false" selection-start-line="5" selection-start-column="0" selection-end-line="86" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="17" column="81" lean-forward="false" selection-start-line="17" selection-start-column="81" selection-end-line="17" selection-end-column="81" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/PC/View/Pc/search.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Sitemap/Controller/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Sitemap/View/Sitemap/create.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Test/Home/Controller/IndexController.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -483,13 +433,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/Controller/IndexController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -560,13 +503,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="277">
           <caret line="99" column="80" lean-forward="false" selection-start-line="99" selection-start-column="80" selection-end-line="99" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/PC/View/Pc/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="399">
-          <caret line="24" column="7" lean-forward="false" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -661,7 +597,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="15" column="22" lean-forward="false" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -686,13 +621,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/PC/Controller/PcController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="191" column="0" lean-forward="false" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Xiaoshuo/Common/Conf/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
@@ -707,37 +635,127 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/booklist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="76" column="29" lean-forward="false" selection-start-line="76" selection-start-column="29" selection-end-line="76" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Adminwz/Controller/IndexController.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="429">
-          <caret line="230" column="0" lean-forward="false" selection-start-line="230" selection-start-column="0" selection-end-line="230" selection-end-column="0" />
-          <folding>
-            <marker date="1539189701398" expanded="true" signature="2169:2193" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
+        <state relative-caret-position="19">
           <caret line="73" column="183" lean-forward="false" selection-start-line="73" selection-start-column="183" selection-end-line="73" selection-end-column="183" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/getcontent.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="68" column="0" lean-forward="true" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        <state relative-caret-position="259">
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Adminwz/View/Index/booklist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="135" column="29" lean-forward="false" selection-start-line="135" selection-start-column="29" selection-end-line="135" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Adminwz/Controller/IndexController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="367" column="0" lean-forward="false" selection-start-line="367" selection-start-column="0" selection-end-line="367" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ThinkPHP/Tpl/think_exception.tpl">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-478">
+          <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/404/404.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="20" column="22" lean-forward="true" selection-start-line="20" selection-start-column="22" selection-end-line="20" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ThinkPHP/Conf/convention.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="106" column="81" lean-forward="true" selection-start-line="106" selection-start-column="81" selection-end-line="106" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/categorytime.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/PC/View/Pc/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="32" column="59" lean-forward="true" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/PC/Controller/PcController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Common/Conf/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="2" selection-end-line="75" selection-end-column="61" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="128" column="36" lean-forward="false" selection-start-line="128" selection-start-column="36" selection-end-line="128" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="21" column="7" lean-forward="false" selection-start-line="21" selection-start-column="7" selection-end-line="21" selection-end-column="7" />
+          <folding>
+            <marker date="1539594810000" expanded="true" signature="1320:1404" ph="..." />
+            <marker date="1539594810000" expanded="true" signature="1456:1676" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/Controller/IndexController.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="73" column="82" lean-forward="false" selection-start-line="73" selection-start-column="82" selection-end-line="73" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/View/style/common.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="433" column="17" lean-forward="true" selection-start-line="433" selection-start-column="17" selection-end-line="433" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Xiaoshuo/Mobile/View/Index/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="72" column="0" lean-forward="false" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#div#2;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

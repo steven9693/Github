@@ -13,13 +13,34 @@
 
 
     <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?e964505c411f879e3523037028adaf39";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
+        // var _hmt = _hmt || [];
+        // (function() {
+        //     var hm = document.createElement("script");
+        //     hm.src = "https://hm.baidu.com/hm.js?e964505c411f879e3523037028adaf39";
+        //     var s = document.getElementsByTagName("script")[0];
+        //     s.parentNode.insertBefore(hm, s);
+        // })();
+
+
+
+        (function(){
+            var ua = window.navigator.userAgent.toLowerCase();
+            var domain = document.domain;
+            console.log(domain);
+            console.log(ua)
+            if (ua.indexOf("iphone") > 0 || ua.indexOf("android") > 0) {
+                // window.location.href ="http://"+domain+"/mindex.html";
+                window.location.href ="http://m.migiweb.com/mindex.html";
+            }
+
+        }());
+
+
+
+
+
+
+
     </script>
 
 </head>

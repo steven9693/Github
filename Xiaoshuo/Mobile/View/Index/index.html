@@ -29,16 +29,16 @@
 
 
 <div class="ui-row-flex ui-whitespace secheader mt10">
-    <div class="ui-col"><h2>今日推荐</h2></div>
+    <div class="ui-col"><h2>最近更新</h2></div>
     <div class="ui-col ui-col-2"></div>
 </div>
 
 
 <ul class="ui-list ui-border-tb mt10">
-    <volist name="todayrecommend" id="item">
+    <volist name="latestupdate" id="item">
     <li>
         <div class="ui-list-img-vertical">
-            <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><img src="{$item.cover}"></a>
+            <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><div class="bookstatus">更新至{$item['count']}集<br>{$item['lastupdate']}</div><img src="{$item.cover}"></a>
         </div>
         <div class="ui-list-info ui-border-t">
             <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
@@ -52,50 +52,21 @@
 
 </ul>
 
-<!--玄幻武俠-->
+
+
+<!--刑侦推理-->
 
 <div class="ui-row-flex ui-whitespace secheader mt10">
-    <div class="ui-col"><h2>玄幻武侠</h2></div>
-    <div class="ui-col ui-col-2"></div>
+    <div class="ui-col"><h2>刑侦推理</h2></div>
+    <div class="ui-col ui-col-2 more"><a href="{:U('categorytime/7')}">更多</a></div>
 </div>
 
-<volist name="xuanhuan" id="item" key="index">
-    <if condition="$index eq 1">
+<volist name="xingzhentuili" id="item" key="index">
+    <if condition="$index lt 4">
         <ul class="ui-list ui-border-tb mt10">
             <li>
                 <div class=" ui-list-img-vertical">
-                    <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><img src="{$item.cover}"></a>
-                </div>
-                <div class="ui-list-info ui-border-t">
-                    <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
-                    <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$item['category_id'])}">{$item.category}</a></p>
-                    <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
-                    <p class="ui-nowrap description">简介：{$item.description}</p>
-                </div>
-            </li>
-        </ul>
-    <else/>
-        <div class="ui-row-flex ui-whitespace list">
-            <div class="ui-col fn-tac"><a href="{:U('categorytime/'.$item['category_id'])}">{$item.category}</a></div>
-            <div class="ui-col ui-col-2"><a href="{:U('book/'.$item['bookid'])}" class="listright">{$item.bookname}</a></div>
-        </div>
-    </if>
-
-</volist>
-
-<!--都市言情-->
-
-<div class="ui-row-flex ui-whitespace secheader mt10">
-    <div class="ui-col"><h2>都市言情</h2></div>
-    <div class="ui-col ui-col-2"></div>
-</div>
-
-<volist name="dushi" id="item" key="index">
-    <if condition="$index eq 1">
-        <ul class="ui-list ui-border-tb mt10">
-            <li>
-                <div class=" ui-list-img-vertical">
-                    <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><img src="{$item.cover}"></a>
+                    <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><div class="bookstatus">更新至{$item['count']}集<br>{$item['lastupdate']}</div><img src="{$item.cover}"></a>
                 </div>
                 <div class="ui-list-info ui-border-t">
                     <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
@@ -107,8 +78,76 @@
         </ul>
         <else/>
         <div class="ui-row-flex ui-whitespace list">
+            <!--
             <div class="ui-col fn-tac"><a href="{:U('categorytime/'.$item['category_id'])}">{$item.category}</a></div>
-            <div class="ui-col ui-col-2"><a href="{:U('book/'.$item['bookid'])}" class="listright">{$item.bookname}</a></div>
+            -->
+            <div class="ui-col oneline"><a href="{:U('book/'.$item['bookid'])}" class="listright">《{$item.bookname}》</a><span class="updatecount">更新至{$item['count']}集</span><span class="updatetime">{$item['lastupdate']}</span></div>
+        </div>
+    </if>
+
+</volist>
+
+
+
+
+
+<!--玄幻武俠-->
+
+<div class="ui-row-flex ui-whitespace secheader mt10">
+    <div class="ui-col"><h2>玄幻武侠</h2></div>
+    <div class="ui-col ui-col-2 more"><a href="{:U('categorytime/1')}">更多</a></div>
+</div>
+
+<volist name="xuanhuan" id="item" key="index">
+    <if condition="$index lt 4">
+        <ul class="ui-list ui-border-tb mt10">
+            <li>
+                <div class=" ui-list-img-vertical">
+                    <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><div class="bookstatus">更新至{$item['count']}集<br>{$item['lastupdate']}</div><img src="{$item.cover}"></a>
+                </div>
+                <div class="ui-list-info ui-border-t">
+                    <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
+                    <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$item['category_id'])}">{$item.category}</a></p>
+                    <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
+                    <p class="ui-nowrap description">简介：{$item.description}</p>
+                </div>
+            </li>
+        </ul>
+    <else/>
+        <div class="ui-row-flex ui-whitespace list">
+            <!-- <div class="ui-col fn-tac"><a href="{:U('categorytime/'.$item['category_id'])}">{$item.category}</a></div> -->
+            <div class="ui-col oneline"><a href="{:U('book/'.$item['bookid'])}" class="listright">《{$item.bookname}》</a><span class="updatecount">更新至{$item['count']}集</span><span class="updatetime">{$item['lastupdate']}</span></div>
+        </div>
+    </if>
+
+</volist>
+
+<!--都市言情-->
+
+<div class="ui-row-flex ui-whitespace secheader mt10">
+    <div class="ui-col"><h2>都市言情</h2></div>
+    <div class="ui-col ui-col-2 more"><a href="{:U('categorytime/2')}">更多</a></div>
+</div>
+
+<volist name="dushi" id="item" key="index">
+    <if condition="$index lt 4">
+        <ul class="ui-list ui-border-tb mt10">
+            <li>
+                <div class=" ui-list-img-vertical">
+                    <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><div class="bookstatus">更新至{$item['count']}集<br>{$item['lastupdate']}</div><img src="{$item.cover}"></a>
+                </div>
+                <div class="ui-list-info ui-border-t">
+                    <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
+                    <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$item['category_id'])}">{$item.category}</a></p>
+                    <p class="ui-nowrap voice">播音：{$item.bojiang}</p>
+                    <p class="ui-nowrap description">简介：{$item.description}</p>
+                </div>
+            </li>
+        </ul>
+        <else/>
+        <div class="ui-row-flex ui-whitespace list">
+            <!-- <div class="ui-col fn-tac"><a href="{:U('categorytime/'.$item['category_id'])}">{$item.category}</a></div> -->
+            <div class="ui-col oneline"><a href="{:U('book/'.$item['bookid'])}" class="listright">《{$item.bookname}》</a><span class="updatecount">更新至{$item['count']}集</span><span class="updatetime">{$item['lastupdate']}</span></div>
         </div>
     </if>
 

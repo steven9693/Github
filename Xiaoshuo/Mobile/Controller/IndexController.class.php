@@ -3,15 +3,15 @@ namespace Mobile\Controller;
 use Think\Controller;
 class IndexController extends Controller {
 
-    public $realpath="/Github/Xiaoshuo/Mobile/View"; //本地测试
-//    public $realpath="/Xiaoshuo/Mobile/View"; //网上路径
+//    public $realpath="/Github/Xiaoshuo/Mobile/View"; //本地测试
+    public $realpath="/Xiaoshuo/Mobile/View"; //网上路径
 
-    public $playpath="/Github/index.php/play/"; //本地测试
-//    public $playpath="/index.php/play/"; //网上路径
+//    public $playpath="/Github/index.php/play/"; //本地测试
+    public $playpath="/index.php/play/"; //网上路径
 
 //    public $domain="http://localhost/Github/index.php";
 
-    public $domain="/index.php";
+//    public $domain="/index.php";
 
 
     public function setpath(){
@@ -23,22 +23,29 @@ class IndexController extends Controller {
 
         $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
 
-        //今日推荐
-        $recommend=M('books')->where(array('isshow'=>1,'todayrecommend'=>1))->order('todayrecommendsort desc,bookid desc')->limit(5)->select();
-        $todayrecommend=$this->getCategory($recommend,$category);
+        //最近更新
+        $latest=M('books')->where(array('isshow'=>1))->order('lastupdate desc')->limit(10)->select();
+        $latestupdate=$this->getCategory($latest,$category);
+
+        //刑侦推理
+        $xztl=M('books')->where(array('isshow'=>1,'category_id'=>7))->order('lastupdate desc')->limit(10)->select();
+        $xingzhentuili=$this->getCategory($xztl,$category);
+
 
         //玄幻武侠
-        $xh=M('books')->where(array('isshow'=>1,'category_id'=>1,'settoindex'=>1))->order('settoindexsort desc,bookid desc')->limit(10)->select();
+        $xh=M('books')->where(array('isshow'=>1,'category_id'=>1))->order('bookid desc')->limit(10)->select();
         $xuanhuan=$this->getCategory($xh,$category);
 
         //都市言情
-        $ds=M('books')->where(array('isshow'=>1,'category_id'=>2,'settoindex'=>1))->order('settoindexsort desc,bookid desc')->limit(10)->select();
+        $ds=M('books')->where(array('isshow'=>1,'category_id'=>2))->order('bookid desc')->limit(10)->select();
         $dushi=$this->getCategory($ds,$category);
+
         $this->assign('dushi',$dushi);
 
-        $this->assign('domain',$this->domain);
 
-        $this->assign('todayrecommend',$todayrecommend);
+        $this->assign('latestupdate',$latestupdate);
+
+        $this->assign('xingzhentuili',$xingzhentuili);
 
         $this->assign('xuanhuan',$xuanhuan);
 
@@ -48,6 +55,7 @@ class IndexController extends Controller {
 
         $this->assign('random',$this->setrandom());
 
+//        $this->assign('random','123');
         $this->setpath();
 
         $this->display();
@@ -61,6 +69,11 @@ class IndexController extends Controller {
                 }
             }
         }
+        for($k=0;$k<count($da);$k++){
+            $da[$k]['lastupdate']=date('Y-m-d',$da[$k]['lastupdate']);
+            $da[$k]['count']=M('voicelist')->where(array('bookid'=>$da[$k]['bookid']))->count();
+        }
+
         return $da;
     }
 
@@ -122,8 +135,6 @@ class IndexController extends Controller {
 
         $bookid=I('get.id');
 
-//        echo $bookid;
-
         $book=M('books')->where(array('bookid'=>$bookid))->find();
 
         $ca = M('category')->where(array('category_id'=>$book['category_id']))->find();
@@ -136,13 +147,33 @@ class IndexController extends Controller {
 
         $count=M('voicelist')->where(array('bookid'=>$bookid))->count();
 
-        $ra=$this->randombook($book['category_id'],3);
+        $data=M('voicelist')->where(array('bookid'=>$bookid))->select();
+
+        if($data){
+        	for($i=0;$i<count($data);$i++){
+        		$data[$i]['num']=$data[$i]['defindex']+1;
+        		$data[$i]['defindex']=$data[$i]['defindex'];
+        	}
+        }
+
+        // $ra=$this->randombook($book['category_id'],3);
+
+	$ra=M('books')->where(array('category_id'=>$book['category_id'],'isshow'=>1))->order('bookid desc')->limit(5)->select();
+
+		$viewitem['bookname']=$book['bookname'];
+		$viewitem['bookid']=$book['bookid'];
+		$viewitem['count']=$count;
+
+		$this->assign('viewitem',json_encode($viewitem));
+
 
         $rand=$this->getCategory($ra,$category);
 
+        $this->assign('count',$count);
+
         $this->assign('rand',$rand);
 
-        $this->assign('count',$count);
+        $this->assign('data',$data);
 
         $this->assign('bookid',$bookid);
 

@@ -25,15 +25,19 @@
 <div class="ui-row-flex ui-whitespace secheader mt10">
     <div class="ui-col"><h2>章节列表</h2></div>
     <div class="ui-col ui-col"></div>
-    <div class="ui-col"><a href="javascript:void(0)" onclick="drawhtml()" class="resort">排序</a></div>
+    <!-- <div class="ui-col"><a href="javascript:void(0)" onclick="drawhtml()" class="resort">排序</a></div> -->
 </div>
 
 
-
-<ul class="ui-row voicebox" id="voicebox">
-
-</ul>
-
+<div class="playlist">
+    <ul class="ui-row voicebox" id="voicebox">
+        <volist name="data" id="item">
+            <li class="ui-col ui-col-33"><a href="{:U('play/'.$item['bookid'].'-0-'.$item['defindex'])}">第{$item.num}集</a></li>
+        </volist>
+        
+    </ul>
+    <a href="javascript:void(0)" class="showall" id="showall">➤➤ 显示全部</a>
+</div>
 
 
 <div class="ui-row-flex ui-whitespace secheader mt20">
@@ -45,7 +49,7 @@
     <volist name="rand" id="item">
         <li>
             <div class=" ui-list-img-vertical">
-                <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><img src="{$item.cover}"></a>
+                <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><div class="bookstatus">更新至{$item['count']}集<br>{$item['lastupdate']}</div><img src="{$item.cover}"></a>
             </div>
             <div class="ui-list-info ui-border-t">
                 <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
@@ -63,37 +67,37 @@
 
 <script>
 
-    var bookid="{$bookid}";
-    var count = "{$count}";
-    var resort=0;
-    var palyurl="{$playpath}"
-
-    function drawhtml(){
-        var html="";
-
-        if(resort){
-            var rcount=parseInt(count)-1;
-            for(rcount;rcount>=0;rcount--){
-                html+='<li class="ui-col ui-col-33"><a href="'+palyurl+bookid+'-0-'+rcount+'.html">第'+(rcount+1)+'集</a></li>';
-            }
-            resort=0;
-        }else{
-            for(var i=0;i<count;i++){
-                html+='<li class="ui-col ui-col-33"><a href="'+palyurl+bookid+'-0-'+i+'.html"'+'>第'+(i+1)+'集</a></li>';
-            }
-            resort=1;
-        }
-
-        $("#voicebox").html(html)
-    }
-
-    drawhtml();
-
-
     $(function(){
         $('.playbtn').click(function(){
             window.location.href=palyurl+bookid+'-0-0.html';
         })
+
+        $('#showall').click(function(){
+            $('.playlist').css({height:'auto'});
+            $('#showall').hide();
+        })
+
+
+
+
+        var viewitem=JSON.parse('{$viewitem}')
+
+        var viewlist = localStorage.getItem('viewlist') ? localStorage.getItem('viewlist') : '';
+
+
+        if(viewlist.indexOf(viewitem['bookid'])<0){
+            if(viewlist==''){
+                viewlist=viewitem['bookid']+'-'+viewitem['bookname']
+            }else{
+                viewlist=viewitem['bookid']+'-'+viewitem['bookname']+','+viewlist
+            }
+            if(viewlist.split(',').length>5){
+                viewlist=viewlist.substring(0, viewlist.lastIndexOf(','))
+            }
+            
+            localStorage.setItem('viewlist',viewlist);
+        }
+
     })
 
 

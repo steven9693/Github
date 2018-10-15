@@ -7,3 +7,86 @@
 <div class="footer">
     专业有声小说在线收听、在线听书、听小说<br/>小微夜听
 </div>
+<div style="position:fixed;left:0;top:0;bottom:0;right:0;background:rgba(0,0,0,0.2);display:none" id="menumask"></div>
+<div class="mainmenu">
+    <div class="listarea" id="listarea">
+    </div>
+    <a href="javascript:void(0)" id="viewbox" onclick="viewlog(event)">浏览记录
+    </a><a href="javascript:void(0)" style="border-left:1px solid #eee">最近播放</a>
+</div>
+
+<script>
+    var timeout=''
+
+    function alertmsg(msg){
+
+        var el='<div class="mask"><div class="alertbox">'+msg+'</div></div>'
+        $('body').append(el);
+        timeout=setTimeout(function(){
+
+            $('.alertbox,.mask').remove();
+        },1500)
+    }
+
+
+
+
+        function viewlog(event){
+
+                var history = window.localStorage.getItem('viewlist')
+
+                if(!history){
+                    alertmsg('暂无浏览记录');
+                }else{
+
+                    if($('#viewbox').attr('rel')){
+                        $('#viewbox').removeAttr('rel')
+                        $('#listarea').hide();
+                        $('#menumask').hide();
+                    }else{
+                        $('#viewbox').attr('rel',1)
+                        $('#listarea').show();
+                        $('#menumask').show();
+                    }
+
+
+                    var viewlist=[]
+                    history=history.split(',');
+                    // console.log(history);
+                    for(var i=0;i<history.length;i++){
+                        var item={};
+                        historyarr=history[i].split('-');
+                        item['bookid']=historyarr[0];
+                        item['bookname']=historyarr[1];
+                        viewlist.push(item);
+                    }
+
+                    var htmlstr = ''
+                    for(var k=0;k<viewlist.length;k++){
+                        htmlstr+='<a href="/Mobile/book/'+viewlist[k]['bookid']+'.html">'+viewlist[k]['bookname']+'</a>'
+                    }
+
+                    var len=viewlist.length;
+                    var height=len*45;
+
+                    $("#listarea").css({'height':height+'px'}).html(htmlstr)
+
+                }
+            }
+
+
+
+    $(function(){
+
+
+        $('#menumask').on('touchstart',function(){
+            $(this).hide();
+            $('#viewbox').removeAttr('rel')
+            $('#listarea').hide();
+        })
+    })
+
+
+
+
+</script>
