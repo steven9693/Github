@@ -1,0 +1,65 @@
+<include file="./Xiaoshuo/Mobile/View/Index/header.html" />
+<include file="./Xiaoshuo/Mobile/View/Index/QQqun.html" />
+
+<if condition="$isexist eq 1">
+
+    <ul class="ui-list ui-border-tb mt10">
+        <volist name="books" id="book">
+        <li>
+            <div class=" ui-list-img-vertical">
+                <a class="imagearea" href="{:U('book/'.$book['bookid'])}"><div class="bookstatus"><if condition="$book.status eq 1">完结<else/>更新至{$book['count']}集</if><br>{$book['lastupdate']}</div><img src="{$book.cover}"></a>
+            </div>
+            <div class="ui-list-info ui-border-t">
+                <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$book['bookid'])}">{$book.bookname}</a></h4>
+                <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$book['category_id'])}">{$book.category}</a></p>
+                <p class="ui-nowrap voice">播音：{$book.bojiang}</p>
+                <p class="ui-nowrap description">简介：{$book.description}</p>
+                <!-- <p class="ui-nowrap voice">最新章节：第{$book.count}集</p>
+                <p class="ui-nowrap voice">最近更新：{$book.lastupdate}</p> -->
+            </div>
+        </li>
+        </volist>
+    </ul>
+
+
+<if condition="$pagenav eq 1">
+    <div class="ui-row-flex ui-whitespace pagenav">
+        <div class="ui-col ui-col"><a href="/mobilesearch.html?book={$search}&page={$page?$page-1:0}" class="pagefront">上一页</a></div>
+        <div class="ui-col ui-col pageinfo">{$page+1}/{$all}</div>
+        <div class="ui-col ui-col"><a href="/mobilesearch.html?book={$search}&page={$page?$page+1:1}" class="pagenext">下一页</a></div>
+    </div>
+</if>
+
+<else/>
+
+    <div class="nodata">对不起，您搜索的资源不存在哦！</div>
+
+    <div class="ui-row-flex ui-whitespace secheader mt10">
+        <div class="ui-col"><h2>为您推荐</h2></div>
+        <div class="ui-col ui-col-2"></div>
+    </div>
+
+    <ul class="ui-list ui-border-tb mt10">
+        <volist name="recommend" id="book">
+        <li>
+            <div class=" ui-list-img-vertical">
+                <a class="imagearea" href="{:U('book/'.$book['bookid'])}"><div class="bookstatus"><if condition="$book.status eq 1">完结<else/>更新至{$book['count']}集</if><br>{$book['lastupdate']}</div><img src="{$book.cover}"></a>
+            </div>
+            <div class="ui-list-info ui-border-t">
+                <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$book['bookid'])}">{$book.bookname}</a></h4>
+                <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$book['category_id'])}">{$book.category}</a></p>
+                <p class="ui-nowrap voice">播音：{$book.bojiang}</p>
+                <p class="ui-nowrap description">简介：{$book.description}</p>
+<!--                 <p class="ui-nowrap voice">最新章节：第{$book.count}集</p>
+                <p class="ui-nowrap voice">最近更新：{$book.lastupdate}</p> -->
+            </div>
+        </li>
+        </volist>
+    </ul>
+
+</if>
+
+
+<include file="./Xiaoshuo/Mobile/View/Index/footer.html" />
+</body>
+</html>

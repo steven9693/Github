@@ -91,7 +91,7 @@ class IndexController extends Controller {
             $category_id=$arg;
         }
 
-        $pagesize=8;
+        $pagesize=10;
 
 
         $category=M('category')->where(array('isshow'=>1))->order('issort desc,category_id desc')->select();
@@ -207,6 +207,10 @@ class IndexController extends Controller {
 
         $map['defindex']=$args[2];
 
+        $next=$args[2]+1;//下一集
+        
+        $this->assign('next',$next);
+
         $data=M('voicelist')->where($map)->find();
 
 //        dump($data);
@@ -240,7 +244,19 @@ class IndexController extends Controller {
 
         $book=M('books')->where(array('bookid'=>$args[0]))->find();
 
-        $rand=$this->randombook($book['category_id'],5);
+        // $rand=$this->randombook($book['category_id'],5);
+
+        $where['category_id']=$book['category_id'];
+        $where['isshow']=1;
+        $rand=M('books')->where($where)->order('bookid desc')->limit(10)->select();
+        $cate=M('category')->where(array('category_id'=>$book['category_id']))->find();
+
+        if($rand){
+        	for($i=0;$i<count($rand);$i++){
+        		$rand[$i]['category']=$cate['name'];
+        		$rand[$i]['lastupdate']=date('Y-m-d H:i:s',$rand[$i]['lastupdate']);
+        	}
+        }
 
         $this->assign('book',$book);
 
@@ -287,29 +303,64 @@ class IndexController extends Controller {
     }
 
     //查询书本
-    public function search(){
+    public function mobilesearch(){
+
+    	header("Content-type:text/html;charset=utf-8");
 
         $book=I('get.book');
 
-        $map['bookname']=$book;
+        $page=I('get.page') ? I('get.page'):0;
+
+        $pagesize=10;
+
+        $map['bookname'] = array('like','%'.$book.'%');
+
         $map['isshow']=1;
 
-        $res=M('books')->where($map)->find();
+        $res=M('books')->where($map)->order('bookid desc')->limit($pagesize*$page,$pagesize)->select();
+
+        $len=M('books')->where($map)->count();
 
         if($res){
             //找到书本
-
             $this->assign('isexist',1);
 
-            $this->assign('book',$res);
-            $count=M('voicelist')->where(array('bookid'=>$res['bookid']))->count();
-            $this->assign('count',$count);
-            $this->assign('bookid',$res['bookid']);
+            for($i=0;$i<count($res);$i++){
+            	$cate = M('category')->where(array('category_id'=>$res[$i]['category_id']))->find();
+            	$count=M('voicelist')->where(array('bookid'=>$res[$i]['bookid']))->count();
+            	$res[$i]['category']=$cate['name'];
+            	$res[$i]['count']=$count;
+            	$res[$i]['lastupdate']=date('Y-m-d H:i:s',$res[$i]['lastupdate']);
+            }
+            // dump($res);
+            $this->assign('books',$res);
+
+            $this->assign('search',$book);
+            $this->assign('page',$page);
+
+            $all=ceil($len/$pagesize);
+
+            $this->assign('all',$all);
 
         }else{
             //不存在书本
             $this->assign('isexist',0);
 
+            $recommend = M('books')->where(array('isshow'=>1))->order('bookid desc')->limit(10)->select();
+
+            for($i=0;$i<count($recommend);$i++){
+            	$cate = M('category')->where(array('category_id'=>$recommend[$i]['category_id']))->find();
+            	$count=M('voicelist')->where(array('bookid'=>$recommend[$i]['bookid']))->count();
+            	$recommend[$i]['category']=$cate['name'];
+            	$recommend[$i]['count']=$count;
+            	$recommend[$i]['lastupdate']=date('Y-m-d H:i:s',$recommend[$i]['lastupdate']);
+            }
+
+            $this->assign('recommend',$recommend);
+        }
+
+        if($len>$pagesize){
+        	$this->assign('pagenav',1);
         }
 
         $this->assign('random',$this->setrandom());

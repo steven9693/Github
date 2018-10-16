@@ -66,7 +66,7 @@
     <volist name="rand" id="item">
         <li>
             <div class=" ui-list-img-vertical">
-                <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><img src="{$item.cover}"></a>
+                <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><div class="bookstatus"><if condition="$item.status eq 1">完结<else/>更新至{$item['count']}集</if><br>{$item['lastupdate']}</div><img src="{$item.cover}"></a>
             </div>
             <div class="ui-list-info ui-border-t">
                 <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
@@ -107,6 +107,49 @@
             storage.setItem('lastest',JSON.stringify(lastest));
         }
 
+
+        //写入最近播放记录
+        var playitem = bookid+'-'+bookname+'-'+showindex;
+        if(window.localStorage){
+            if(window.localStorage.getItem('playlist')){
+                var playlist=window.localStorage.getItem('playlist');
+
+                var bookidstr=bookid+'-';
+                if(playlist.indexOf(bookidstr)<0){ //不在播放列表里面
+                    playlist=playitem+','+playlist;
+
+                    var playlistarr=playlist.split(',');
+
+                    if(playlistarr.length>5){
+                        playlistarr = playlistarr.slice(0,5);
+                        playlist = playlistarr.join(',');
+                    }else{
+                        playlist = playlistarr.join(',');
+                    }
+
+                }else{
+
+                    var playlistarr=playlist.split(',');
+                    for(var i=0;i<playlistarr.length;i++){
+                        if(playlistarr[i].indexOf(bookidstr)==0){
+                            playlistarr[i]=playitem;
+                        }
+                    }
+
+                    playlist = playlistarr.join(',');
+
+                    
+                }
+
+                window.localStorage.setItem('playlist',playlist);
+
+            }else{
+                window.localStorage.setItem('playlist',playitem);
+            }
+            
+        }
+
+
     })
 
 
@@ -119,7 +162,7 @@
                 title: "Bubble",
                 m4a:encodevoice,
                 oga:encodevoice
-            });
+            }).jPlayer("play");
         },
         swfPath: "../../dist/jplayer",
         supplied: "m4a, oga",
@@ -129,8 +172,22 @@
         smoothPlayBar: true,
         keyEnabled: true,
         remainingDuration: true,
-        toggleDuration: true
+        toggleDuration: true,
+
+        ended:function(){
+            var href="/Mobile/play/578-0-{$next}.html"
+            window.location.href=href;
+            
+        }
     });
+
+
+
+
+
+
+
+
 
 
     //]]>

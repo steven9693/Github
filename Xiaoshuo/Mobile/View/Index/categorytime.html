@@ -12,7 +12,7 @@
     <volist name="data" id="item">
     <li>
         <div class=" ui-list-img-vertical">
-            <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><img src="{$item.cover}"></a>
+            <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><div class="bookstatus"><if condition="$item.status eq 1">完结<else/>更新至{$item['count']}集</if><br>{$item['lastupdate']}</div><img src="{$item.cover}"></a>
         </div>
         <div class="ui-list-info ui-border-t">
             <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
@@ -23,6 +23,7 @@
     </li>
     </volist>
 </ul>
+
 
 <div class="ui-row-flex ui-whitespace pagenav">
     <div class="ui-col ui-col"><a href="{:U('categorytime/'.$category_id.'-'.($page?$page-1:0))}" class="pagefront">上一页</a></div>

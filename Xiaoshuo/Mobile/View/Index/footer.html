@@ -12,7 +12,7 @@
     <div class="listarea" id="listarea">
     </div>
     <a href="javascript:void(0)" id="viewbox" onclick="viewlog(event)">浏览记录
-    </a><a href="javascript:void(0)" style="border-left:1px solid #eee">最近播放</a>
+    </a><a href="javascript:void(0)" style="border-left:1px solid #eee" onclick="playlog(event)" id="playlist">最近播放</a>
 </div>
 
 <script>
@@ -38,13 +38,14 @@
                 if(!history){
                     alertmsg('暂无浏览记录');
                 }else{
+                    $('#playlist').removeAttr('rel')
 
                     if($('#viewbox').attr('rel')){
                         $('#viewbox').removeAttr('rel')
                         $('#listarea').hide();
                         $('#menumask').hide();
                     }else{
-                        $('#viewbox').attr('rel',1)
+                        $('#viewbox').attr('rel',1);
                         $('#listarea').show();
                         $('#menumask').show();
                     }
@@ -69,20 +70,72 @@
                     var len=viewlist.length;
                     var height=len*45;
 
-                    $("#listarea").css({'height':height+'px'}).html(htmlstr)
+                    $("#listarea").css({'left':0,'height':height+'px'}).html(htmlstr);
+
 
                 }
             }
 
 
 
+
+
+        function playlog(event){
+            //播放页
+            var playlist = window.localStorage.getItem('playlist')
+
+            if(!playlist){
+                alertmsg('暂无播放记录');
+            }else{
+
+                $('#viewbox').removeAttr('rel')
+
+                if($('#playlist').attr('rel')){
+                    $('#playlist').removeAttr('rel')
+                    $('#listarea').hide();
+                    $('#menumask').hide();
+                }else{
+                    $('#playlist').attr('rel',1);
+                    $('#listarea').css({'left':'50%'}).show();
+                    $('#menumask').show();
+                }
+
+                
+                var playlistarr=playlist.split(',');
+                console.log(playlistarr)
+                var htmlstr=''
+
+                for(var i=0;i<playlistarr.length;i++){
+                    var itemlist=playlistarr[i].split('-');
+                    htmlstr+='<a href="'+itemlist[0]+'-0-'+itemlist[2]+'.html">'+itemlist[1]+'<span style="color:#999;font-style:italic;margin-left:5px">第'+(parseInt(itemlist[2])+1)+'集</span>'+'</a>'
+                }
+
+                var len=playlistarr.length;
+
+                var height=len*45;
+
+                $("#listarea").css({'left':'50%','height':height+'px'}).html(htmlstr);
+
+            }
+        }
+
+
+
+            
+
+
+
     $(function(){
 
 
-        $('#menumask').on('touchstart',function(){
+        $('#menumask').on('touchstart',function(event){
+            // console.log(event)
             $(this).hide();
-            $('#viewbox').removeAttr('rel')
+            $('#viewbox').removeAttr('rel');
+            $('#playlist').removeAttr('rel');
             $('#listarea').hide();
+            event.preventDefault();
+            event.stopPropagation();
         })
     })
 

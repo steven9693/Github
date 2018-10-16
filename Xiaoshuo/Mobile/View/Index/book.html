@@ -10,7 +10,7 @@
             <h4 class="ui-nowrap bookname"><a href="javascript:void(0)">{$book.bookname}</a></h4>
             <p class="ui-nowrap classify">分类：<a href="{:U('categorytime/'.$book['category_id'])}">{$book.category}</a></p>
             <p class="ui-nowrap voice">播音：{$book.bojiang}</p>
-            <p class="ui-nowrap description">最新章节：第{$count}集</p>
+            <p class="ui-nowrap description"><if condition="$book.status eq 1">状态：完结<else/>最新章节：第{$count}集</if></p>
         </div>
     </li>
 </ul>
@@ -49,7 +49,7 @@
     <volist name="rand" id="item">
         <li>
             <div class=" ui-list-img-vertical">
-                <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><div class="bookstatus">更新至{$item['count']}集<br>{$item['lastupdate']}</div><img src="{$item.cover}"></a>
+                <a class="imagearea" href="{:U('book/'.$item['bookid'])}"><div class="bookstatus"><if condition="$item.status eq 1">完结<else/>更新至{$item['count']}集</if><br>{$item['lastupdate']}</div><img src="{$item.cover}"></a>
             </div>
             <div class="ui-list-info ui-border-t">
                 <h4 class="ui-nowrap bookname"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></h4>
@@ -67,9 +67,11 @@
 
 <script>
 
+    var bookid="{$bookid}";
+
     $(function(){
         $('.playbtn').click(function(){
-            window.location.href=palyurl+bookid+'-0-0.html';
+            window.location.href='/Mobile/play/'+bookid+'-0-0.html';
         })
 
         $('#showall').click(function(){
