@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="{$path}/js/jquery-1.11.1.min.js"></script>
+    <script src="{$path}/layui/layui.all.js"></script>
+    <link href="{$path}/layui/css/layui.css" rel="stylesheet">
+    <link href="{$path}/css/css.css" rel="stylesheet">
+</head>
+<body>
+
+<style>
+    .layui-table td{padding:9px 10px;}
+</style>
+<table class="layui-table">
+
+    <thead>
+
+    <tr>
+        <th width="30">全选</th>
+        <th width="400">章节名称</th>
+        <th width="160">添加时间</th>
+        <th width="160">更新时间</th>
+        <th width="40">状态</th>
+        <th width="220" colspan="3">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <volist name="data" id="item">
+        <tr>
+            <td style="text-align: center"><input type="checkbox" style="width:20px;height:20px"></td>
+            <td><a href="javascript:void(0)" id="{$item.chapterid}" class="js-getdetail">{$item.title}</a></td>
+            <td>{$item.ctime}</td>
+            <td>{$item.updatetime}</td>
+            <td>
+                <if condition="$item.isshow eq 0">隐藏</if>
+                <if condition="$item.isshow eq 1">显示</if>
+                <if condition="$item.isshow eq 2">忽略</if>
+            </td>
+            <td><a href="">隐藏</a></td>
+            <td><a href="">显示</a></td>
+            <td><a href="">忽略</a></td>
+        </tr>
+    </volist>
+
+    
+    </tbody>
+</table>
+
+{$page}
+
+<script>
+    $(function(){
+        $('.js-getdetail').click(function(){
+            var id=$(this).attr('id');
+            layer.open({
+                title:'章节内容',
+                type: 2,
+                content: '/index.php?m=Adminwz&c=Index&a=getdetail&id='+id, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                area: ['800px', '450px'],
+                offset: ['20px']
+            });
+        })
+    })
+
+
+</script>
+
+</body>
+</html>

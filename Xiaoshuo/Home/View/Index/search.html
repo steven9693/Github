@@ -13,14 +13,24 @@
 
 
 <body>
-
-<div class="layui-form-item">
-    <label class="layui-form-label">书名：</label>
-    <div class="layui-input-inline" style="width:450px">
-        <input type="text" class="layui-input" id="search" required="" lay-verify="required" />
-    </div>
-    <a href="javascript:void(0)" class="layui-btn js-search">搜索</a>
-</div>
+<table class="layui-table">
+    <tbody>
+    <tr>
+        <td style="width:700px">
+            <div class="layui-form-item" style="margin-bottom: 0">
+                <label class="layui-form-label">书名：</label>
+                <div class="layui-input-inline" style="width:450px">
+                    <input type="text" class="layui-input" id="search" required="" lay-verify="required" />
+                </div>
+                <a href="javascript:void(0)" class="layui-btn js-search">搜索</a>
+            </div>
+        </td>
+        <td>
+            <a href="javascript:void(0)" class="layui-btn layui-btn-radius" id="addbook">添加书本</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 <hr/>
 
 <if condition="$issearch eq 1">
@@ -34,7 +44,23 @@
 
     <tr>
         <th>封面</th>
-        <td><img src="{$book.cover}" style="width:60px;height:80px;display:block"></td>
+        <td><img src="{$book.cover}" style="width:60px;height:80px;display:block" id="bookcover"></td>
+    </tr>
+
+    <tr>
+        <th>设置封面</th>
+        <td>
+
+            <div class="layui-form-item" style="margin-bottom:0">
+                <div class="layui-input-inline">
+                    <input type="text"  placeholder="请输入图片名称" class="layui-input" id="book_{$book.bookid}" data-id="{$book.bookid}" value="{$book.cover}"/>
+                </div>
+                <div class="layui-form-mid layui-word-aux" style="padding:3px 0 0 0!important;margin:0">
+                    <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-savecover" data-id="{$book.bookid}" >保存</a>
+                </div>
+            </div>
+
+        </td>
     </tr>
 
     <tr>
@@ -145,7 +171,8 @@
                 type: 2,
                 title:'音频列表',
                 content:url,
-                area:["1000px","500px"]
+                area:["1000px","500px"],
+                offset: ['20px']
 
             });
         })
@@ -158,7 +185,8 @@
                 type: 2,
                 title:'获取书本信息',
                 content:url,
-                area:["1000px","500px"]
+                area:["1000px","500px"],
+                offset: ['20px']
 
             });
         })
@@ -171,7 +199,8 @@
                 type: 2,
                 title:'获取音频链接',
                 content:url,
-                area:["1000px","500px"]
+                area:["1000px","500px"],
+                offset: ['20px']
 
             });
         })
@@ -246,6 +275,52 @@
                 }
             },'json')
 
+        })
+
+
+
+
+
+        //添加书本按钮
+
+        $('#addbook').click(function(){
+
+            layer.open({
+                type: 2,
+                title:'添加书本',
+                content:'./index.php?m=Home&c=Index&a=addbook',
+                area:["900px","500px"],
+                offset: ['20px']
+
+            });
+        })
+
+
+
+
+
+        //封面设置
+
+        $('.js-savecover').click(function(){
+            var id = $(this).attr('data-id');
+            var cover='';
+            if(id){
+                cover = $("#book_"+id).val();
+                if(cover){
+
+                    $.post(SAVECOVER,{id:id,cover:cover},function(ret){
+                        if(ret.status==1){
+                            layer.msg('保存成功');
+                            $('#book_'+id).val(ret.data.cover);
+                            $('#bookcover').attr('src',ret.data.cover);
+                        }
+                    },'json')
+
+                }else{
+                    layer.msg('输入图片名称');
+                }
+
+            }
         })
 
 

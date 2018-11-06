@@ -2,6 +2,7 @@
 
 namespace Adminwz\Controller;
 use Think\Controller;
+use Pagenav\Pagenav;
 
 header("Content-type: text/html; charset=utf-8");
 class IndexController extends Controller {
@@ -137,7 +138,8 @@ class IndexController extends Controller {
 
     public function booklist(){
 
-        $booklist = M("wz_books")->select();
+        $booklist = M("wz_books")->field('bookid,def_bookid,ctime,updatetime,isshow,bookname,isover,author')->order('bookid desc')->limit(10)->select();
+
 
         for($i=0;$i<count($booklist);$i++){
             $booklist[$i]['ctime']=date('Y-m-d',$booklist[$i]['ctime']);
@@ -213,7 +215,7 @@ class IndexController extends Controller {
 
         $def_bookid=I('post.def_bookid');
         $def_chapterid=I('post.def_chapterid');
-        $url='https://www.xxbiquge.com/'.$def_bookid.'/'.$def_chapterid.'.html';
+        $url='https://www.xbiquge6.com/'.$def_bookid.'/'.$def_chapterid.'.html';
 
         $data = curl($url,false,true,true);
 
@@ -229,6 +231,7 @@ class IndexController extends Controller {
 
         $res['updatetime']=time();
         M('wz_books')->where(array('def_bookid'=>$def_bookid))->save($res);
+        echo $str;
 
     }
 
@@ -277,11 +280,11 @@ class IndexController extends Controller {
 
         $exsit=M('wz_chapter')->field('def_chapterid')->where($map)->select();
 
-        $lasts = M('wz_chapter')->where($map)->limit(1)->order('chapterid desc')->select();
+        $lasts = M('wz_chapter')->where($map)->order('chapterid desc')->limit(1)->select();
+
 
         $this->assign('lasts',$lasts);
 
-        // dump($exsit);
 
         if($exsit){
             $exsitarr = array();
@@ -349,21 +352,118 @@ class IndexController extends Controller {
     //获取章节详情
     public function getcontent(){
 
-        $def_bookid = I('get.def_bookid');
 
-        if($def_bookid){
-            $map['def_bookid']=$def_bookid;
-        }
 
-        $map['content']=array('eq','');
+//        $def_bookid = I('get.def_bookid');
+//
+//        if($def_bookid){
+//            $map['def_bookid']=$def_bookid;
+//        }
+//
+        $map['contempty']=array('eq',0);
 
-        $data = M('wz_chapter')->where($map)->select();
+        $data = M('wz_chapter')->where($map)->order('chapterid')->limit(30)->select();
 
         $this->assign('datastr',json_encode($data));
         $this->assign('data',$data);
         $this->assign('count',count($data));
         $this->assign('path',setpath());
         $this->display();
+    }
+
+
+    function latest(){
+
+        $page=I('get.page')?(I('get.page')-1):0;
+
+        $pagesize=10;
+
+        $data=M('wz_books')->order('updatetime desc')->limit($pagesize*$page,$pagesize)->select();
+
+        $pagenav=new Pagenav();
+
+        $url="./index.php?m=Adminwz&c=Index&a=latest";
+
+        $count=M('wz_books')->order('bookid desc')->count();
+
+
+        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
+
+        if($data){
+            for($i=0;$i<count($data);$i++){
+                $data[$i]['updatetime']=date('Y-m-d H:i:s',$data[$i]['updatetime']);
+            }
+        }
+
+        $this->assign('data',$data);
+        $this->assign('page',$pagehtml);
+        $this->assign('path',setpath());
+        $this->display();
+    }
+
+    function chapterlist(){
+
+        $page=I('get.page')?(I('get.page')-1):0;
+
+        $def_bookid='77_77425';
+
+        $pagesize=100;
+
+        $data=M('wz_chapter')->field('chapterid,title,isshow,ctime,updatetime')->where(array('def_bookid'=>$def_bookid))->limit('100')->select();
+
+        if($data){
+            for($i=0;$i<count($data);$i++){
+                $data[$i]['ctime']=date('Y-m-d H:i:s',$data[$i]['ctime']);
+                if($data[$i]['updatetime']){
+                    $data[$i]['updatetime']=date('Y-m-d H:i:s',$data[$i]['updatetime']);
+                }
+
+            }
+        }
+        $count=M('wz_chapter')->where(array('def_bookid'=>$def_bookid))->count();
+
+        $pagenav=new Pagenav();
+
+        $url="./index.php?m=Adminwz&c=Index&a=chapterlist";
+
+        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
+
+        $this->assign('page',$pagehtml);
+
+        $this->assign('data',$data);
+        $this->assign('path',setpath());
+
+        $this->display();
+    }
+
+    function getdetail(){
+
+        $chapterid=I('get.id');
+
+        $data=M('wz_chapter')->where(array('chapterid'=>$chapterid))->find();
+
+        $this->assign('data',$data);
+
+        $this->assign('path',setpath());
+
+        $this->display();
+    }
+
+
+
+    function showdata(){
+        $bookid=I('get.id');
+        $data = M('wz_chapter')->where(array('def_bookid'=>$bookid))->select();
+        dump($data);
+    }
+
+
+
+
+    function demo(){
+        $data = M('wz_chapter')->where(array('def_bookid'=>'77_77425'))->order('chapterid desc')->limit(10)->select();
+        echo M('wz_chapter')->getLastSql();
+        dump($data);
     }
 
 

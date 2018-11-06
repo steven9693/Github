@@ -84,3 +84,5 @@ var SCORE = DOMAIN+"index.php?m=Home&c=Index&a=score";
 //设置热搜
 
 var SETHOTSEARCH = DOMAIN+"index.php?m=Home&c=Index&a=sethotsearch";
+
+var SETSEARCHBOOK=DOMAIN+"index.php?m=Home&c=Index&a=setsearchbook";

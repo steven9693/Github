@@ -18,8 +18,6 @@
 
 <body>
 
-<a href="javascript:void(0)" class="layui-btn layui-btn-radius" id="addbook">添加书本</a>
-<hr/>
 
 <table class="layui-table">
     <colgroup>
@@ -83,18 +81,6 @@
 
 <script>
     $(function(){
-        $('#addbook').click(function(){
-
-            layer.open({
-                type: 2,
-                title:'添加书本',
-                content:'./index.php?m=Home&c=Index&a=addbook',
-                area:["900px","500px"],
-                offset: ['20px']
-
-            });
-        })
-
 
 
         $('.getvoicelist').click(function(){

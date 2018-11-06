@@ -6,6 +6,7 @@
     <script src="{$path}/js/jquery-1.11.1.min.js"></script>
     <script src="{$path}/layui/layui.all.js"></script>
     <link href="{$path}/layui/css/layui.css" rel="stylesheet">
+    <link href="{$path}/css/css.css" rel="stylesheet">
 </head>
 <body>
 
@@ -15,22 +16,17 @@
     <thead>
 
     <tr>
-        <td><a href="javascript:void(0)" class="layui-btn layui-btn-norma js-getchapter">采集</a></td>
-        <td colspan="2">采集数量：{$count}</td>
-    </tr>
-
-    <tr>
-        <th>原始章节序号</th>
-        <th>书本章节名称</th>
-        <th>设置忽略</th>
+        <th>书本封面</th>
+        <th>书本名称</th>
+        <th>更新时间</th>
     </tr>
     </thead>
     <tbody>
     <volist name="data" id="item">
         <tr>
-            <td>{$item.def_chapterid}</td>
-            <td>{$item.title}</td>
-            <td><a href="javascript:void(0)">忽略</a></td>
+            <td><img src="{$item.cover}" style="width:30px;height:50px" /></td>
+            <td><a href="javascript:void(0)" class="js-chapterlist" rel="{$item.def_bookid}">{$item.bookname}</a></td>
+            <td>{$item.updatetime}</td>
         </tr>
     </volist>
 
@@ -38,6 +34,7 @@
     </tbody>
 </table>
 
+{$page}
 
 <script>
 
@@ -78,6 +75,23 @@
             }
 
         })
+
+
+        $('.js-chapterlist').click(function(){
+            layer.open({
+                title:'小说内容列表',
+                type: 2,
+                content: '/index.php?m=Adminwz&c=Index&a=chapterlist', //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                area: ['1200px', '500px'],
+                offset: ['20px']
+            });
+        })
+
+
+
+
+
+
 
     })
 </script>

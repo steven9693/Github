@@ -356,6 +356,25 @@ class IndexController extends Controller {
             	$recommend[$i]['lastupdate']=date('Y-m-d H:i:s',$recommend[$i]['lastupdate']);
             }
 
+
+
+
+
+            $exist = M('search')->where(array('bookname'=>$book))->find();
+            if($exist){
+                M('search')->where(array('bookname'=>$book))->setInc('count');
+            }else{
+                $searchbook['bookname']=$book;
+                $searchbook['fromtype']=0;
+                $searchbook['ishandle']=0;
+                $searchbook['ctime']=time();
+                M('search')->add($searchbook);
+            }
+
+
+
+
+
             $this->assign('recommend',$recommend);
         }
 

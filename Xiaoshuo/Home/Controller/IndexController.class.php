@@ -119,6 +119,8 @@ class IndexController extends Controller {
             echo json_encode($result);
         }else{
             $id=M('books')->add($data);
+            $data['bookid']=$id;
+            $result['data']=$data;
             $result['status']=1;
             echo json_encode($result);
         }
@@ -646,6 +648,34 @@ class IndexController extends Controller {
 
         M('books')->where(array('bookid'=>$id))->save(array('ishot'=>$val));
 
+        echo json_encode(array('status'=>1));
+    }
+
+
+
+
+    //用户搜索记录
+
+    public function searchlog(){
+
+        $w['ishandle']=0;
+        $data=M('search')->where($w)->limit(10)->order('searchid desc')->select();
+
+        if($data){
+            for($i=0;$i<count($data);$i++){
+                $data[$i]['ctime']=date('Y-m-d H:i:s',$data[$i]['ctime']);
+            }
+        }
+
+        $this->assign('books',$data);
+        $this->assign('version',$this->clearcache());
+        $this->display();
+
+    }
+
+    public function setsearchbook(){
+        $searchid=I('post.searchid');
+        M('search')->where(array('searchid'=>$searchid))->save(array('ishandle'=>1));
         echo json_encode(array('status'=>1));
     }
 

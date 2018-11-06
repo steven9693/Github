@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="./Xiaoshuo/Home/View/js/jquery-1.11.1.min.js"></script>
+    <link href="./Xiaoshuo/Home/View/css/global.css?v={$version}" rel="stylesheet">
+    <link href="./Xiaoshuo/Home/View/layui/css/layui.css" rel="stylesheet">
+    <script src="./Xiaoshuo/Home/View/layui/layui.all.js"></script>
+    <script src="./Xiaoshuo/Home/View/js/urls.js?v={$version}"></script>
+
+</head>
+
+<style>
+
+    .layui-table td, .layui-table th{padding:9px 0px}
+</style>
+
+<body>
+
+
+<table class="layui-table">
+    <colgroup>
+        <col width="200">
+        <col width="200">
+        <col width="200">
+    </colgroup>
+    <thead>
+    <tr>
+        <th>书名</th>
+        <th>查询时间</th>
+        <th>处理</th>
+    </tr>
+    </thead>
+    <tbody>
+
+        <volist name="books" id="book">
+            <tr>
+                <td>{$book.bookname}</td>
+                <td>{$book.ctime}</td>
+                <td><a href="javascript:void(0)" rel="{$book.searchid}" class="layui-btn js-setbook">设置</a></td>
+            </tr>
+        </volist>
+
+    </tbody>
+</table>
+
+
+<script>
+    $(function(){
+        $('.js-setbook').click(function(){
+            var searchid = $(this).attr('rel');
+            var href = window.location.href;
+            $.post(SETSEARCHBOOK,{searchid:searchid},function(ret){
+                if(ret.status==1){
+                    window.location.href=href;
+                }
+            },'json')
+        })
+
+
+    })
+</script>
+
+
+</body>
+</html>

@@ -509,6 +509,21 @@ class PcController extends Controller {
         $map['isshow']=1;
         $data=M('books')->where($map)->limit(10)->select();
 
+        if(!$data){ //找不到这本书,写入记录
+
+            $exist = M('search')->where(array('bookname'=>$bookname))->find();
+            if($exist){
+                M('search')->where(array('bookname'=>$bookname))->setInc('count');
+            }else{
+                $searchbook['bookname']=$bookname;
+                $searchbook['fromtype']=0;
+                $searchbook['ishandle']=0;
+                $searchbook['ctime']=time();
+                M('search')->add($searchbook);
+            }
+
+        }
+
         $len = count($data)? count($data) : 0;
         $this->assign('len',$len);
 

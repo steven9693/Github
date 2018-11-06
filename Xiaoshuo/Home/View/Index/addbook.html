@@ -72,10 +72,13 @@
         //监听提交
         form.on('submit(formDemo)', function(data){
 
-            var href=window.parent.window.location.href;
+            // var href=window.parent.window.location.href;
+            var href='/index.php?m=Home&c=Index&a=search'
+
             console.log(data.field)
             $.post(SETBOOK,data.field,function(data){
                 if(data.status==1){
+                    href+='&id='+data.data.bookid;
                     window.parent.location.href=href;
                 }else{
                     layer.alert('书本已经添加过了');
