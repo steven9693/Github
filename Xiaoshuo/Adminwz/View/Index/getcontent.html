@@ -43,14 +43,39 @@
 
     var data = '{$datastr}' ?  JSON.parse('{$datastr}') : '';
     var interval;
+    var run='{$run}';
+    var isfinish='{$isfinish}';
+
     console.log(data)
 
-    function getchapter(){
-        var item = data.shift();
-        console.log(item);
-        $.post('./index.php?m=Adminwz&c=Index&a=getdetial',
-            {def_bookid:item.def_bookid,def_chapterid:item.def_chapterid},
-            function(){},'json')
+
+
+    function getchapter() {
+
+        layer.load();
+        setInterval(function(){
+
+            var item = data.shift();
+
+            console.log(item)
+            console.log(data.length)
+
+            if (item) {
+                $.post('./index.php?m=Adminwz&c=Index&a=getdetial',
+                    {def_bookid: item.def_bookid, def_chapterid: item.def_chapterid},
+                    function (res) {
+                        console.log(res)
+                    }, 'json')
+            }else{
+                var href='./index.php?m=Adminwz&c=Index&a=getcontent&run=1';
+                window.location.href=href;
+            }
+        },1000)
+
+    }
+
+    if(run==1&&(!isfinish)){
+        getchapter();
     }
 
 
@@ -59,24 +84,7 @@
     $(function(){
 
         $('.js-getchapter').click(function(){
-            layer.load();
-            if(data.length>0){
-                interval = setInterval(function(){
-                    if(data.length==0){
-                        clearInterval(interval);
-                        layer.open({
-                            title: '采集完成'
-                            ,content: '已经采集完所有数据'
-                        });
-
-                    }else{
-                        getchapter()
-                    }
-
-                },1000)
-
-            }
-
+            getchapter();
         })
 
     })

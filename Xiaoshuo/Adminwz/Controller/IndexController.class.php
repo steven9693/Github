@@ -226,7 +226,12 @@ class IndexController extends Controller {
 
         $str = str_replace("&nbsp;" , " " , $arr[1][0]) ;
 
+        $time=time();
+
         $content['content']=$str;
+        $content['contempty']=1;
+        $content['updatetime']=$time;
+
         M('wz_chapter')->where($map)->save($content);
 
         $res['updatetime']=time();
@@ -352,7 +357,7 @@ class IndexController extends Controller {
     //获取章节详情
     public function getcontent(){
 
-
+        $run=I('get.run'); //判读是否继续
 
 //        $def_bookid = I('get.def_bookid');
 //
@@ -362,7 +367,13 @@ class IndexController extends Controller {
 //
         $map['contempty']=array('eq',0);
 
-        $data = M('wz_chapter')->where($map)->order('chapterid')->limit(30)->select();
+        $data = M('wz_chapter')->where($map)->order('chapterid')->limit(10)->select();
+
+        $this->assign('run',$run);
+
+        if(!$data){
+            $this->assign('isfinish',1);
+        }
 
         $this->assign('datastr',json_encode($data));
         $this->assign('data',$data);
