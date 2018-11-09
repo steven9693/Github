@@ -78,10 +78,11 @@
 
 
         $('.js-chapterlist').click(function(){
+            var def_bookid=$(this).attr('rel');
             layer.open({
                 title:'小说内容列表',
                 type: 2,
-                content: '/index.php?m=Adminwz&c=Index&a=chapterlist', //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                content: '/index.php?m=Adminwz&c=Index&a=chapterlist'+'&def_bookid='+def_bookid, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
                 area: ['1200px', '500px'],
                 offset: ['20px']
             });

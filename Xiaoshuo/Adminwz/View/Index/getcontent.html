@@ -22,7 +22,6 @@
     <tr>
         <th>原始章节序号</th>
         <th>书本章节名称</th>
-        <th>设置忽略</th>
     </tr>
     </thead>
     <tbody>
@@ -30,7 +29,6 @@
         <tr>
             <td>{$item.def_chapterid}</td>
             <td>{$item.title}</td>
-            <td><a href="javascript:void(0)">忽略</a></td>
         </tr>
     </volist>
 
@@ -61,7 +59,7 @@
             console.log(data.length)
 
             if (item) {
-                $.post('./index.php?m=Adminwz&c=Index&a=getdetial',
+                $.post('./index.php?m=Adminwz&c=Index&a=catchcontent',
                     {def_bookid: item.def_bookid, def_chapterid: item.def_chapterid},
                     function (res) {
                         console.log(res)
@@ -82,7 +80,6 @@
 
 
     $(function(){
-
         $('.js-getchapter').click(function(){
             getchapter();
         })

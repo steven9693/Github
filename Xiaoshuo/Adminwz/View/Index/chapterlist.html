@@ -29,21 +29,26 @@
     <tbody>
     <volist name="data" id="item">
         <tr>
-            <td style="text-align: center"><input type="checkbox" style="width:20px;height:20px"></td>
+            <td style="text-align: center"><if condition="$item.isshow eq 0"><input type="checkbox" style="width:20px;height:20px" value="{$item.chapterid}" class="js-checkbox"></if></td>
             <td><a href="javascript:void(0)" id="{$item.chapterid}" class="js-getdetail">{$item.title}</a></td>
             <td>{$item.ctime}</td>
             <td>{$item.updatetime}</td>
             <td>
-                <if condition="$item.isshow eq 0">隐藏</if>
-                <if condition="$item.isshow eq 1">显示</if>
-                <if condition="$item.isshow eq 2">忽略</if>
+                <if condition="$item.isshow eq 0"><a href="javascript:void(0)" class="layui-btn layui-btn-sm">隐藏</a></if>
+                <if condition="$item.isshow eq 1"><a href="javascript:void(0)" class="layui-btn layui-btn-normal layui-btn-sm">显示</a></if>
+                <if condition="$item.isshow eq 2"><a href="javascript:void(0)" class="layui-btn layui-btn-danger layui-btn-sm">忽略</a></if>
             </td>
-            <td><a href="">隐藏</a></td>
-            <td><a href="">显示</a></td>
-            <td><a href="">忽略</a></td>
+            <td><a href="javascript:void(0)" data-chapterid="{$item.chapterid}" rel="0" class="layui-btn layui-btn-sm js-isshow">隐藏</a></td>
+            <td><a href="javascript:void(0)" data-chapterid="{$item.chapterid}" rel="1" class="layui-btn layui-btn-normal layui-btn-sm js-isshow">显示</a></td>
+            <td><a href="javascript:void(0)" data-chapterid="{$item.chapterid}" rel="2" class="layui-btn layui-btn-danger layui-btn-sm js-isshow">忽略</a></td>
         </tr>
     </volist>
-
+    <tr>
+        <td colspan="8">
+            <a href="javascript:void(0)" class="layui-btn" id="selectall">全选</a>
+            <a href="javascript:void(0)" class="layui-btn" id="saveall">保存</a>
+        </td>
+    </tr>
     
     </tbody>
 </table>
@@ -61,6 +66,56 @@
                 area: ['800px', '450px'],
                 offset: ['20px']
             });
+        })
+        
+        $('.js-isshow').click(function(){
+            var chapterid=$(this).attr('data-chapterid');
+            var isshow=$(this).attr('rel');
+            var href=window.location.href
+            $.post('./index.php?m=Adminwz&c=Index&a=setchapter',{chapterid:chapterid,isshow:isshow},function(res){
+                if(res.status==1){
+                    layer.msg('修改成功', function(){
+                        window.location.href=href;
+                    })
+                    
+                }
+            },'json')
+        })
+        
+        $(".js-checkbox").click(function(){
+            if($(this).attr("checked")){
+                $(this).removeAttr("checked");
+            }else{
+                $(this).attr("checked",'true');
+            }
+            
+        })
+        
+        $('#selectall').click(function(){
+           $(".js-checkbox").attr("checked",'true');//全选 
+        })
+        
+        $('#saveall').click(function(){
+            var chapter=[];
+            var href=window.location.href;
+           $(".js-checkbox").each(function(){
+               if($(this).attr('checked')){
+                   chapter.push($(this).val())
+               }
+                
+           })
+           console.log(chapter);
+           if(chapter.length>0){
+               $.post('./index.php?m=Adminwz&c=Index&a=savedata',{chapter:chapter.join(',')},function(res){
+                   if(res.status==1){
+                       layer.msg('保存成功',function(){
+                           window.location.href=href
+                       })
+                   }
+               },'json')
+           }else{
+               layer.msg('暂无选中数据')
+           }
         })
     })
 

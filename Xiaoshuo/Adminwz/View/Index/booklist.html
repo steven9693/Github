@@ -9,16 +9,22 @@
 </head>
 <body>
 
+    <style>
+        .layui-table td, .layui-table th{
+            padding:9px 5px
+        }
+    </style>
 
 <table class="layui-table">
 
     <thead>
     <tr>
         <th>书本名称</th>
-        <th>封面图片</th>
+        <th>封面</th>
+        <th style="width:240px">保存封面</th>
         <th>设置详情</th>
         <th>显示/隐藏</th>
-        <th>采集章节标题</th>
+        <th>章节标题</th>
         <th>作者</th>
         <th>是否完结</th>
         <th>添加时间</th>
@@ -29,8 +35,14 @@
     <tbody>
     <volist name="booklist" id="item">
     <tr>
-        <td><a href="javascript:void(0)" class="js-getcontent" id="{$item.def_bookid}">{$item.bookname}</a></td>
-        <td><img src="{$item.cover}" style="width:60px;height:90px"></td>
+        <td>{$item.bookname}</td>
+        <td><img src="{$item.cover}" style="width:30px;height:40px"></td>
+        <td>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" id="bookid_{$item.bookid}">
+            </div>
+            <a href="javascript:void(0)" class="layui-btn layui-btn-normal layui-btn-sm js-savecover" rel="{$item.bookid}">保存</a>
+        </td>
         <td><a href="javascript:void(0)" class="js-setdetail layui-btn layui-btn-sm" data-bookid="{$item.bookid}">设置详情</a></td>
         <td>
             <if condition="$item.isshow eq 1">
@@ -39,7 +51,7 @@
                 <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-show" rel="1" data-bookid="{$item.bookid}">隐藏</a>
             </if>
         </td>
-        <td><a href="javascript:void(0)" id="{$item.bookid}" class="js-caiji">采集</a></td>
+        <td><a href="javascript:void(0)" id="{$item.bookid}" class="js-caiji layui-btn layui-btn-normal layui-btn-sm">采集</a></td>
         <td>{$item.author}</td>
         <td>
             <if condition="$item.isover eq 1">
@@ -83,17 +95,17 @@
             });
         })
 
-        $('.js-getcontent').click(function(){
-            var def_bookid=$(this).attr('id');
-            // console.log(def_bookid)
-            layer.open({
-                type: 2,
-                title:'采集书本章节内容',
-                content: './index.php?m=Adminwz&c=Index&a=getcontent&def_bookid='+def_bookid,
-                area: ['1000px', '500px'],
-                offset: '20px'
-            });
-        })
+//        $('.js-getcontent').click(function(){
+//            var def_bookid=$(this).attr('id');
+//            // console.log(def_bookid)
+//            layer.open({
+//                type: 2,
+//                title:'采集书本章节内容',
+//                content: './index.php?m=Adminwz&c=Index&a=getcontent&def_bookid='+def_bookid,
+//                area: ['1000px', '500px'],
+//                offset: '20px'
+//            });
+//        })
 
 
 
@@ -141,8 +153,15 @@
         })
 
 
-
-
+        //设置封面图片名称
+        
+        $('.js-savecover').click(function(){
+            var bookid=$(this).attr('rel');
+            var cover=$('#bookid_'+bookid).val();
+            $.post('./index.php?m=Adminwz&c=Index&a=savecover',{bookid:bookid,cover:cover},function(res){
+                
+            },'json')
+        })
 
 
 
