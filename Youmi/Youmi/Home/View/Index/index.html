@@ -20,7 +20,7 @@
                     </a>
                     <div class="wrapbox-right">
                         <div class="wrapbox-right-t clearfix">
-                            <a href="./index.php?m=Youmi&c=Index&a=book&bookid={$item.bookid}" class="bookname" target="_blank">{$item.bookname}</a>
+                            <a href="./index.php?m=Home&c=Index&a=book&bookid={$item.bookid}" class="bookname" target="_blank">{$item.bookname}</a>
                             <span class="author">{$item.author}</span>
                         </div>
                         <div class="wrapbox-right-m">{$item.description}</div>
@@ -36,7 +36,7 @@
                     <volist name="jingdian" id="item">
                     <li>
                         <span class="right-cate">[{$item.category}]
-                        </span><a href="./index.php?m=Youmi&c=Index&a=book&bookid={$item.bookid}" class="right-bookname">{$item.bookname}
+                        </span><a href="./index.php?m=Home&c=Index&a=book&bookid={$item.bookid}" class="right-bookname">{$item.bookname}
                         </a><span class="right-author">{$item.author}</span>
                     </li>
                     </volist>
@@ -58,7 +58,7 @@
                             <img src="{$book.cover}">
                         </a>
                         <div class="bookinfo">
-                            <a href="/index.php?m=Youmi&c=Index&a=book&bookid={$book.bookid}" class="booktitle">{$book.bookname}</a>
+                            <a href="/index.php?m=Home&c=Index&a=book&bookid={$book.bookid}" class="booktitle">{$book.bookname}</a>
                             <p class="bookmsg">{$book.description}</p>
                         </div>
                     </div>
@@ -67,8 +67,8 @@
 
                 <div class="category-list">
 
-                    <span class="c-listarea-l"><a  href="./index.php?m=Youmi&c=Index&a=book&bookid={$book.bookid}" class="c-bookname">{$book.bookname}
-                    </a><a href="./index.php?m=Youmi&c=Index&a=chapter&chapterid={$book.chapterid}" class="book-latest">&nbsp;&nbsp;{$book.chaptertitle}</a>
+                    <span class="c-listarea-l"><a  href="./index.php?m=Home&c=Index&a=book&bookid={$book.bookid}" class="c-bookname">{$book.bookname}
+                    </a><a href="./index.php?m=Home&c=Index&a=chapter&chapterid={$book.chapterid}" class="book-latest">&nbsp;&nbsp;{$book.chaptertitle}</a>
                     </span><span class="c-listarea-r">{$book.author}</span>
 
                 </div>
@@ -88,8 +88,8 @@
                     <volist name="latestupdate" id="latest">
                     <li>
                         <span class="update-cate">[{$latest.category}]
-                        </span><a href="./index.php?m=Youmi&c=Index&a=book&bookid={$latest.bookid}" class="update-bookname">{$latest.bookname}
-                        </a><a href="./index.php?m=Youmi&c=Index&a=chapter&chapterid={$latest.chapter_chapterid}" class="update-chaptername">{$latest.chapter_title}
+                        </span><a href="./index.php?m=Home&c=Index&a=book&bookid={$latest.bookid}" class="update-bookname">{$latest.bookname}
+                        </a><a href="./index.php?m=Home&c=Index&a=chapter&chapterid={$latest.chapter_chapterid}" class="update-chaptername">{$latest.chapter_title}
                         </a><span class="update-bookauthor">{$latest.author}
                         </span><span class="update-date">{$latest.updatetime}</span>
                     </li>
@@ -102,7 +102,7 @@
                 <ul class="right-list" style="margin-top:0">
                     <volist name="latestadd" id="item">
                     <li>
-                        <a href="./index.php?m=Youmi&c=Index&a=book&bookid={$item.bookid}" class="right-bookname">{$item.bookname}
+                        <a href="./index.php?m=Home&c=Index&a=book&bookid={$item.bookid}" class="right-bookname">{$item.bookname}
                         </a><a href="javascript:void(0)" class="right-author">{$item.author}</a>
                     </li>
                     </volist>

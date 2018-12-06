@@ -1,4 +1,4 @@
-<include file="./Xiaoshuo/Youmi/View/Index/header.html" />
+<include file="./Youmi/Home/View/Index/header.html" />
 
 
 <body>
@@ -15,15 +15,15 @@
     </div>
 
     <div class="content">
-        <div class="breadcrumb"><a href="">悠米小说</a> > <a href="">武侠仙侠</a> > <a href="./index.php?m=Youmi&c=Index&a=book&bookid={$chapter.bookid}">{$book.bookname}</a> > {$chapter.title}</div>
+        <div class="breadcrumb"><a href="">悠米小说</a> > <a href="">武侠仙侠</a> > <a href="./index.php?m=Home&c=Index&a=book&bookid={$chapter.bookid}">{$book.bookname}</a> > {$chapter.title}</div>
         <div class="capter">
             <h1 class="chapter-title">{$chapter.title}</h1>
             <div class="chapter-nav">
                 <if condition="$noprep neq 1">
-                <a href="./index.php?m=Youmi&c=Index&a=chapter&chapterid={$prep.chapterid}">上一章</a><span>←
-                </span></if> <a href="./index.php?m=Youmi&c=Index&a=book&bookid={$chapter.bookid}">章节列表
+                <a href="./index.php?m=Home&c=Index&a=chapter&chapterid={$prep.chapterid}">上一章</a><span>←
+                </span></if> <a href="./index.php?m=Home&c=Index&a=book&bookid={$chapter.bookid}">章节列表
                 </a><if condition="$nonext neq 1"><span>→
-            </span><a href="./index.php?m=Youmi&c=Index&a=chapter&chapterid={$next.chapterid}">下一章</a></if>
+            </span><a href="./index.php?m=Home&c=Index&a=chapter&chapterid={$next.chapterid}">下一章</a></if>
             </div>
         </div>
 
@@ -43,7 +43,7 @@
 
         <div class="chapter-nav" style="margin-top:35px;padding-top:20px;border-top:1px solid #ddd">
             <a href="">上一章</a><span>←
-                </span> <a href="./index.php?m=Youmi&c=Index&a=book&bookid={$chapter.bookid}">章节列表</a><span>→
+                </span> <a href="./index.php?m=Home&c=Index&a=book&bookid={$chapter.bookid}">章节列表</a><span>→
                 </span><a href="">下一章</a>
         </div>
 
