@@ -1,0 +1,21 @@
+    <div class="header">
+        <div class="headertop"></div>
+        <div class="headermain">
+            <div class="logo"></div>
+            <div class="headermainright">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline" style="width:580px">
+                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                    </div><div class="layui-input-inline" style="width:100px;margin-right:0">
+                        <button class="layui-btn layui-btn-normal" style="width:100%">搜索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="headernav layui-bg-cyan">
+            <a href="/index.php?m=Youmi&c=Index&a=index">首页</a>
+            <volist name="category" id="item">
+                <a href="/index.php?m=Youmi&c=Index&a=category&cid={$item.cid}">{$item.category}</a>
+            </volist>
+        </div>
+    </div>

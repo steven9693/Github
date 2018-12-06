@@ -47,26 +47,34 @@ class TestController extends Controller {
 
 
 
-    public function curl($url)
+    public function curl()
     {
         $ch = curl_init();
+        
+        $url="http://www.ting56.com/video/17306-0-3.html";
 
 // 2. 设置选项
-        $cookie='adv=1; bdshare_firstime=1526351137824; UM_distinctid=163b4d67aac361-0610dc12b297eb-39614807-100200-163b4d67aad483; Hm_lvt_f48885d046488759be0f43cb09d34403=1527746887,1528094532,1528875853,1529376592; adv=2; CNZZDATA3055531=cnzz_eid%3D539051506-1527745097-http%253A%252F%252Fwww.ting56.com%252F%26ntime%3D1529385276; cscpvcouplet8776_fidx=1; Hm_lpvt_f48885d046488759be0f43cb09d34403=1529388734';
+//        $cookie='adv=1; bdshare_firstime=1526351137824; UM_distinctid=163b4d67aac361-0610dc12b297eb-39614807-100200-163b4d67aad483; Hm_lvt_f48885d046488759be0f43cb09d34403=1527746887,1528094532,1528875853,1529376592; adv=2; CNZZDATA3055531=cnzz_eid%3D539051506-1527745097-http%253A%252F%252Fwww.ting56.com%252F%26ntime%3D1529385276; cscpvcouplet8776_fidx=1; Hm_lpvt_f48885d046488759be0f43cb09d34403=1529388734';
         curl_setopt ( $ch, CURLOPT_COOKIE,$cookie);
         curl_setopt($ch, CURLOPT_URL, $url);  // 设置要抓取的页面地址
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);              // 抓取结果直接返回（如果为0，则直接输出内容到页面）
-        curl_setopt($ch, CURLOPT_HEADER, 0);                      // 不需要页面的HTTP头
+        curl_setopt($ch, CURLOPT_HEADER, true);                      // 不需要页面的HTTP头
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 
 // 3. 执行并获取HTML文档内容，可用echo输出内容
         $output = curl_exec($ch);
 
 // 4. 释放curl句柄
         curl_close($ch);
+        
+        echo $output;
 
-        return  $output;
+//        return  $output;
     }
+    
+    
 
 
 

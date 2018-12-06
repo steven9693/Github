@@ -1,0 +1,68 @@
+<include file="./Xiaoshuo/Youmi/View/Index/header.html" />
+
+
+<body>
+
+<div class="wrapper">
+    
+    <include file="./Xiaoshuo/Youmi/View/Index/nav.html" />
+
+    <div class="content">
+        <div class="categorylist clearfix">
+            <volist name="data" id="item">
+            <div class="categorylist-box">
+                <a href="" class="category-image"><img src="{$item.cover}" /></a>
+                <div class="category-rightbox">
+                    <div class="clearfix category-rightbox-t">
+                        <a href="#" class="category-bookname">{$item.bookname}</a>
+                        <span class="cateb-a">{$item.author}</span>
+                    </div>
+                    <div class="category-desc">{$item.description}</div>
+                </div>
+            </div>
+            </volist>
+        </div>
+        <div class="contentfoot clearfix" style="margin:0">
+            <div class="contentfoot-left  clearfix">
+                <h2 class="right-title">最近更新小说列表</h2>
+                <ul class="updatalist">
+                    <volist name="latestupdate" id="item">
+                    <li>
+                        <span class="update-cate">{$item.category}
+                        </span><a href="./index.php?m=Youmi&c=Index&a=book&bookid={$item.bookid}" class="update-bookname">{$item.bookname}
+                        </a><a href="./index.php?m=Youmi&c=Index&a=chapter&chapterid={$item.chapter_chapterid}" class="update-chaptername">{$item.chapter_title}
+                        </a><span class="update-bookauthor">{$item.author}
+                        </span><span class="update-date">{$item.updatetime}</span>
+                    </li>
+                    </volist>
+                </ul>
+            </div>
+            <div class="contentfoot-right">
+                <h2 class="right-title">最新入库小说</h2>
+
+                <ul class="right-list" style="margin-top:0">
+                    <volist name="latestadd" id="item">
+                    <li>
+                        <a href="./index.php?m=Youmi&c=Index&a=book&bookid={$item.bookid}" class="right-bookname">{$item.bookname}
+                        </a><a href="javascript:void(0)" class="right-author">{$item.author}</a>
+                    </li>
+                    </volist>
+                </ul>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="footer">
+        <p>本站所有小说为转载作品，所有章节均由网友上传，转载至本站只是为了宣传本书让更多读者欣赏。</p>
+        <p>Copyright © 2018 悠米小说 All Rights Reserved.</p>
+    </div>
+</div>
+
+
+</body>
+</html>
