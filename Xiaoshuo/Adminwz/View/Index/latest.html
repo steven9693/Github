@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>最新更新书本</title>
     <script src="{$path}/js/jquery-1.11.1.min.js"></script>
     <script src="{$path}/layui/layui.all.js"></script>
     <link href="{$path}/layui/css/layui.css" rel="stylesheet">
@@ -25,7 +25,7 @@
     <volist name="data" id="item">
         <tr>
             <td><img src="{$item.cover}" style="width:30px;height:50px" /></td>
-            <td><a href="javascript:void(0)" class="js-chapterlist" rel="{$item.def_bookid}">{$item.bookname}</a></td>
+            <td><a href="./index.php?m=Adminwz&c=Index&a=chapterlist&def_bookid={$item.def_bookid}" class="js-chapterlist" rel="{$item.def_bookid}" target="_blank">{$item.bookname}</a></td>
             <td>{$item.updatetime}</td>
         </tr>
     </volist>
@@ -77,16 +77,16 @@
         })
 
 
-        $('.js-chapterlist').click(function(){
-            var def_bookid=$(this).attr('rel');
-            layer.open({
-                title:'小说内容列表',
-                type: 2,
-                content: '/index.php?m=Adminwz&c=Index&a=chapterlist'+'&def_bookid='+def_bookid, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
-                area: ['1200px', '500px'],
-                offset: ['20px']
-            });
-        })
+        // $('.js-chapterlist').click(function(){
+        //     var def_bookid=$(this).attr('rel');
+        //     layer.open({
+        //         title:'小说内容列表',
+        //         type: 2,
+        //         content: '/index.php?m=Adminwz&c=Index&a=chapterlist'+'&def_bookid='+def_bookid, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+        //         area: ['1000px', '500px'],
+        //         offset: ['20px']
+        //     });
+        // })
 
 
 

@@ -1,0 +1,62 @@
+<include file="./Xiaoshuo/Youmi/View/Index/header.html" />
+
+
+<body>
+
+<div class="wrapper">
+    <div class="header">
+        <div class="headertop"></div>
+        <div class="headermain"></div>
+        <div class="headernav layui-bg-cyan">
+            <volist name="category" id="item">
+                <a href="">{$item.category}</a>
+            </volist>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="breadcrumb"><a href="">悠米小说</a> > <a href="">武侠仙侠</a> > <a href="./index.php?m=Youmi&c=Index&a=book&bookid={$chapter.bookid}">{$book.bookname}</a> > {$chapter.title}</div>
+        <div class="capter">
+            <h1 class="chapter-title">{$chapter.title}</h1>
+            <div class="chapter-nav">
+                <if condition="$noprep neq 1">
+                <a href="./index.php?m=Youmi&c=Index&a=chapter&chapterid={$prep.chapterid}">上一章</a><span>←
+                </span></if> <a href="./index.php?m=Youmi&c=Index&a=book&bookid={$chapter.bookid}">章节列表
+                </a><if condition="$nonext neq 1"><span>→
+            </span><a href="./index.php?m=Youmi&c=Index&a=chapter&chapterid={$next.chapterid}">下一章</a></if>
+            </div>
+        </div>
+
+        <div class="chapter-re">
+            推荐阅读：<a href="">仙界篇外传一</a>
+            <a href="">仙界篇外传一</a>
+            <a href="">仙界篇外传一</a>
+            <a href="">仙界篇外传一</a>
+            <a href="">仙界篇外传一</a>
+        </div>
+
+        <div class="capter-main">
+
+            {$chapter.content}
+
+        </div>
+
+        <div class="chapter-nav" style="margin-top:35px;padding-top:20px;border-top:1px solid #ddd">
+            <a href="">上一章</a><span>←
+                </span> <a href="./index.php?m=Youmi&c=Index&a=book&bookid={$chapter.bookid}">章节列表</a><span>→
+                </span><a href="">下一章</a>
+        </div>
+
+
+    </div>
+
+
+    <div class="footer">
+        <p>本站所有小说为转载作品，所有章节均由网友上传，转载至本站只是为了宣传本书让更多读者欣赏。</p>
+        <p>Copyright © 2018 悠米小说 All Rights Reserved.</p>
+    </div>
+</div>
+
+
+</body>
+</html>

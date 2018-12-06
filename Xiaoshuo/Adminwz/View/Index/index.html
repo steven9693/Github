@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>文字小说管理后台</title>
     <script src="{$path}/js/jquery-1.11.1.min.js"></script>
     <script src="{$path}/layui/layui.all.js"></script>
     <link href="{$path}/layui/css/layui.css" rel="stylesheet">
@@ -48,11 +48,11 @@
                 <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">管理菜单</a>
                     <dl class="layui-nav-child" id="menu">
-                        <dd><a href="javascript:void(0);" rel="./index.php?m=Adminwz&c=Index&a=category">添加分类</a></dd>
-                        <dd><a href="javascript:void(0);" rel="./index.php?m=Adminwz&c=Index&a=addbook">添加书本</a></dd>
-                        <dd><a href="javascript:void(0);" rel="./index.php?m=Adminwz&c=Index&a=booklist">书本管理</a></dd>
-                        <dd><a href="javascript:void(0);" rel="./index.php?m=Adminwz&c=Index&a=latest">最新更新书本</a></dd>
-                        <dd><a href="javascript:void(0);" rel="./index.php?m=Adminwz&c=Index&a=getcontent">挂机采集文章内容</a></dd>
+                        <dd><a href="javascript:void(0);" rel="./index.php?m=Adminwz&c=Index&a=category" class="js-open">添加分类</a></dd>
+                        <dd><a href="./index.php?m=Adminwz&c=Index&a=addbook" target="_blank">添加书本</a></dd>
+                        <dd><a href="./index.php?m=Adminwz&c=Index&a=booklist" target="_blank">书本管理</a></dd>
+                        <dd><a href="./index.php?m=Adminwz&c=Index&a=latest" target="_blank">最新更新书本</a></dd>
+                        <dd><a href="./index.php?m=Adminwz&c=Index&a=getcontent" target="_blank">挂机采集文章内容</a></dd>
                     </dl>
                 </li>
                 <!--<li class="layui-nav-item">-->
@@ -93,7 +93,7 @@
 
 
     $(function(){
-        $('#menu a').click(function(){
+        $('.js-open').click(function(){
             var href = $(this).attr('rel');
             $('#framewind').attr('src',href);
         })

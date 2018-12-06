@@ -68,20 +68,24 @@
                 layer.msg('暂无数据保存');
                 return;
             }
+            var href=window.parent.window.location.href;
             var index = layer.load()
             $.post('./index.php?m=Adminwz&c=Index&a=savelist',{lists:lists,bookid:bookid},function(res){
                 if(res.status==1){
                     layer.close(index);
-                    layer.open({
-                        title:'温馨提示',
-                        content: '保存成功',
-                        // yes: function(index){
-                        //     console.log(index)
-                        //     //do something
-                        //     layer.close(index); //如果设定了yes回调，需进行手工关闭
-                        //     window.location.href=href;
-                        // }
-                    });
+                    layer.msg('保存成功',function(){
+                        window.parent.window.location.href=href;
+                    })
+                    // layer.open({
+                    //     title:'温馨提示',
+                    //     content: '保存成功',
+                    //     // yes: function(index){
+                    //     //     console.log(index)
+                    //     //     //do something
+                    //     //     layer.close(index); //如果设定了yes回调，需进行手工关闭
+                    //     //     window.location.href=href;
+                    //     // }
+                    // });
                 }
             },'json')
         })

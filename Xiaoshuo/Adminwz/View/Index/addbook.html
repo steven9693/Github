@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>添加书本</title>
     <script src="{$path}/js/jquery-1.11.1.min.js"></script>
     <script src="{$path}/layui/layui.all.js"></script>
     <link href="{$path}/layui/css/layui.css" rel="stylesheet">
 </head>
-<body>
+<body  style="padding:40px 0 0 40px">
 
 
 <div class="layui-input-inline" style="width:350px">
@@ -40,7 +40,7 @@
 
         <tr>
             <th>封面图片</th>
-            <td><img src="{$book.cover}" style="width:80px;height:120px"/></td>
+            <td><img src="{$book.cover}" style="width:80px;height:120px" id="id_{$book.bookid}"/></td>
         </tr>
 
         <tr>
@@ -83,6 +83,11 @@
         </tr>
 
         <tr>
+            <th>采集章节标题</th>
+            <td><a href="javascript:void(0)" class="layui-btn layui-btn-sm js-gettitle" data-bookid="{$book.bookid}">采集</a></td>
+        </tr>
+
+        <tr>
             <th>设置完结</th>
             <td>
                 <if condition="$book.isover eq 1">
@@ -117,7 +122,22 @@
                 type: 2,
                 title:'添加书本',
                 content: './index.php?m=Adminwz&c=Index&a=addbookinfo',
-                area: ['1000px', '500px'],
+                area: ['1400px', '750px'],
+                offset: '20px'
+            });
+        })
+
+
+        //采集书本标题
+
+        $('.js-gettitle').click(function(){
+            var id=$(this).attr('data-bookid');
+            var href="./index.php?m=Adminwz&c=Index&a=lists&id="+id
+            layer.open({
+                type: 2,
+                title:'添加章节标题',
+                content: href,
+                area: ['1400px', '750px'],
                 offset: '20px'
             });
         })
@@ -136,6 +156,8 @@
                 console.log(res)
                 if(res.status==1){
                     window.location.href=href+'&bookid='+res.data.bookid
+                }else{
+                    layer.msg('暂未添加该书本');
                 }
             },'json')
         })
@@ -173,10 +195,11 @@
         $('.js-picture').click(function(){
             var picname=$('#picname').val();
             var bookid=$(this).attr('data-bookid');
-            var href=window.location.href;
-            $.post('./index.php?m=Adminwz&c=Index&a=setpicture',{picname:picname,bookid:bookid},function(res){
+
+            $.post('./index.php?m=Adminwz&c=Index&a=savecover',{cover:picname,bookid:bookid},function(res){
+                console.log(res)
                 if(res.status==1){
-                    window.location.href=href;
+                    $('#id_'+bookid).attr('src',res.data.cover)
                 }
             },'json')
         })

@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>书本管理</title>
     <script src="{$path}/js/jquery-1.11.1.min.js"></script>
     <script src="{$path}/layui/layui.all.js"></script>
     <link href="{$path}/layui/css/layui.css" rel="stylesheet">
+    <link href="{$path}/css/css.css" rel="stylesheet">
 </head>
 <body>
 
@@ -27,8 +28,9 @@
         <th>章节标题</th>
         <th>作者</th>
         <th>是否完结</th>
-        <th>添加时间</th>
-        <th>最近更新</th>
+        <!--<th>添加时间</th>-->
+        <!--<th>最近更新</th>-->
+        <th>原始链接</th>
         <th>章节数量</th>
     </tr>
     </thead>
@@ -36,10 +38,10 @@
     <volist name="booklist" id="item">
     <tr>
         <td>{$item.bookname}</td>
-        <td><img src="{$item.cover}" style="width:30px;height:40px"></td>
+        <td><img src="{$item.cover}" style="width:30px;height:40px" id="img_{$item.bookid}"></td>
         <td>
             <div class="layui-input-inline">
-                <input type="text" class="layui-input" id="bookid_{$item.bookid}">
+                <input type="text" class="layui-input" id="bookid_{$item.bookid}" value="{$item.cover}">
             </div>
             <a href="javascript:void(0)" class="layui-btn layui-btn-normal layui-btn-sm js-savecover" rel="{$item.bookid}">保存</a>
         </td>
@@ -51,7 +53,7 @@
                 <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-show" rel="1" data-bookid="{$item.bookid}">隐藏</a>
             </if>
         </td>
-        <td><a href="javascript:void(0)" id="{$item.bookid}" class="js-caiji layui-btn layui-btn-normal layui-btn-sm">采集</a></td>
+        <td><a href="javascript:void(0)" id="{$item.bookid}" class="js-caiji layui-btn layui-btn-normal layui-btn-sm" title="{$item.bookname}">采集</a></td>
         <td>{$item.author}</td>
         <td>
             <if condition="$item.isover eq 1">
@@ -60,23 +62,25 @@
                 <a href="javascript:void(0)" class="layui-btn layui-btn-sm js-isover" rel="1" data-bookid="{$item.bookid}">续集</a>
             </if>
         </td>
-        <td>{$item.ctime}</td>
-        <td>{$item.updatetime}</td>
+        <!--<td>{$item.ctime}</td>-->
+        <!--<td>{$item.updatetime}</td>-->
+        <td>{$item.defurl}</td>
         <td>{$item.total}</td>
     </tr>
     </volist>
     </tbody>
 </table>
-
+{$pagehtml}
 
 <script>
     $(function(){
 
         $('.js-caiji').click(function(){
             var id = $(this).attr('id');
+            var title=$(this).attr('title');
             layer.open({
                 type: 2,
-                title:'采集章节',
+                title:title,
                 content: './index.php?m=Adminwz&c=Index&a=lists&id='+id,
                 area: ['1000px', '500px'],
                 offset: '20px'
@@ -159,7 +163,10 @@
             var bookid=$(this).attr('rel');
             var cover=$('#bookid_'+bookid).val();
             $.post('./index.php?m=Adminwz&c=Index&a=savecover',{bookid:bookid,cover:cover},function(res){
-                
+                if(res.status==1){
+                    $('#img_'+bookid).attr('src',res.data.cover);
+                    $('#bookid_'+bookid).val(res.data.cover);
+                }
             },'json')
         })
 

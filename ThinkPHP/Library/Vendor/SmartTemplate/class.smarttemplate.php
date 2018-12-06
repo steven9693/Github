@@ -7,7 +7,7 @@
 	*
 	* Usage Example I:
 	*
-	* $page = new SmartTemplate( "index.html" );
+	* $page = new SmartTemplate( "header.html" );
 	* $page->assign( 'TITLE',  'TemplateDemo - Userlist' );
 	* $page->assign( 'user',   DB_read_all( 'select * from ris_user' ) );
 	* $page->output();
@@ -18,7 +18,7 @@
 	*             'TITLE' => 'TemplateDemo - Userlist',
 	*             'user'  => DB_read_all( 'select * from ris_user' )
 	*         );
-	* $page = new SmartTemplate( "index.html" );
+	* $page = new SmartTemplate( "header.html" );
 	* $page->output( $data );
 	*
 	*
@@ -329,7 +329,7 @@
 		* Start Ouput Content Buffering
 		*
 		* Usage Example:
-		* $page = new SmartTemplate('index.html');
+		* $page = new SmartTemplate('header.html');
 		* $page->use_cache();
 		* ...
 		*

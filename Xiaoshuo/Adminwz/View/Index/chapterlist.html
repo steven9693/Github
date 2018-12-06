@@ -24,23 +24,25 @@
         <th width="160">更新时间</th>
         <th width="40">状态</th>
         <th width="220" colspan="3">操作</th>
+        <th width="220" colspan="3">内容</th>
     </tr>
     </thead>
     <tbody>
     <volist name="data" id="item">
         <tr>
-            <td style="text-align: center"><if condition="$item.isshow eq 0"><input type="checkbox" style="width:20px;height:20px" value="{$item.chapterid}" class="js-checkbox"></if></td>
+            <td style="text-align: center"><if condition="$item.isshow eq 0"><input type="checkbox" style="width:20px;height:20px" value="{$item.chapterid}" class="js-checkbox" id="checkbox_{$item.chapterid}"></if></td>
             <td><a href="javascript:void(0)" id="{$item.chapterid}" class="js-getdetail">{$item.title}</a></td>
             <td>{$item.ctime}</td>
             <td>{$item.updatetime}</td>
             <td>
-                <if condition="$item.isshow eq 0"><a href="javascript:void(0)" class="layui-btn layui-btn-sm">隐藏</a></if>
-                <if condition="$item.isshow eq 1"><a href="javascript:void(0)" class="layui-btn layui-btn-normal layui-btn-sm">显示</a></if>
-                <if condition="$item.isshow eq 2"><a href="javascript:void(0)" class="layui-btn layui-btn-danger layui-btn-sm">忽略</a></if>
+                <if condition="$item.isshow eq 0"><a href="javascript:void(0)" class="layui-btn layui-btn-sm" rel="{$item.chapterid}">隐藏</a></if>
+                <if condition="$item.isshow eq 1"><a href="javascript:void(0)" class="layui-btn layui-btn-normal layui-btn-sm" rel="{$item.chapterid}">显示</a></if>
+                <if condition="$item.isshow eq 2"><a href="javascript:void(0)" class="layui-btn layui-btn-danger layui-btn-sm" rel="{$item.chapterid}">忽略</a></if>
             </td>
             <td><a href="javascript:void(0)" data-chapterid="{$item.chapterid}" rel="0" class="layui-btn layui-btn-sm js-isshow">隐藏</a></td>
             <td><a href="javascript:void(0)" data-chapterid="{$item.chapterid}" rel="1" class="layui-btn layui-btn-normal layui-btn-sm js-isshow">显示</a></td>
             <td><a href="javascript:void(0)" data-chapterid="{$item.chapterid}" rel="2" class="layui-btn layui-btn-danger layui-btn-sm js-isshow">忽略</a></td>
+            <td><div style="height:60px;line-height:20px;font-size:12px;overflow:hidden;width:300px">{$item.content}</div></td>
         </tr>
     </volist>
     <tr>
@@ -56,6 +58,8 @@
 {$page}
 
 <script>
+
+    var def_bookid="{$def_bookid}"
     $(function(){
         $('.js-getdetail').click(function(){
             var id=$(this).attr('id');
@@ -63,7 +67,7 @@
                 title:'章节内容',
                 type: 2,
                 content: '/index.php?m=Adminwz&c=Index&a=getdetail&id='+id, //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
-                area: ['800px', '450px'],
+                area: ['1200px', '600px'],
                 offset: ['20px']
             });
         })
@@ -71,12 +75,34 @@
         $('.js-isshow').click(function(){
             var chapterid=$(this).attr('data-chapterid');
             var isshow=$(this).attr('rel');
-            var href=window.location.href
+            // var href=window.location.href
             $.post('./index.php?m=Adminwz&c=Index&a=setchapter',{chapterid:chapterid,isshow:isshow},function(res){
                 if(res.status==1){
-                    layer.msg('修改成功', function(){
-                        window.location.href=href;
-                    })
+                    // layer.msg('修改成功', function(){
+                    //     window.location.href=href;
+                    // })
+
+                    if(isshow==0){
+                        $('[rel='+chapterid+']').removeClass('layui-btn-normal').removeClass('layui-btn-danger');
+                        $('[rel='+chapterid+']').html('忽略');
+                    }
+
+                    if(isshow==1){
+                        $('[rel='+chapterid+']').addClass('layui-btn-normal').removeClass('layui-btn-danger');
+                        $('[rel='+chapterid+']').html('显示');
+                    }
+
+                    if(isshow==2){
+                        $('[rel='+chapterid+']').addClass('layui-btn-danger');
+                        $('[rel='+chapterid+']').html('忽略');
+                    }
+
+
+
+                    if(isshow==0||isshow==2){
+                        $("#checkbox_"+chapterid).remove();
+                        layer.msg('修改成功')
+                    }
                     
                 }
             },'json')
@@ -106,7 +132,7 @@
            })
            console.log(chapter);
            if(chapter.length>0){
-               $.post('./index.php?m=Adminwz&c=Index&a=savedata',{chapter:chapter.join(',')},function(res){
+               $.post('./index.php?m=Adminwz&c=Index&a=savedata',{chapter:chapter.join(','),def_bookid:def_bookid},function(res){
                    if(res.status==1){
                        layer.msg('保存成功',function(){
                            window.location.href=href

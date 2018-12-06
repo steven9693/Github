@@ -66,8 +66,13 @@ class IndexController extends Controller {
 
         $book = M('wz_books')->where(array('bookname'=>$bookname))->find();
 
-        $res['status']=1;
-        $res['data']=$book;
+        if($book){
+            $res['status']=1;
+            $res['data']=$book;
+        }else{
+            $res['status']=0;
+        }
+
         echo json_encode($res);
     }
 
@@ -75,7 +80,11 @@ class IndexController extends Controller {
     public function setshow(){
         $isshow=I('post.isshow');
         $bookid=I('post.bookid');
-        M('wz_books')->where(array('bookid'=>$bookid))->save(array('isshow'=>$isshow));
+
+        $data['isshow']=$isshow;
+        $data['ontime']=time();
+
+        M('wz_books')->where(array('bookid'=>$bookid))->save($data);
         echo json_encode(array('status'=>1));
     }
 
@@ -88,16 +97,6 @@ class IndexController extends Controller {
     }
 
 
-    //设置图片名称
-
-    public function setpicture(){
-        $picname=I('post.picname');
-        $bookid=I('post.bookid');
-
-        $data['cover']=$picname;
-        M('wz_books')->where(array('bookid'=>$bookid))->save($data);
-        echo json_encode(array('status'=>1));
-    }
 
 
     public function addbookinfo(){
@@ -138,7 +137,24 @@ class IndexController extends Controller {
 
     public function booklist(){
 
-        $booklist = M("wz_books")->field('bookid,def_bookid,ctime,updatetime,isshow,bookname,isover,author')->order('bookid desc')->limit(10)->select();
+        $page=I('get.page')?(I('get.page')-1):0;
+
+        $pagesize=10;
+
+
+        $booklist = M("wz_books")->field('bookid,def_bookid,ctime,updatetime,isshow,bookname,isover,author,cover,defurl')->order('bookid desc')->limit($pagesize*$page,$pagesize)->select();
+
+        $pagenav=new Pagenav();
+
+        $url="./index.php?m=Adminwz&c=Index&a=booklist";
+
+        $count=M('wz_books')->order('bookid desc')->count();
+
+
+        $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
+
+
+
 
 
         for($i=0;$i<count($booklist);$i++){
@@ -146,6 +162,10 @@ class IndexController extends Controller {
             $booklist[$i]['updatetime']=date('Y-m-d',$booklist[$i]['updatetime']);
             $booklist[$i]['total'] = M('wz_chapter')->where(array('def_bookid'=>$booklist[$i]['def_bookid']))->count();
         }
+
+//        dump($booklist);
+
+        $this->assign('pagehtml',$pagehtml);
 
         $this->assign('booklist',$booklist);
 
@@ -229,13 +249,25 @@ class IndexController extends Controller {
 
         $time=time();
 
-        $content['content']=$str;
-        $content['contempty']=1;
-        $content['updatetime']=$time;
+        $unsave='正在手打中，请稍等片刻，w Ww.XxBi Quge.c0m新笔趣阁内容更新后，需要重新刷新页面，才能获取最新更新！';
+
+        if($str==$unsave){ //直接过滤掉
+            $content['content']=$str;
+            $content['contempty']=1;
+            $content['updatetime']=$time;
+            $content['isshow']=2;
+        }else{
+            $content['content']=$str;
+            $content['contempty']=1;
+            $content['updatetime']=$time;
+            $content['isshow']=1;
+        }
+
 
         M('wz_chapter')->where($map)->save($content);
 
         $res['updatetime']=$time;
+        $res['ontime']=$time;
         M('wz_books')->where(array('def_bookid'=>$def_bookid))->save($res);
         echo $str;
 
@@ -370,6 +402,7 @@ class IndexController extends Controller {
 
         $data = M('wz_chapter')->where($map)->order('chapterid')->limit(10)->select();
 
+        $allcount=M('wz_chapter')->where($map)->order('chapterid')->count();
         $this->assign('run',$run);
 
         if(!$data){
@@ -378,7 +411,7 @@ class IndexController extends Controller {
 
         $this->assign('datastr',json_encode($data));
         $this->assign('data',$data);
-        $this->assign('count',count($data));
+        $this->assign('count',$allcount);
         $this->assign('path',setpath());
         $this->display();
     }
@@ -424,7 +457,7 @@ class IndexController extends Controller {
         $map['contempty']=1;
         $map['def_bookid']=$def_bookid;
 
-        $data=M('wz_chapter')->field('chapterid,title,isshow,ctime,updatetime,contempty')->where($map)->order('chapterid desc')->limit($pagesize*$page,$pagesize)->select();
+        $data=M('wz_chapter')->field('chapterid,title,isshow,ctime,updatetime,contempty,content')->where($map)->order('chapterid desc')->limit($pagesize*$page,$pagesize)->select();
 
         if($data){
             for($i=0;$i<count($data);$i++){
@@ -444,6 +477,8 @@ class IndexController extends Controller {
         $pagehtml=$pagenav->pagenav($count,$pagesize,$url);
 
         $this->assign('page',$pagehtml);
+
+        $this->assign('def_bookid',$def_bookid);
 
         $this->assign('data',$data);
         $this->assign('path',setpath());
@@ -478,10 +513,14 @@ class IndexController extends Controller {
     
     function savedata(){
         $chapter=I('post.chapter');
+        $def_bookid=I('post.def_bookid');
         $map['chapterid']=array('in',$chapter);
         M('wz_chapter')->where($map)->save(array('isshow'=>1));
         
         //需要更新书本线上更新时间
+        $data['ontime']=time();
+        M('wz_books')->where(array('def_bookid'=>$def_bookid))->save($data);
+
         
         echo json_encode(array('status'=>1));
     }
@@ -489,9 +528,16 @@ class IndexController extends Controller {
     function savecover(){
         $bookid=I('post.bookid');
         $cover=I('post.cover');
+
+        $url='http://image.weishop.wang/wzxs/'.$cover;
+        $w['bookid']=$bookid;
+        $data['cover']=$url;
+        M('wz_books')->where($w)->save($data);
+
+        $res['status']=1;
+        $res['data']=array('cover'=>$url);
         
-        
-        echo json_encode(array('status'=>1));
+        echo json_encode($res);
     }
     
 
@@ -527,7 +573,12 @@ class IndexController extends Controller {
         dump($data);
     }
     
-    
+
+    function setshowfn(){
+//        $map['isshow']=0;
+//        $data = M('wz_chapter')->where($map)->save(array('isshow'=>1));
+//        echo $data;
+    }
 
 
 
