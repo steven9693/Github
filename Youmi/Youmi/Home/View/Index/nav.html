@@ -13,9 +13,9 @@
             </div>
         </div>
         <div class="headernav layui-bg-cyan">
-            <a href="/index.php?m=Youmi&c=Index&a=index">首页</a>
+            <a href="./index.html">首页</a>
             <volist name="category" id="item">
-                <a href="/index.php?m=Home&c=Index&a=category&cid={$item.cid}">{$item.category}</a>
+                <a href="{:U('category/'.$item['cid'])}">{$item.category}</a>
             </volist>
         </div>
     </div>

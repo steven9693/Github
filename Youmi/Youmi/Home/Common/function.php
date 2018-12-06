@@ -9,7 +9,7 @@
 
 function setpath(){
 //    echo 'setpath';
-    $path="./Youmi";
+    $path="./Youmi/Home/View";
     return $path;
 }
 
