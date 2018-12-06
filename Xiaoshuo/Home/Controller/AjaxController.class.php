@@ -47,9 +47,6 @@ class AjaxController extends Controller {
             $url="http://www.ting56.com/video/$setid-0-$start.html";
             $str.=$this->curl($url);
         }
-        
-        echo $str;
-        exit;
 
         preg_match_all("/FonHen_JieMa\([^\)]*/",$str,$arr);
 
@@ -102,13 +99,10 @@ class AjaxController extends Controller {
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36');
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 30);
         curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-        curl_setopt($ch, CURLOPT_MAXREDIRS, 2);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER,array('Accept-Encoding: gzip, deflate'));
         curl_setopt($ch, CURLOPT_ENCODING, 'gzip,deflate');
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         if ($https) {
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE); // 对认证证书来源的检查
             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, FALSE); // 从证书中检查SSL加密算法是否存在
