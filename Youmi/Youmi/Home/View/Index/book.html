@@ -4,34 +4,27 @@
 <body>
 
 <div class="wrapper">
-    <div class="header">
-        <div class="headertop"></div>
-        <div class="headermain"></div>
-        <div class="headernav layui-bg-cyan">
-            <!--<volist name="category" id="item">-->
-                <!--<a href="">{$item.category}</a>-->
-            <!--</volist>-->
-        </div>
-    </div>
+    
+    <include file="./Youmi/Home/View/Index/nav.html" />
 
     <div class="content">
-        <div class="breadcrumb">悠米小说 > {$category.category} > {$book.bookname} 最新章节列表</div>
+        <div class="breadcrumb"><a href="{$domain}">悠米小说</a> > <a href="{:U('category/'.$xclass['cid'])}" title="{$xclass.category}" target="_blank">{$xclass.category}</a> > {$book.bookname} 最新章节列表</div>
         <div class="bookarea">
-            <span class="bookimage"><img src="{$book.cover}"></span>
+            <span class="bookimage"><img src="{$book.cover}" alt="{$book.bookname}"></span>
             <div class="bookarea-r">
                 <h1 class="bookarea-bn">{$book.bookname}</h1>
                 <div class="clearfix bookarea-items">
                     <div>作    者：{$book.author}</div>
                     <div>状    态：<if condition="$book.isover eq 1">完结<else/>连载中...</if></div>
                     <div>最后更新：{$book.updatetime}</div>
-                    <div>最新章节：<a href="">{$lastest.title}</a></div>
+                    <div class="latestchapter">最新章节：<a href="{:U('chapter/'.$lastest['chapterid'])}" title="{$lastest.title}" target="_blank">{$lastest.title}</a></div>
                 </div>
                 <div class="bookarea-desc">{$book.description}</div>
             </div>
         </div>
         <ul class="capterlist clearfix">
             <volist name="chapter" id="item">
-            <li><a href="./index.php?m=Home&c=Index&a=chapter&chapterid={$item.chapterid}">{$item.title}</a></li>
+            <li><a href="{:U('chapter/'.$item['chapterid'])}" title="{$item.title}">{$item.title}</a></li>
             </volist>
         </ul>
 
@@ -39,10 +32,7 @@
     </div>
 
 
-    <div class="footer">
-        <p>本站所有小说为转载作品，所有章节均由网友上传，转载至本站只是为了宣传本书让更多读者欣赏。</p>
-        <p>Copyright © 2018 悠米小说 All Rights Reserved.</p>
-    </div>
+    <include file="./Youmi/Home/View/Index/footer.html" />
 </div>
 
 

@@ -9,12 +9,16 @@
 
 function setpath(){
 //    echo 'setpath';
-    $path="./Youmi/Home/View";
+    $path="/Youmi/Home/View";
     return $path;
 }
 
 function setversion(){
     return time();
+}
+
+function setdomain(){
+    return 'http://www.youmixs.com';
 }
 
 

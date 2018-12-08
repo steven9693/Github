@@ -11,10 +11,10 @@
         <div class="categorylist clearfix">
             <volist name="data" id="item">
             <div class="categorylist-box">
-                <a href="" class="category-image"><img src="{$item.cover}" /></a>
+                <a href="{:U('book/'.$item['bookid'])}" class="category-image" title="{$item.bookname}" target="_blank"><img src="{$item.cover}" alt="{$item.bookname}" /></a>
                 <div class="category-rightbox">
                     <div class="clearfix category-rightbox-t">
-                        <a href="#" class="category-bookname">{$item.bookname}</a>
+                        <a href="{:U('book/'.$item['bookid'])}" class="category-bookname" title="{$item.bookname}" target="_blank">{$item.bookname}</a>
                         <span class="cateb-a">{$item.author}</span>
                     </div>
                     <div class="category-desc">{$item.description}</div>
@@ -24,13 +24,12 @@
         </div>
         <div class="contentfoot clearfix" style="margin:0">
             <div class="contentfoot-left  clearfix">
-                <h2 class="right-title">最近更新小说列表</h2>
+                <h2 class="right-title">{$currentCategory}最近更新列表</h2>
                 <ul class="updatalist">
                     <volist name="latestupdate" id="item">
                     <li>
-                        <span class="update-cate">{$item.category}
-                        </span><a href="./index.php?m=Home&c=Index&a=book&bookid={$item.bookid}" class="update-bookname">{$item.bookname}
-                        </a><a href="./index.php?m=Home&c=Index&a=chapter&chapterid={$item.chapter_chapterid}" class="update-chaptername">{$item.chapter_title}
+                        <a href="{:U('book/'.$item['bookid'])}" class="update-bookname" title="{$item.bookname}" target="_blank" style="width:200px">{$item.bookname}
+                        </a><a href="{:U('chapter/'.$item['chapter_chapterid'])}" class="update-chaptername" title="{$item.chapter_title}" target="_blank" style="width:330px">{$item.chapter_title}
                         </a><span class="update-bookauthor">{$item.author}
                         </span><span class="update-date">{$item.updatetime}</span>
                     </li>
@@ -43,8 +42,8 @@
                 <ul class="right-list" style="margin-top:0">
                     <volist name="latestadd" id="item">
                     <li>
-                        <a href="./index.php?m=Home&c=Index&a=book&bookid={$item.bookid}" class="right-bookname">{$item.bookname}
-                        </a><a href="javascript:void(0)" class="right-author">{$item.author}</a>
+                        <a href="{:U('book/'.$item['bookid'])}" class="right-bookname" title="{$item.bookname}" target="_blank">{$item.bookname}
+                        </a><span class="right-author">{$item.author}</span>
                     </li>
                     </volist>
                 </ul>
@@ -57,10 +56,7 @@
     </div>
 
 
-    <div class="footer">
-        <p>本站所有小说为转载作品，所有章节均由网友上传，转载至本站只是为了宣传本书让更多读者欣赏。</p>
-        <p>Copyright © 2018 悠米小说 All Rights Reserved.</p>
-    </div>
+    <include file="./Youmi/Home/View/Index/footer.html" />
 </div>
 
 

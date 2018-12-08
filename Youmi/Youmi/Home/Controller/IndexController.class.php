@@ -4,7 +4,10 @@ namespace Home\Controller;
 use Think\Controller;
 header("Content-type: text/html; charset=utf-8");
 class IndexController extends Controller {
-
+    
+    public $webname='悠米小说_书友最值得收藏的网络小说阅读网_网络小说_小说爱好者必备的小说网_我爱看小说';
+    public $keywords='悠米小说,网络小说,小说阅读网,88读书网,顶点小说,在线阅读,在线阅读小说,小说阅读,最新小说';
+    public $description='小说爱好者最喜欢的小说阅读网,收录了当前最火热的网络小说,免费为您提供小说在线阅读服务,免费提供高质量的小说最新章节，是广大网络小说爱好者必备的小说阅读网。';
 
     public function setnav(){
         $map['isshow']=1;
@@ -54,11 +57,17 @@ class IndexController extends Controller {
         //最新入库书本
         $latestadd=$this->latestadd(false);
         $this->assign('latestadd',$latestadd);
+        
+        $this->assign('current','isindex');
 
-
-
+        $this->assign('domain',setdomain());
         $this->assign('path',setpath());
         $this->assign('version',setversion());
+        
+        $this->assign('webname',$this->webname);
+        $this->assign('keywords',$this->keywords);
+        $this->assign('description',$this->description);
+        
         $this->display();
     }
 
@@ -143,7 +152,13 @@ class IndexController extends Controller {
         $category=$this->setnav();
         $this->assign('category',$category);
         
-        
+        if($category){
+            for($i=0;$i<count($category);$i++){
+                if($cid==$category[$i]['cid']){
+                    $currentCategory=$category[$i]['category'];
+                }
+            }
+        }
         //分类顶部带封面书本
         $data = M('wz_books')->where($map)->limit(6)->select();
         $this->assign('data',$data);
@@ -157,10 +172,20 @@ class IndexController extends Controller {
         $latestadd=$this->latestadd($cid);
         $this->assign('latestadd',$latestadd);
         
-        
-
+        $this->assign('current',$cid);
+        $this->assign('domain',setdomain());
         $this->assign('path',setpath());
         $this->assign('version',setversion());
+        
+        $webname=$currentCategory.'小说_'.'我爱看'.$currentCategory.'小说_'.'悠米小说';
+        $keywords=$currentCategory.'小说,免费小说,网络小说,88读书网,顶点小说,在线阅读,在线阅读小说,小说阅读,最新小说';
+        $description="悠米小说".$currentCategory."频道，汇集".$currentCategory."精品小说，收录了当前最火热的网络小说,免费为您提供".$currentCategory."小说在线阅读服务,免费提供高质量的小说最新章节，";
+        $this->assign('webname',$webname);
+        $this->assign('keywords',$keywords);
+        $this->assign('description',$description);
+        
+        $this->assign('currentCategory',$currentCategory);
+        
         $this->display();
     }
 
@@ -170,22 +195,40 @@ class IndexController extends Controller {
         $bookid=I('get.bookid');
 
         $book=M('wz_books')->where(array('bookid'=>$bookid))->find();
-
-
+        
         $book['updatetime']=date('Y-m-d H:i:s',$book['updatetime']);
         $this->assign('book',$book);
 
-        $category=M('wz_category')->where(array('cid'=>$book['cid']))->find();
-        $this->assign('category',$category);
+        $xclass=M('wz_category')->where(array('cid'=>$book['cid']))->find();
+        $this->assign('xclass',$xclass);
+//        dump($xclass);
 
         $map['bookid']=$book['bookid'];
         $map['isshow']=1;
         $chapter=M('wz_chapter')->field('bookid,chapterid,title,isshow,updatetime')->where($map)->order('chapterid asc')->select();
         $this->assign('chapter',$chapter);
         $this->assign('lastest',$chapter[(count($chapter)-1)]);
-
+        
+        $category=$this->setnav();
+        $this->assign('category',$category);
+        
+        $this->assign('domain',setdomain());
+        
+        $this->assign('current',$book['cid']);
+        
         $this->assign('path',setpath());
         $this->assign('version',setversion());
+        
+        $webname=$book['bookname']."最新章节_".$book['bookname']."全文阅读_".$book['bookname']."新章节目录_悠米小说";
+        $keywords=$book['bookname']."最新章节,".$book['bookname']."全文阅读,".$book['bookname']."新章节目录,".$book['bookname'].','.$book['bookname'].'作者'.$book['author'];
+        $description=$book['bookname']."最新章节由网友提供,".$book['description'];
+        $this->assign('webname',$webname);
+        $this->assign('keywords',$keywords);
+        $this->assign('description',$this->trimall($description));
+        
+        
+        
+        
         $this->display();
     }
 
@@ -197,11 +240,31 @@ class IndexController extends Controller {
         $map['isshow']=1;
 
         $chapter = M('wz_chapter')->where($map)->find();
-
         $bookid=$chapter['bookid'];
 
         $book=M('wz_books')->where(array('bookid'=>$bookid))->find();
         $this->assign('book',$book);
+        
+        //查询推荐的书本当前的推荐方式是同类书本相邻的5本书
+        $where['cid']=$book['cid'];
+        $where['isshow']=1;
+        $where['bookid']=array('lt',$book['bookid']);
+        $recom = M('wz_books')->where($where)->order('bookid desc')->limit(5)->select();
+        if(count($recom)<5){
+            $where['bookid']=array('gt',$book['bookid']);
+            $recom = M('wz_books')->where($where)->order('bookid desc')->limit(5)->select();
+        }
+        $this->assign('recom',$recom);
+//        dump($recom);
+        
+        $xclass=M('wz_category')->where(array('cid'=>$book['cid']))->find();
+        $this->assign('xclass',$xclass);
+        
+        $this->assign('current',$xclass['cid']);
+        
+        $category=$this->setnav();
+        $this->assign('category',$category);
+        $this->assign('domain',setdomain());
 
         //下一集
         $nextpmap['bookid']=$bookid;
@@ -214,7 +277,7 @@ class IndexController extends Controller {
             $this->assign('next',$next[0]);
         }
 
-
+        
         //上一集
         $prepmap['bookid']=$bookid;
         $prepmap['isshow']=1;
@@ -226,14 +289,24 @@ class IndexController extends Controller {
             $this->assign('prep',$prep[0]);
         }
 
-
-
-
         $this->assign('chapter',$chapter);
 
 
         $this->assign('path',setpath());
         $this->assign('version',setversion());
+        
+        
+        
+        $webname=$chapter['title'].'_'.$book['bookname'].'_'.$xclass['category'].'_悠米小说';
+        $keywords=$chapter['title'].','.$xclass['category'].'小说'.$book['bookname'].','.$book['bookname'].'作者'.$book['author'];
+        $this->assign('webname',$webname);
+        $this->assign('keywords',$keywords);
+        
+        $content=$this->trimall($chapter['content']);
+        $content=$book['bookname'].'作者'.$book['author'].' '.$chapter['title'].','.mb_substr($content,0,80,'UTF-8').'...';
+        $this->assign('description',$content);
+        
+        
         $this->display();
     }
 
@@ -255,6 +328,59 @@ class IndexController extends Controller {
 
     function setbooks(){
         M('wz_books')->where(array('isshow'=>0))->save(array('isshow'=>1,'ontime'=>time()));
+    }
+    
+    //查找书本
+    function search(){
+        
+        $bookname=I('get.bookname');
+        
+        $where['bookname'] = array('like','%'.$bookname.'%');
+        $where['isshow']=1;
+        $data = M('wz_books')->where($where)->order('bookid desc')->limit(10)->select();
+        if($data){
+            //找到当前书本
+            for($i=0;$i<count($data);$i++){
+                $data[$i]['updatetime']=date('Y-m-d H:i:s',$data[$i]['updatetime']);
+                $map['bookid']=$data[$i]['bookid'];
+                $map['isshow']=1;
+                $item = M('wz_chapter')->field('title,chapterid')->where($map)->limit(1)->order('chapterid desc')->select();
+                $data[$i]['chapter_title']=$item[0]['title'];
+                $data[$i]['chapter_chapterid']=$item[0]['chapterid'];
+            }
+            $this->assign('isfind',1);
+            $this->assign('data',$data);
+            
+        }else{
+            $this->assign('bookname',$bookname);
+            $str=mb_substr($bookname, 0, 1, 'utf-8');
+            
+            $wh['bookname'] = array('like','%'.$str.'%');
+            $wh['isshow']=1;
+            $redata = M('wz_books')->where($wh)->order('bookid desc')->limit(10)->select();
+            if($redata){
+                $this->assign('redata',$redata);
+                $this->assign('isfind',2); //可以推荐
+            }else{
+                $this->assign('isfind',0); //没有推荐的
+            }
+            
+        }
+        
+        
+        
+        
+        $category=$this->setnav();
+        $this->assign('category',$category);
+        
+        $this->assign('path',setpath());
+        $this->assign('version',setversion());
+        $this->display();
+    }
+    
+    function trimall($str){
+        $qian=array(" ","　","\t","\n","\r","<br>","<br/>");
+        return str_replace($qian, '', $str);   
     }
 
 

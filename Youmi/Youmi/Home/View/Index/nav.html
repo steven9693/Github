@@ -5,17 +5,30 @@
             <div class="headermainright">
                 <div class="layui-form-item">
                     <div class="layui-input-inline" style="width:580px">
-                        <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+                        <input type="text" placeholder="请输入书名" class="layui-input" id='search'>
                     </div><div class="layui-input-inline" style="width:100px;margin-right:0">
-                        <button class="layui-btn layui-btn-normal" style="width:100%">搜索</button>
+                        <button class="layui-btn layui-btn-normal js-search" style="width:100%">搜索</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="headernav layui-bg-cyan">
-            <a href="./index.html">首页</a>
+            <a href="{$domain}" <if condition="$current eq 'isindex'" target="_blank">class="current"</if>>首页</a>
             <volist name="category" id="item">
-                <a href="{:U('category/'.$item['cid'])}">{$item.category}</a>
+                <a href="{:U('category/'.$item['cid'])}" <if condition="$current eq $item['cid']">class="current"</if> target="_blank" title="{$item.category}">{$item.category}</a>
             </volist>
         </div>
     </div>
+
+<script>
+    $(function(){
+        $(document).on('click','.js-search',function(){
+            var bookname = $('#search').val();
+            if(!bookname){
+                layer.msg('请输入查找书本名称...', {icon: 3});
+            }else{
+                window.location.href="/search/"+bookname
+            }
+        })
+    })
+</script>

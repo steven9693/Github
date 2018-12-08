@@ -67,10 +67,19 @@
     color:#fff;
     display:inline-block;
     margin:0 5px;
+    padding:0 10px;
 
 }
 .headernav a:hover{
-    color:#FFB800;
+    color:#1E9FFF;
+}
+
+.headernav a.current{
+    background:#1E9FFF
+}
+
+.headernav a.current:hover{
+    color:#fff
 }
 
 .content{
@@ -202,13 +211,20 @@
 .right-bookname{
     font-size:14px;
     color:#6F78A7;
-    flex-grow: 2;
+    width:180px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 .right-author{
-    font-size:14px;
-    color:#666;
+    font-size:12px;
+    color:#999;
     flex-grow: 1;
     text-align:right;
+    width:80px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .contentmain{
@@ -376,11 +392,16 @@
 }
 
 .category-bookname{
-    font-size:16px;
+    font-size:14px;
     display:block;
     height:34px;
     float:left;
     color:#6F78A7;
+    width:120px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    
 }
 
 .cateb-a{
@@ -388,6 +409,13 @@
     display:block;
     height:34px;
     color:#ccc;
+    width:60px;
+    font-size:12px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: right;
+    
 }
 
 .category-desc{
@@ -562,4 +590,77 @@
 
 .c-bookname:hover{
     color:#5d69a9;
+}
+
+.latestchapter{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap
+}
+
+.noexist{
+    font-size:24px;
+    padding:50px 0 10px 0;
+    height:40px;
+    line-height:40px;
+    text-align: center;
+    color:#FF5722;
+}
+
+.addgroup{
+    font-size:14px;
+    color:#666;
+    text-align:center;
+    line-height:30px;
+    height:30px;
+}
+
+.recommendbooks{
+    padding:80px 20px 50px;
+    color:#FF5722;
+    font-size:16px;
+    
+}
+
+.recommendbooks_title{
+    border-bottom:1px solid #ddd;
+    margin-bottom:10px;
+    line-height:35px;
+    height:35px;
+}
+
+.recommendbooks_content a{
+    color:#2F4056;
+    display:inline-block;
+    width:50%;
+    overflow: hidden;
+    height:30px;
+    line-height:30px;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    float:left;
+}
+
+
+
+.recommendbooks_content a:hover{
+    text-decoration: underline;
+}
+
+
+.friend{
+    width: 960px;
+    margin: 15px auto;
+    background: #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+    font-size:12px;
+    color:#6F78A7;
+    padding:15px 10px;
+}
+
+.friend a{
+    color:#6F78A7;
+    display:inline-block;
+    margin:0 15px 0 0;
 }

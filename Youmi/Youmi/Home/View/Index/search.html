@@ -1,0 +1,47 @@
+<include file="./Youmi/Home/View/Index/header.html" />
+
+
+<body>
+
+<div class="wrapper">
+    
+    <include file="./Youmi/Home/View/Index/nav.html" />
+
+    <div class="content">
+        <if condition="$isfind eq 1">
+        <volist name='data' id='book'>
+        <div class="bookarea" style='height:158px;overflow:hidden'>
+            <span class="bookimage"><a href="{:U('book/'.$book['bookid'])}"><img src="{$book.cover}"></a></span>
+            <div class="bookarea-r">
+                <div class="bookarea-bn" style="margin-bottom:10px"><a href="{:U('book/'.$book['bookid'])}" style='color:#2F4056;font-size:20px'>{$book.bookname}</a></div>
+                <div class="clearfix bookarea-items">
+                    <div>作    者：{$book.author}</div>
+                    <div>状    态：<if condition="$book.isover eq 1">完结<else/>连载中...</if></div>
+                    <div>最后更新：{$book.updatetime}</div>
+                    <div class="latestchapter">最新章节：<a href="{:U('chapter/'.$book['chapter_chapterid'])}">{$book.chapter_title}</a></div>
+                </div>
+                <div class="bookarea-desc" style='margin-top:0;overflow:hidden;height:48px;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;'>{$book.description}</div>
+            </div>
+        </div>
+        </volist>
+        <else/>
+        <div class="noexist">暂未找到与"{$bookname}"相关的书本</div>
+        <div class="addgroup">加入悠米书友群，我们在这里等您！</div>
+            <if condition='$isfind eq 2'>
+                <div class="recommendbooks">
+                    <div class="recommendbooks_title">给您推荐:</div>
+                    <div class="recommendbooks_content clearfix">
+                    <volist name="redata" id="item"><a href="{:U('book/'.$item['bookid'])}">{$item.bookname}</a></volist>
+                    </div>
+                </div>
+            </if>
+        </if>
+    </div>
+
+
+    <include file="./Youmi/Home/View/Index/footer.html" />
+</div>
+
+
+</body>
+</html>
